@@ -39,7 +39,16 @@ def addUser():
         return jsonify({"mensaje": 'Usuario Agregado',"token" : access_token}), 201    
     except Exception as e:
         return jsonify({"error": str(e)}), 400         
-    
+
+@api.route('/User/<user_id>')
+def get_user(user_id):
+    if user_id is None:
+        return jsonify({"Mensaje": "invalid user_id"}), 400
+    try:
+        user = User.query.filter_by(id=user_id).first()
+        return jsonify(user.serialize()), 200  
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400         
 
 
 
