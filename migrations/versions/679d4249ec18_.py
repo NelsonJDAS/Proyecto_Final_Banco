@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: b1457e975040
-Revises: b6439589320b
-Create Date: 2024-12-18 19:31:42.621876
+Revision ID: 679d4249ec18
+Revises: 
+Create Date: 2024-12-19 19:57:03.031642
 
 """
 from alembic import op
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'b1457e975040'
-down_revision = 'b6439589320b'
+revision = '679d4249ec18'
+down_revision = None
 branch_labels = None
 depends_on = None
 
@@ -43,6 +43,14 @@ def upgrade():
     sa.Column('nombre', sa.String(length=50), nullable=True),
     sa.Column('descripcion', sa.String(length=200), nullable=True),
     sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('user',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('email', sa.String(length=120), nullable=False),
+    sa.Column('password', sa.String(length=80), nullable=False),
+    sa.Column('is_active', sa.Boolean(), nullable=False),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('email')
     )
     op.create_table('asesor',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -97,6 +105,7 @@ def downgrade():
     op.drop_table('cuenta')
     op.drop_table('configuracion_usuario')
     op.drop_table('asesor')
+    op.drop_table('user')
     op.drop_table('tipo_transaccion')
     op.drop_table('seguro')
     op.drop_table('cliente')
