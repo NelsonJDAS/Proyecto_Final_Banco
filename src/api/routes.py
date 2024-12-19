@@ -12,8 +12,13 @@ api = Blueprint('api', __name__)
 # Allow CORS requests to this API
 CORS(api)
 
+@api.route('/Users')
+def getUsers():
+    Users = User.query.all()
+    return jsonify([user.serialize() for user in Users])
+
 @api.route('/addUser', methods=['POST'])
-def handle_hello():
+def addUser():
     data = request.get_json()
     if data.get("email") is None or data.get("email") is "":
         return jsonify({"Mensaje": "The email is missing"}), 400
