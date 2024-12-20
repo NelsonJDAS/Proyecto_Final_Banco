@@ -1,3 +1,25 @@
-/* 
-    General Styles used on every website (Don't Repeat Yourself)
-*/
+body {
+    background-color: black !important;
+}
+
+/* .color-principal {
+    background-color: #87BF34;
+    color: white;
+    font-weight: 700;
+}
+
+.color-componente{
+    background-color: #95F238;
+    color: #0d0d0de8;
+    font-weight: 700;
+}
+
+.color-componente2{
+    background-color: #AAF23D;
+    color: #0d0d0de8;
+    font-weight: 700;
+    
+} */
+.test {
+    height: 500px;
+}
