@@ -1,7 +1,28 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
-    store: {},
+    store: {
+      texto: "text-black",
+      fondo: "bg-dark",
+      borde: "border-danger",
+    },
     actions: {
+      CambiarModo: (estado) => {
+        if (estado === true) {
+          setStore({
+            texto: "text-black",
+            fondo: "bg-white",
+            borde: "border-dark",
+          });
+          document.body.style.backgroundColor = "white";
+        } else {
+          setStore({
+            texto: "text-white",
+            fondo: "bg-black",
+            borde: "border-white",
+          });
+          document.body.style.backgroundColor = "black";
+        }
+      },
       // Funcion Ejemplo
       //   changeColor: (index, color) => {
       //     //get the store
