@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";// importacion de traducción
 
 export const Footer = () => {
 
-	const { t, i18n } = useTranslation();
+	const { t } = useTranslation();
 
 
 	return (
@@ -15,34 +15,34 @@ export const Footer = () => {
 					<span className="enlace text-white">{t('Contact')}</span>
 					<span className="enlace text-white">{t('Chat')}</span>
 				</div>
-				{/* <div className="col-2 text-start d-flex flex-column">
-					<h6 className="subtitulo text-white">{t(')}Enlaces legales</h6>
-					<span className="enlace text-white">{t(')}Politica de privacidad</span>
-					<span className="enlace text-white">{t(')}Termino de condiciones</span>
-					<span className="enlace text-white">{t(')}aviso legal</span>
+				<div className="col-2 text-start d-flex flex-column">
+					<h6 className="subtitulo text-white">{t('Legal links')}</h6>
+					<span className="enlace text-white">{t('Privacy Policy')}</span>
+					<span className="enlace text-white">{t('Term of conditions')}</span>
+					<span className="enlace text-white">{t('Legal notice')}</span>
 				</div>
 				<div className="col-2 text-start d-flex flex-column">
-					<h6 className="subtitulo text-white">{t(')}Enlaces a recursos</h6>
-					<span className="enlace text-white">{t(')}Tarifas / Comisiones</span>
-					<span className="enlace text-white">{t(')}Educacion</span>
+					<h6 className="subtitulo text-white">{t('Links to resources')}</h6>
+					<span className="enlace text-white">{t('Rates and commissions')}</span>
+					<span className="enlace text-white">{t('Education')}</span>
 				</div>
 				<div className="col-2 text-start d-flex flex-column">
-					<h6 className="subtitulo text-white">{t(')}Seguridad</h6>
-					<span className="enlace text-white">{t(')}Consejos</span>
-					<span className="enlace text-white">{t(')}Metodos de Seguridad</span>
-					<span className="enlace text-white">{t(')}Tarjeta de cordenadas</span>
+					<h6 className="subtitulo text-white">{t('Security')}</h6>
+					<span className="enlace text-white">{t('Tips')}</span>
+					<span className="enlace text-white">{t('Security methods')}</span>
+					<span className="enlace text-white">{t('Coordinate card')}</span>
 				</div>
 				<div className="col-2 text-start d-flex flex-column">
-					<h6 className="subtitulo text-white">{t(')}Productos y Servicios</h6>
-					<span className="enlace text-white">{t(')}Store</span>
-					<span className="enlace text-white">{t(')}Seguro</span>
-					<span className="enlace text-white">{t(')}Prestamo</span>
+					<h6 className="subtitulo text-white">{t('Products and services')}</h6>
+					<span className="enlace text-white">{t('Shop')}</span>
+					<span className="enlace text-white">{t('Insurance')}</span>
+					<span className="enlace text-white">{t('Loans')}</span>
 				</div>
 				<div className="col-2 text-start d-flex flex-column">
-					<h6 className="subtitulo text-white">{t(')}Certificaciones</h6>
-					<span className="enlace text-white">{t(')}Titulos certificados</span>
-					<span className="enlace text-white">{t(')}Titulos de seguridad</span>
-				</div> */}
+					<h6 className="subtitulo text-white">{t('Certifications')}</h6>
+					<span className="enlace text-white">{t('Certified titles')}</span>
+					<span className="enlace text-white">{t('Security titles')}</span>
+				</div>
 			</div>
 		</footer>
 	)
