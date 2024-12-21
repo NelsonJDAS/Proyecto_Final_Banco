@@ -1,0 +1,4 @@
+.enlace:hover{
+    cursor: pointer;
+    text-shadow: 0 0 13px rgb(255, 255, 255);
+}

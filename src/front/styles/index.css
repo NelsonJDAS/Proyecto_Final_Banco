@@ -1,3 +1,43 @@
-/* 
-    General Styles used on every website (Don't Repeat Yourself)
-*/
+body {
+    background-color: black !important;
+}
+
+ .color-principal {
+    background-color: #030A8C;
+    color: white;
+    font-weight: 700;
+}
+
+.color-componente{
+    background-color: #95F238;
+    color: #0d0d0de8;
+    font-weight: 700;
+}
+
+.color-componente2{
+    background-color: #AAF23D;
+    color: #0d0d0de8;
+    font-weight: 700;
+    
+} 
+.test {
+    height: 500px;
+}
+
+.enlace-claro:hover{
+    cursor: pointer;
+    text-shadow: 0 0 13px rgb(255, 255, 255);
+}
+
+.enlace-oscuro:hover{
+    cursor: pointer;
+    text-shadow: 0 0 13px rgb(0, 0, 0);
+}
+
+.borde-brillante{
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+}
+
+.letra-brillante{
+    text-shadow: 0 0 13px rgb(255, 255, 255);
+}
