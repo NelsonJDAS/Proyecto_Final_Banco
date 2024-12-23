@@ -15,6 +15,7 @@
   color: #0d0d0de8;
   font-weight: 700;
 }
+
 .test {
   height: 500px;
 }
@@ -26,7 +27,7 @@
 
 .enlace-oscuro:hover {
   cursor: pointer;
-  text-shadow: 0 0 13px rgb(0, 0, 0);
+  text-shadow: 0 0 13px rgba(64, 64, 64, 0.542);
 }
 
 .borde-brillante {

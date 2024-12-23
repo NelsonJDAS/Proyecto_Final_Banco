@@ -2,49 +2,100 @@ import React, { Component, useContext } from "react";
 import "../../styles/footer.css";
 import { useTranslation } from "react-i18next";// importacion de traducción
 import { Context } from "../store/appContext";
+import { useNavigate } from "react-router-dom";
+import { FaFacebookSquare } from "react-icons/fa";
+import { FaSquareXTwitter } from "react-icons/fa6";
+import { FaSquareInstagram } from "react-icons/fa6";
+import { FaLinkedin } from "react-icons/fa";
+import { IoLogoYoutube } from "react-icons/io5";
+import { FaSquareWhatsapp } from "react-icons/fa6";
 
 export const Footer = () => {
 
 	const { t } = useTranslation();
 	const { store, actions } = useContext(Context);
+	const navigate = useNavigate(null);
 
 	return (
-		<footer className={`footer mt-auto py-3 border-top ${store.borde} ${store.texto} ${store.fondo}`}>
-			<div className="row px-3 m-0">
-				<div className="col-2 text-start d-flex flex-column">
-					<h6 className="subtitulo ">{t('Contact information')}</h6>
-					<span className="enlace ">{t('Contact')}</span>
-					<span className="enlace ">{t('Chat')}</span>
+		<footer className={`footer mt-auto py-3 border-top ${store.borde} ${store.texto} ${store.fondo}`}> {/* modo oscuro y claro */}
+			<div className="row px-3 m-0"> {/* Links */}
+				<div className="col-2 flex-column animation">
+					<h6 className="subtitulo d-flex ">{t('Contact information')}</h6>
+					<span className={`d-flex ${store.borde_hover}`} onClick={() => {
+						navigate("/example")
+					}}>{t('Contact')}</span>
+					<span className={`d-flex ${store.borde_hover}`} onClick={() => {
+						navigate("/example")
+					}}>{t('Chat')}</span>
 				</div>
-				<div className="col-2 text-start d-flex flex-column">
-					<h6 className="subtitulo ">{t('Legal links')}</h6>
-					<span className="enlace ">{t('Privacy Policy')}</span>
-					<span className="enlace ">{t('Term of conditions')}</span>
-					<span className="enlace ">{t('Legal notice')}</span>
+				<div className="col-2 flex-column animation">
+					<h6 className="subtitulo d-flex ">{t('Legal links')}</h6>
+					<span className={`d-flex ${store.borde_hover}`} onClick={() => {
+						navigate("/example")
+					}}>{t('Privacy Policy')}</span>
+					<span className={`d-flex ${store.borde_hover}`} onClick={() => {
+						navigate("/example")
+					}}>{t('Term of conditions')}</span>
+					<span className={`d-flex ${store.borde_hover}`} onClick={() => {
+						navigate("/example")
+					}}>{t('Legal notice')}</span>
 				</div>
-				<div className="col-2 text-start d-flex flex-column">
-					<h6 className="subtitulo ">{t('Links to resources')}</h6>
-					<span className="enlace ">{t('Rates and commissions')}</span>
-					<span className="enlace ">{t('Education')}</span>
+				<div className="col-2 flex-column animation">
+					<h6 className="subtitulo d-flex ">{t('Links to resources')}</h6>
+					<span className={`d-flex ${store.borde_hover}`} onClick={() => {
+						navigate("/example")
+					}}>{t('Rates and commissions')}</span>
+					<span className={`d-flex ${store.borde_hover}`} onClick={() => {
+						navigate("/example")
+					}}>{t('Education')}</span>
 				</div>
-				<div className="col-2 text-start d-flex flex-column">
-					<h6 className="subtitulo ">{t('Security')}</h6>
-					<span className="enlace ">{t('Tips')}</span>
-					<span className="enlace ">{t('Security methods')}</span>
-					<span className="enlace ">{t('Coordinate card')}</span>
+				<div className="col-2 flex-column animation">
+					<h6 className="subtitulo d-flex ">{t('Security')}</h6>
+					<span className={`d-flex ${store.borde_hover}`} onClick={() => {
+						navigate("/example")
+					}}>{t('Tips')}</span>
+					<span className={`d-flex ${store.borde_hover}`} onClick={() => {
+						navigate("/example")
+					}}>{t('Security methods')}</span>
+					<span className={`d-flex ${store.borde_hover}`} onClick={() => {
+						navigate("/example")
+					}}>{t('Coordinate card')}</span>
 				</div>
-				<div className="col-2 text-start d-flex flex-column">
-					<h6 className="subtitulo ">{t('Products and services')}</h6>
-					<span className="enlace ">{t('Shop')}</span>
-					<span className="enlace ">{t('Insurance')}</span>
-					<span className="enlace ">{t('Loans')}</span>
+				<div className="col-2 flex-column animation">
+					<h6 className="subtitulo d-flex ">{t('Products and services')}</h6>
+					<span className={`d-flex ${store.borde_hover}`} onClick={() => {
+						navigate("/example")
+					}}>{t('Shop')}</span>
+					<span className={`d-flex ${store.borde_hover}`} onClick={() => {
+						navigate("/example")
+					}}>{t('Insurance')}</span>
+					<span className={`d-flex ${store.borde_hover}`} onClick={() => {
+						navigate("/example")
+					}}>{t('Loans')}</span>
 				</div>
-				<div className="col-2 text-start d-flex flex-column">
-					<h6 className="subtitulo ">{t('Certifications')}</h6>
-					<span className="enlace ">{t('Certified titles')}</span>
-					<span className="enlace ">{t('Security titles')}</span>
+				<div className="col-2 flex-column animation">
+					<h6 className="subtitulo d-flex ">{t('Certifications')}</h6>
+					<span className={`d-flex ${store.borde_hover}`} onClick={() => {
+						navigate("/example")
+					}}>{t('Certified titles')}</span>
+					<span className={`d-flex ${store.borde_hover}`} onClick={() => {
+						navigate("/example")
+					}}>{t('Security titles')}</span>
 				</div>
 			</div>
+			<div className="row">
+				<div className="col-12 justify-content-end px-3 d-flex">
+
+					<div className="icono_redes"><FaFacebookSquare /></div>
+					<div className="icono_redes"><FaSquareXTwitter /></div>
+					<div className="icono_redes"><FaSquareInstagram /></div>
+					<div className="icono_redes"><FaLinkedin /></div>
+					<div className="icono_redes"><IoLogoYoutube /></div>
+					<div className="icono_redes"><FaSquareWhatsapp /></div>
+
+
+				</div>
+			</div> {/* Redes sociales */}
 		</footer>
 	)
 };
