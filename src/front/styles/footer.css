@@ -1,6 +1,7 @@
 /*--------------- animacion linea blanca h6 ----------*/
 .animation {
     transition: justify-content 0.5s ease;
+    transition: transform 0.5s ease;
 }
 
 .animation h6 {
@@ -25,7 +26,7 @@
 }
 
 .animation:hover span {
-    justify-content: center;
+    transform: translateX(5%);
 }
 
 .animation:hover h6::after {
@@ -39,4 +40,9 @@
 .icono_redes {
     margin: 0 3px;
     font-size: 25px;
+}
+
+.icono_redes:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
 }

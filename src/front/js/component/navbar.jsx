@@ -5,13 +5,15 @@ import "../../styles/navbar.css";
 import { FaMoon } from "react-icons/fa";
 import { MdWbSunny } from "react-icons/md";
 import { GiWorld } from "react-icons/gi";
+import { IoClose } from "react-icons/io5";
 
 // Importacion de la traduccion
 import { useTranslation } from "react-i18next";
 import { Context } from "../store/appContext";
+import { useNavigate } from "react-router-dom";
 
 export const Navbar = () => {
-	const { store, actions } = useContext(Context); ////////
+	const { store, actions } = useContext(Context);
 
 	// Logica para botones onclick modal/traduccion
 	const { t, i18n } = useTranslation();
@@ -19,68 +21,69 @@ export const Navbar = () => {
 		i18n.changeLanguage(language);
 	};
 
-	const [btn, setbtn] = useState(false) // esto es para test
+	const [btn, setbtn] = useState(false) // estado boton modo claro, modo oscuro
+	const navigate = useNavigate(null);
 
 	useEffect(() => {
 		btn === true ? actions.CambiarModo(true) : actions.CambiarModo(false)
 	}, [btn])
 
 	return (
-		<div className={`${store.texto} `}>
-			<div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div className={`${store.texto} `}> {/* modo oscuro y claro */}
+			<div className="modal fade" id="lenguajes" tabIndex="-1" aria-labelledby="label" aria-hidden="true">
 				{/* Modal selector de idiomas */}
 				<div className="modal-dialog">
-					<div className="modal-content bg-dark rounded-3">
+					<div className={`modal-content rounded-3 ${store.fondo} borde-brillante`}>
 						<div className="modal-header">
-							<h1 className="modal-title fs-5 " id="exampleModalLabel">{t('Languages')}</h1>
-							<button type="button" className="btn-close rounded-circle" data-bs-dismiss="modal" aria-label="Close"></button>
+							<h1 className="modal-title fs-5 " id="label">{t('Languages')}</h1>
+							<div className="hover fs-3" data-bs-dismiss="modal"><IoClose /></div>
 						</div>
 						<div className="modal-body">
 							{/* Selector de lenguaje */}
 							<div className="row py-3">
 								<div className="col-4">
-									<p className="fw-bold  enlace" onClick={() => handleLanguageChange('en')}>
-										<span className="fi mx-1 fi-gb">Inglés</span>
-									</p>
+									<div data-bs-dismiss="modal" onClick={() => handleLanguageChange('en')}>
+										<p className={`fw-bold ${store.borde_hover}`}><span className="fi mx-1 fi-gb"></span>Inglés</p>
+									</div>
 								</div>
 								<div className="col-4">
-									<p className="fw-bold  enlace" onClick={() => handleLanguageChange('zh')}>
-										<span className="fi mx-1 fi-cn">Chino</span>
-									</p>
+									<div data-bs-dismiss="modal" onClick={() => handleLanguageChange('zh')}>
+										<p className={`fw-bold ${store.borde_hover}`}><span className="fi mx-1 fi-cn"></span>Chino</p>
+									</div>
 								</div>
 								<div className="col-4">
-									<p className="fw-bold  enlace" onClick={() => handleLanguageChange('es')}>
-										<span className="fi mx-1 fi-es">Español</span>
-									</p>
-								</div>
-							</div>
-							<div className="row py-3">
-								<div className="col-4">
-									<p className="fw-bold  enlace" onClick={() => handleLanguageChange('pt')}>
-										<span className="fi mx-1 fi-pt">Portugués</span>
-									</p>
-								</div>
-								<div className="col-4">
-									<p className="fw-bold  enlace" onClick={() => handleLanguageChange('ru')}>
-										<span className="fi mx-1 fi-ru">Ruso</span>
-									</p>
-								</div>
-								<div className="col-4">
-									<p className="fw-bold  enlace" onClick={() => handleLanguageChange('de')}>
-										<span className="fi mx-1 fi-de">Alemán</span>
-									</p>
+									<div data-bs-dismiss="modal" onClick={() => handleLanguageChange('es')}>
+										<p className={`fw-bold ${store.borde_hover}`}><span className="fi mx-1 fi-es"></span>Español</p>
+									</div>
 								</div>
 							</div>
 							<div className="row py-3">
 								<div className="col-4">
-									<p className="fw-bold  enlace" onClick={() => handleLanguageChange('ar')}>
-										<span className="fi mx-1 fi-sa">Árabe</span>
-									</p>
+									<div data-bs-dismiss="modal" onClick={() => handleLanguageChange('pt')}>
+										<p className={`fw-bold ${store.borde_hover}`}><span className="fi mx-1 fi-pt"></span>Portugués</p>
+									</div>
 								</div>
 								<div className="col-4">
-									<p className="fw-bold  enlace" onClick={() => handleLanguageChange('fr')}>
-										<span className="fi mx-1 fi-fr">Francés</span>
-									</p>
+									<div data-bs-dismiss="modal" onClick={() => handleLanguageChange('ru')}>
+										<p className={`fw-bold ${store.borde_hover}`}><span className="fi mx-1 fi-ru"></span>Ruso</p>
+									</div>
+								</div>
+								<div className="col-4">
+									<div data-bs-dismiss="modal" onClick={() => handleLanguageChange('de')}>
+										<p className={`fw-bold ${store.borde_hover}`}><span className="fi mx-1 fi-de"></span>Alemán</p>
+									</div>
+								</div>
+							</div>
+							<div className="row py-3">
+								<div className="col-4">
+									<div data-bs-dismiss="modal" onClick={() => handleLanguageChange('ar')}>
+										<p className={`fw-bold ${store.borde_hover}`}><span className="fi mx-1 fi-sa"></span>Árabe</p>
+									</div>
+								</div>
+								<div className="col-4">
+									<div data-bs-dismiss="modal" onClick={() => handleLanguageChange('fr')}>
+										<p className={`fw-bold ${store.borde_hover}`}><span className="fi mx-1 fi-fr"></span>Francés</p>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -89,28 +92,41 @@ export const Navbar = () => {
 			</div>
 			<nav >
 				<div className="row my-2 mx-0">
-					<div className="col-3 text-end fs-3 fw-bold  px-0"><img src={store.fondo == "bg-black" ? logo_negro : logo_blanco} className={`img-fluid ${store.fondo == "bg-black" ? "img-oscuro" : "img-claro"}`} /></div> {/* Simbolo */}
+					<div className="col-3 text-end d-flex justify-content-end">
+						<img src={logo_negro} className={`img-fluid img-oscuro ${store.fondo == "bg-dark" ? "d-block" : "d-none"}`} /><img src={logo_blanco} className={`img-fluid img-claro ${store.fondo == "bg-dark" ? "d-none" : "d-block"}`} />
+					</div>
+
 					<div className="col-2 text-start fs-3 fw-bold  px-0 align-content-center"><span>GeekBank</span></div>
 					<div className="col-1 align-content-center  fw-bold text-center">
-						<span className="enlace-claro">{t('Movements')} </span>{/* Seccion movimientos */}
+						<span className={store.borde_hover} onClick={() => {
+							navigate("/example")
+						}}>{t('Movements')} </span>{/* Seccion movimientos */}
 					</div>
 					<div className="col-1 align-content-center  fw-bold text-center">
-						<span className="enlace-claro">{t('Transfers')}</span> {/* Seccion transferencias */}
+						<span className={store.borde_hover} onClick={() => {
+							navigate("/example")
+						}}>{t('Transfers')}</span> {/* Seccion transferencias */}
 					</div>
 					<div className="col-1 align-content-center  fw-bold text-center">
-						<span className="enlace-claro">{t('GEEK Store')}</span>{/* Seccion tienda */}
+						<span className={store.borde_hover} onClick={() => {
+							navigate("/example")
+						}}>{t('GEEK Store')}</span>{/* Seccion tienda */}
 					</div>
 					<div className="col-1 align-content-center  fw-bold text-center">
-						<span className="enlace-claro">{t('Exch/Currency')}</span> {/* Seccion divisas */}
+						<span className={store.borde_hover} onClick={() => {
+							navigate("/example")
+						}}>{t('Exch/Currency')}</span> {/* Seccion divisas */}
 					</div>
 					<div className="col-1 align-content-center  fw-bold text-center">
-						<span className="enlace-claro">{t('Investments')}</span> {/* Seccion divisas */}
+						<span className={store.borde_hover} onClick={() => {
+							navigate("/example")
+						}}>{t('Investments')}</span> {/* Seccion divisas */}
 					</div>
 
 					{/*------------------------------ eleccion de idiomas ------------ */}
 					<div className="col-1 text-end align-content-center">
-						<div type="div" className="rounded-circle enlace" data-bs-toggle="modal" data-bs-target="#exampleModal"> {/* Ejecuta el modal */}
-							<GiWorld className="simbolo-idioma" />
+						<div type="div" className="rounded-circle enlace" data-bs-toggle="modal" data-bs-target="#lenguajes"> {/* Ejecuta el modal */}
+							<GiWorld className="simbolo-idioma hover" />
 						</div>
 					</div>
 					{/*------------------------------ eleccion de idiomas ------------ */}
@@ -120,7 +136,7 @@ export const Navbar = () => {
 							<div className={btn === true ? "text-warning circle rounded-circle bg-white w-50 border  fw-bold enlace position-relative d-flex justify-content-center active" : "circle rounded-circle w-50 border  bg-black  fw-bold enlace position-relative d-flex justify-content-center"} onClick={() => {
 								btn === true ? setbtn(false) : setbtn(true);
 							}}>
-								<div className="icono">
+								<div className="icono hover">
 									{btn === false ? <FaMoon /> : <MdWbSunny />}
 								</div>
 							</div>
@@ -128,7 +144,7 @@ export const Navbar = () => {
 					</div>
 					{/*------------------------------ modo oscuro/ modo claro ------------ */}
 				</div>
-			</nav>
-		</div>
+			</nav >
+		</div >
 	);
 }

@@ -20,20 +20,31 @@
   height: 500px;
 }
 
+
 .enlace-claro:hover {
+  /* iluminacion letra para el modo oscuro */
   cursor: pointer;
   text-shadow: 0 0 13px rgb(255, 255, 255);
 }
 
 .enlace-oscuro:hover {
+  /* iluminacion letra para el modo claro */
   cursor: pointer;
   text-shadow: 0 0 13px rgba(64, 64, 64, 0.542);
 }
 
 .borde-brillante {
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+  /* borde con iluminacion */
+  box-shadow: 0 0 10px rgb(110, 110, 110);
 }
 
+
 .letra-brillante {
+  /* iluminacion para letras */
   text-shadow: 0 0 13px rgb(255, 255, 255);
+}
+
+.hover:hover {
+  /* accion para que el cursor actue como link */
+  cursor: pointer;
 }

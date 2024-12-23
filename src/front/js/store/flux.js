@@ -19,7 +19,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         } else {
           setStore({
             texto: "text-white",
-            fondo: "bg-black",
+            fondo: "bg-dark",
             borde: "border-white",
              borde_hover: "enlace-claro",
           });
