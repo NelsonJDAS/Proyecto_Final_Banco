@@ -83,7 +83,7 @@ export const Footer = () => {
 					}}>{t('Security titles')}</span>
 				</div>
 			</div>
-			<div className="row">
+			<div className="row mx-0">
 				<div className="col-12 justify-content-end px-3 d-flex">
 
 					<div className="icono_redes"><FaFacebookSquare /></div>
