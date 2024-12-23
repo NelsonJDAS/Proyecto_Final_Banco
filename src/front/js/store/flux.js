@@ -3,7 +3,8 @@ const getState = ({ getStore, getActions, setStore }) => {
     store: {
       texto: "text-black",
       fondo: "bg-dark",
-      borde: "border-danger",
+      borde: "border border-danger",
+      borde_hover: "enlace-oscuro"
     },
     actions: {
       CambiarModo: (estado) => {
@@ -12,6 +13,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             texto: "text-black",
             fondo: "bg-white",
             borde: "border-dark",
+             borde_hover: "enlace-oscuro",
           });
           document.body.style.backgroundColor = "white";
         } else {
@@ -19,6 +21,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             texto: "text-white",
             fondo: "bg-black",
             borde: "border-white",
+             borde_hover: "enlace-claro",
           });
           document.body.style.backgroundColor = "black";
         }
