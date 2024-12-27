@@ -1,3 +1,12 @@
+.content {
+    align-content: center;
+}
+
+.contenedor-main {
+    height: 600px;
+  }
+
+
 .contenedor {
     position: relative;
     width: 768px;

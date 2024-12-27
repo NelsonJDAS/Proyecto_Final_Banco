@@ -8,7 +8,7 @@ export const ContenedorPrincipal = () => {
     const { store, actions } = useContext(Context);
 
     return (
-        <div className={`contenedor container w-75 d-flex ${Registro === true ? "" : "panel-derecho-activo"} ${store.texto} ${store.borde}`}>
+        <div className={`contenedor container w-75 h-100 d-flex ${Registro === true ? "" : "panel-derecho-activo"} ${store.texto} ${store.borde}`}>
             <div className="register">
                 <form action="#" className={`d-flex flex-column align-content-center text-center justify-content-center ${store.fondo}`}>
                     <h1>Crear Cuenta</h1>

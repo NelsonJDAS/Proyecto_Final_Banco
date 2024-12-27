@@ -7,7 +7,7 @@ export const Home = () => {
   const { store, actions } = useContext(Context);
 
   return (
-    <div className="text-center mt-5 test">
+    <div className="text-center my-5 contenedor-main">
       <ContenedorPrincipal></ContenedorPrincipal>
     </div>
   );
