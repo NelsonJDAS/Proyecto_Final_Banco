@@ -4,24 +4,24 @@ const getState = ({ getStore, getActions, setStore }) => {
       texto: "text-black",
       fondo: "bg-dark",
       borde: "border border-danger",
-      borde_hover: "enlace-oscuro"
+      borde_hover: "enlace-oscuro",
     },
     actions: {
       CambiarModo: (estado) => {
         if (estado === true) {
           setStore({
             texto: "text-black",
-            fondo: "bg-white",
-            borde: "border-dark",
-             borde_hover: "enlace-oscuro",
+            fondo: "bg-light",
+            borde: "border border-dark",
+            borde_hover: "enlace-oscuro",
           });
           document.body.style.backgroundColor = "white";
         } else {
           setStore({
             texto: "text-white",
             fondo: "bg-dark",
-            borde: "border-white",
-             borde_hover: "enlace-claro",
+            borde: "border border-white",
+            borde_hover: "enlace-claro",
           });
           document.body.style.backgroundColor = "black";
         }
