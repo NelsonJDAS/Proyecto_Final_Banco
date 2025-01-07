@@ -26,6 +26,13 @@ const getState = ({ getStore, getActions, setStore }) => {
           document.body.style.backgroundColor = "black";
         }
       },
+
+      ConseguirToken: () => {
+        try {
+        } catch (error) {
+          console.log(error);
+        }
+      },
       // Funcion Ejemplo
       //   changeColor: (index, color) => {
       //     //get the store
