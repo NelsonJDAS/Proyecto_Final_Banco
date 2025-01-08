@@ -3,7 +3,7 @@ import { Context } from "../../store/appContext.js";
 import { useTranslation } from "react-i18next";// importacion de traducción
 
 export const Login = () => {
-    const  { t } = useTranslation();
+    const { t } = useTranslation();
 
     const { store, actions } = useContext(Context);
     // estados para controlar los valores puestos por el usuario
@@ -66,10 +66,52 @@ export const Login = () => {
     const HandlePassword = (e) => {
         SetPassword(e.target.value)
     }
+
+    const inputName = useRef(null)
+    const inputPassword = useRef(null)
+    const inputMail = useRef(null)
+
+    const FindUser = async () => {
+        try {
+            inputName.current.value = "";
+            inputPassword.current.value = "";
+            inputMail.current.value = "";
+            const response = await fetch(
+                process.env.BACKEND_URL + "/api/User/Login",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        "password": password,
+                        "email": email,
+                        "name": name,
+                        "is_active": true
+                    }),
+                }
+            );
+            if (!response.ok) {
+                throw new Error(`Error: :( )`);
+            }
+
+            const data = await response.json(); // Parseamos la respuesta JSON
+            console.log(data)
+            // Accedemos al token desde la respuesta
+            const token = data.token;
+
+            localStorage.setItem('token', token)
+
+
+            return "success";
+        } catch (error) {
+            console.error("Error al agregar usuario:", error);
+        }
+    }
     return (
         <div className="login">
             <form action="#" className={`d-flex flex-column align-content-center text-center justify-content-center ${store.fondo}`}>
-            <h1>{t(userForgotPassword === false ? 'Login' : 'Recovery')}</h1>
+                <h1>{t(userForgotPassword === false ? 'Login' : 'Recovery')}</h1>
                 {/* hace la transicion mas suave  */}
                 <div className={userForgotPassword ? "transicion-recuperar-password " : "transicion-Iniciar-Sesion "}>
                     {/*muestra dependiendo del estado userForgotPassword el contenedor de iniciar sesion o password olvidada*/}
@@ -78,16 +120,16 @@ export const Login = () => {
                             <>
                                 {/* cotenedor inciar sesion */}
                                 <label className="my-1 fw-bold">{t('Name')}</label>
-                                <input className=" mx-3 text-center py-1 rounded-pill input" type="text" onChange={HandleName} maxLength="40" />
-                                <label className="my-1 fw-bold">{t ('Email')}</label>
-                                <input className=" mx-3 text-center py-1 rounded-pill input" type="email" onChange={HandleEmail} />
+                                <input className=" mx-3 text-center py-1 rounded-pill input" type="text" onChange={HandleName} maxLength="40" ref={inputName} />
+                                <label className="my-1 fw-bold">{t('Email')}</label>
+                                <input className=" mx-3 text-center py-1 rounded-pill input" type="email" onChange={HandleEmail} ref={inputMail} />
                                 <label className="my-1 fw-bold">{t('Password')}</label>
-                                <input className=" mx-3 text-center py-1 rounded-pill input" type="password" onChange={HandlePassword} />
+                                <input className=" mx-3 text-center py-1 rounded-pill input" type="password" onChange={HandlePassword} ref={inputPassword} />
                                 <span className={`text-end mx-3 ${store.borde_hover}`} onClick={() => { SetuserForgotPassword(true) }}>{t('Forgot')}</span>
                                 <div className="text-center">
                                     <button type="button" className={`btn btn-light mt-3 w-50 rounded-pill ${store.borde}`} onClick={() => {
-                                        console.log(name, password, email);
-                                    }}>{t ('Login')}</button>
+                                        FindUser();
+                                    }}>{t('Login')}</button>
                                 </div>
                             </>
                         ) : (
