@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Context } from "../../store/appContext.js";
 import { useTranslation } from "react-i18next";// importacion de traducción
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
     const { t } = useTranslation();
@@ -108,6 +109,8 @@ export const Login = () => {
             console.error("Error al agregar usuario:", error);
         }
     }
+
+    const navigate = useNavigate("");
     return (
         <div className="login">
             <form action="#" className={`d-flex flex-column align-content-center text-center justify-content-center ${store.fondo}`}>
@@ -128,7 +131,8 @@ export const Login = () => {
                                 <span className={`text-end mx-3 ${store.borde_hover}`} onClick={() => { SetuserForgotPassword(true) }}>{t('Forgot')}</span>
                                 <div className="text-center">
                                     <button type="button" className={`btn btn-light mt-3 w-50 rounded-pill ${store.borde}`} onClick={() => {
-                                        FindUser();
+                                        // FindUser();
+                                        navigate("/home")
                                     }}>{t('Login')}</button>
                                 </div>
                             </>
