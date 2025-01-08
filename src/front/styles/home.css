@@ -160,3 +160,7 @@ form {
 .input-code {
     caret-color: transparent;
 }
+
+.prueba {
+    background: linear-gradient(135deg, #b71c1c, #e53935, #ff8a80);
+}

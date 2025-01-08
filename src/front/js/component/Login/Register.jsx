@@ -79,7 +79,7 @@ export const Register = () => {
                 </div>
 
                 <div className="text-center">
-                    <button className={`btn btn-light mt-3 w-50 rounded-pill ${store.borde}`} onClick={() => {
+                    <button className={`btn btn-light mt-3 w-50 rounded-pill  ${store.borde}`} onClick={() => {
                         AddUser();
                     }}>{t('Ready')}</button>
                 </div>
