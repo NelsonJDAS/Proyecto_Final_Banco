@@ -154,3 +154,9 @@ form {
     transform: translateY(-10px);
     transition: transform 0.3s ease;
 }
+
+
+/* Esto hace que el cursor sea invisible */
+.input-code {
+    caret-color: transparent;
+}

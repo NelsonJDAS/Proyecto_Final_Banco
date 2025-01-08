@@ -46,7 +46,7 @@ footer {
 .enlace-claro:hover {
   /* iluminacion letra para el modo oscuro */
   cursor: pointer;
-  text-shadow: 0 0 13px rgb(255, 255, 255);
+  text-shadow: 0 0 13px rgb(163, 163, 163);
 }
 
 .enlace-oscuro:hover {
