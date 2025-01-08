@@ -97,31 +97,38 @@ export const Navbar = () => {
 					</div>
 
 					<div className="col-2 text-start fs-3 fw-bold  px-0 align-content-center"><span>GeekBank</span></div>
-					<div className="col-1 align-content-center  fw-bold text-center">
+					{localStorage.getItem('token') === null ? (<div className="col-5 align-content-center  fw-bold text-center">
 						<span className={store.borde_hover} onClick={() => {
 							navigate("/example")
-						}}>{t('Movements')} </span>{/* Seccion movimientos */}
-					</div>
-					<div className="col-1 align-content-center  fw-bold text-center">
-						<span className={store.borde_hover} onClick={() => {
-							navigate("/example")
-						}}>{t('Transfers')}</span> {/* Seccion transferencias */}
-					</div>
-					<div className="col-1 align-content-center  fw-bold text-center">
-						<span className={store.borde_hover} onClick={() => {
-							navigate("/example")
-						}}>{t('GEEK Store')}</span>{/* Seccion tienda */}
-					</div>
-					<div className="col-1 align-content-center  fw-bold text-center">
-						<span className={store.borde_hover} onClick={() => {
-							navigate("/example")
-						}}>{t('Exch/Currency')}</span> {/* Seccion divisas */}
-					</div>
-					<div className="col-1 align-content-center  fw-bold text-center">
-						<span className={store.borde_hover} onClick={() => {
-							navigate("/example")
-						}}>{t('Investments')}</span> {/* Seccion divisas */}
-					</div>
+						}}></span>
+					</div>) : (
+						<>
+							<div className="col-1 align-content-center  fw-bold text-center">
+								<span className={store.borde_hover} onClick={() => {
+									navigate("/example")
+								}}>{t('Movements')} </span>{/* Seccion movimientos */}
+							</div>
+							<div className="col-1 align-content-center  fw-bold text-center">
+								<span className={store.borde_hover} onClick={() => {
+									navigate("/example")
+								}}>{t('Transfers')}</span> {/* Seccion transferencias */}
+							</div>
+							<div className="col-1 align-content-center  fw-bold text-center">
+								<span className={store.borde_hover} onClick={() => {
+									navigate("/example")
+								}}>{t('GEEK Store')}</span>{/* Seccion tienda */}
+							</div>
+							<div className="col-1 align-content-center  fw-bold text-center">
+								<span className={store.borde_hover} onClick={() => {
+									navigate("/example")
+								}}>{t('Exch/Currency')}</span> {/* Seccion divisas */}
+							</div>
+							<div className="col-1 align-content-center  fw-bold text-center">
+								<span className={store.borde_hover} onClick={() => {
+									navigate("/example")
+								}}>{t('Investments')}</span> {/* Seccion divisas */}
+							</div>
+						</>)}
 
 					{/*------------------------------ eleccion de idiomas ------------ */}
 					<div className="col-1 text-end align-content-center">
