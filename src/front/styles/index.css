@@ -1,3 +1,28 @@
+/* ajusta el footer para que siempre se localize abajo (las clases se ubican en el loyout.js) */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1;
+}
+
+footer {
+  background: #333;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+}
+
 .color-principal {
   background-color: #030a8c;
   color: white;
@@ -16,15 +41,12 @@
   font-weight: 700;
 }
 
-.test {
-  height: 500px;
-}
 
 
 .enlace-claro:hover {
   /* iluminacion letra para el modo oscuro */
   cursor: pointer;
-  text-shadow: 0 0 13px rgb(255, 255, 255);
+  text-shadow: 0 0 13px rgb(163, 163, 163);
 }
 
 .enlace-oscuro:hover {

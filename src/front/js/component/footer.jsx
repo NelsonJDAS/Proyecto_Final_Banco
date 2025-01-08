@@ -17,7 +17,7 @@ export const Footer = () => {
 	const navigate = useNavigate(null);
 
 	return (
-		<footer className={`footer mt-auto py-3 border-top ${store.borde} ${store.texto} ${store.fondo}`}> {/* modo oscuro y claro */}
+		<footer className={`footer mt-auto py-3 border-end-0 border-start-0 ${store.borde} ${store.texto} ${store.fondo}`}> {/* modo oscuro y claro */}
 			<div className="row px-3 m-0"> {/* Links */}
 				<div className="col-2 flex-column animation">
 					<h6 className="subtitulo d-flex ">{t('Contact information')}</h6>
