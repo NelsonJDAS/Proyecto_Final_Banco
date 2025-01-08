@@ -1,29 +1,31 @@
 import React from "react";
+import { useTranslation } from "react-i18next";// importacion de traducción
 
 const ContenedorAnimado = ({ funcion }) => {
+    const  { t } = useTranslation();
     // contenedor animado
     return (
         <div className="contenedor-principal text-white">
             <div className="contenedor-interactivo">
                 {/* contenedor para ocultar el iniciar sesion cuando el usuario este interactuando con el contenedor crear usuario */}
                 <div className="d-flex flex-column justify-content-center align-items-center text-center contenedor-izquierdo">
-                    <h1>Bienvenido!</h1>
-                    <p>¿Ya tienes una cuenta?</p>
-                    <p>Inicia sesión para acceder a todas tus funcionalidades de la web</p>
+                    <h1>{t('Welcome!')}</h1>
+                    <p>{t('cuenta?')}</p>
+                    <p>{t('Login to access all your web functionalities')}</p>
                     <span className="link fw-bold hover" onClick={() => {
                         funcion(true)
-                    }}>Iniciar Sesion</span>
+                    }}>{t('Login')}</span>
                 </div>
                 {/* contenedor para ocultar el Crear cuenta cuando el usuario este interactuando con el contenedor Inciar sesion */}
                 <div className="d-flex flex-column justify-content-center align-items-center text-center contenedor-derecho">
-                    <h1 className="fs-1">Hola!</h1>
-                    <p>¿Aún no tienes una cuenta?</p>
-                    <p>Crear una es rápido y sencillo.</p>
-                    <p>Haz clic en el botón de abajo para comenzar.</p>
+                    <h1 className="fs-1">{t('Hello!')}</h1>
+                    <p>{t('SinCuenta')}</p>
+                    <p>{t('SinCuenta2')}</p>
+                    <p>{t('SinCuenta3')}</p>
 
                     <span className="link fw-bold hover" onClick={() => {
                         funcion(false)
-                    }}>Registrarme</span>
+                    }}>{t('Register')}</span>
                 </div>
             </div>
         </div>
