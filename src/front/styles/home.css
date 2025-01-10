@@ -1,17 +1,22 @@
-/* Estilo inicial */
+/* Animacion para suavizar la transicion */
 .elemento {
-    opacity: 0;
-    /* Comienza invisible */
+    opacity: 0.1;
     transform: translateY(20px);
-    /* Ligeramente desplazado hacia abajo */
     transition: opacity 0.5s ease, transform 0.5s ease;
-    /* Animación suave */
 }
 
-/* Estilo para hacerlo visible */
 .elemento.visible {
     opacity: 1;
-    /* Totalmente visible */
     transform: translateY(0);
-    /* Posición final */
+}
+
+.elemento-segundario {
+    opacity: 0.1;
+    transform: translateY(20px);
+    transition: opacity 1.5s ease, transform 1.5s ease;
+}
+
+.elemento-segundario.visible {
+    opacity: 1;
+    transform: translateY(0);
 }

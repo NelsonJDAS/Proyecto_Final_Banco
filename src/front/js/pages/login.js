@@ -7,7 +7,7 @@ export const Login = () => {
   const { store, actions } = useContext(Context);
 
   return (
-    <div className="text-center my-5 contenedor-main">
+    <div className="text-center my-5 contenedor-main h-100">
       <ContenedorLoginYRegistro></ContenedorLoginYRegistro>
     </div>
   );
