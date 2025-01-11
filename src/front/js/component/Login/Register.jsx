@@ -1,6 +1,7 @@
 import React, { useContext, useRef, useState } from "react";
 import { Context } from "../../store/appContext.js";
 import { useTranslation } from "react-i18next";// importacion de traducción
+import { useNavigate } from "react-router-dom";
 
 export const Register = () => {
     const { t } = useTranslation();
@@ -8,6 +9,7 @@ export const Register = () => {
     const [name, SetName] = useState("");
     const [email, SetEmail] = useState("");
     const [password, SetPassword] = useState("");
+    const navigate = useNavigate(null);
 
     const { store, actions } = useContext(Context);
 
@@ -79,8 +81,9 @@ export const Register = () => {
                 </div>
 
                 <div className="text-center">
-                    <button className={`btn btn-light mt-3 w-50 rounded-pill  ${store.borde}`} onClick={() => {
-                        AddUser();
+                    <button className={`btn btn-light mt-3 w-50 rounded-pill  ${store.borde}`} onClick={async () => {
+                        const user = await AddUser();
+                        user === "success" ? navigate("/home") : ""
                     }}>{t('Ready')}</button>
                 </div>
             </form>

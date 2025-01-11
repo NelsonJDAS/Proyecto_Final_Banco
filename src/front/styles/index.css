@@ -17,6 +17,10 @@ body {
 }
 
 
+.w-90 {
+  width: 90%;
+}
+
 
 .app-container {
   display: flex;
