@@ -1,18 +1,34 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../../store/appContext";
+import NotificacionCol from "./NotificacionCol.jsx";
 
 
 const ContenedorNotificaciones = () => {
     const { store, actions } = useContext(Context);
 
-    const [userLoad, SetUserLoad] = useState("elemento-tabla");
+    const [userLoad, SetUserLoad] = useState("elemento");
     useEffect(() => {
-        SetUserLoad("elemento-tabla visible")
+        SetUserLoad("elemento visible")
     }, [])
 
     return (
-        <div className={`row fw-bold border-top-0 border-end-0 border-start-0 ${store.borde} ${userLoad} py-2`}>
-        </div>
+        <>
+            <div className="row">
+                <div classname="col-12 text-center fw-bold"><h3 className="text-center">Notificaciones</h3></div>
+            </div>
+            <div className={`row fw-bold ${store.borde} ${userLoad} py-2 rounded px-3 scroll`}>
+                <NotificacionCol cuerpo="Si necesitas ayuda contacta con nosotros via Chat/Correo en contacto" />
+                <NotificacionCol cuerpo="Tranferencia realizada hace 10 minutos" />
+                <NotificacionCol cuerpo="Tranferencia realizada hace 10 minutos" />
+                <NotificacionCol cuerpo="Tranferencia realizada hace 10 minutos" />
+                <NotificacionCol cuerpo="Tranferencia realizada hace 10 minutos" />
+                <NotificacionCol cuerpo="Tranferencia realizada hace 10 minutos" />
+                <NotificacionCol cuerpo="Tranferencia realizada hace 10 minutos" />
+                <NotificacionCol cuerpo="Tranferencia realizada hace 10 minutos" />
+                <NotificacionCol cuerpo="Tranferencia realizada hace 10 minutos" />
+                <NotificacionCol cuerpo="Tranferencia realizada hace 10 minutos" />
+            </div>
+        </>
     )
 }
 

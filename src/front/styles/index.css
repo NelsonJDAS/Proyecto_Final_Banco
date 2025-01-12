@@ -7,6 +7,32 @@ span {
 }
 
 
+/*scroll principal*/
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(85, 85, 85, 0.756);
+  cursor: grab;
+}
+
+::-webkit-scrollbar-thumb:active {
+  cursor: grabbing;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+
 /* ajusta el footer para que siempre se localize abajo (las clases se ubican en el loyout.js) */
 html,
 body {
@@ -17,8 +43,8 @@ body {
 }
 
 
-.w-90 {
-  width: 90%;
+.w-85 {
+  width: 85%;
 }
 
 

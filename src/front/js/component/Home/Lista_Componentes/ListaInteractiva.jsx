@@ -21,7 +21,7 @@ const ListaInteractiva = () => {
             {
                 root: null, // Usar la ventana como viewport
                 rootMargin: '0px', // Sin márgenes
-                threshold: 0.15, // Al menos el 15% del componente debe estar visible
+                threshold: 0, // Al menos el 1% del componente debe estar visible
             }
         );
 
@@ -43,11 +43,16 @@ const ListaInteractiva = () => {
             SetSecCol("componente-derecho visible")
             SetThCol("componente-izquierdov2 visible")
             SetFoCol("componente-derechov2 visible")
+        } else {
+            SetFirstCol("componente-izquierdo")
+            SetSecCol("componente-derecho")
+            SetThCol("componente-izquierdov2")
+            SetFoCol("componente-derechov2")
         }
     }, [isVisible])
 
     return (
-        <div className="container-fluid w-90" ref={sectionRef}>
+        <div className="container-fluid w-85" ref={sectionRef}>
             <div className="row">
                 <div className={`col-2 ${firstCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Bloqueo y desbloqueo de cuentas</div></div>
                 <div className={`col-4 ${thCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Historial de transacciones</div></div>
