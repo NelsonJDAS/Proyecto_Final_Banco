@@ -16,7 +16,7 @@ const ContenedorNotificaciones = () => {
             <div className="row">
                 <div classname="col-12 text-center fw-bold"><h3 className="text-center">Notificaciones</h3></div>
             </div>
-            <div className={`row fw-bold ${store.borde} ${userLoad} py-2 rounded px-3 scroll`}>
+            <div className={`row fw-bold ${store.borde} ${userLoad} py-2 px-3 scroll`}>
                 <NotificacionCol cuerpo="Si necesitas ayuda contacta con nosotros via Chat/Correo en contacto" />
                 <NotificacionCol cuerpo="Tranferencia realizada hace 10 minutos" />
                 <NotificacionCol cuerpo="Tranferencia realizada hace 10 minutos" />

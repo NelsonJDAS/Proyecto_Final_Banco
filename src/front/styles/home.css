@@ -107,6 +107,7 @@
 .scroll {
     overflow: auto;
     height: 600px;
+    border-radius: 10px;
 }
 
 .scroll::-webkit-scrollbar {
@@ -116,7 +117,7 @@
 
 .scroll::-webkit-scrollbar-thumb {
     background: #888;
-    border-radius: 0px 4px;
+    border-radius: 0px 10px 10px 0px;
 }
 
 .scroll::-webkit-scrollbar-thumb:hover {
