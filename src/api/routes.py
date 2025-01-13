@@ -7,6 +7,15 @@ from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from flask_jwt_extended import create_access_token
 
+from api.mail_config import get_mail
+
+
+
+# Para Flask-Mail, codigo de seguridad
+from flask_mail import Message
+import random
+
+
 api = Blueprint('api', __name__)
 
 # Allow CORS requests to this API
@@ -90,7 +99,39 @@ def user_autentication():
         else:
             return jsonify({"Usuario Identificado": user.serialize(),"token" : access_token}), 201    
     except Exception as e:
-        return jsonify({"error": str(e)}), 400         
+        return jsonify({"error": str(e)}), 400 
 
-    
-    
+# Endpoint para codigo de seguridad
+@api.route('/send-code', methods=['POST'])
+def send_code():
+    data = request.json
+    email = data.get('email')
+
+    if not email:
+        return jsonify({'error': 'Email es requerido'}), 400
+
+    # Generar código de seguridad
+    code = random.randint(100000, 999999)
+
+    # Enviar correo
+    try:
+        msg = Message('Código de seguridad para restablecer tu contraseña en Geek-Bank',
+                      recipients=[email])
+        msg.body = (
+            f"Hola,\n\n"
+            f"Hemos recibido una solicitud para restablecer tu contraseña en Geek-Bank.\n\n"
+            f"Tu código de seguridad es:\n\n"
+            f"🔑 **{code}** 🔑\n\n"  # Resalta el código con emojis y texto claro
+            f"Por favor, introduce este código en nuestra página web para completar el proceso de recuperación de tu cuenta.\n\n"
+            f"⚠️ *Nota importante:* Si no solicitaste este código, es posible que alguien haya intentado acceder a tu cuenta. "
+            f"Te recomendamos ignorar este mensaje y, si tienes alguna duda, contacta con nuestro equipo de soporte a la brevedad.\n\n"
+            f"¡Gracias por confiar en Geek-Bank!\n\n"
+            f"Atentamente,\n"
+            f"El equipo de Geek-Bank")
+
+        # Usamos la función get_mail para enviar el correo
+        get_mail().send(msg)
+
+        return jsonify({'message': 'Código enviado exitosamente', 'code': code}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
