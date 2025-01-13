@@ -39,7 +39,7 @@
 /* primera columna */
 .componente-izquierdo {
     opacity: 0;
-    transform: translateX(-100px);
+    transform: translateY(-100px);
     transition: opacity 2s ease, transform 2s ease;
 }
 
@@ -182,4 +182,8 @@
 
 .bg-transferencias {
     background-color: rgb(221 210 210 / 75%);
+}
+
+.bg-tarjetas {
+    background: linear-gradient(to right, #b30000, #ff6666);
 }
