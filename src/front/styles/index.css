@@ -12,6 +12,7 @@ span {
 ::-webkit-scrollbar {
   width: 8px;
   height: 0;
+  background: none;
 }
 
 ::-webkit-scrollbar-thumb {

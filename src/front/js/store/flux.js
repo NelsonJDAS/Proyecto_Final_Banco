@@ -19,7 +19,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             borde: "border border-dark",
             borde_hover: "enlace-oscuro",
           });
-          document.body.style.backgroundColor = "white";
+          document.body.classList.remove("fondo-modo-oscuro");
+          document.body.classList.add("fondo-modo-claro");
         } else {
           setStore({
             texto: "text-white",
@@ -27,7 +28,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             borde: "border border-white",
             borde_hover: "enlace-claro",
           });
-          document.body.style.backgroundColor = "black";
+          document.body.classList.remove("fondo-modo-claro");
+          document.body.classList.add("fondo-modo-oscuro");
         }
       },
 

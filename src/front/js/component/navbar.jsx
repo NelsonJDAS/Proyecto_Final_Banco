@@ -129,7 +129,7 @@ export const Navbar = () => {
 									navigate("/example")
 								}}>{t('Investments')}</span> {/* Seccion divisas */}
 							</div>
-							<div className="col-1 align-content-center text-center hover text-danger fs-3 fw-bold"><span onClick={() => {
+							<div className="col-1 align-content-center text-center text-danger fs-3 fw-bold"><span className="hover" onClick={() => {
 								localStorage.clear()
 								navigate("/")
 							}}><IoIosLogOut /></span></div>

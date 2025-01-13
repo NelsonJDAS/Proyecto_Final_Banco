@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import BloqueoDesbloqueoCuentas from "./Componentes/BloqueoDesbloqueoCuentas.jsx";
 
 const ListaInteractiva = () => {
 
@@ -54,7 +55,7 @@ const ListaInteractiva = () => {
     return (
         <div className="container-fluid w-85" ref={sectionRef}>
             <div className="row">
-                <div className={`col-2 ${firstCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Bloqueo y desbloqueo de cuentas</div></div>
+                <div className={`col-2 ${firstCol}`}><BloqueoDesbloqueoCuentas /></div>
                 <div className={`col-4 ${thCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Historial de transacciones</div></div>
                 <div className={`col-3 ${FoCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Alertas</div></div>
                 <div className={`col-3 ${secCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Tarjetas</div></div>
