@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import BloqueoDesbloqueoCuentas from "./Componentes/BloqueoDesbloqueoCuentas.jsx";
 import HistorialTransacciones from "./Componentes/HistorialTransacciones.jsx";
 import Tarjetas from "./Componentes/Tarjetas.jsx";
+import Alertas from "./Componentes/Alertas.jsx";
 
 const ListaInteractiva = () => {
 
@@ -59,7 +60,7 @@ const ListaInteractiva = () => {
             <div className="row">
                 <div className={`col-3 ${firstCol}`}><BloqueoDesbloqueoCuentas /></div>
                 <div className={`col-3 ${thCol}`}><HistorialTransacciones /></div>
-                <div className={`col-3 ${FoCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Alertas</div></div>
+                <div className={`col-3 ${FoCol}`}><Alertas /></div>
                 <div className={`col-3 ${secCol}`}><Tarjetas /></div>
             </div>
             <div className="row">
