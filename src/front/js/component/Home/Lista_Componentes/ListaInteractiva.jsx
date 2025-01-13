@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import BloqueoDesbloqueoCuentas from "./Componentes/BloqueoDesbloqueoCuentas.jsx";
+import HistorialTransacciones from "./Componentes/HistorialTransacciones.jsx";
 
 const ListaInteractiva = () => {
 
@@ -55,8 +56,8 @@ const ListaInteractiva = () => {
     return (
         <div className="container-fluid w-85" ref={sectionRef}>
             <div className="row">
-                <div className={`col-2 ${firstCol}`}><BloqueoDesbloqueoCuentas /></div>
-                <div className={`col-4 ${thCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Historial de transacciones</div></div>
+                <div className={`col-3 ${firstCol}`}><BloqueoDesbloqueoCuentas /></div>
+                <div className={`col-3 ${thCol}`}><HistorialTransacciones /></div>
                 <div className={`col-3 ${FoCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Alertas</div></div>
                 <div className={`col-3 ${secCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Tarjetas</div></div>
             </div>
@@ -68,15 +69,15 @@ const ListaInteractiva = () => {
             </div>
             <div className="row">
                 <div className={`col-2 ${firstCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Enlaces Legales</div></div>
-                <div className={`col-3 ${thCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Recursos</div></div>
-                <div className={`col-4 ${FoCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Seguridad</div></div>
-                <div className={`col-3 ${secCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Certificaciones</div></div>
+                <div className={`col-4 ${thCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Recursos</div></div>
+                <div className={`col-2 ${FoCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Seguridad</div></div>
+                <div className={`col-4 ${secCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Certificaciones</div></div>
             </div>
             <div className="row">
-                <div className={`col-2 ${firstCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Inversiones</div></div>
-                <div className={`col-3 ${thCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Tarjeta de Cordenadas</div></div>
-                <div className={`col-4 ${FoCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Divisas</div></div>
-                <div className={`col-3 ${secCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Redes Sociales</div></div>
+                <div className={`col-3 ${firstCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Inversiones</div></div>
+                <div className={`col-4 ${thCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Tarjeta de Cordenadas</div></div>
+                <div className={`col-3 ${FoCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Divisas</div></div>
+                <div className={`col-2 ${secCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Redes Sociales</div></div>
             </div>
         </div>
     )
