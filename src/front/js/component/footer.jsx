@@ -31,19 +31,19 @@ export const Footer = () => {
 				<div className="col-2 flex-column animation">
 					<h6 className="subtitulo d-flex ">{t('Legal links')}</h6>
 					<span className={`d-flex ${store.borde_hover}`} onClick={() => {
-						navigate("/example")
+						navigate("/politicas")
 					}}>{t('Privacy Policy')}</span>
 					<span className={`d-flex ${store.borde_hover}`} onClick={() => {
-						navigate("/example")
+						navigate("/terminos")
 					}}>{t('Term of conditions')}</span>
 					<span className={`d-flex ${store.borde_hover}`} onClick={() => {
-						navigate("/example")
+						navigate("/aviso")
 					}}>{t('Legal notice')}</span>
 				</div>
 				<div className="col-2 flex-column animation">
 					<h6 className="subtitulo d-flex ">{t('Links to resources')}</h6>
 					<span className={`d-flex ${store.borde_hover}`} onClick={() => {
-						navigate("/example")
+						navigate("/tarifas")
 					}}>{t('Rates and commissions')}</span>
 					<span className={`d-flex ${store.borde_hover}`} onClick={() => {
 						navigate("/example")
