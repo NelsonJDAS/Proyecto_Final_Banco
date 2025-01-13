@@ -22,7 +22,7 @@ const Tarjetas = () => {
                 <p></p>
                 <p>01/26</p>
             </div>
-            <span className="align-content-start mb-auto my-2">Tarjetas</span>
+            <span className="align-content-start mb-auto my-1">Tarjetas</span>
         </div >
     )
 }
