@@ -1,11 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/login.css";
 import ContenedorLoginYRegistro from "../component/Login/ContenedorLogin.jsx";
 
 export const Login = () => {
-  const { store, actions } = useContext(Context);
-
+  useEffect(() => {
+    localStorage.clear();
+  }, []);
   return (
     <div className="text-center my-5 contenedor-main h-100">
       <ContenedorLoginYRegistro></ContenedorLoginYRegistro>

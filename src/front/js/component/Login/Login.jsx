@@ -132,6 +132,7 @@ export const Login = () => {
                                 <div className="text-center">
                                     <button type="button" className={`btn btn-light mt-3 w-50 rounded-pill ${store.borde}`} onClick={() => {
                                         // FindUser();
+                                        localStorage.setItem('token', "ejemplo")
                                         navigate("/home")
                                     }}>{t('Login')}</button>
                                 </div>

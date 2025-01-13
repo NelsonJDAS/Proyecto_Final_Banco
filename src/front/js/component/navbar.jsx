@@ -11,6 +11,7 @@ import { IoClose } from "react-icons/io5";
 import { useTranslation } from "react-i18next";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
+import { IoIosLogOut } from "react-icons/io";
 
 export const Navbar = () => {
 	const { store, actions } = useContext(Context);
@@ -92,12 +93,12 @@ export const Navbar = () => {
 			</div>
 			<nav >
 				<div className="row my-2 mx-0">
-					<div className="col-3 text-end d-flex justify-content-end">
+					<div className="col-2 text-end d-flex justify-content-end">
 						<img src={logo_negro} className={`img-fluid img ${store.fondo == "fondo-modo-oscuro" ? "d-block" : "d-none"}`} /><img src={logo_blanco} className={`img-fluid img ${store.fondo == "fondo-modo-oscuro" ? "d-none" : "d-block"}`} />
 					</div>
 
 					<div className="col-2 text-start fs-3 fw-bold  px-0 align-content-center"><span>GeekBank</span></div>
-					{localStorage.getItem('token') === null ? (<div className="col-5 align-content-center  fw-bold text-center">
+					{localStorage.getItem('token') === null ? (<div className="col-6 align-content-center  fw-bold text-center">
 						<span className={store.borde_hover} onClick={() => {
 							navigate("/example")
 						}}></span>
@@ -128,6 +129,10 @@ export const Navbar = () => {
 									navigate("/example")
 								}}>{t('Investments')}</span> {/* Seccion divisas */}
 							</div>
+							<div className="col-1 align-content-center text-center hover text-danger fs-3 fw-bold"><span onClick={() => {
+								localStorage.clear()
+								navigate("/")
+							}}><IoIosLogOut /></span></div>
 						</>)}
 
 					{/*------------------------------ eleccion de idiomas ------------ */}
