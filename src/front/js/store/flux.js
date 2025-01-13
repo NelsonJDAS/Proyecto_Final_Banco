@@ -5,8 +5,12 @@ const getState = ({ getStore, getActions, setStore }) => {
       fondo: "fondo-modo-oscuro",
       borde: "border border-danger",
       borde_hover: "enlace-oscuro",
+      hidden: false,
     },
     actions: {
+      CambiarIncognito: (estado) => {
+        setStore({ ...getStore(), hidden: estado });
+      },
       CambiarModo: (estado) => {
         if (estado === true) {
           setStore({

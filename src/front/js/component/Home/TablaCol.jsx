@@ -14,9 +14,9 @@ const TablaCol = ({ fecha, monto, cuerpo, importe, saldo }) => {
         <div className={`row fw-bold border-top-0 border-end-0 border-start-0 ${store.borde} ${userLoad} py-2`}>
             <div className="col-3 text-center fw-bold align-content-center"><p>{fecha}</p></div>
             <div className="col-3 text-center fw-bold align-content-center"><p>{cuerpo}</p></div>
-            <div className={`col-3 text-center fw-bold align-content-center ${monto === undefined ? "text-danger" : "text-success"}`}><p>{monto === undefined ? importe : monto}</p></div>
-            <div className="col-3 text-center fw-bold align-content-center"><p>{monto === undefined ? saldo - importe : monto + saldo}</p></div>
-        </div>
+            <div className={`col-3 text-center fw-bold align-content-center ${monto === undefined ? "text-danger" : "text-success"}`}><p className={store.hidden ? "desenfoque text-white" : ""}>{monto === undefined ? importe : monto}</p></div>
+            <div className={`col-3 text-center fw-bold align-content-center ${store.hidden ? "desenfoque" : ""}`}><p>{monto === undefined ? saldo - importe : monto + saldo}</p></div>
+        </div >
     )
 }
 
