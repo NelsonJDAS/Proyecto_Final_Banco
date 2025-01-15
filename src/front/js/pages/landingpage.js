@@ -6,6 +6,7 @@ import "../../styles/landingPage.css";
 import ContenedorPresentacion from "../component/Landingpage/ContenedorPresentacion.jsx";
 import ContenedorVentajas from "../component/Landingpage/ContenedorVentajas.jsx";
 import ContenedorBeneficios from "../component/Landingpage/ContenedorBeneficios.jsx";
+import Testimonios from "../component/Landingpage/Testimonios.jsx";
 
 export const Landingpage = () => {
   useEffect(() => {
@@ -17,6 +18,7 @@ export const Landingpage = () => {
       <ContenedorBeneficios />
       <Banner />
       <ContenedorVentajas />
+      <Testimonios />
     </div>
   );
 };

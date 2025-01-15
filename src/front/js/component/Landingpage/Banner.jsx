@@ -22,7 +22,7 @@ const Banner = () => {
             {
                 root: null, // Usar la ventana como viewport
                 rootMargin: '0px', // Sin márgenes
-                threshold: 0.4, // Al menos el 40% del componente debe estar visible
+                threshold: 0.8, // Al menos el 80% del componente debe estar visible
             }
         );
 

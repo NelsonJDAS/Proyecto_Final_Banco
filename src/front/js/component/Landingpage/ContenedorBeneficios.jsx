@@ -30,7 +30,7 @@ const ContenedorBeneficios = () => {
             {
                 root: null, // Usar la ventana como viewport
                 rootMargin: '0px', // Sin márgenes
-                threshold: 0.1, // Al menos el 10% del componente debe estar visible
+                threshold: 0.3, // Al menos el 30% del componente debe estar visible
             }
         );
 
