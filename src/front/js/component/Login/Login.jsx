@@ -30,9 +30,6 @@ export const Login = () => {
     }
     const HandleCodeSeg = (e) => {
         SetCodeSend(e.target.value)
-        console.log(CodeSend);
-        
-
     }
 
     const CountRef = useRef(null)
@@ -157,7 +154,7 @@ export const Login = () => {
                                     <div className="col-6 my-3 text-start">
                                         <button type="button" className="rounded-pill btn btn-primary w-100 fw-bold" ref={buttomCode} onClick={() => {
                                             SetCode(true)
-                                            // Count()
+                                            Count()
                                             actions.sendCode(forgotMail)
                                             
                                         }}>{code ?

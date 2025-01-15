@@ -89,10 +89,10 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({ email });
         setStore({ code })
 
-        fetch("process.env.BACKEND_URL + /api/verify-code", {
+        fetch(process.env.BACKEND_URL + "/api/verify-code", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: store.email, reset_code: store.code }),
+          body: JSON.stringify({ email: store.email, code: store.code }),
         })
           .then((response) => response.json())
           .then((data) => {

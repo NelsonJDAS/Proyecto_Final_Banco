@@ -121,7 +121,7 @@ def send_code():
     # Generar código de seguridad
     code = f"{random.randint(100000, 999999)}"
     user.reset_code = code
-    user.code_expires = datetime.now(timezone.utc) + timedelta(minutes=10)  # Código válido por 10 minutos
+    # user.code_expires = datetime.now(timezone.utc) + timedelta(minutes=10)  # Código válido por 10 minutos
 
     # Guardar cambios en la base de datos
     db.session.commit()
@@ -149,7 +149,7 @@ def send_code():
 def verify_code():
     data = request.json
     email = data.get('email')
-    code = data.get('reset_code')
+    code = data.get('code')
 
     if not email or not code:
         return jsonify({'error': 'Email y código son requeridos'}), 400
@@ -160,8 +160,4 @@ def verify_code():
 
     if user.reset_code != code:
         return jsonify({'error': 'Código incorrecto'}), 400
-
-    # if datetime.timezone.utc() > user.code_expires:
-    #     return jsonify({'error': 'El código ha expirado'}), 400
-
     return jsonify({'message': 'Código verificado correctamente'}), 200
