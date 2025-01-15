@@ -6,7 +6,7 @@ from api.models import db, User
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from flask_jwt_extended import create_access_token
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from api.mail_config import get_mail
 
 
@@ -117,7 +117,7 @@ def send_code():
     # Generar código de seguridad
     code = f"{random.randint(100000, 999999)}"
     user.reset_code = code
-    user.code_expires = datetime.timezone.utc() + timedelta(minutes=10)  # Código válido por 10 minutos
+    user.code_expires = datetime.now(timezone.utc) + timedelta(minutes=10)  # Código válido por 10 minutos
 
     # Guardar cambios en la base de datos
     db.session.commit()
@@ -141,23 +141,23 @@ def send_code():
     get_mail().send(msg)
     return jsonify({'message': 'Código enviado exitosamente', 'code': code}), 200
     
-@api.route('/verify-code', methods=['POST'])
-def verify_code():
-    data = request.json
-    email = data.get('email')
-    code = data.get('code')
+# @api.route('/verify-code', methods=['POST'])
+# def verify_code():
+#     data = request.json
+#     email = data.get('email')
+#     code = data.get('code')
 
-    if not email or not code:
-        return jsonify({'error': 'Email y código son requeridos'}), 400
+#     if not email or not code:
+#         return jsonify({'error': 'Email y código son requeridos'}), 400
 
-    user = User.query.filter_by(email=email).first()
-    if not user:
-        return jsonify({'error': 'Usuario no encontrado'}), 404
+#     user = User.query.filter_by(email=email).first()
+#     if not user:
+#         return jsonify({'error': 'Usuario no encontrado'}), 404
 
-    if user.reset_code != code:
-        return jsonify({'error': 'Código incorrecto'}), 400
+#     if user.reset_code != code:
+#         return jsonify({'error': 'Código incorrecto'}), 400
 
-    if datetime.timezone.utc() > user.code_expires:
-        return jsonify({'error': 'El código ha expirado'}), 400
+#     if datetime.timezone.utc() > user.code_expires:
+#         return jsonify({'error': 'El código ha expirado'}), 400
 
-    return jsonify({'message': 'Código verificado correctamente'}), 200
+#     return jsonify({'message': 'Código verificado correctamente'}), 200

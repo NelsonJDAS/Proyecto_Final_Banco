@@ -48,7 +48,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         const actions = getActions();
         setStore({ email }); // Almacena el email ingresado por el usuario
 
-        fetch(`${BACKEND_URL}api/send-code`, {
+        fetch(process.env.BACKEND_URL + "/api/send-code", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email: store.email }), // Usa el email recibido desde Login.jsx
@@ -63,26 +63,26 @@ const getState = ({ getStore, getActions, setStore }) => {
               });
 
               // Inicia el temporizador
-              actions.startTimer();
+              // actions.startTimer();
             } else {
               alert(data.error);
             }
           });
       },
 
-      startTimer: () => {
-        const interval = setInterval(() => {
-          const store = getStore();
-          const newTimeLeft = store.timeLeft - 1;
+      // startTimer: () => {
+      //   const interval = setInterval(() => {
+      //     const store = getStore();
+      //     const newTimeLeft = store.timeLeft - 1;
 
-          if (newTimeLeft <= 0) {
-            clearInterval(interval); // Detiene el temporizador cuando llega a 0
-            setStore({ codeSent: false, timeLeft: 0 }); // Resetea el estado
-          } else {
-            setStore({ timeLeft: newTimeLeft }); // Actualiza el tiempo restante
-          }
-        }, 1000); // Decrementa cada segundo
-      },
+      //     if (newTimeLeft <= 0) {
+      //       clearInterval(interval); // Detiene el temporizador cuando llega a 0
+      //       setStore({ codeSent: false, timeLeft: 0 }); // Resetea el estado
+      //     } else {
+      //       setStore({ timeLeft: newTimeLeft }); // Actualiza el tiempo restante
+      //     }
+      //   }, 1000); // Decrementa cada segundo
+      // },
 
       verifyCode: (code) => {
         const store = getStore();
