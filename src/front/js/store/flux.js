@@ -3,7 +3,7 @@ const getState = ({ getStore, getActions, setStore }) => {
     store: {
       texto: "text-dark",
       fondo: "fondo-modo-oscuro",
-      borde: "border border-danger",
+      borde: "border border-dark",
       borde_hover: "enlace-oscuro",
       hidden: false,
       codeSent: false,
