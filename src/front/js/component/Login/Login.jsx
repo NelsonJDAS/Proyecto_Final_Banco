@@ -26,6 +26,8 @@ export const Login = () => {
 
     const HandleForgotMail = (e) => {
         SetForgotMail(e.target.value.toLowerCase())
+        console.log(forgotMail);
+        
     }
 
     const CountRef = useRef(null)
@@ -150,7 +152,9 @@ export const Login = () => {
                                     <div className="col-6 my-3 text-start">
                                         <button type="button" className="rounded-pill btn btn-primary w-100 fw-bold" ref={buttomCode} onClick={() => {
                                             SetCode(true)
-                                            Count()
+                                            // Count()
+                                            actions.sendCode(forgotMail)
+                                            
                                         }}>{code ?
                                             `( ${timeCode} ) s`
                                             : t('SendCode')}</button>

@@ -6,7 +6,7 @@ from api.models import db, User
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from flask_jwt_extended import create_access_token
-
+from datetime import datetime, timedelta
 from api.mail_config import get_mail
 
 
@@ -110,28 +110,54 @@ def send_code():
     if not email:
         return jsonify({'error': 'Email es requerido'}), 400
 
+    user = User.query.filter_by(email=email).first()
+    if not user:
+        return jsonify({'error': 'Usuario no encontrado'}), 404
+
     # Generar código de seguridad
-    code = random.randint(100000, 999999)
+    code = f"{random.randint(100000, 999999)}"
+    user.reset_code = code
+    user.code_expires = datetime.timezone.utc() + timedelta(minutes=10)  # Código válido por 10 minutos
+
+    # Guardar cambios en la base de datos
+    db.session.commit()
 
     # Enviar correo
-    try:
-        msg = Message('Código de seguridad para restablecer tu contraseña en Geek-Bank',
-                      recipients=[email])
-        msg.body = (
-            f"Hola,\n\n"
-            f"Hemos recibido una solicitud para restablecer tu contraseña en Geek-Bank.\n\n"
-            f"Tu código de seguridad es:\n\n"
-            f"🔑 **{code}** 🔑\n\n"  # Resalta el código con emojis y texto claro
-            f"Por favor, introduce este código en nuestra página web para completar el proceso de recuperación de tu cuenta.\n\n"
-            f"⚠️ *Nota importante:* Si no solicitaste este código, es posible que alguien haya intentado acceder a tu cuenta. "
-            f"Te recomendamos ignorar este mensaje y, si tienes alguna duda, contacta con nuestro equipo de soporte a la brevedad.\n\n"
-            f"¡Gracias por confiar en Geek-Bank!\n\n"
-            f"Atentamente,\n"
-            f"El equipo de Geek-Bank")
+    msg = Message('Código de seguridad para restablecer tu contraseña en Geek-Bank',
+                  recipients=[email])
+    msg.body = (
+        f"Hola,\n\n"
+        f"Hemos recibido una solicitud para restablecer tu contraseña en Geek-Bank.\n\n"
+        f"Tu código de seguridad es:\n\n"
+        f"🔑 **{code}** 🔑\n\n" 
+        f"Por favor, introduce este código en nuestra página web para completar el proceso de recuperación de tu cuenta.\n\n"
+        f"Este código es válido por 10 minutos.\n\n"
+        f"⚠️ *Nota importante:* Si no solicitaste este código, es posible que alguien haya intentado acceder a tu cuenta. "
+        f"Te recomendamos ignorar este mensaje y, si tienes alguna duda, contacta con nuestro equipo de soporte a la brevedad.\n\n"
+        f"¡Gracias por confiar en Geek-Bank!\n\n"
+        f"Atentamente,\n"
+        f"El equipo de Geek-Bank")
 
-        # Usamos la función get_mail para enviar el correo
-        get_mail().send(msg)
+    get_mail().send(msg)
+    return jsonify({'message': 'Código enviado exitosamente', 'code': code}), 200
+    
+@api.route('/verify-code', methods=['POST'])
+def verify_code():
+    data = request.json
+    email = data.get('email')
+    code = data.get('code')
 
-        return jsonify({'message': 'Código enviado exitosamente', 'code': code}), 200
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
+    if not email or not code:
+        return jsonify({'error': 'Email y código son requeridos'}), 400
+
+    user = User.query.filter_by(email=email).first()
+    if not user:
+        return jsonify({'error': 'Usuario no encontrado'}), 404
+
+    if user.reset_code != code:
+        return jsonify({'error': 'Código incorrecto'}), 400
+
+    if datetime.timezone.utc() > user.code_expires:
+        return jsonify({'error': 'El código ha expirado'}), 400
+
+    return jsonify({'message': 'Código verificado correctamente'}), 200

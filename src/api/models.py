@@ -5,9 +5,12 @@ db = SQLAlchemy()
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    nombre = db.Column(db.String(100))
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), nullable=False)
     is_active = db.Column(db.Boolean(), nullable=False)
+    reset_code = db.Column(db.String(6), nullable=True)
+    code_expires = db.Column(db.DateTime, nullable=True)
 
     def __repr__(self):
         return f'<User {self.email}>'
@@ -15,6 +18,7 @@ class User(db.Model):
     def serialize(self):
         return {
             "id": self.id,
+            "nombre": self.nombre,
             "email": self.email,
         }
 
@@ -23,9 +27,6 @@ class Cliente(db.Model):
     __tablename__ = 'cliente'
 
     id = db.Column(db.Integer, primary_key=True)
-    nombre = db.Column(db.String(100))
-    email = db.Column(db.String(100), unique=True)
-    password = db.Column(db.String(100))  # Asumimos que será en texto plano o hasheado
     telefono = db.Column(db.String(15))
     direccion = db.Column(db.String(200))
     fecha_creacion = db.Column(db.DateTime, default=datetime.utcnow)
