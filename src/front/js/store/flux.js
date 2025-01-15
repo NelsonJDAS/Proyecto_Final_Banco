@@ -3,9 +3,12 @@ const getState = ({ getStore, getActions, setStore }) => {
     store: {
       texto: "text-dark",
       fondo: "fondo-modo-oscuro",
-      borde: "border border-dark",
+      borde: "border border-danger",
       borde_hover: "enlace-oscuro",
       hidden: false,
+      codeSent: false,
+      email: "", // Email ingresado por el usuario,
+      code: ""
     },
     actions: {
       CambiarIncognito: (estado) => {
@@ -39,6 +42,70 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log(error);
         }
       },
+
+      sendCode: (email) => {
+        const store = getStore();
+        const actions = getActions();
+        setStore({ email }); // Almacena el email ingresado por el usuario
+
+        fetch(process.env.BACKEND_URL + "/api/send-code", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: store.email }), // Usa el email recibido desde Login.jsx
+        })
+          .then((response) => response.json())
+          .then((response) => console.log(response))
+          .then((data) => {
+            if (response.ok) {
+              setStore({
+                codeSent: true, // Indica que el código fue enviado
+                timeLeft: 600, // 10 minutos en segundos
+              });
+
+              // Inicia el temporizador
+              // actions.startTimer();
+            } else {
+              alert(data.error);
+            }
+          });
+      },
+
+      // startTimer: () => {
+      //   const interval = setInterval(() => {
+      //     const store = getStore();
+      //     const newTimeLeft = store.timeLeft - 1;
+
+      //     if (newTimeLeft <= 0) {
+      //       clearInterval(interval); // Detiene el temporizador cuando llega a 0
+      //       setStore({ codeSent: false, timeLeft: 0 }); // Resetea el estado
+      //     } else {
+      //       setStore({ timeLeft: newTimeLeft }); // Actualiza el tiempo restante
+      //     }
+      //   }, 1000); // Decrementa cada segundo
+      // },
+
+      verifyCode: (email, code) => {
+        const store = getStore();
+        setStore({ email });
+        setStore({ code })
+
+        fetch(process.env.BACKEND_URL + "/api/verify-code", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: store.email, code: store.code }),
+        })
+          .then((response) => response.json())
+          .then((response) => console.log(response))
+          .then((data) => {
+            if (response.ok) {
+              alert("Código verificado. Ahora puedes cambiar tu contraseña.");
+            } else {
+              alert(data.error);
+            }
+          });
+      },
+
+      
       // Funcion Ejemplo
       //   changeColor: (index, color) => {
       //     //get the store
