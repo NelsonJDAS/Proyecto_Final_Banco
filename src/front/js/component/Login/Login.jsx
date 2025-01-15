@@ -23,7 +23,7 @@ export const Login = () => {
     const [forgotMail, SetForgotMail] = useState("");
 
     // tiempo que tiene que pasar para solicitar de nuevo el codigo
-    const [timeCode, SetTimeCode] = useState(30);
+    const [timeCode, SetTimeCode] = useState(300);
 
     const HandleForgotMail = (e) => {
         SetForgotMail(e.target.value.toLowerCase())
@@ -49,17 +49,12 @@ export const Login = () => {
     useEffect(() => {
         if (timeCode === 0) {
             clearInterval(CountRef.current)
-            SetTimeCode(60)
+            SetTimeCode(600)
             SetCode(false)
             buttomCode.current.disabled = false;
         }
     }, [timeCode])
 
-    const HandleCode = (e) => {
-        if (/^\d+$/.test(e.target.value) === false) {
-            InputCode.current.value = InputCode.current.value.slice(0, -1)
-        }
-    }
 
     //handles para cambiar los valores puestos por el usuario
     const HandleName = (e) => {
@@ -156,7 +151,7 @@ export const Login = () => {
                                             SetCode(true)
                                             Count()
                                             actions.sendCode(forgotMail)
-                                            
+
                                         }}>{code ?
                                             `( ${timeCode} ) s`
                                             : t('SendCode')}</button>
@@ -171,7 +166,7 @@ export const Login = () => {
                                                 console.log(timeCode)
                                                 actions.verifyCode(forgotMail, CodeSend)
                                                 console.log(forgotMail, CodeSend);
-                                                
+
                                                 ;
                                             }}>{t('Check')}</button>
                                         </div>

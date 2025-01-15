@@ -46,13 +46,13 @@ const Banner = () => {
 
     return (
         <div className="contenedor-landing">
-            <div className="img-banner w-100 align-content-center text-center text-white" ref={sectionRef} style={{ 'background-image': `url(${Bannerimg})` }}>
+            <div className="img-banner w-100 align-content-center text-center text-white" ref={sectionRef} style={{ backgroundImage: `url(${Bannerimg})` }}>
                 <div className={`d-flex flex-column contenido-banner ${userLoad}`}>
                     <p className="">¡Empieza Ahora!</p>
                     <p className="mx-2 fs-2">Regístrate ahora para disfrutar de todos nuestros beneficios.</p>
-                    <div><buttom className="rounded-pill btn border-white w-25 fw-bold text-white mx-3 fs-1 btn-landing hover" onClick={() => {
+                    <div><button className="rounded-pill btn border-white w-25 fw-bold text-white mx-3 fs-1 btn-landing hover" onClick={() => {
                         navigate("/login")
-                    }}>Entrar</buttom></div>
+                    }}>Entrar</button></div>
                 </div>
             </div>
         </div>)

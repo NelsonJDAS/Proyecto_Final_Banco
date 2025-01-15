@@ -26,7 +26,6 @@ const TestimonioIndividual = ({ nombre, fecha, descripcion, estrellas, userLoad 
             numestrellas++
         }
 
-        console.log(estrellas)
         return estrellas
     }
 
@@ -47,10 +46,13 @@ const TestimonioIndividual = ({ nombre, fecha, descripcion, estrellas, userLoad 
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-12 text-end"><div className="mx-3">{
-                        Object.assign(generarEstrellas(estrellas)).map((elem) => {
-                            return elem === "★" ? <RiStarSFill /> : <RiStarSLine />
-                        })}</div></div>
+                    <div className="col-12 text-end">
+                        <div className="mx-3">{
+                            Object.assign(generarEstrellas(estrellas)).map((elem, index) => {
+                                return elem === "★" ? <i key={index} ><RiStarSFill /></i> : <i key={index}><RiStarSLine /></i>
+                            })}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
