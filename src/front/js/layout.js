@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 
+import { Landingpage } from "./pages/landingpage.js";
 import { Login } from "./pages/login";
 import { Home } from "./pages/home";
 import { Politicas } from "./pages/politicas";
@@ -32,7 +33,8 @@ const Layout = () => {
           <Navbar />
           <div className="content">
             <Routes>
-              <Route element={<Login />} path="/" />
+              <Route element={<Landingpage />} path="/" />
+              <Route element={<Login />} path="/login" />
               <Route element={<Home />} path="/home" />
               <Route element={<Politicas />} path="/politicas" />
               <Route element={<Terminos />} path="/terminos" />

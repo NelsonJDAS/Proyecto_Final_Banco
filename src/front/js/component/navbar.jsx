@@ -91,7 +91,7 @@ export const Navbar = () => {
 					</div>
 				</div>
 			</div>
-			<nav >
+			<nav>
 				<div className="row my-2 mx-0">
 					<div className="col-2 text-end d-flex justify-content-end">
 						<img src={logo_negro} className={`img-fluid img ${store.fondo == "fondo-modo-oscuro" ? "d-block" : "d-none"}`} /><img src={logo_blanco} className={`img-fluid img ${store.fondo == "fondo-modo-oscuro" ? "d-none" : "d-block"}`} />
