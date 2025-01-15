@@ -1,0 +1,23 @@
+.logo_not_found {
+    font-size: 400px;
+}
+
+.logo_not_found_v2 {
+    font-size: 200px;
+}
+
+.titulo-404 {
+    font-size: 50px;
+}
+
+.desvanecer {
+    opacity: 0;
+    transition: opacity 3s ease, transform 3s ease;
+    transform: translateY(100px);
+}
+
+.desvanecer.visible {
+    opacity: 1;
+    transition: opacity 3s ease, transform 3s ease;
+    transform: translateY(0);
+}

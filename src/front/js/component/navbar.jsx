@@ -94,10 +94,14 @@ export const Navbar = () => {
 			<nav>
 				<div className="row my-2 mx-0">
 					<div className="col-2 text-end d-flex justify-content-end">
-						<img src={logo_negro} className={`img-fluid img ${store.fondo == "fondo-modo-oscuro" ? "d-block" : "d-none"}`} /><img src={logo_blanco} className={`img-fluid img ${store.fondo == "fondo-modo-oscuro" ? "d-none" : "d-block"}`} />
+						<img src={logo_negro} className={`img-fluid hover img ${store.fondo == "fondo-modo-oscuro" ? "d-block" : "d-none"}`} onClick={() => {
+							localStorage.getItem('token') === null ? navigate("/") : navigate("/home")
+						}} /><img src={logo_blanco} className={`img-fluid img ${store.fondo == "fondo-modo-oscuro" ? "d-none" : "d-block"}`} />
 					</div>
 
-					<div className="col-2 text-start fs-3 fw-bold  px-0 align-content-center"><span>GeekBank</span></div>
+					<div className="col-2 text-start fs-3 fw-bold  px-0 align-content-center hover" onClick={() => {
+						localStorage.getItem('token') === null ? navigate("/") : navigate("/home")
+					}}><span>GeekBank</span></div>
 					{localStorage.getItem('token') === null ? (<div className="col-6 align-content-center  fw-bold text-center">
 						<span className={store.borde_hover} onClick={() => {
 							navigate("/example")
