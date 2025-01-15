@@ -18,7 +18,7 @@
     width: 0;
     height: 2.5px;
     background-color: rgb(110, 110, 110);
-    transition: width 0.3s ease;
+    transition: width 0.5s ease;
 }
 
 .animation:hover h6 {
