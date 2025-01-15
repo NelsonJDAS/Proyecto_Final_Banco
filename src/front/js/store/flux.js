@@ -3,7 +3,7 @@ const getState = ({ getStore, getActions, setStore }) => {
     store: {
       texto: "text-dark",
       fondo: "fondo-modo-oscuro",
-      borde: "border border-dark",
+      borde: "border border-danger",
       borde_hover: "enlace-oscuro",
       hidden: false,
       codeSent: false,
@@ -95,6 +95,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           body: JSON.stringify({ email: store.email, code: store.code }),
         })
           .then((response) => response.json())
+          .then((response) => console.log(response))
           .then((data) => {
             if (response.ok) {
               alert("Código verificado. Ahora puedes cambiar tu contraseña.");
