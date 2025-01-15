@@ -1,0 +1,77 @@
+/* animaciones generales para animacion de izq a derecha , derecha a izquierda, arriba a abajo, abajo a arriba*/
+
+.animacion-izq {
+    opacity: 0.1;
+    transform: translateX(-100px);
+    transition: opacity 2s ease, transform 2s ease;
+}
+
+.animacion-izq.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.animacion-der {
+    opacity: 0.1;
+    transform: translateX(100px);
+    transition: opacity 2s ease, transform 2s ease;
+}
+
+.animacion-der.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.animacion-arriba {
+    opacity: 0.1;
+    transform: translateY(-100px);
+    transition: opacity 2s ease, transform 2s ease;
+}
+
+.animacion-arriba.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.animacion-abajo {
+    opacity: 0.1;
+    transform: translateY(100px);
+    transition: opacity 2s ease, transform 2s ease;
+}
+
+.animacion-abajo.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+.titulo-landing {
+    font-size: 70px;
+    margin: 60px 0px;
+}
+
+.contenedor-beneficios {
+    width: 100%;
+    height: 350px;
+    border-radius: 20px;
+}
+
+
+.img-banner {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 70vh;
+}
+
+.contenido-banner {
+    font-size: 80px;
+}
+
+.btn-landing {
+    transition: all 0.4s ease-in-out
+}
+
+.btn-landing:hover {
+    background-color: rgba(255, 255, 255, 0.184);
+}

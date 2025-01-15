@@ -1,8 +1,8 @@
 /* Animacion para suavizar la transicion */
 .elemento-login {
     opacity: 0.1;
-    transform: translatex(60px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transform: translatex(100px);
+    transition: opacity 1s ease, transform 2s ease;
 }
 
 .elemento-login.visible {
