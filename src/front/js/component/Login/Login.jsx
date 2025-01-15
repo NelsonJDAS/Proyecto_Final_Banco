@@ -11,6 +11,7 @@ export const Login = () => {
     const [name, SetName] = useState("");
     const [email, SetEmail] = useState("");
     const [password, SetPassword] = useState("");
+    const [CodeSend, SetCodeSend] = useState("")
 
     // ejecuta el contenedor si el usuario se ha olvidado el password de su cuenta
     const [userForgotPassword, SetuserForgotPassword] = useState(false)
@@ -26,8 +27,12 @@ export const Login = () => {
 
     const HandleForgotMail = (e) => {
         SetForgotMail(e.target.value.toLowerCase())
-        console.log(forgotMail);
+    }
+    const HandleCodeSeg = (e) => {
+        SetCodeSend(e.target.value)
+        console.log(CodeSend);
         
+
     }
 
     const CountRef = useRef(null)
@@ -160,13 +165,17 @@ export const Login = () => {
                                             : t('SendCode')}</button>
                                     </div>
                                     <div className="col-3 my-3 text-center">
-                                        <input className="text-center py-1 rounded-pill input w-100 fw-bold input-code" type="text" onChange={HandleCode} maxLength={6} ref={InputCode} placeholder="******" />
+                                        <input className="text-center py-1 rounded-pill input w-100 fw-bold input-code" type="text" onChange={HandleCodeSeg} maxLength={6} ref={InputCode} placeholder="******" />
                                         <label className="fw-bold">{t('Code')}</label>
                                     </div>
                                     <div className="col-3">
                                         <div className="col-12 text-center">
                                             <button type="button" className={`btn mt-3 w-100 rounded-pill ${store.borde} ${store.texto} `} onClick={() => {
-                                                console.log(timeCode);
+                                                console.log(timeCode)
+                                                actions.verifyCode(forgotMail, CodeSend)
+                                                console.log(forgotMail, CodeSend);
+                                                
+                                                ;
                                             }}>{t('Check')}</button>
                                         </div>
                                     </div>

@@ -7,8 +7,8 @@ const getState = ({ getStore, getActions, setStore }) => {
       borde_hover: "enlace-oscuro",
       hidden: false,
       codeSent: false,
-      timeLeft: 0, // Tiempo restante para el temporizador
-      email: "", // Email ingresado por el usuario
+      email: "", // Email ingresado por el usuario,
+      code: ""
     },
     actions: {
       CambiarIncognito: (estado) => {
@@ -84,13 +84,15 @@ const getState = ({ getStore, getActions, setStore }) => {
       //   }, 1000); // Decrementa cada segundo
       // },
 
-      verifyCode: (code) => {
+      verifyCode: (email, code) => {
         const store = getStore();
+        setStore({ email });
+        setStore({ code })
 
-        fetch("/api/verify-code", {
+        fetch("process.env.BACKEND_URL + /api/verify-code", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: store.email, code }),
+          body: JSON.stringify({ email: store.email, reset_code: store.code }),
         })
           .then((response) => response.json())
           .then((data) => {

@@ -46,6 +46,7 @@ def getUsers():
 @api.route('/User/Register', methods=['POST'])
 def addUser():
     data = request.get_json()
+    name = data.get("name")
     email = data.get("email")
     password = data.get("password")
     is_active = data.get("is_active")
@@ -53,12 +54,15 @@ def addUser():
     
     if email is None or email is "":
         return jsonify({"Mensaje": "The email is missing"}), 400
+    elif name is None or name is "":
+        return jsonify({"Mensaje": "The name is missing"}), 400
     elif password is None or password is "":
         return jsonify({"Mensaje": "The password is missing"}), 400
     elif is_active is None or is_active is "":
         return jsonify({"Mensaje": "The is_active is missing"}), 400
     try:
         new_user = User(
+            name= data.get("name"),
             email= data.get("email"),
             password= data.get("password"),
             is_active=data.get("is_active")
@@ -141,23 +145,23 @@ def send_code():
     get_mail().send(msg)
     return jsonify({'message': 'Código enviado exitosamente', 'code': code}), 200
     
-# @api.route('/verify-code', methods=['POST'])
-# def verify_code():
-#     data = request.json
-#     email = data.get('email')
-#     code = data.get('code')
+@api.route('/verify-code', methods=['POST'])
+def verify_code():
+    data = request.json
+    email = data.get('email')
+    code = data.get('reset_code')
 
-#     if not email or not code:
-#         return jsonify({'error': 'Email y código son requeridos'}), 400
+    if not email or not code:
+        return jsonify({'error': 'Email y código son requeridos'}), 400
 
-#     user = User.query.filter_by(email=email).first()
-#     if not user:
-#         return jsonify({'error': 'Usuario no encontrado'}), 404
+    user = User.query.filter_by(email=email).first()
+    if not user:
+        return jsonify({'error': 'Usuario no encontrado'}), 404
 
-#     if user.reset_code != code:
-#         return jsonify({'error': 'Código incorrecto'}), 400
+    if user.reset_code != code:
+        return jsonify({'error': 'Código incorrecto'}), 400
 
-#     if datetime.timezone.utc() > user.code_expires:
-#         return jsonify({'error': 'El código ha expirado'}), 400
+    # if datetime.timezone.utc() > user.code_expires:
+    #     return jsonify({'error': 'El código ha expirado'}), 400
 
-#     return jsonify({'message': 'Código verificado correctamente'}), 200
+    return jsonify({'message': 'Código verificado correctamente'}), 200
