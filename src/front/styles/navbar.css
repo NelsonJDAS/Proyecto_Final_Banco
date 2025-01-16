@@ -5,6 +5,83 @@
   margin-top: -10px;
 }
 
+@media (max-width: 480px) {
+  .img {
+    width: 60px;
+    height: 60px;
+    margin-top: 0px;
+  }
+
+  .titulo-nav {
+    font-size: 20px !important;
+  }
+
+  body {
+    padding-right: 0px !important;
+  }
+
+  .contenedor-modal {
+    padding-top: 60px;
+  }
+}
+
+@media (min-width: 480px) and (max-width: 550px) {
+  .img {
+    margin: 5px 20px 0px 0px;
+    width: 85px;
+    height: 85px;
+  }
+
+  .titulo-nav {
+    font-size: 22px !important;
+  }
+
+  body {
+    padding-right: 0px !important;
+  }
+}
+
+@media (min-width: 550px) and (max-width: 768px) {
+  .img {
+    margin: 10px 20px 0px 0px;
+    width: 92px;
+    height: 92px;
+  }
+
+  .titulo-nav {
+    font-size: 24px !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .img {
+    width: 100px;
+    height: 100px;
+    margin-top: 0px;
+  }
+
+  .titulo-nav {
+    font-size: 30px !important;
+  }
+
+  body {
+    padding-right: 0px !important;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1300px) {
+  .link {
+    font-size: 10px !important;
+  }
+}
+
+@media (min-width: 1300px) and (max-width: 1900px) {
+  .link {
+    font-size: 17px !important;
+  }
+}
+
+
 .dark-mode {
   /* contenedor del modo oscuro/claro */
   transition: background-image 0.5s ease-in-out, color 0.5s ease-in-out;
