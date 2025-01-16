@@ -70,7 +70,67 @@
 }
 
 
+@media (max-width: 768px) {
+    .titulo-landing {
+        font-size: 40px !important;
+    }
 
+    .contenedor-landing {
+        margin: 25px 0 !important;
+    }
+
+    .logo-ventajas {
+        font-size: 40px !important;
+    }
+
+    .contenedor-ventajas {
+        height: 240px !important;
+    }
+
+    .btn-landing {
+        width: 80% !important;
+    }
+
+    .contenedor-comentario {
+        height: 110px !important;
+        font-size: 15px !important;
+    }
+
+    .contenedor-ventajas:hover p {
+        transform: scale(1.05) !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1300px) {
+    .titulo-landing {
+        font-size: 40px !important;
+    }
+
+    .contenedor-landing {
+        margin: 25px 0 !important;
+    }
+
+    .logo-ventajas {
+        font-size: 40px !important;
+    }
+
+    .contenedor-ventajas {
+        height: 240px !important;
+    }
+
+    .btn-landing {
+        width: 80% !important;
+    }
+
+    .contenedor-comentario {
+        height: 110px !important;
+        font-size: 15px !important;
+    }
+
+    .contenedor-ventajas:hover p {
+        transform: scale(1.05) !important;
+    }
+}
 
 
 
@@ -103,5 +163,6 @@
 
 
 .contenedor-comentario {
-    height: 180px;
+    height: 220px;
+    padding: 0px 50px;
 }

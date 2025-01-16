@@ -65,8 +65,29 @@ const ContenedorBeneficios = () => {
                     <div className="col-12 text-center"><h2 className={`titulo-landing ${userLoadv2 ? "animacion-izq visible" : "animacion-izq"}`}>Beneficios de Geek Bank</h2></div>
                 </div>
                 <div className="row">
-                    <div className="col-3">
-                        <div className={`mx-2 contenedor-ventajas text-info align-content-center ${store.borde} ${userLoad ? "animacion-izq visible" : "animacion-izq"} ${store.fondo === "fondo-modo-claro" ? "bg-dark" : "bg-white"}`}>
+                    <div className="col-lg-3 my-3 col-md-8 col-6">
+                        <div className={`mx-0 mx-md-2 my-3 my-md-0 contenedor-ventajas text-info align-content-center ${store.borde} ${userLoad ? "animacion-izq visible" : "animacion-izq"} ${store.fondo === "fondo-modo-claro" ? "bg-dark" : "bg-white"}`}>
+                            <div className="d-flex flex-column text-center">
+                            <i className="logo-ventajas"><FaUsers /></i>
+                                <div className="text-center fs-4 fw-bold">
+                                    <p>Soporte 24/7</p>
+                                    <p>para que nunca estés solo</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-lg-3 my-3 col-md-4 col-6">
+                        <div className={`mx-0 mx-md-2 my-3 my-md-0 contenedor-ventajas text-info align-content-center ${store.borde} ${userLoad ? "animacion-arriba visible" : "animacion-arriba"} ${store.fondo === "fondo-modo-claro" ? "bg-dark" : "bg-white"}`}>
+                            <div className="d-flex flex-column text-center">
+                                <i className="logo-ventajas"><BsGraphUpArrow /></i>
+                                <div className="text-center fs-4">
+                                    <p className="fw-bold">Crece con Geek Bank</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-lg-3 my-3 col-md-4 col-6">
+                         <div className={`mx-0 mx-md-2 my-3 my-md-0 contenedor-ventajas text-info align-content-center ${store.borde} ${userLoad ? "animacion-der visible" : "animacion-der"} ${store.fondo === "fondo-modo-claro" ? "bg-dark" : "bg-white"}`}>
                             <div className="d-flex flex-column text-center">
                                 <i className="logo-ventajas"><MdOutlinePercent /></i>
                                 <div className="text-center fs-4">
@@ -75,18 +96,8 @@ const ContenedorBeneficios = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-3">
-                        <div className={`mx-2 contenedor-ventajas text-info align-content-center ${store.borde} ${userLoad ? "animacion-arriba visible" : "animacion-arriba"} ${store.fondo === "fondo-modo-claro" ? "bg-dark" : "bg-white"}`}>
-                            <div className="d-flex flex-column text-center">
-                                <i className="logo-ventajas"><TbClick /></i>
-                                <div className="text-center fs-4">
-                                    <p className="fw-bold">Ahorro automatizado con solo un click</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-3">
-                        <div className={`mx-2 contenedor-ventajas text-info align-content-center ${store.borde} ${userLoad ? "animacion-arriba visible" : "animacion-arriba"} ${store.fondo === "fondo-modo-claro" ? "bg-dark" : "bg-white"}`}>
+                    <div className="col-lg-3 my-3 col-md-8 col-6">
+                    <div className={`mx-0 mx-md-2 my-3 my-md-0 contenedor-ventajas text-info align-content-center ${store.borde} ${userLoad ? "animacion-arriba visible" : "animacion-arriba"} ${store.fondo === "fondo-modo-claro" ? "bg-dark" : "bg-white"}`}>
                             <div className="d-flex flex-column text-center">
                                 <i className="logo-ventajas"><FaRegMoneyBillAlt /></i>
                                 <div className="text-center fs-4">
@@ -95,21 +106,8 @@ const ContenedorBeneficios = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-3">
-                        <div className={`mx-2 contenedor-ventajas text-info align-content-center ${store.borde} ${userLoad ? "animacion-der visible" : "animacion-der"} ${store.fondo === "fondo-modo-claro" ? "bg-dark" : "bg-white"}`}>
-                            <div className="d-flex flex-column text-center">
-                                <i className="logo-ventajas"><FaUsers /></i>
-                                <div className="text-center fs-4 fw-bold">
-                                    <p>Soporte 24/7</p>
-                                    <p>para que nunca estés solo</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="row my-3">
-                    <div className="col-3">
-                        <div className={`mx-2 contenedor-ventajas text-info align-content-center ${store.borde} ${userLoad ? "animacion-izq visible" : "animacion-izq"} ${store.fondo === "fondo-modo-claro" ? "bg-dark" : "bg-white"}`}>
+                    <div className="col-lg-3 my-3 col-md-8 col-6">
+                        <div className={`mx-0 mx-md-2 my-3 my-md-0 contenedor-ventajas text-info align-content-center ${store.borde} ${userLoad ? "animacion-izq visible" : "animacion-izq"} ${store.fondo === "fondo-modo-claro" ? "bg-dark" : "bg-white"}`}>
                             <div className="d-flex flex-column text-center">
                                 <i className="logo-ventajas"><RiSecurePaymentLine /></i>
                                 <div className="text-center fs-4">
@@ -118,8 +116,8 @@ const ContenedorBeneficios = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-3">
-                        <div className={`mx-2 contenedor-ventajas text-info align-content-center ${store.borde} ${userLoad ? "animacion-abajo visible" : "animacion-abajo"} ${store.fondo === "fondo-modo-claro" ? "bg-dark" : "bg-white"}`}>
+                    <div className="col-lg-3 my-3 col-md-4 col-6">
+                        <div className={`mx-0 mx-md-2 my-3 my-md-0 contenedor-ventajas text-info align-content-center ${store.borde} ${userLoad ? "animacion-abajo visible" : "animacion-abajo"} ${store.fondo === "fondo-modo-claro" ? "bg-dark" : "bg-white"}`}>
                             <div className="d-flex flex-column text-center">
                                 <i className="logo-ventajas"><MdOutlineSystemSecurityUpdateGood /></i>
                                 <div className="text-center fs-4">
@@ -128,8 +126,8 @@ const ContenedorBeneficios = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-3">
-                        <div className={`mx-2 contenedor-ventajas text-info align-content-center ${store.borde} ${userLoad ? "animacion-abajo visible" : "animacion-abajo"} ${store.fondo === "fondo-modo-claro" ? "bg-dark" : "bg-white"}`}>
+                    <div className="col-lg-3 my-3 col-md-4 col-6">
+                        <div className={`mx-0 mx-md-2 my-3 my-md-0 contenedor-ventajas text-info align-content-center ${store.borde} ${userLoad ? "animacion-abajo visible" : "animacion-abajo"} ${store.fondo === "fondo-modo-claro" ? "bg-dark" : "bg-white"}`}>
                             <div className="d-flex flex-column text-center">
                                 <i className="logo-ventajas"><AiOutlineGlobal /></i>
                                 <div className="text-center fs-4">
@@ -138,12 +136,12 @@ const ContenedorBeneficios = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-3">
-                        <div className={`mx-2 contenedor-ventajas text-info align-content-center ${store.borde} ${userLoad ? "animacion-der visible" : "animacion-der"} ${store.fondo === "fondo-modo-claro" ? "bg-dark" : "bg-white"}`}>
+                    <div className="col-lg-3 my-3 col-md-8 col-6">
+                        <div className={`mx-0 mx-md-2 my-3 my-md-0 contenedor-ventajas text-info align-content-center ${store.borde} ${userLoad ? "animacion-der visible" : "animacion-der"} ${store.fondo === "fondo-modo-claro" ? "bg-dark" : "bg-white"}`}>
                             <div className="d-flex flex-column text-center">
-                                <i className="logo-ventajas"><BsGraphUpArrow /></i>
+                                <i className="logo-ventajas"><TbClick /></i>
                                 <div className="text-center fs-4">
-                                    <p className="fw-bold">Crece con Geek Bank</p>
+                                    <p className="fw-bold">Ahorro automatizado con solo un click</p>
                                 </div>
                             </div>
                         </div>

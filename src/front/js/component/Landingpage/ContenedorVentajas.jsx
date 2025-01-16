@@ -59,8 +59,8 @@ const ContenedorVentajas = () => {
                 <div className="col-12 text-center"><h2 className={`titulo-landing ${userLoadv2 ? "animacion-der visible" : "animacion-der"}`}>¿Por qué elegir Geek Bank?</h2></div>
             </div>
             <div className="row" ref={sectionRef}>
-                <div className="col-4">
-                    <div className={`mx-2 contenedor-ventajas text-warning ${store.borde} ${userLoad ? "animacion-izq visible" : "animacion-izq"} ${store.fondo === "fondo-modo-claro" ? "bg-dark" : "bg-white"}`}>
+                <div className="col-12 col-md-6 my-3 my-lg-0">
+                    <div className={`mx-md-2 contenedor-ventajas text-warning ${store.borde} ${userLoad ? "animacion-izq visible" : "animacion-izq"} ${store.fondo === "fondo-modo-claro" ? "bg-dark" : "bg-white"}`}>
                         <div className="d-flex flex-column text-center">
                             <i className="logo-ventajas"><TbPigMoney /></i>
                             <div className="text-center fs-4">
@@ -70,8 +70,8 @@ const ContenedorVentajas = () => {
                         </div>
                     </div>
                 </div>
-                <div className="col-4">
-                    <div className={`mx-2 contenedor-ventajas text-success ${store.borde} ${userLoad ? "animacion-abajo visible" : "animacion-abajo"} ${store.fondo === "fondo-modo-claro" ? "bg-dark" : "bg-white"}`}>
+                <div className="col-12 col-md-6 my-3 my-lg-0">
+                    <div className={`mx-md-2 contenedor-ventajas text-success ${store.borde} ${userLoad ? "animacion-abajo visible" : "animacion-abajo"} ${store.fondo === "fondo-modo-claro" ? "bg-dark" : "bg-white"}`}>
                         <div className="d-flex flex-column text-center">
                             <i className="logo-ventajas"><TiDocumentText /></i>
                             <div className="text-center fs-4">
@@ -81,8 +81,8 @@ const ContenedorVentajas = () => {
                         </div>
                     </div>
                 </div>
-                <div className="col-4">
-                    <div className={`mx-2 contenedor-ventajas text-primary ${store.borde} ${userLoad ? "animacion-der visible" : "animacion-der"} ${store.fondo === "fondo-modo-claro" ? "bg-dark" : "bg-white"}`}>
+                <div className="col-12 col-md-12 my-3 my-lg-0">
+                    <div className={`mx-md-2 contenedor-ventajas text-primary ${store.borde} ${userLoad ? "animacion-der visible" : "animacion-der"} ${store.fondo === "fondo-modo-claro" ? "bg-dark" : "bg-white"}`}>
                         <div className="d-flex flex-column text-center">
                             <i className="logo-ventajas"><IoMdTime /></i>
                             <div className="text-center fs-4">
