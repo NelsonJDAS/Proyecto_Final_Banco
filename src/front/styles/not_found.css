@@ -21,10 +21,6 @@
         transition: opacity 3s ease;
     }
 
-    .content {
-        align-content: start;
-    }
-
     .btn-home {
         font-size: 20px !important;
     }
@@ -49,10 +45,6 @@
 
     .desvanecer {
         margin: 50px 0px 0px 20px;
-    }
-
-    .content {
-        align-content: start;
     }
 
     .btn-home {
@@ -89,3 +81,4 @@
     transition: opacity 3s ease, transform 3s ease;
     transform: translateY(0);
 }
+

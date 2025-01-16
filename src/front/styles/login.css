@@ -1,5 +1,6 @@
 /* Animacion para suavizar la transicion */
 .elemento-login {
+    width: 90% !important;
     opacity: 0.1;
     transform: translatex(100px);
     transition: opacity 1s ease, transform 2s ease;
@@ -31,6 +32,81 @@
     overflow: hidden;
 }
 
+@media (max-width: 660px) {
+    .contenedor-main {
+        height: auto !important;
+        width: 100% !important;
+    }
+
+    .elemento-login {
+        border: transparent !important;
+        width: 100% !important;
+    }
+
+    .contenedor {
+        border-radius: 0px;
+        margin: 0px !important;
+    }
+
+    .texto-login {
+        font-size: 10px !important;
+    }
+
+    .input {
+        width: 90%;
+    }
+
+    .label-login {
+        text-align: center !important;
+        font-size: 13px !important;
+        margin: 15px 0px !important;
+    }
+
+    .titulo-login {
+        font-size: 25px !important;
+    }
+
+    .btn-login {
+        width: 90% !important;
+    }
+
+    .link-login {
+        font-size: 18px !important;
+    }
+}
+
+@media (min-width: 660px) and (max-width: 992px) {
+
+    .elemento-login {
+        width: 90% !important;
+    }
+
+    .texto-login {
+        font-size: 15px !important;
+    }
+
+    .input {
+        width: 90%;
+    }
+
+    .label-login {
+        text-align: center !important;
+        font-size: 15px !important;
+        margin: 10px 0px !important;
+    }
+
+    .titulo-login {
+        font-size: 30px !important;
+    }
+
+    .btn-login {
+        width: 90% !important;
+    }
+
+    .link-login {
+        font-size: 30px !important;
+    }
+}
 
 /* estado base de los contenedores antes de la animacion */
 .register,
@@ -58,6 +134,7 @@
 
 /* aplicamos la altura maxima para el contenedor login y register */
 form {
+    justify-content: center;
     height: 100%;
 }
 
@@ -113,6 +190,7 @@ form {
 /* clases generales para el contenedor izquierdo y derecho */
 .contenedor-derecho,
 .contenedor-izquierdo {
+    justify-content: center;
     position: absolute;
     top: 0;
     height: 100%;
@@ -142,11 +220,11 @@ form {
 
 
 /* aumentar la altura del link encargado de cambiar el estado del contenedor animado */
-.link {
-    font-size: 25px;
+.link-login {
+    font-size: 25px !important;
 }
 
-.link:hover {
+.link-login:hover {
     opacity: 0.7;
     transform: scale(0.99);
 }
