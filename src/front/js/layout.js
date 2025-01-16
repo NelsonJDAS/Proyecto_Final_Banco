@@ -9,6 +9,7 @@ import { Politicas } from "./pages/politicas";
 import { Terminos } from "./pages/terminos";
 import { Aviso } from "./pages/aviso";
 import { Tarifas } from "./pages/tarifas";
+import { Educacion } from "./pages/educacion";
 import injectContext, { Context } from "./store/appContext";
 
 import { Navbar } from "./component/navbar.jsx";
@@ -38,6 +39,7 @@ const Layout = () => {
               <Route element={<Terminos />} path="/terminos" />
               <Route element={<Aviso />} path="/aviso" />
               <Route element={<Tarifas />} path="/tarifas" />
+              <Route element={<Educacion />} path="/educacion" />
               <Route element={<h1>Not found!</h1>} />
             </Routes>
           </div>
