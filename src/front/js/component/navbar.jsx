@@ -107,49 +107,49 @@ export const Navbar = () => {
 					</div>) : (
 						<>
 							<div className="col-3 col-md-4 d-lg-none align-content-center text-center">
-								<div class="btn-group w-50">
-									<button class={`btn ${store.texto} fs-2`} type="button" data-bs-toggle="dropdown" aria-expanded="false">
+								<div className="btn-group w-50">
+									<button className={`btn ${store.texto} fs-2`} type="button" data-bs-toggle="dropdown" aria-expanded="false">
 										<IoIosArrowDown />
 									</button>
-									<ul class={`dropdown-menu fw-bold ${store.fondo === "fondo-modo-claro" ? "bg-dark" : "bg-white"}`}>
+									<ul className={`dropdown-menu fw-bold ${store.fondo === "fondo-modo-claro" ? "bg-dark" : "bg-white"}`}>
 										<li>
-											<a class={`dropdown-item text-center hover ${store.fondo === "fondo-modo-claro" ? "text-white" : "text-dark"}`} href="#">
+											<a className={`dropdown-item text-center hover ${store.fondo === "fondo-modo-claro" ? "text-white" : "text-dark"}`} href="#">
 												<span className={store.borde_hover} onClick={() => {
 													navigate("/example")
 												}}>{t('Movements')} </span>
 											</a>
 										</li>
 										<li>
-											<a class={`dropdown-item text-center hover ${store.fondo === "fondo-modo-claro" ? "text-white" : "text-dark"}`} href="#">
+											<a className={`dropdown-item text-center hover ${store.fondo === "fondo-modo-claro" ? "text-white" : "text-dark"}`} href="#">
 												<span className={store.borde_hover} onClick={() => {
 													navigate("/example")
 												}}>{t('Transfers')}</span>
 											</a>
 										</li>
 										<li>
-											<a class={`dropdown-item text-center hover ${store.fondo === "fondo-modo-claro" ? "text-white" : "text-dark"}`} href="#">
+											<a className={`dropdown-item text-center hover ${store.fondo === "fondo-modo-claro" ? "text-white" : "text-dark"}`} href="#">
 												<span className={store.borde_hover} onClick={() => {
 													navigate("/example")
 												}}>{t('GEEK Store')}</span>
 											</a>
 										</li>
 										<li>
-											<a class={`dropdown-item text-center hover ${store.fondo === "fondo-modo-claro" ? "text-white" : "text-dark"}`} href="#">
+											<a className={`dropdown-item text-center hover ${store.fondo === "fondo-modo-claro" ? "text-white" : "text-dark"}`} href="#">
 												<span className={store.borde_hover} onClick={() => {
 													navigate("/example")
 												}}>{t('Exch/Currency')}</span>
 											</a>
 										</li>
 										<li>
-											<a class={`dropdown-item text-center hover ${store.fondo === "fondo-modo-claro" ? "text-white" : "text-dark"}`} href="#">
+											<a className={`dropdown-item text-center hover ${store.fondo === "fondo-modo-claro" ? "text-white" : "text-dark"}`} href="#">
 												<span className={store.borde_hover} onClick={() => {
 													navigate("/example")
 												}}>{t('Investments')}</span>
 											</a>
 										</li>
-										<li className="d-md-none"><hr class="dropdown-divider" /></li>
+										<li className="d-md-none"><hr className="dropdown-divider" /></li>
 										<li className="d-md-none">
-											<a class={`dropdown-item text-center hover ${store.fondo === "fondo-modo-claro" ? "text-white" : "text-dark"}`} href="#">
+											<a className={`dropdown-item text-center hover ${store.fondo === "fondo-modo-claro" ? "text-white" : "text-dark"}`} href="#">
 												<span className="hover text-danger" onClick={() => {
 													localStorage.clear()
 													navigate("/")
