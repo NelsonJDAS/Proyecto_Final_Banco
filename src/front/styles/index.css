@@ -131,23 +131,12 @@ footer {
 }
 
 .color-principal {
-  background-color: red;
-  color: white;
-  font-weight: 700;
+  background-color: #1E3A8A;
 }
 
-.color-componente {
-  background-color: #95f238;
-  color: #0d0d0de8;
-  font-weight: 700;
+.color-gradiante {
+  background: linear-gradient(90deg, #1E3A8A, #2563EB);
 }
-
-.color-componente2 {
-  background-color: #aaf23d;
-  color: #0d0d0de8;
-  font-weight: 700;
-}
-
 
 
 .enlace-claro:hover {
