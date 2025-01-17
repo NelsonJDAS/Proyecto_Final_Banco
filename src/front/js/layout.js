@@ -10,13 +10,11 @@ import { Politicas } from "./pages/politicas";
 import { Terminos } from "./pages/terminos";
 import { Aviso } from "./pages/aviso";
 import { Tarifas } from "./pages/tarifas";
-<<<<<<< HEAD
-import { Educacion } from "./pages/educacion";
-=======
-import { Not_found } from "./pages/not_found.js";
->>>>>>> 19366709b4f1ab1e8f3896ec95cc1a637f4ab29c
-import injectContext, { Context } from "./store/appContext";
+import { Educacion } from "./pages/educacion.js";
 
+import { Not_found } from "./pages/not_found.js";
+
+import injectContext, { Context } from "./store/appContext";
 import { Navbar } from "./component/navbar.jsx";
 import { Footer } from "./component/footer.jsx";
 
@@ -45,12 +43,8 @@ const Layout = () => {
               <Route element={<Terminos />} path="/terminos" />
               <Route element={<Aviso />} path="/aviso" />
               <Route element={<Tarifas />} path="/tarifas" />
-<<<<<<< HEAD
               <Route element={<Educacion />} path="/educacion" />
-              <Route element={<h1>Not found!</h1>} />
-=======
               <Route element={<Not_found />} path="*" />
->>>>>>> 19366709b4f1ab1e8f3896ec95cc1a637f4ab29c
             </Routes>
           </div>
           <Footer />
