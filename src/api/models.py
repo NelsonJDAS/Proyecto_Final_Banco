@@ -11,6 +11,8 @@ class User(db.Model):
     is_active = db.Column(db.Boolean(), nullable=False)
     reset_code = db.Column(db.String(6), nullable=True)
     code_expires = db.Column(db.DateTime, nullable=True)
+    cliente_id = db.Column(db.Integer, db.ForeignKey('cliente.id'))
+    cliente = db.relationship("Cliente", back_populates="usuarios")
 
     def __repr__(self):
         return f'<User {self.email}>'
@@ -18,7 +20,7 @@ class User(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "nombre": self.nombre,
+            "name": self.name,
             "email": self.email,
         }
 
@@ -33,18 +35,18 @@ class Cliente(db.Model):
     fecha_nacimiento = db.Column(db.Date)
     tipo_documento = db.Column(db.String(20))
     numero_documento = db.Column(db.String(50), unique=True)
+    # Eliminamos nombre y email de aquí, ya que ahora están en User
     cuentas = db.relationship("Cuenta", back_populates="cliente")
     asesor = db.relationship("Asesor", back_populates="cliente", uselist=False)
     configuracion = db.relationship("ConfiguracionUsuario", back_populates="cliente", uselist=False)
+    usuarios = db.relationship("User", back_populates="cliente")
 
     def __repr__(self):
-        return f'<Cliente {self.nombre}, Email: {self.email}>'
+        return f'<Cliente {self.id}>'
 
     def serialize(self):
         return {
             "id": self.id,
-            "nombre": self.nombre,
-            "email": self.email,
             "telefono": self.telefono,
             "direccion": self.direccion,
             "fecha_creacion": self.fecha_creacion,
