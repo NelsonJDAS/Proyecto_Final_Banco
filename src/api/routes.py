@@ -51,39 +51,86 @@ def addUser():
     password = data.get("password")
     is_active = data.get("is_active")
     
-    
-    if email is None or email is "":
+    if email is None or email == "":
         return jsonify({"Mensaje": "The email is missing"}), 400
-    elif name is None or name is "":
+    elif name is None or name == "":
         return jsonify({"Mensaje": "The name is missing"}), 400
-    elif password is None or password is "":
+    elif password is None or password == "":
         return jsonify({"Mensaje": "The password is missing"}), 400
-    elif is_active is None or is_active is "":
+    elif is_active is None or is_active == "":
         return jsonify({"Mensaje": "The is_active is missing"}), 400
+
     try:
         new_user = User(
-            name= data.get("name"),
-            email= data.get("email"),
-            password= data.get("password"),
-            is_active=data.get("is_active")
+            name=name,
+            email=email,
+            password=password,
+            is_active=is_active
         )
         db.session.add(new_user)
         db.session.commit()
         
-        access_token = create_access_token(identity=data.get('id'))
-        return jsonify({"mensaje": 'Usuario Agregado',"token" : access_token}), 201    
+        access_token = create_access_token(identity=new_user.id)
+        return jsonify({"mensaje": 'Usuario Agregado', "token": access_token}), 201
     except Exception as e:
-        return jsonify({"error": str(e)}), 400         
+        return jsonify({"error": str(e)}), 400      
 
 @api.route('/User/<user_id>')
-def get_user(user_id):
-    if user_id is None:
-        return jsonify({"Mensaje": "invalid user_id"}), 400
+def get_user_details(user_id):
     try:
-        user = User.query.filter_by(id=user_id).first()
-        return jsonify(user.serialize()), 201  
+        # Buscar el usuario por ID
+        user = User.query.get(user_id)
+        if not user:
+            return jsonify({"error": "Usuario no encontrado"}), 404
+        # Obtener el cliente asociado al usuario
+        cliente = user.cliente
+        if not cliente:
+            return jsonify({"error": "El usuario no tiene un cliente asociado"}), 404
+        # Obtener las cuentas del cliente
+        cuentas = cliente.cuentas
+        cuentas_data = []
+        saldo_total = 0
+        for cuenta in cuentas:
+            # Calcular el saldo total de todas las cuentas
+            saldo_total += cuenta.saldo
+            # Obtener las transacciones asociadas a esta cuenta
+            transacciones = cuenta.transacciones
+            transacciones_data = [
+                {
+                    "id": transaccion.id,
+                    "tipo": transaccion.tipo,
+                    "monto": transaccion.monto,
+                    "fecha": transaccion.fecha,
+                    "descripcion": transaccion.descripcion
+                }
+                for transaccion in transacciones
+            ]
+            # Añadir los datos de la cuenta
+            cuentas_data.append({
+                "id": cuenta.id,
+                "numero_cuenta": cuenta.numero_cuenta,
+                "tipo_cuenta": cuenta.tipo_cuenta,
+                "saldo": cuenta.saldo,
+                "transacciones": transacciones_data
+            })
+        # Formar la respuesta con los datos serializados
+        response = {
+            "user": {
+                "id": user.id,
+                "name": user.name,
+                "email": user.email
+            },
+            "cliente": {
+                "id": cliente.id,
+                "telefono": cliente.telefono,
+                "direccion": cliente.direccion,
+            },
+            "saldo_total": saldo_total,
+            "cuentas": cuentas_data
+        }
+        return jsonify(response), 200
     except Exception as e:
-        return jsonify({"error": str(e)}), 400         
+        return jsonify({"error": "Ha ocurrido un error", "details": str(e)}), 500       
 
 @api.route('/User/Login', methods=['POST'])
 def user_autentication():
