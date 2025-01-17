@@ -10,9 +10,11 @@ import { Politicas } from "./pages/politicas";
 import { Terminos } from "./pages/terminos";
 import { Aviso } from "./pages/aviso";
 import { Tarifas } from "./pages/tarifas";
-import { Not_found } from "./pages/not_found.js";
-import injectContext, { Context } from "./store/appContext";
+import { Educacion } from "./pages/educacion.js";
 
+import { Not_found } from "./pages/not_found.js";
+
+import injectContext, { Context } from "./store/appContext";
 import { Navbar } from "./component/navbar.jsx";
 import { Footer } from "./component/footer.jsx";
 
@@ -41,6 +43,7 @@ const Layout = () => {
               <Route element={<Terminos />} path="/terminos" />
               <Route element={<Aviso />} path="/aviso" />
               <Route element={<Tarifas />} path="/tarifas" />
+              <Route element={<Educacion />} path="/educacion" />
               <Route element={<Not_found />} path="*" />
             </Routes>
           </div>
