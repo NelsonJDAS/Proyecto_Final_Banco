@@ -1,10 +1,9 @@
 import React from "react";
 
-
 const ContenedorDerechos = () => {
     return (
         <div className="container">
-            <h2 className="text-center">5. Sus Derechos</h2>
+            <h2 className="text-center">Sus Derechos</h2>
             <p>
                 Usted tiene derecho a:
                 <ul>
