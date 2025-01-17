@@ -46,7 +46,7 @@ export const Footer = () => {
 						navigate("/tarifas")
 					}}>{t('Rates and commissions')}</span>
 					<span className={`d-flex link-footer ${store.borde_hover}`} onClick={() => {
-						navigate("/example")
+						navigate("/educacion")
 					}}>{t('Education')}</span>
 				</div>
 				<div className="col-4 col-md-3 col-lg-2 px-0 px-md-3 flex-column animation">
