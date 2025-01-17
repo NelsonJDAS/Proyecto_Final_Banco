@@ -109,6 +109,8 @@ def get_user_details(user_id):
             cuentas_data.append({
                 "id": cuenta.id,
                 "numero_cuenta": cuenta.numero_cuenta,
+                "numero_tarjeta": cuenta.numero_tarjeta,
+                "cvv": cuenta.cvv,
                 "tipo_cuenta": cuenta.tipo_cuenta,
                 "saldo": cuenta.saldo,
                 "transacciones": transacciones_data
