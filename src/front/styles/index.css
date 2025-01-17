@@ -7,6 +7,10 @@ label {
   transition: all 0.6s ease-in-out;
 }
 
+html,
+body {
+  overflow-x: hidden !important;
+}
 
 /* animaciones generales para animacion de izq a derecha , derecha a izquierda, arriba a abajo, abajo a arriba*/
 

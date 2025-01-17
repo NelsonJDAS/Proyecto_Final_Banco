@@ -68,7 +68,7 @@ const ContenedorBeneficios = () => {
                     <div className="col-lg-3 my-3 col-md-8 col-6">
                         <div className={`mx-0 mx-md-2 my-3 my-md-0 contenedor-ventajas text-info align-content-center ${store.borde} ${userLoad ? "animacion-izq visible" : "animacion-izq"} ${store.fondo === "fondo-modo-claro" ? "bg-dark" : "bg-white"}`}>
                             <div className="d-flex flex-column text-center">
-                            <i className="logo-ventajas"><FaUsers /></i>
+                                <i className="logo-ventajas"><FaUsers /></i>
                                 <div className="text-center fs-4 fw-bold">
                                     <p>Soporte 24/7</p>
                                     <p>para que nunca estés solo</p>
@@ -87,7 +87,7 @@ const ContenedorBeneficios = () => {
                         </div>
                     </div>
                     <div className="col-lg-3 my-3 col-md-4 col-6">
-                         <div className={`mx-0 mx-md-2 my-3 my-md-0 contenedor-ventajas text-info align-content-center ${store.borde} ${userLoad ? "animacion-der visible" : "animacion-der"} ${store.fondo === "fondo-modo-claro" ? "bg-dark" : "bg-white"}`}>
+                        <div className={`mx-0 mx-md-2 my-3 my-md-0 contenedor-ventajas text-info align-content-center ${store.borde} ${userLoad ? "animacion-arriba visible" : "animacion-arriba"} ${store.fondo === "fondo-modo-claro" ? "bg-dark" : "bg-white"}`}>
                             <div className="d-flex flex-column text-center">
                                 <i className="logo-ventajas"><MdOutlinePercent /></i>
                                 <div className="text-center fs-4">
@@ -97,7 +97,7 @@ const ContenedorBeneficios = () => {
                         </div>
                     </div>
                     <div className="col-lg-3 my-3 col-md-8 col-6">
-                    <div className={`mx-0 mx-md-2 my-3 my-md-0 contenedor-ventajas text-info align-content-center ${store.borde} ${userLoad ? "animacion-arriba visible" : "animacion-arriba"} ${store.fondo === "fondo-modo-claro" ? "bg-dark" : "bg-white"}`}>
+                        <div className={`mx-0 mx-md-2 my-3 my-md-0 contenedor-ventajas text-info align-content-center ${store.borde} ${userLoad ? "animacion-der visible" : "animacion-der"} ${store.fondo === "fondo-modo-claro" ? "bg-dark" : "bg-white"}`}>
                             <div className="d-flex flex-column text-center">
                                 <i className="logo-ventajas"><FaRegMoneyBillAlt /></i>
                                 <div className="text-center fs-4">
