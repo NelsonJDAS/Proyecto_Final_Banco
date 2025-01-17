@@ -12,11 +12,11 @@ export const Home = () => {
   return (
     <div className={`${store.texto}`}>
       <div className="row p-0 m-0">
-        <div className="col-7 text-end mx-3">
+        <div className="col-xl-7 text-end mx-xl-3 col-12">
           <SaldoUsuario />
           <TablaMovimientosUsuario />
         </div>
-        <div className="col-4 text-end mx-3">
+        <div className="col-4 text-end mx-3 d-none d-xl-block">
           <ContenedorNotificaciones />
         </div>
       </div>

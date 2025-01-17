@@ -8,7 +8,7 @@ const ContenedorPresentacion = () => {
         SetUserLoad(true)
     }, [])
 
-    return (<div className="contenedor-langind">
+    return (<div className="contenedor-landing">
         <div className="container">
             <div className="d-flex flex-column text-center">
                 <h1 className={`titulo-landing ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}> ¡Bienvenido a Geek Bank!</h1>

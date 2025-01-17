@@ -13,8 +13,8 @@
 /* Animacion para suavizar la transicion de la tabla de movimientos*/
 .elemento-tabla {
     opacity: 0.1;
-    transform: translateX(50px);
-    transition: opacity 2s ease, transform 2s ease;
+    transform: translateX(25px);
+    transition: opacity 1s ease, transform 1s ease;
 }
 
 .elemento-tabla.visible {
@@ -185,5 +185,35 @@
 }
 
 .bg-tarjetas {
-    background: linear-gradient(to right, #b30000, #ff6666);
+    background: linear-gradient(90deg, #1E3A8A, #2563EB);
+}
+
+/*responsive*/
+
+@media (max-width: 768px) {
+    .saldo-disponible {
+        font-size: 10px;
+    }
+
+    .num-saldo {
+        font-size: 20px !important;
+    }
+
+    .cabecera-movimientos {
+        font-size: 12px !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+    .saldo-disponible {
+        font-size: 20px;
+    }
+
+    .num-saldo {
+        font-size: 30px !important;
+    }
+
+    .cabecera-movimientos {
+        font-size: 17px !important;
+    }
 }
