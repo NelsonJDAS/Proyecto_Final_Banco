@@ -16,10 +16,10 @@ const SaldoUsuario = () => {
         <div className="row">
             <div className="col-12">
                 <div className="row">
-                    <div className="col-4 d-flex flex-column text-center">
+                    <div className="col-xl-4 col-8 d-flex flex-column text-center">
                         <p className="fs-1 fw-light">Hola, <span className="fw-bold">User</span></p>
                     </div>
-                    <div className="col-8 text-end"><span className="hover fs-3" onClick={() => {
+                    <div className="col-4 col-xl-8 text-end"><span className="hover fs-3" onClick={() => {
                         SetHidden(prevHidden => !prevHidden)
                         actions.CambiarIncognito(!hidden)
                     }}>{hidden ? <FaEyeSlash /> : <FaEye />}</span></div>
@@ -27,14 +27,14 @@ const SaldoUsuario = () => {
             </div>
         </div>
         <div className="row">
-            <div className="col-4 d-flex flex-column">
+            <div className="col-6 col-xl-4 d-flex flex-column">
                 <div className="row">
-                    <div className="col-6 px-1 text-end"><p className="fw-light my-2">Saldo Disponible:</p></div>
-                    <div className={`col-6  px-1 text-start ${hidden ? "desenfoque" : ""}`}><span className="fs-3 fw-bold">0</span></div>
+                    <div className="col-6 px-1 text-end"><p className="fw-light my-2 saldo-disponible">Saldo Disponible:</p></div>
+                    <div className={`col-6  px-1 text-start ${hidden ? "desenfoque" : ""}`}><span className="fs-3 fw-bold num-saldo">0</span></div>
                 </div>
                 <div className="row">
-                    <div className="col-6 px-1 text-end"><p className="fw-light my-2">Saldo Retenido: </p></div>
-                    <div className={`col-6  px-1 text-start ${hidden ? "desenfoque" : ""}`}><span className="fs-3 fw-bold">0</span></div>
+                    <div className="col-6 px-1 text-end"><p className="fw-light my-2 saldo-disponible">Saldo Retenido: </p></div>
+                    <div className={`col-6  px-1 text-start ${hidden ? "desenfoque" : ""}`}><span className="fs-3 fw-bold num-saldo">0</span></div>
                 </div>
             </div>
             <div className="col-8"></div>
