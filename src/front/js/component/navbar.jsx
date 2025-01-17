@@ -147,7 +147,7 @@ export const Navbar = () => {
 												}}>{t('Investments')}</span>
 											</a>
 										</li>
-										<li className="d-md-none"><hr class="dropdown-divider" /></li>
+										<li className="d-md-none"><hr className="dropdown-divider" /></li>
 										<li className="d-md-none">
 											<a className={`dropdown-item text-center hover ${store.fondo === "fondo-modo-claro" ? "text-white" : "text-dark"}`} href="#">
 												<span className="hover text-danger" onClick={() => {

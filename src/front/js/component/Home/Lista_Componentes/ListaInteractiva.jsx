@@ -58,8 +58,8 @@ const ListaInteractiva = () => {
     return (
         <div className="container-fluid w-85" ref={sectionRef}>
             <div className="row">
-                <div className={`col-12 col-xl-3 ${thCol}`}><HistorialTransacciones /></div>
-                <div className={`col-6 col-xl-3 ${firstCol}`}><BloqueoDesbloqueoCuentas /></div>
+                <div className={`col-12 col-xl-3 ${firstCol}`}><HistorialTransacciones /></div>
+                <div className={`col-6 col-xl-3 ${thCol}`}><BloqueoDesbloqueoCuentas /></div>
                 <div className={`col-6 col-xl-3 ${FoCol}`}><Alertas /></div>
                 <div className={`col-12 col-xl-3 ${secCol}`}><Tarjetas /></div>
             </div>
