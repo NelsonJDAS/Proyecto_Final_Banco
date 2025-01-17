@@ -1,6 +1,5 @@
 import React from "react";
 
-
 const ContenedorInformacion = () => {
     return (
         <div className="container">
