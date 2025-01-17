@@ -67,6 +67,8 @@ export const Login = () => {
     const HandlePassword = (e) => {
         SetPassword(e.target.value)
     }
+
+    // LLamada al login para loguear usuario
     const HandleLogin = async () => {  
         try {
             await actions.loginUser(name, email, password);

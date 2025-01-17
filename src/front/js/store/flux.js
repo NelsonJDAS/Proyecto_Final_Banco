@@ -69,6 +69,35 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.error("Error en loginUser:", error.message);
             throw error; // Lanzamos el error para que HandleLogin lo maneje
         }
+      },
+
+      registerUser: (name, email, password) => { 
+        return fetch(process.env.BACKEND_URL + "/api/User/Register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                password: password,
+                email: email,
+                name: name,
+                is_active: true,
+            }),
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Error en el registro");
+                }
+                return response.json(); // Parseamos la respuesta JSON
+            })
+            .then((data) => {
+                const token = data.token; // Accedemos al token desde la respuesta
+                localStorage.setItem("token", token); // Guardamos el token en localStorage
+                return "success";
+            })
+            .catch((error) => {
+                console.error("Error al registrar usuario:", error);
+            });
     },
 
       sendCode: (email) => {

@@ -29,43 +29,16 @@ export const Register = () => {
     const inputPassword = useRef(null)
     const inputMail = useRef(null)
 
-    const AddUser = async () => {
-        try {
-            inputName.current.value = "";
-            inputPassword.current.value = "";
-            inputMail.current.value = "";
-            const response = await fetch(
-                process.env.BACKEND_URL + "/api/User/Register",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        "password": password,
-                        "email": email,
-                        "name": name,
-                        "is_active": true
-                    }),
-                }
-            );
-            if (!response.ok) {
-                throw new Error(`Error: :( )`);
-            }
-
-            const data = await response.json(); // Parseamos la respuesta JSON
-
-            // Accedemos al token desde la respuesta
-            const token = data.token;
-
-            localStorage.setItem('token', token)
-
-
-            return "success";
-        } catch (error) {
-            console.error("Error al agregar usuario:", error);
+    // LLamada al flux para registro
+    const handleRegister = async () => {
+        const result = await actions.registerUser(name, email, password);
+        if (result === "success") {
+            navigate("/home");
+            console.log("Usuario registrado exitosamente");
+        } else {
+            console.error("Error en el registro");
         }
-    }
+    };
 
     return (
         <div className="register">
@@ -81,10 +54,7 @@ export const Register = () => {
                 </div>
 
                 <div className="text-center">
-                    <button className={`btn btn-light mt-3 w-50 rounded-pill  ${store.borde}`} onClick={async () => {
-                        const user = await AddUser();
-                        user === "success" ? navigate("/home") : ""
-                    }}>{t('Ready')}</button>
+                    <button className={`btn btn-light mt-3 w-50 rounded-pill  ${store.borde}`} onClick={() => {handleRegister()}}>{t('Ready')}</button>
                 </div>
             </form>
         </div>
