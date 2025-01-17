@@ -12,6 +12,7 @@ export const Login = () => {
     const [email, SetEmail] = useState("");
     const [password, SetPassword] = useState("");
     const [CodeSend, SetCodeSend] = useState("")
+    const navigate = useNavigate("");
 
     // ejecuta el contenedor si el usuario se ha olvidado el password de su cuenta
     const [userForgotPassword, SetuserForgotPassword] = useState(false)
@@ -66,50 +67,27 @@ export const Login = () => {
     const HandlePassword = (e) => {
         SetPassword(e.target.value)
     }
+    const HandleLogin = async () => {  
+        try {
+            await actions.loginUser(name, email, password);
+            const token = localStorage.getItem("token");
+    
+            if (token) {
+                console.log("Redirigiendo a /home");
+                navigate("/home");
+            } else {
+                console.error("Token no encontrado");
+            }
+        } catch (error) {
+            console.error("Error en HandleLogin:", error);
+            alert("Error en el inicio de sesión. Por favor, verifica tus credenciales.");
+        }
+    };
 
     const inputName = useRef(null)
     const inputPassword = useRef(null)
     const inputMail = useRef(null)
 
-    const FindUser = async () => {
-        try {
-            inputName.current.value = "";
-            inputPassword.current.value = "";
-            inputMail.current.value = "";
-            const response = await fetch(
-                process.env.BACKEND_URL + "/api/User/Login",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        "password": password,
-                        "email": email,
-                        "name": name,
-                        "is_active": true
-                    }),
-                }
-            );
-            if (!response.ok) {
-                throw new Error(`Error: :( )`);
-            }
-
-            const data = await response.json(); // Parseamos la respuesta JSON
-            console.log(data)
-            // Accedemos al token desde la respuesta
-            const token = data.token;
-
-            localStorage.setItem('token', token)
-
-
-            return "success";
-        } catch (error) {
-            console.error("Error al agregar usuario:", error);
-        }
-    }
-
-    const navigate = useNavigate("");
     return (
         <div className="login">
             <form action="#" className={`d-flex flex-column align-content-center text-center justify-content-center ${store.fondo}`}>
@@ -130,9 +108,7 @@ export const Login = () => {
                                 <span className={`text-end mx-3 ${store.borde_hover}`} onClick={() => { SetuserForgotPassword(true) }}>{t('Forgot')}</span>
                                 <div className="text-center">
                                     <button type="button" className={`btn btn-light mt-3 w-50 rounded-pill ${store.borde}`} onClick={() => {
-                                        // FindUser();
-                                        localStorage.setItem('token', "ejemplo")
-                                        navigate("/home")
+                                        HandleLogin()
                                     }}>{t('Login')}</button>
                                 </div>
                             </>

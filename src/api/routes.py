@@ -6,7 +6,7 @@ from api.models import db, User
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from flask_jwt_extended import create_access_token
-from datetime import datetime, timedelta, timezone
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from api.mail_config import get_mail
 
 
@@ -87,23 +87,40 @@ def get_user(user_id):
 
 @api.route('/User/Login', methods=['POST'])
 def user_autentication():
+    # Obtener datos del cliente
     data = request.get_json()
+    name = data.get("name")
     email = data.get("email")
     password = data.get("password")
-    if email is None or email is "":
+    print("Datos recibidos:", data)  # Log para depuración
+
+    # Validaciones
+    if not email:
         return jsonify({"Mensaje": "The email is missing"}), 400
-    elif password is None or password is "":
+    if not password:
         return jsonify({"Mensaje": "The password is missing"}), 400
+    if not name:
+        return jsonify({"Mensaje": "The name is missing"}), 400
+
     try:
-        user = User.query.filter_by(password=password, email=email).first()
-        
-        access_token = create_access_token(identity=data.get('id'))
+        # Buscar usuario en la base de datos
+        user = User.query.filter_by(name=name, email=email, password=password).first()
+
         if user is None:
-            return jsonify({"mensaje": "Invalid password or email"}), 400  
-        else:
-            return jsonify({"Usuario Identificado": user.serialize(),"token" : access_token}), 201    
+            return jsonify({"mensaje": "Invalid password or email"}), 400
+        
+        # Crear token de acceso
+        access_token = create_access_token(identity=user.id)
+
+        # Responder con el usuario y el token
+        return jsonify({
+            "Usuario Identificado": user.serialize(),
+            "token": access_token
+        }), 200  # 200 para indicar éxito en login
+
     except Exception as e:
-        return jsonify({"error": str(e)}), 400 
+        print("Error en el backend:", str(e))  # Log para debugging
+        return jsonify({"error": "An error occurred during login"}), 500
 
 # Endpoint para codigo de seguridad
 @api.route('/send-code', methods=['POST'])
