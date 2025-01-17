@@ -32,15 +32,14 @@ const TestimonioIndividual = ({ nombre, fecha, descripcion, estrellas, userLoad 
     return (
         <div className={`mx-2 contenedor-ventajas ${store.borde} ${userLoad} ${store.fondo === "fondo-modo-claro" ? "bg-dark text-white" : "bg-white text-dark"}`}>
             <div className="d-flex flex-column text-center">
-                <div className="row my-3">
+                <div className="row my-3 mx-2">
                     <div className="col-1 text-end mx-0 px-0 align-content-center"><i><FaUser /></i></div>
-                    <div className="col-8 text-start align-content-center fs-5"><b>{nombre}</b></div>
-                    <div className="col-2 text-center align-content-center"><b>{fecha}</b></div>
+                    <div className="col-7 col-md-7 col-xl-8 text-start align-content-center fs-5"><b>{nombre}</b></div>
+                    <div className="col-1 col-md-2 text-center align-content-center"><b className="mx-3 mx-lg-0">{fecha}</b></div>
                 </div>
                 <div className="row my-3">
-                    <div className="col-12 text-center"><b className="fs-3">Comentario</b></div>
-                    <div className="col-12">
-                        <div className="container w-75 border border-secondary rounded-3 p-3 text-center contenedor-comentario">
+                    <div className="col-12 px-0">
+                        <div className="container rounded-3 text-center contenedor-comentario align-content-center text-center">
                             <b>{descripcion}</b>
                         </div>
                     </div>
@@ -49,7 +48,7 @@ const TestimonioIndividual = ({ nombre, fecha, descripcion, estrellas, userLoad 
                     <div className="col-12 text-end">
                         <div className="mx-3">{
                             Object.assign(generarEstrellas(estrellas)).map((elem, index) => {
-                                return elem === "★" ? <i key={index} ><RiStarSFill /></i> : <i key={index}><RiStarSLine /></i>
+                                return elem === "★" ? <i key={index} className="text-warning"><RiStarSFill /></i> : <i key={index}><RiStarSLine /></i>
                             })}
                         </div>
                     </div>

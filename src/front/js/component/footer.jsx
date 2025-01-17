@@ -17,68 +17,68 @@ export const Footer = () => {
 	const navigate = useNavigate(null);
 
 	return (
-		<footer className={`footer mt-auto py-3 border-end-0 border-start-0 ${store.borde} ${store.texto} ${store.fondo}`}> {/* modo oscuro y claro */}
-			<div className="row px-3 m-0"> {/* Links */}
-				<div className="col-2 flex-column animation">
+		<footer className={`footer mt-auto py-md-3 border-end-0 border-start-0 ${store.borde} ${store.texto} ${store.fondo}`}> {/* modo oscuro y claro */}
+			<div className="row px-0 px-md-3 m-0"> {/* Links */}
+				<div className="col-4 col-md-3 col-lg-2 px-0 px-md-3 flex-column animation">
 					<h6 className="subtitulo d-flex ">{t('Contact information')}</h6>
-					<span className={`d-flex ${store.borde_hover}`} onClick={() => {
+					<span className={`d-flex link-footer ${store.borde_hover}`} onClick={() => {
 						navigate("/example")
 					}}>{t('Contact')}</span>
-					<span className={`d-flex ${store.borde_hover}`} onClick={() => {
+					<span className={`d-flex link-footer ${store.borde_hover}`} onClick={() => {
 						navigate("/example")
 					}}>{t('Chat')}</span>
 				</div>
-				<div className="col-2 flex-column animation">
+				<div className="col-4 col-md-3 col-lg-2 px-0 px-md-3 flex-column animation">
 					<h6 className="subtitulo d-flex ">{t('Legal links')}</h6>
-					<span className={`d-flex ${store.borde_hover}`} onClick={() => {
+					<span className={`d-flex link-footer ${store.borde_hover}`} onClick={() => {
 						navigate("/politicas")
 					}}>{t('Privacy Policy')}</span>
-					<span className={`d-flex ${store.borde_hover}`} onClick={() => {
+					<span className={`d-flex link-footer ${store.borde_hover}`} onClick={() => {
 						navigate("/terminos")
 					}}>{t('Term of conditions')}</span>
-					<span className={`d-flex ${store.borde_hover}`} onClick={() => {
+					<span className={`d-flex link-footer ${store.borde_hover}`} onClick={() => {
 						navigate("/aviso")
 					}}>{t('Legal notice')}</span>
 				</div>
-				<div className="col-2 flex-column animation">
+				<div className="col-4 col-md-3 col-lg-2 px-0 px-md-3 flex-column animation">
 					<h6 className="subtitulo d-flex ">{t('Links to resources')}</h6>
-					<span className={`d-flex ${store.borde_hover}`} onClick={() => {
+					<span className={`d-flex link-footer ${store.borde_hover}`} onClick={() => {
 						navigate("/tarifas")
 					}}>{t('Rates and commissions')}</span>
-					<span className={`d-flex ${store.borde_hover}`} onClick={() => {
-						navigate("/educacion")
+					<span className={`d-flex link-footer ${store.borde_hover}`} onClick={() => {
+						navigate("/example")
 					}}>{t('Education')}</span>
 				</div>
-				<div className="col-2 flex-column animation">
+				<div className="col-4 col-md-3 col-lg-2 px-0 px-md-3 flex-column animation">
 					<h6 className="subtitulo d-flex ">{t('Security')}</h6>
-					<span className={`d-flex ${store.borde_hover}`} onClick={() => {
+					<span className={`d-flex link-footer ${store.borde_hover}`} onClick={() => {
 						navigate("/example")
 					}}>{t('Tips')}</span>
-					<span className={`d-flex ${store.borde_hover}`} onClick={() => {
+					<span className={`d-flex link-footer ${store.borde_hover}`} onClick={() => {
 						navigate("/example")
 					}}>{t('Security methods')}</span>
-					<span className={`d-flex ${store.borde_hover}`} onClick={() => {
+					<span className={`d-flex link-footer ${store.borde_hover}`} onClick={() => {
 						navigate("/example")
 					}}>{t('Coordinate card')}</span>
 				</div>
-				<div className="col-2 flex-column animation">
+				<div className="col-4 col-md-3 col-lg-2 px-0 px-md-3 flex-column animation">
 					<h6 className="subtitulo d-flex ">{t('Products and services')}</h6>
-					<span className={`d-flex ${store.borde_hover}`} onClick={() => {
+					<span className={`d-flex link-footer ${store.borde_hover}`} onClick={() => {
 						navigate("/example")
 					}}>{t('Shop')}</span>
-					<span className={`d-flex ${store.borde_hover}`} onClick={() => {
+					<span className={`d-flex link-footer ${store.borde_hover}`} onClick={() => {
 						navigate("/example")
 					}}>{t('Insurance')}</span>
-					<span className={`d-flex ${store.borde_hover}`} onClick={() => {
+					<span className={`d-flex link-footer ${store.borde_hover}`} onClick={() => {
 						navigate("/example")
 					}}>{t('Loans')}</span>
 				</div>
-				<div className="col-2 flex-column animation">
+				<div className="col-4 col-md-3 col-lg-2 px-0 px-md-3 flex-column animation">
 					<h6 className="subtitulo d-flex ">{t('Certifications')}</h6>
-					<span className={`d-flex ${store.borde_hover}`} onClick={() => {
+					<span className={`d-flex link-footer ${store.borde_hover}`} onClick={() => {
 						navigate("/example")
 					}}>{t('Certified titles')}</span>
-					<span className={`d-flex ${store.borde_hover}`} onClick={() => {
+					<span className={`d-flex link-footer ${store.borde_hover}`} onClick={() => {
 						navigate("/example")
 					}}>{t('Security titles')}</span>
 				</div>

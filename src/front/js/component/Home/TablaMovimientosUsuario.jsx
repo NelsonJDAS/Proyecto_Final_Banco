@@ -17,10 +17,10 @@ const TablaMovimientoUsuario = () => {
             </div>
         </div>
         <div className="row my-3">
-            <div className="col-3 text-center fw-bold"><p>Dia</p></div>
-            <div className="col-3 text-center fw-bold"><p>Establecimiento / Concepto</p></div>
-            <div className="col-3 text-center fw-bold"><p>Importe</p></div>
-            <div className="col-3 text-center fw-bold"><p>Saldo</p></div>
+            <div className="col-3 text-center fw-bold"><p className="cabecera-movimientos">Dia</p></div>
+            <div className="col-3 text-center fw-bold"><p className="cabecera-movimientos"><b className="d-none d-lg-block">Establecimiento / </b>Concepto</p></div>
+            <div className="col-3 text-center fw-bold"><p className="cabecera-movimientos">Importe</p></div>
+            <div className="col-3 text-center fw-bold"><p className="cabecera-movimientos">Saldo</p></div>
         </div>
         <div>
             <TablaCol fecha="01/03/2024" cuerpo="Mc Donalds / Sevilla" importe={12.9} saldo={400} />

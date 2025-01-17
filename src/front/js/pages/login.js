@@ -8,7 +8,7 @@ export const Login = () => {
     localStorage.clear();
   }, []);
   return (
-    <div className="text-center my-5 contenedor-main h-100">
+    <div className="text-center my-md-5 contenedor-main h-100">
       <ContenedorLoginYRegistro></ContenedorLoginYRegistro>
     </div>
   );
