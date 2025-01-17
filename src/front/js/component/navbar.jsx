@@ -6,6 +6,7 @@ import { FaMoon } from "react-icons/fa";
 import { MdWbSunny } from "react-icons/md";
 import { GiWorld } from "react-icons/gi";
 import { IoClose } from "react-icons/io5";
+import { IoIosArrowDown } from "react-icons/io";
 
 // Importacion de la traduccion
 import { useTranslation } from "react-i18next";
@@ -33,7 +34,7 @@ export const Navbar = () => {
 		<div> {/* modo oscuro y claro */}
 			<div className="modal fade" id="lenguajes" tabIndex="-1" aria-labelledby="label" aria-hidden="true">
 				{/* Modal selector de idiomas */}
-				<div className="modal-dialog">
+				<div className="modal-dialog contenedor-modal">
 					<div className={`modal-content rounded-3 ${store.fondo} borde-brillante`}>
 						<div className="modal-header">
 							<h1 className="modal-title fs-5 " id="label">{t('Languages')}</h1>
@@ -42,48 +43,45 @@ export const Navbar = () => {
 						<div className="modal-body">
 							{/* Selector de lenguaje */}
 							<div className="row py-3">
-								<div className="col-4">
+								<div className="col-6 col-lg-4 d-flex justify-content-between">
 									<div data-bs-dismiss="modal" onClick={() => handleLanguageChange('en')}>
-										<p className={`fw-bold ${store.borde_hover}`}><span className="fi mx-1 fi-gb"></span>Inglés</p>
+										<p className={`fw-bold mx-0 mx-md-3 mx-lg-0 ${store.borde_hover}`}><span className="fi mx-1 fi-gb"></span>Inglés</p>
 									</div>
 								</div>
-								<div className="col-4">
+								<div className="col-6 col-lg-4 d-flex justify-content-between">
 									<div data-bs-dismiss="modal" onClick={() => handleLanguageChange('zh')}>
-										<p className={`fw-bold ${store.borde_hover}`}><span className="fi mx-1 fi-cn"></span>Chino</p>
+										<p className={`fw-bold mx-0 mx-md-3 mx-lg-0 ${store.borde_hover}`}><span className="fi mx-1 fi-cn"></span>Chino</p>
 									</div>
 								</div>
-								<div className="col-4">
+								<div className="col-6 col-lg-4 d-flex justify-content-between">
 									<div data-bs-dismiss="modal" onClick={() => handleLanguageChange('es')}>
-										<p className={`fw-bold ${store.borde_hover}`}><span className="fi mx-1 fi-es"></span>Español</p>
+										<p className={`fw-bold mx-0 mx-md-3 mx-lg-0 ${store.borde_hover}`}><span className="fi mx-1 fi-es"></span>Español</p>
 									</div>
 								</div>
-							</div>
-							<div className="row py-3">
-								<div className="col-4">
+
+								<div className="col-6 col-lg-4 d-flex justify-content-between">
 									<div data-bs-dismiss="modal" onClick={() => handleLanguageChange('pt')}>
-										<p className={`fw-bold ${store.borde_hover}`}><span className="fi mx-1 fi-pt"></span>Portugués</p>
+										<p className={`fw-bold mx-0 mx-md-3 mx-lg-0 ${store.borde_hover}`}><span className="fi mx-1 fi-pt"></span>Portugués</p>
 									</div>
 								</div>
-								<div className="col-4">
+								<div className="col-6 col-lg-4 d-flex justify-content-between">
 									<div data-bs-dismiss="modal" onClick={() => handleLanguageChange('ru')}>
-										<p className={`fw-bold ${store.borde_hover}`}><span className="fi mx-1 fi-ru"></span>Ruso</p>
+										<p className={`fw-bold mx-0 mx-md-3 mx-lg-0 ${store.borde_hover}`}><span className="fi mx-1 fi-ru"></span>Ruso</p>
 									</div>
 								</div>
-								<div className="col-4">
+								<div className="col-6 col-lg-4 d-flex justify-content-between">
 									<div data-bs-dismiss="modal" onClick={() => handleLanguageChange('de')}>
-										<p className={`fw-bold ${store.borde_hover}`}><span className="fi mx-1 fi-de"></span>Alemán</p>
+										<p className={`fw-bold mx-0 mx-md-3 mx-lg-0 ${store.borde_hover}`}><span className="fi mx-1 fi-de"></span>Alemán</p>
 									</div>
 								</div>
-							</div>
-							<div className="row py-3">
-								<div className="col-4">
+								<div className="col-6 col-lg-4 d-flex justify-content-between">
 									<div data-bs-dismiss="modal" onClick={() => handleLanguageChange('ar')}>
-										<p className={`fw-bold ${store.borde_hover}`}><span className="fi mx-1 fi-sa"></span>Árabe</p>
+										<p className={`fw-bold mx-0 mx-md-3 mx-lg-0 ${store.borde_hover}`}><span className="fi mx-1 fi-sa"></span>Árabe</p>
 									</div>
 								</div>
-								<div className="col-4">
+								<div className="col-6 col-lg-4 d-flex justify-content-between">
 									<div data-bs-dismiss="modal" onClick={() => handleLanguageChange('fr')}>
-										<p className={`fw-bold ${store.borde_hover}`}><span className="fi mx-1 fi-fr"></span>Francés</p>
+										<p className={`fw-bold mx-0 mx-md-3 mx-lg-0 ${store.borde_hover}`}><span className="fi mx-1 fi-fr"></span>Francés</p>
 									</div>
 								</div>
 							</div>
@@ -93,47 +91,100 @@ export const Navbar = () => {
 			</div>
 			<nav>
 				<div className="row my-2 mx-0">
-					<div className="col-2 text-end d-flex justify-content-end">
+					<div className="col-3 col-md-2 text-end d-flex justify-content-end">
 						<img src={logo_negro} className={`img-fluid hover img ${store.fondo == "fondo-modo-oscuro" ? "d-block" : "d-none"}`} onClick={() => {
 							localStorage.getItem('token') === null ? navigate("/") : navigate("/home")
 						}} /><img src={logo_blanco} className={`img-fluid img ${store.fondo == "fondo-modo-oscuro" ? "d-none" : "d-block"}`} />
 					</div>
 
-					<div className="col-2 text-start fs-3 fw-bold  px-0 align-content-center hover" onClick={() => {
+					<div className="col-2 col-md-2 text-start fs-3 titulo-nav fw-bold  px-0 align-content-center hover" onClick={() => {
 						localStorage.getItem('token') === null ? navigate("/") : navigate("/home")
 					}}><span>GeekBank</span></div>
-					{localStorage.getItem('token') === null ? (<div className="col-6 align-content-center  fw-bold text-center">
+					{localStorage.getItem('token') === null ? (<div className="col-3 col-md-5 col-lg-6 align-content-center  fw-bold text-center">
 						<span className={store.borde_hover} onClick={() => {
 							navigate("/example")
 						}}></span>
 					</div>) : (
 						<>
-							<div className="col-1 align-content-center  fw-bold text-center">
+							<div className="col-3 col-md-4 d-lg-none align-content-center text-center">
+								<div class="btn-group w-50">
+									<button class={`btn ${store.texto} fs-2`} type="button" data-bs-toggle="dropdown" aria-expanded="false">
+										<IoIosArrowDown />
+									</button>
+									<ul class={`dropdown-menu fw-bold ${store.fondo === "fondo-modo-claro" ? "bg-dark" : "bg-white"}`}>
+										<li>
+											<a class={`dropdown-item text-center hover ${store.fondo === "fondo-modo-claro" ? "text-white" : "text-dark"}`} href="#">
+												<span className={store.borde_hover} onClick={() => {
+													navigate("/example")
+												}}>{t('Movements')} </span>
+											</a>
+										</li>
+										<li>
+											<a class={`dropdown-item text-center hover ${store.fondo === "fondo-modo-claro" ? "text-white" : "text-dark"}`} href="#">
+												<span className={store.borde_hover} onClick={() => {
+													navigate("/example")
+												}}>{t('Transfers')}</span>
+											</a>
+										</li>
+										<li>
+											<a class={`dropdown-item text-center hover ${store.fondo === "fondo-modo-claro" ? "text-white" : "text-dark"}`} href="#">
+												<span className={store.borde_hover} onClick={() => {
+													navigate("/example")
+												}}>{t('GEEK Store')}</span>
+											</a>
+										</li>
+										<li>
+											<a class={`dropdown-item text-center hover ${store.fondo === "fondo-modo-claro" ? "text-white" : "text-dark"}`} href="#">
+												<span className={store.borde_hover} onClick={() => {
+													navigate("/example")
+												}}>{t('Exch/Currency')}</span>
+											</a>
+										</li>
+										<li>
+											<a class={`dropdown-item text-center hover ${store.fondo === "fondo-modo-claro" ? "text-white" : "text-dark"}`} href="#">
+												<span className={store.borde_hover} onClick={() => {
+													navigate("/example")
+												}}>{t('Investments')}</span>
+											</a>
+										</li>
+										<li className="d-md-none"><hr class="dropdown-divider" /></li>
+										<li className="d-md-none">
+											<a class={`dropdown-item text-center hover ${store.fondo === "fondo-modo-claro" ? "text-white" : "text-dark"}`} href="#">
+												<span className="hover text-danger" onClick={() => {
+													localStorage.clear()
+													navigate("/")
+												}}>Salir  <IoIosLogOut /></span>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div className="col-1 align-content-center link  fw-bold text-center d-none d-lg-block">
 								<span className={store.borde_hover} onClick={() => {
 									navigate("/example")
 								}}>{t('Movements')} </span>{/* Seccion movimientos */}
 							</div>
-							<div className="col-1 align-content-center  fw-bold text-center">
+							<div className="col-1 align-content-center link  fw-bold text-center d-none d-lg-block">
 								<span className={store.borde_hover} onClick={() => {
 									navigate("/example")
 								}}>{t('Transfers')}</span> {/* Seccion transferencias */}
 							</div>
-							<div className="col-1 align-content-center  fw-bold text-center">
+							<div className="col-1 align-content-center link  fw-bold text-center d-none d-lg-block">
 								<span className={store.borde_hover} onClick={() => {
 									navigate("/example")
 								}}>{t('GEEK Store')}</span>{/* Seccion tienda */}
 							</div>
-							<div className="col-1 align-content-center  fw-bold text-center">
+							<div className="col-1 align-content-center link  fw-bold text-center d-none d-lg-block">
 								<span className={store.borde_hover} onClick={() => {
 									navigate("/example")
 								}}>{t('Exch/Currency')}</span> {/* Seccion divisas */}
 							</div>
-							<div className="col-1 align-content-center  fw-bold text-center">
+							<div className="col-1 align-content-center link  fw-bold text-center d-none d-lg-block">
 								<span className={store.borde_hover} onClick={() => {
 									navigate("/example")
 								}}>{t('Investments')}</span> {/* Seccion divisas */}
 							</div>
-							<div className="col-1 align-content-center text-center text-danger fs-3 fw-bold"><span className="hover" onClick={() => {
+							<div className="col-2 col-md-1 align-content-center text-center fs-3 fw-bold d-none d-md-block"><span className="hover text-danger" onClick={() => {
 								localStorage.clear()
 								navigate("/")
 							}}><IoIosLogOut /></span></div>

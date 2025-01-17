@@ -92,8 +92,8 @@ export const Login = () => {
 
     return (
         <div className="login">
-            <form action="#" className={`d-flex flex-column align-content-center text-center justify-content-center ${store.fondo}`}>
-                <h1>{t(userForgotPassword === false ? 'Login' : 'Recovery')}</h1>
+            <form action="#" className={`d-flex flex-column align-content-center text-center ${store.fondo}`}>
+                <h1 className="titulo-login">{t(userForgotPassword === false ? 'Login' : 'Recovery')}</h1>
                 {/* hace la transicion mas suave  */}
                 <div className={userForgotPassword ? "transicion-recuperar-password " : "transicion-Iniciar-Sesion "}>
                     {/*muestra dependiendo del estado userForgotPassword el contenedor de iniciar sesion o password olvidada*/}
@@ -101,15 +101,15 @@ export const Login = () => {
                         {userForgotPassword === false ? (
                             <>
                                 {/* cotenedor inciar sesion */}
-                                <label className="my-1 fw-bold">{t('Name')}</label>
-                                <input className=" mx-3 text-center py-1 rounded-pill input" type="text" onChange={HandleName} maxLength="40" ref={inputName} />
-                                <label className="my-1 fw-bold">{t('Email')}</label>
-                                <input className=" mx-3 text-center py-1 rounded-pill input" type="email" onChange={HandleEmail} ref={inputMail} />
-                                <label className="my-1 fw-bold">{t('Password')}</label>
-                                <input className=" mx-3 text-center py-1 rounded-pill input" type="password" onChange={HandlePassword} ref={inputPassword} />
-                                <span className={`text-end mx-3 ${store.borde_hover}`} onClick={() => { SetuserForgotPassword(true) }}>{t('Forgot')}</span>
+                                <label className="my-1 fw-bold label-login">{t('Name')}</label>
+                                <input className=" mx-2 mx-md-3 text-center py-1 rounded-pill input" type="text" onChange={HandleName} maxLength="40" ref={inputName} />
+                                <label className="my-1 fw-bold label-login">{t('Email')}</label>
+                                <input className=" mx-2 mx-md-3 text-center py-1 rounded-pill input" type="email" onChange={HandleEmail} ref={inputMail} />
+                                <label className="my-1 fw-bold label-login">{t('Password')}</label>
+                                <input className=" mx-2 mx-md-3 text-center py-1 rounded-pill input" type="password" onChange={HandlePassword} ref={inputPassword} />
+                                <span className={`text-end mx-md-3 label-login ${store.borde_hover}`} onClick={() => { SetuserForgotPassword(true) }}>{t('Forgot')}</span>
                                 <div className="text-center">
-                                    <button type="button" className={`btn btn-light mt-3 w-50 rounded-pill ${store.borde}`} onClick={() => {
+                                <button type="button" className={`btn btn-light mt-3 w-50 rounded-pill btn-login ${store.borde}`} onClick={() => {
                                         HandleLogin()
                                     }}>{t('Login')}</button>
                                 </div>
@@ -117,14 +117,14 @@ export const Login = () => {
                         ) : (
                             <>
                                 {/* contenedor password olvidada */}
-                                <div className="text-center my-2">
-                                    <span className="fw-bold">{t('Forgot')}</span>
-                                    <p className="mx-3 text-center py-1 rounded-3 text-center">{t('Recovery2')}</p>
+                                <div className="text-center my-md-2">
+                                    <span className="fw-bold d-none d-md-block">{t('Forgot')}</span>
+                                    <p className="mx-3 text-center py-md-1 py-0 rounded-3 texto-login">{t('Recovery2')}</p>
                                 </div>
-                                <label className="my-1 fw-bold">{t('Email')}</label>
-                                <input className=" mx-3 text-center py-1 rounded-pill input" type="email" onChange={HandleForgotMail} />
+                                <label className="my-md-1 fw-bold label-login">{t('Email')}</label>
+                                <input className="mx-md-3 mx-2 text-center py-0 py-md-1 rounded-pill input" placeholder="Email" type="email" onChange={HandleForgotMail} />
                                 <div className="text-center row mx-1 my-2">
-                                    <div className="col-6 my-3 text-start">
+                                    <div className="col-12 col-xl-6 col-md-6 my-md-3 my-1 text-start">
                                         <button type="button" className="rounded-pill btn btn-primary w-100 fw-bold" ref={buttomCode} onClick={() => {
                                             SetCode(true)
                                             Count()
@@ -134,13 +134,13 @@ export const Login = () => {
                                             `( ${timeCode} ) s`
                                             : t('SendCode')}</button>
                                     </div>
-                                    <div className="col-3 my-3 text-center">
+                                    <div className="col-12 col-md-6 col-xl-3 my-md-3 text-center">
                                         <input className="text-center py-1 rounded-pill input w-100 fw-bold input-code" type="text" onChange={HandleCodeSeg} maxLength={6} ref={InputCode} placeholder="******" />
-                                        <label className="fw-bold">{t('Code')}</label>
+                                        <label className="fw-bold d-none d-md-block">{t('Code')}</label>
                                     </div>
-                                    <div className="col-3">
+                                    <div className="col-12 col-xl-3">
                                         <div className="col-12 text-center">
-                                            <button type="button" className={`btn mt-3 w-100 rounded-pill ${store.borde} ${store.texto} `} onClick={() => {
+                                            <button type="button" className={`btn mt-3 mt-xl-3 mt-md-0 mt-lg-0 w-100 rounded-pill ${store.borde} ${store.texto} `} onClick={() => {
                                                 console.log(timeCode)
                                                 actions.verifyCode(forgotMail, CodeSend)
                                                 console.log(forgotMail, CodeSend);

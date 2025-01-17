@@ -42,19 +42,20 @@ export const Register = () => {
 
     return (
         <div className="register">
-            <form action="#" className={`d-flex flex-column align-content-center text-center justify-content-center ${store.fondo}`}>
-                <h1>{t('Create')}</h1>
+            <form action="#" className={`d-flex flex-column align-content-center text-center  ${store.fondo}`}>
+                <h1 className="titulo-login">{t('Create')}</h1>
                 <div className="d-flex flex-column text-center container mb-3">
-                    <label className="my-1 fw-bold">{t('Name')}</label>
-                    <input className=" mx-3 text-center py-1 rounded-pill input" type="text" onChange={HandleName} maxLength="40" ref={inputName} />
-                    <label className="my-1 fw-bold">{t('Email')}</label>
-                    <input className=" mx-3 text-center py-1 rounded-pill input" type="email" onChange={HandleEmail} ref={inputMail} />
-                    <label className="my-1 fw-bold">{t('Password')}</label>
-                    <input className=" mx-3 text-center py-1 rounded-pill input" type="password" onChange={HandlePassword} ref={inputPassword} />
+                    <label className="my-1 fw-bold label-login">{t('Name')}</label>
+                    <input className="mx-2 mx-md-3 text-center py-1 rounded-pill input" type="text" onChange={HandleName} maxLength="40" ref={inputName} />
+                    <label className="my-1 fw-bold label-login">{t('Email')}</label>
+                    <input className="mx-2 mx-md-3 text-center py-1 rounded-pill input" type="email" onChange={HandleEmail} ref={inputMail} />
+                    <label className="my-1 fw-bold label-login">{t('Password')}</label>
+                    <input className="mx-2 mx-md-3 text-center py-1 rounded-pill input" type="password" onChange={HandlePassword} ref={inputPassword} />
                 </div>
 
                 <div className="text-center">
-                    <button className={`btn btn-light mt-3 w-50 rounded-pill  ${store.borde}`} onClick={() => {handleRegister()}}>{t('Ready')}</button>
+                <button className={`btn btn-light mt-3 w-50 rounded-pill btn-login ${store.borde}`} onClick={() => {handleRegister()}}>{t('Ready')}</button>
+                        
                 </div>
             </form>
         </div>

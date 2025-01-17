@@ -58,28 +58,28 @@ const ListaInteractiva = () => {
     return (
         <div className="container-fluid w-85" ref={sectionRef}>
             <div className="row">
-                <div className={`col-3 ${firstCol}`}><BloqueoDesbloqueoCuentas /></div>
-                <div className={`col-3 ${thCol}`}><HistorialTransacciones /></div>
-                <div className={`col-3 ${FoCol}`}><Alertas /></div>
-                <div className={`col-3 ${secCol}`}><Tarjetas /></div>
+                <div className={`col-12 col-xl-3 ${thCol}`}><HistorialTransacciones /></div>
+                <div className={`col-6 col-xl-3 ${firstCol}`}><BloqueoDesbloqueoCuentas /></div>
+                <div className={`col-6 col-xl-3 ${FoCol}`}><Alertas /></div>
+                <div className={`col-12 col-xl-3 ${secCol}`}><Tarjetas /></div>
             </div>
             <div className="row">
-                <div className={`col-4 ${firstCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Tienda</div></div>
-                <div className={`col-2 ${thCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Productos</div></div>
-                <div className={`col-4 ${FoCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Configuracion</div></div>
-                <div className={`col-2 ${secCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Atencion al Cliente</div></div>
+                <div className={`col-6 col-xl-4 ${firstCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Tienda</div></div>
+                <div className={`col-6 col-xl-2 ${thCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Productos</div></div>
+                <div className={`col-6 col-xl-4 ${FoCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Configuracion</div></div>
+                <div className={`col-6 col-xl-2 ${secCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Atencion al Cliente</div></div>
             </div>
             <div className="row">
-                <div className={`col-2 ${firstCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Enlaces Legales</div></div>
-                <div className={`col-4 ${thCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Recursos</div></div>
-                <div className={`col-2 ${FoCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Seguridad</div></div>
-                <div className={`col-4 ${secCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Certificaciones</div></div>
+                <div className={`col-6 col-xl-2 ${firstCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Enlaces Legales</div></div>
+                <div className={`col-6 col-xl-4 ${thCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Recursos</div></div>
+                <div className={`col-6 col-xl-2 ${FoCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Seguridad</div></div>
+                <div className={`col-6 col-xl-4 ${secCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Certificaciones</div></div>
             </div>
             <div className="row">
-                <div className={`col-3 ${firstCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Inversiones</div></div>
-                <div className={`col-4 ${thCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Tarjeta de Cordenadas</div></div>
-                <div className={`col-3 ${FoCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Divisas</div></div>
-                <div className={`col-2 ${secCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Redes Sociales</div></div>
+                <div className={`col-6 col-xl-3 ${firstCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Inversiones</div></div>
+                <div className={`col-6 col-xl-4 ${thCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Tarjeta de Cordenadas</div></div>
+                <div className={`col-6 col-xl-3 ${FoCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Divisas</div></div>
+                <div className={`col-6 col-xl-2 ${secCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Redes Sociales</div></div>
             </div>
         </div>
     )

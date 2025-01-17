@@ -15,7 +15,7 @@ export const ContenedorLoginYRegistro = () => {
 
     //contenedor para registrarse o iniciar sesion con animacion incluida
     return (
-        <div className={`contenedor container w-75 h-100 d-flex ${Registro === true ? "" : "panel-derecho-activo"} ${store.borde} ${userLoad}`}>
+        <div className={`contenedor container h-100 d-flex ${Registro === true ? "" : "panel-derecho-activo"} ${store.borde} ${userLoad}`}>
             {/* contenedor registro*/}
             <Register />
             {/* contenedor login*/}
