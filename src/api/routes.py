@@ -6,6 +6,15 @@ from api.models import db, User
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from flask_jwt_extended import create_access_token
+from datetime import datetime, timedelta, timezone
+from api.mail_config import get_mail
+
+
+
+# Para Flask-Mail, codigo de seguridad
+from flask_mail import Message
+import random
+
 
 api = Blueprint('api', __name__)
 
@@ -37,6 +46,7 @@ def getUsers():
 @api.route('/User/Register', methods=['POST'])
 def addUser():
     data = request.get_json()
+    name = data.get("name")
     email = data.get("email")
     password = data.get("password")
     is_active = data.get("is_active")
@@ -44,12 +54,15 @@ def addUser():
     
     if email is None or email is "":
         return jsonify({"Mensaje": "The email is missing"}), 400
+    elif name is None or name is "":
+        return jsonify({"Mensaje": "The name is missing"}), 400
     elif password is None or password is "":
         return jsonify({"Mensaje": "The password is missing"}), 400
     elif is_active is None or is_active is "":
         return jsonify({"Mensaje": "The is_active is missing"}), 400
     try:
         new_user = User(
+            name= data.get("name"),
             email= data.get("email"),
             password= data.get("password"),
             is_active=data.get("is_active")
@@ -90,7 +103,61 @@ def user_autentication():
         else:
             return jsonify({"Usuario Identificado": user.serialize(),"token" : access_token}), 201    
     except Exception as e:
-        return jsonify({"error": str(e)}), 400         
+        return jsonify({"error": str(e)}), 400 
 
+# Endpoint para codigo de seguridad
+@api.route('/send-code', methods=['POST'])
+def send_code():
+    data = request.json
+    email = data.get('email')
+
+    if not email:
+        return jsonify({'error': 'Email es requerido'}), 400
+
+    user = User.query.filter_by(email=email).first()
+    if not user:
+        return jsonify({'error': 'Usuario no encontrado'}), 404
+
+    # Generar código de seguridad
+    code = f"{random.randint(100000, 999999)}"
+    user.reset_code = code
+    # user.code_expires = datetime.now(timezone.utc) + timedelta(minutes=10)  # Código válido por 10 minutos
+
+    # Guardar cambios en la base de datos
+    db.session.commit()
+
+    # Enviar correo
+    msg = Message('Código de seguridad para restablecer tu contraseña en Geek-Bank',
+                  recipients=[email])
+    msg.body = (
+        f"Hola,\n\n"
+        f"Hemos recibido una solicitud para restablecer tu contraseña en Geek-Bank.\n\n"
+        f"Tu código de seguridad es:\n\n"
+        f"🔑 **{code}** 🔑\n\n" 
+        f"Por favor, introduce este código en nuestra página web para completar el proceso de recuperación de tu cuenta.\n\n"
+        f"Este código es válido por 10 minutos.\n\n"
+        f"⚠️ *Nota importante:* Si no solicitaste este código, es posible que alguien haya intentado acceder a tu cuenta. "
+        f"Te recomendamos ignorar este mensaje y, si tienes alguna duda, contacta con nuestro equipo de soporte a la brevedad.\n\n"
+        f"¡Gracias por confiar en Geek-Bank!\n\n"
+        f"Atentamente,\n"
+        f"El equipo de Geek-Bank")
+
+    get_mail().send(msg)
+    return jsonify({'message': 'Código enviado exitosamente', 'code': code}), 200
     
-    
+@api.route('/verify-code', methods=['POST'])
+def verify_code():
+    data = request.json
+    email = data.get('email')
+    code = data.get('code')
+
+    if not email or not code:
+        return jsonify({'error': 'Email y código son requeridos'}), 400
+
+    user = User.query.filter_by(email=email).first()
+    if not user:
+        return jsonify({'error': 'Usuario no encontrado'}), 404
+
+    if user.reset_code != code:
+        return jsonify({'error': 'Código incorrecto'}), 400
+    return jsonify({'message': 'Código verificado correctamente'}), 200

@@ -11,6 +11,7 @@ export const Login = () => {
     const [name, SetName] = useState("");
     const [email, SetEmail] = useState("");
     const [password, SetPassword] = useState("");
+    const [CodeSend, SetCodeSend] = useState("")
 
     // ejecuta el contenedor si el usuario se ha olvidado el password de su cuenta
     const [userForgotPassword, SetuserForgotPassword] = useState(false)
@@ -22,10 +23,13 @@ export const Login = () => {
     const [forgotMail, SetForgotMail] = useState("");
 
     // tiempo que tiene que pasar para solicitar de nuevo el codigo
-    const [timeCode, SetTimeCode] = useState(30);
+    const [timeCode, SetTimeCode] = useState(300);
 
     const HandleForgotMail = (e) => {
         SetForgotMail(e.target.value.toLowerCase())
+    }
+    const HandleCodeSeg = (e) => {
+        SetCodeSend(e.target.value)
     }
 
     const CountRef = useRef(null)
@@ -45,17 +49,12 @@ export const Login = () => {
     useEffect(() => {
         if (timeCode === 0) {
             clearInterval(CountRef.current)
-            SetTimeCode(60)
+            SetTimeCode(600)
             SetCode(false)
             buttomCode.current.disabled = false;
         }
     }, [timeCode])
 
-    const HandleCode = (e) => {
-        if (/^\d+$/.test(e.target.value) === false) {
-            InputCode.current.value = InputCode.current.value.slice(0, -1)
-        }
-    }
 
     //handles para cambiar los valores puestos por el usuario
     const HandleName = (e) => {
@@ -151,18 +150,24 @@ export const Login = () => {
                                         <button type="button" className="rounded-pill btn btn-primary w-100 fw-bold" ref={buttomCode} onClick={() => {
                                             SetCode(true)
                                             Count()
+                                            actions.sendCode(forgotMail)
+
                                         }}>{code ?
                                             `( ${timeCode} ) s`
                                             : t('SendCode')}</button>
                                     </div>
                                     <div className="col-3 my-3 text-center">
-                                        <input className="text-center py-1 rounded-pill input w-100 fw-bold input-code" type="text" onChange={HandleCode} maxLength={6} ref={InputCode} placeholder="******" />
+                                        <input className="text-center py-1 rounded-pill input w-100 fw-bold input-code" type="text" onChange={HandleCodeSeg} maxLength={6} ref={InputCode} placeholder="******" />
                                         <label className="fw-bold">{t('Code')}</label>
                                     </div>
                                     <div className="col-3">
                                         <div className="col-12 text-center">
                                             <button type="button" className={`btn mt-3 w-100 rounded-pill ${store.borde} ${store.texto} `} onClick={() => {
-                                                console.log(timeCode);
+                                                console.log(timeCode)
+                                                actions.verifyCode(forgotMail, CodeSend)
+                                                console.log(forgotMail, CodeSend);
+
+                                                ;
                                             }}>{t('Check')}</button>
                                         </div>
                                     </div>

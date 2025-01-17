@@ -3,13 +3,18 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 
+import { Landingpage } from "./pages/landingpage.js";
 import { Login } from "./pages/login";
 import { Home } from "./pages/home";
 import { Politicas } from "./pages/politicas";
 import { Terminos } from "./pages/terminos";
 import { Aviso } from "./pages/aviso";
 import { Tarifas } from "./pages/tarifas";
+<<<<<<< HEAD
 import { Educacion } from "./pages/educacion";
+=======
+import { Not_found } from "./pages/not_found.js";
+>>>>>>> 19366709b4f1ab1e8f3896ec95cc1a637f4ab29c
 import injectContext, { Context } from "./store/appContext";
 
 import { Navbar } from "./component/navbar.jsx";
@@ -33,14 +38,19 @@ const Layout = () => {
           <Navbar />
           <div className="content">
             <Routes>
-              <Route element={<Login />} path="/" />
+              <Route element={<Landingpage />} path="/" />
+              <Route element={<Login />} path="/login" />
               <Route element={<Home />} path="/home" />
               <Route element={<Politicas />} path="/politicas" />
               <Route element={<Terminos />} path="/terminos" />
               <Route element={<Aviso />} path="/aviso" />
               <Route element={<Tarifas />} path="/tarifas" />
+<<<<<<< HEAD
               <Route element={<Educacion />} path="/educacion" />
               <Route element={<h1>Not found!</h1>} />
+=======
+              <Route element={<Not_found />} path="*" />
+>>>>>>> 19366709b4f1ab1e8f3896ec95cc1a637f4ab29c
             </Routes>
           </div>
           <Footer />
