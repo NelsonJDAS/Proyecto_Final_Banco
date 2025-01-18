@@ -122,3 +122,7 @@
 .simbolo-idioma {
   font-size: 22px;
 }
+
+.contenedor-nav {
+  z-index: 1;
+}
