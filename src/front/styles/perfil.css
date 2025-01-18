@@ -1,0 +1,15 @@
+.btn-perfil {
+    transition: background-color 0.8s ease;
+}
+
+.btn-perfil:hover {
+    background-color: transparent !important;
+}
+
+.img-fondo-perfil {
+    background-image: url(https://www.bartolomeconsultores.com/wp-content/uploads/2015/10/fondo-formulario.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 90vh;
+}

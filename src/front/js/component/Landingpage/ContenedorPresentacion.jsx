@@ -11,7 +11,7 @@ const ContenedorPresentacion = () => {
     return (<div className="contenedor-landing">
         <div className="container">
             <div className="d-flex flex-column text-center">
-                <h1 className={`titulo-landing ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}> ¡Bienvenido a Geek Bank!</h1>
+                <h1 className={`titulo-landing ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}> ¡Bienvenido a GeekBank!</h1>
                 <div className={`fs-2 ${userLoad ? "animacion-der visible" : "animacion-der"}`}>
                     <p>En Geek Bank reinventamos la forma en que interactúas con tu dinero. Somos más que un banco</p>
                     <p>tradicional; somos una plataforma diseñada para brindarte comodidad, transparencia y control total</p>
