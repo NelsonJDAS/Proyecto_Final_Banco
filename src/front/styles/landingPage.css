@@ -73,6 +73,7 @@
 @media (max-width: 768px) {
     .titulo-landing {
         font-size: 40px !important;
+        margin: 20px 0 35px 0;
     }
 
 

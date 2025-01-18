@@ -17,6 +17,7 @@ import { Not_found } from "./pages/not_found.js";
 import injectContext, { Context } from "./store/appContext";
 import { Navbar } from "./component/navbar.jsx";
 import { Footer } from "./component/footer.jsx";
+import { Perfil } from "./pages/perfil.js";
 
 //create your first component
 const Layout = () => {
@@ -44,6 +45,7 @@ const Layout = () => {
               <Route element={<Aviso />} path="/aviso" />
               <Route element={<Tarifas />} path="/tarifas" />
               <Route element={<Educacion />} path="/educacion" />
+              <Route element={<Perfil />} path="/perfil" />
               <Route element={<Not_found />} path="*" />
             </Routes>
           </div>

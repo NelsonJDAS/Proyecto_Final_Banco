@@ -1,5 +1,4 @@
 import React from "react";
-import "../../styles/not_found.css";
 import ContenedorPresentacionPoliticas from "../component/Individuales/politicas/ContenedorPresentacionPoliticas.jsx";
 import ContenedorInformacion from "../component/Individuales/politicas/ContenedorInformacion.jsx";
 import ContenedorUsoInformacion from "../component/Individuales/politicas/ContenedorUsoInformacion.jsx";
