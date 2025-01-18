@@ -1,0 +1,90 @@
+.btn-perfil {
+    transition: background-color 0.8s ease;
+}
+
+.btn-perfil:hover {
+    background-color: transparent !important;
+}
+
+.img-fondo-perfil {
+    background-image: url(https://www.bartolomeconsultores.com/wp-content/uploads/2015/10/fondo-formulario.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 110vh;
+    margin-top: -67px;
+    z-index: 2;
+}
+
+.titulo-perfil {
+    font-size: 40px;
+    font-weight: 900;
+}
+
+.contenedor-perfil {
+    padding-top: 40px;
+}
+
+@media (max-width: 768px) {
+    .titulo-perfil {
+        font-size: 25px !important;
+        margin: 40px 0 !important;
+    }
+
+    .img-fondo-perfil {
+        height: 140vh;
+    }
+
+    .contenedor-perfil {
+        width: 100% !important;
+    }
+
+    .btn-perfil {
+        font-size: 20px !important;
+        width: 90% !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+    .titulo-perfil {
+        font-size: 35px !important;
+        margin: 20px 0 !important;
+    }
+
+    .img-fondo-perfil {
+        height: 90vh;
+    }
+
+    .contenedor-perfil {
+        width: 100% !important;
+    }
+
+    .btn-perfil {
+        font-size: 20px !important;
+        width: 60% !important;
+    }
+
+    .label-perfil {
+        font-size: 20px !important;
+    }
+}
+
+@media (min-width: 1300px) {
+    .titulo-perfil {
+        font-size: 35px !important;
+        margin: 20px 0 !important;
+    }
+
+    .contenedor-perfil {
+        width: 100% !important;
+    }
+
+    .btn-perfil {
+        font-size: 20px !important;
+        width: 60% !important;
+    }
+
+    .label-perfil {
+        font-size: 20px !important;
+    }
+}

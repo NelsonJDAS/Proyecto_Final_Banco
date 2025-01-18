@@ -62,7 +62,7 @@ const ContenedorBeneficios = () => {
         <div className="contenedor-landing">
             <div className="container" ref={sectionRef}>
                 <div className="row my-3">
-                    <div className="col-12 text-center"><h2 className={`titulo-landing ${userLoadv2 ? "animacion-izq visible" : "animacion-izq"}`}>Beneficios de Geek Bank</h2></div>
+                    <div className="col-12 text-center"><h2 className={`titulo-landing ${userLoadv2 ? "animacion-izq visible" : "animacion-izq"}`}>Beneficios de GeekBank</h2></div>
                 </div>
                 <div className="row">
                     <div className="col-lg-3 my-3 col-md-8 col-6">
