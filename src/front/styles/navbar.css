@@ -3,6 +3,7 @@
   width: 165px;
   height: 150px;
   margin-top: -10px;
+  z-index: 0;
 }
 
 @media (max-width: 480px) {
@@ -121,8 +122,4 @@
 
 .simbolo-idioma {
   font-size: 22px;
-}
-
-.contenedor-nav {
-  z-index: 1;
 }
