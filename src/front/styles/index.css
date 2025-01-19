@@ -12,6 +12,14 @@ body {
   overflow-x: hidden !important;
 }
 
+.modal-backdrop {
+  z-index: 0 !important;
+}
+
+.z-1 {
+  z-index: 1;
+}
+
 /* animaciones generales para animacion de izq a derecha , derecha a izquierda, arriba a abajo, abajo a arriba*/
 
 .animacion-izq {

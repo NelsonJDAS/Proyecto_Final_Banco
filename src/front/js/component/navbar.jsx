@@ -32,7 +32,7 @@ export const Navbar = () => {
 	}, [btn])
 
 	return (
-		<div className={`contenedor-nav ${location.pathname === "/perfil" ? "text-white" : ""}`}> {/* modo oscuro y claro */}
+		<div className={`contenedor-nav ${location.pathname === "/perfil" ? "text-white z-1" : ""}`}> {/* modo oscuro y claro */}
 			<div className="modal fade" id="lenguajes" tabIndex="-1" aria-labelledby="label" aria-hidden="true">
 				{/* Modal selector de idiomas */}
 				<div className="modal-dialog contenedor-modal">
