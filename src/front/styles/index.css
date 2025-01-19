@@ -24,49 +24,49 @@ body {
 
 .animacion-izq {
   opacity: 0;
-  transition: opacity 2s ease, transform 2s ease;
+  transition: opacity 2s ease, transform 2s ease, color 0.6s ease;
   transform: translateX(-100px);
 }
 
 .animacion-izq.visible {
   opacity: 1;
-  transition: opacity 2s ease, transform 2s ease;
+  transition: opacity 2s ease, transform 2s ease, color 0.6s ease;
   transform: translateX(0);
 }
 
 .animacion-der {
   opacity: 0;
-  transition: opacity 2s ease, transform 2s ease;
+  transition: opacity 2s ease, transform 2s ease, color 0.6s ease;
   transform: translateX(100px);
 }
 
 .animacion-der.visible {
   opacity: 1;
-  transition: opacity 2s ease, transform 2s ease;
+  transition: opacity 2s ease, transform 2s ease, color 0.6s ease;
   transform: translateX(0);
 }
 
 .animacion-arriba {
   opacity: 0;
-  transition: opacity 2s ease, transform 2s ease;
+  transition: opacity 2s ease, transform 2s ease, color 0.6s ease;
   transform: translateY(-100px);
 }
 
 .animacion-arriba.visible {
   opacity: 1;
-  transition: opacity 2s ease, transform 2s ease;
+  transition: opacity 2s ease, transform 2s ease, color 0.6s ease;
   transform: translateX(0);
 }
 
 .animacion-abajo {
   opacity: 0;
-  transition: opacity 2s ease, transform 2s ease;
+  transition: opacity 2s ease, transform 2s ease, color 0.6s ease;
   transform: translateY(100px);
 }
 
 .animacion-abajo.visible {
   opacity: 1;
-  transition: opacity 2s ease, transform 2s ease;
+  transition: opacity 2s ease, transform 2s ease, color 0.6s ease;
   transform: translateY(0);
 }
 

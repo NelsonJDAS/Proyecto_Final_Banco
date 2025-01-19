@@ -1,12 +1,9 @@
 import React from "react";
-import "../../styles/not_found.css";
+import "../../styles/terminos.css";
 import ContenedorPresentacionTerminos from "../component/Individuales/terminos/ContenedorPresentacionTerminos.jsx";
 import ContenedorUsoServicios from "../component/Individuales/terminos/ContenedorUsoServicios.jsx";
-import ContenedorResponsabilidad from "../component/Individuales/terminos/ContenedorResponsabilidad.jsx"
-import ContenedorTarifasCargos from "../component/Individuales/terminos/ContenedorTarifasCargos.jsx"
-import ContenedorLimitaciones from "../component/Individuales/terminos/ContenedorLimitaciones.jsx"
-import ContenedorModificaciones from "../component/Individuales/terminos/ContenedorModificaciones.jsx"
-import ContenedorContacto from "../component/Individuales/terminos/ContenedorContacto.jsx"
+import ContenedorResponsabilidad from "../component/Individuales/terminos/ContenedorResponsabilidad.jsx";
+import ContenedorLimitaciones from "../component/Individuales/terminos/ContenedorLimitaciones.jsx";
 
 export const Terminos = () => {
   return (
@@ -14,10 +11,7 @@ export const Terminos = () => {
       <ContenedorPresentacionTerminos />
       <ContenedorUsoServicios />
       <ContenedorResponsabilidad />
-      <ContenedorTarifasCargos />
       <ContenedorLimitaciones />
-      <ContenedorModificaciones />
-      <ContenedorContacto />
     </div>
   );
 };
