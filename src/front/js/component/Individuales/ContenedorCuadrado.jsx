@@ -1,6 +1,12 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
+import { Context } from "../../store/appContext";
 
-const ContenedorUsoServicios = () => {
+
+const ContenedorCuadrado = ({ logo, position, text, title }) => {
+    const { store, actions } = useContext(Context);
+    const [positionCol, SetPositionCol] = useState(position === "left" ? "animacion-izq" : "" || position === "bottom" ? "animacion-abajo" : "" || position === "up" ? "animacion-arriba" : "" || position === "right" ? "animacion-der" : "");
+
+
     const [userLoad, SetUserLoad] = useState(false);
     // logica para mostrar el conteindo si el usuario esta en la seccion del componente
     const [isVisible, setIsVisible] = useState(false);
@@ -40,19 +46,15 @@ const ContenedorUsoServicios = () => {
         }
     }, [isVisible])
     return (
-        <div className="container">
-            <h1 className={`text-center titulo-politica ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>Uso de Nuestros Servicios</h1>
-            <p className={`fs-3 text-center ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`} ref={sectionRef}>
-                En GeekBank, ofrecemos soluciones bancarias seguras y eficientes para satisfacer sus necesidades financieras.
-                Al utilizar nuestros servicios, usted se compromete a hacerlo de manera responsable y conforme a las leyes y
-                regulaciones aplicables. Es su responsabilidad proporcionar información precisa y actualizada al registrarse y realizar
-                transacciones. No debe utilizar nuestros servicios para actividades ilegales, fraudulentas o malintencionadas. GeekBank
-                se reserva el derecho de suspender o cancelar su acceso si detectamos un uso inapropiado. Además, le recomendamos proteger
-                sus dispositivos y datos personales con medidas de seguridad adecuadas. Al acceder a nuestros servicios, se compromete a seguir
-                estos términos para garantizar una experiencia segura y eficiente.
-            </p>
+        <div className={`mx-md-2 contenedor-cuadrado espaciado-abajo  text-warning align-content-center ${store.borde} ${userLoad ? `${positionCol} visible` : positionCol} ${store.fondo === "fondo-modo-claro" ? "bg-dark text-white" : "bg-white text-dark"}`} ref={sectionRef}>
+            <div className="d-flex flex-column text-center">
+                {logo === null ? "" : <i className="logo-ventajas">{logo}</i>}
+                <div className="text-center fs-4">
+                    {title === null ? "" : <span className="fw-bold my-2">{title}</span>}
+                    {text === null ? "" : <p>{text}</p>}
+                </div>
+            </div>
         </div>
     )
 }
-
-export default ContenedorUsoServicios
+export default ContenedorCuadrado

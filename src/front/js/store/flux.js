@@ -15,6 +15,15 @@ const getState = ({ getStore, getActions, setStore }) => {
       CambiarIncognito: (estado) => {
         setStore({ ...getStore(), hidden: estado });
       },
+      Scroll: () => {
+        const navbar = document.getElementById("navbar"); // Seleccionamos el elemento por ID
+        if (navbar) {
+          navbar.scrollIntoView({
+            behavior: "smooth", // Desplazamiento suave
+            block: "start", // Alinear al inicio del elemento
+          });
+        }
+      },
       CambiarModo: (estado) => {
         if (estado === true) {
           setStore({
@@ -40,65 +49,70 @@ const getState = ({ getStore, getActions, setStore }) => {
       loginUser: async (name, email, password) => {
         const store = getStore();
         const actions = getActions();
-    
+
         try {
-            const response = await fetch(process.env.BACKEND_URL + "/api/User/Login", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ name, email, password }),
-            });
-    
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.mensaje || "Error en el inicio de sesión");
+          const response = await fetch(
+            process.env.BACKEND_URL + "/api/User/Login",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ name, email, password }),
             }
-    
-            const data = await response.json();
-            // Guardamos el token en el localStorage
-            localStorage.setItem("token", data.token);
-    
-            // Actualizamos el store con el token y los datos del usuario
-            setStore({
-                ...store,
-                token: data.token,
-                user: data["Usuario Identificado"], // Ajustar según lo que devuelva tu backend
-            });
-    
-            console.log("Login exitoso. Token guardado en localStorage.");
+          );
+
+          if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(
+              errorData.mensaje || "Error en el inicio de sesión"
+            );
+          }
+
+          const data = await response.json();
+          // Guardamos el token en el localStorage
+          localStorage.setItem("token", data.token);
+
+          // Actualizamos el store con el token y los datos del usuario
+          setStore({
+            ...store,
+            token: data.token,
+            user: data["Usuario Identificado"], // Ajustar según lo que devuelva tu backend
+          });
+
+          console.log("Login exitoso. Token guardado en localStorage.");
         } catch (error) {
-            console.error("Error en loginUser:", error.message);
-            throw error; // Lanzamos el error para que HandleLogin lo maneje
+          console.error("Error en loginUser:", error.message);
+          throw error; // Lanzamos el error para que HandleLogin lo maneje
         }
       },
 
-      registerUser: (name, email, password) => { 
+      registerUser: (name, email, password) => {
         return fetch(process.env.BACKEND_URL + "/api/User/Register", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                password: password,
-                email: email,
-                name: name,
-                is_active: true,
-            }),
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            password: password,
+            email: email,
+            name: name,
+            is_active: true,
+          }),
         })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error("Error en el registro");
-                }
-                return response.json(); // Parseamos la respuesta JSON
-            })
-            .then((data) => {
-                const token = data.token; // Accedemos al token desde la respuesta
-                localStorage.setItem("token", token); // Guardamos el token en localStorage
-                return "success";
-            })
-            .catch((error) => {
-                console.error("Error al registrar usuario:", error);
-            });
-    },
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Error en el registro");
+            }
+            return response.json(); // Parseamos la respuesta JSON
+          })
+          .then((data) => {
+            const token = data.token; // Accedemos al token desde la respuesta
+            localStorage.setItem("token", token); // Guardamos el token en localStorage
+            return "success";
+          })
+          .catch((error) => {
+            console.error("Error al registrar usuario:", error);
+          });
+      },
 
       sendCode: (email) => {
         const store = getStore();
@@ -124,7 +138,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       verifyCode: (email, code) => {
         const store = getStore();
         setStore({ email });
-        setStore({ code })
+        setStore({ code });
 
         fetch(process.env.BACKEND_URL + "/api/verify-code", {
           method: "POST",
@@ -142,7 +156,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
       },
 
-      
       // Funcion Ejemplo
       //   changeColor: (index, color) => {
       //     //get the store
