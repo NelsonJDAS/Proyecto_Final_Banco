@@ -86,8 +86,11 @@ class Cuenta(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     numero_cuenta = db.Column(db.String(20), unique=True)
+    numero_tarjeta = db.Column(db.String(20), unique=True)
+    cvv = db.Column(db.String(3), unique=True)
     tipo_cuenta = db.Column(db.String(50))
     saldo = db.Column(db.Float)
+    saldo_retenido = db.Column(db.Float)
     cliente_id = db.Column(db.Integer, db.ForeignKey('cliente.id'))
     estado = db.Column(db.Integer)
     cliente = db.relationship("Cliente", back_populates="cuentas")
@@ -102,8 +105,11 @@ class Cuenta(db.Model):
         return {
             "id": self.id,
             "numero_cuenta": self.numero_cuenta,
+            "numero_tarjeta": self.numero_tarjeta,
+            "cvv": self.cvv,
             "tipo_cuenta": self.tipo_cuenta,
             "saldo": self.saldo,
+            "saldo_retenido": self.saldo_retenido,
             "estado": self.estado,
             "cliente_id": self.cliente_id,
             "seguro_id": self.seguro_id,

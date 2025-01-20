@@ -39,7 +39,7 @@ export const Navbar = () => {
 				<div className="modal-dialog contenedor-modal">
 					<div className={`modal-content rounded-3 ${store.fondo} borde-brillante`}>
 						<div className="modal-header">
-							<h1 className="modal-title fs-5 " id="label">{t('Languages')}</h1>
+							<h1 className="modal-title fs-5 " id="label">{t('Navbar.Languages')}</h1>
 							<div className="hover fs-3" data-bs-dismiss="modal"><IoClose /></div>
 						</div>
 						<div className="modal-body">
@@ -120,14 +120,14 @@ export const Navbar = () => {
 											<a className={`dropdown-item text-center hover ${store.fondo === "fondo-modo-claro" ? "text-white" : "text-dark"}`} href="#">
 												<span className={store.borde_hover} onClick={() => {
 													navigate("/example")
-												}}>{t('Movements')} </span>
+												}}>{t('Navbar.Movements')} </span>
 											</a>
 										</li>
 										<li>
 											<a className={`dropdown-item text-center hover ${store.fondo === "fondo-modo-claro" ? "text-white" : "text-dark"}`} href="#">
 												<span className={store.borde_hover} onClick={() => {
 													navigate("/example")
-												}}>{t('Transfers')}</span>
+												}}>{t('Navbar.Transfers')}</span>
 											</a>
 										</li>
 										<li>
@@ -141,14 +141,14 @@ export const Navbar = () => {
 											<a className={`dropdown-item text-center hover ${store.fondo === "fondo-modo-claro" ? "text-white" : "text-dark"}`} href="#">
 												<span className={store.borde_hover} onClick={() => {
 													navigate("/example")
-												}}>{t('Exch/Currency')}</span>
+												}}>{t('Navbar.Exch/Currency')}</span>
 											</a>
 										</li>
 										<li>
 											<a className={`dropdown-item text-center hover ${store.fondo === "fondo-modo-claro" ? "text-white" : "text-dark"}`} href="#">
 												<span className={store.borde_hover} onClick={() => {
 													navigate("/example")
-												}}>{t('Investments')}</span>
+												}}>{t('Navbar.Investments')}</span>
 											</a>
 										</li>
 										<li className="d-md-none"><hr className="dropdown-divider" /></li>
@@ -166,12 +166,12 @@ export const Navbar = () => {
 							<div className="col-1 align-content-center link  fw-bold text-center d-none d-lg-block">
 								<span className={store.borde_hover} onClick={() => {
 									navigate("/example")
-								}}>{t('Movements')} </span>{/* Seccion movimientos */}
+								}}>{t('Navbar.Movements')} </span>{/* Seccion movimientos */}
 							</div>
 							<div className="col-1 align-content-center link  fw-bold text-center d-none d-lg-block">
 								<span className={store.borde_hover} onClick={() => {
 									navigate("/example")
-								}}>{t('Transfers')}</span> {/* Seccion transferencias */}
+								}}>{t('Navbar.Transfers')}</span> {/* Seccion transferencias */}
 							</div>
 							<div className="col-1 align-content-center link  fw-bold text-center d-none d-lg-block">
 								<span className={store.borde_hover} onClick={() => {
@@ -181,12 +181,12 @@ export const Navbar = () => {
 							<div className="col-1 align-content-center link  fw-bold text-center d-none d-lg-block">
 								<span className={store.borde_hover} onClick={() => {
 									navigate("/example")
-								}}>{t('Exch/Currency')}</span> {/* Seccion divisas */}
+								}}>{t('Navbar.Exch/Currency')}</span> {/* Seccion divisas */}
 							</div>
 							<div className="col-1 align-content-center link  fw-bold text-center d-none d-lg-block">
 								<span className={store.borde_hover} onClick={() => {
 									navigate("/example")
-								}}>{t('Investments')}</span> {/* Seccion divisas */}
+								}}>{t('Navbar.Investments')}</span> {/* Seccion divisas */}
 							</div>
 							<div className="col-2 col-md-1 align-content-center text-center fs-3 fw-bold d-none d-md-block"><span className="hover text-danger" onClick={() => {
 								localStorage.clear()

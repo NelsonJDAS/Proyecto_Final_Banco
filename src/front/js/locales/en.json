@@ -1,10 +1,82 @@
 {
+  "Landing1": {
+    "welcome": "Welcome to GeekBank!",
+    "welcome1": "At Geek Bank, we reinvent the way you interact with your money. We are more than a traditional bank;",
+    "welcome2": "we are a platform designed to provide you with convenience, transparency, and full control",
+    "welcome3": "over your finances, all backed by the latest financial technology."
+  },
+
+  "Landing2": {
+    "p1_1": "Benefits of GeekBank",
+    "p1_2": "24/7 Support",
+    "p1_3": "so you are never alone",
+    "p2": "Grow with Geek Bank",
+    "p3": "No hidden fees",
+    "p4": "Competitive interest rates on loans and credits",
+    "p5": "Security",
+    "p6": "Mobile Banking",
+    "p7": "Global Banking",
+    "p8": "Automated savings with just one click"
+  },
+
+  "Landing3": {
+    "p1": "Start Now!",
+    "p2": "Sign up now to enjoy all our benefits.",
+    "btn": "Enter"
+  },
+
+  "Landing4": {
+    "h2": "Why choose GeekBank?",
+    "p1_1": "Manage your finances",
+    "p1_2": "Our platform is intuitive and designed to simplify your life.",
+    "p2_1": "Transparency",
+    "p2_2": "No hidden fees or unpleasant surprises.",
+    "p3_1": "We value your time",
+    "p3_2": "Make transactions and manage your accounts in seconds, wherever you are."
+  },
+
+  "Landing5": {
+    "t1": "Since I switched to this bank, everything has been much easier. The app interface is super easy to use and transfers are fast. Also, I don't have to worry about hidden fees.",
+    "t2": "Clear, transparent, and with excellent support. No hidden fees. Highly recommended!",
+    "t3": "The support is fast, helpful, and always available. They solved all my questions instantly."
+  },
+
+  "Login": {
+    "login": "Login",
+    "recovery": "Recover password",
+    "name" : "Name",
+    "email" : "Email address",
+    "password" : "Password",
+    "forgot": "Forgot your password?"
+  },
+
+  "Forgot": {
+    "recovery2" : "Don’t worry, we’ll help you recover access to your account. Please enter the email address associated with your account. We will send you a verification code that you can use to reset your password.",
+    "sendCode" : "Send code",
+    "code" : "Code",
+    "check" : "Check",
+    "return": "Go Back"
+  },
+
+  "Register": {
+    "welcome!": "",
+    "register" : "Sign up here",
+    "cuenta?" : "Already have an account?",
+    "loginfunc": "Log in to access all the features of the website",
+    "hello!" : "Hello!",
+    "sinCuenta" : "Don't have an account yet?",
+    "sinCuenta2" : "Creating one is quick and easy",
+    "sinCuenta3" : "Click the button below to get started.",
+    "create" : "Create an account",
+    "ready" : "Ready!"
+  },
+  "Footer": {
     "Contact information": "Contact information",
     "Contact": "Contact",
     "Chat": "Chat",
     "Legal links": "Legal links",
     "Privacy Policy": "Privacy Policy",
-    "Term of conditions": "Term of conditions",
+    "Term of conditions": "Terms and conditions",
     "Legal notice": "Legal notice",
     "Links to resources": "Links to resources",
     "Rates and commissions": "Rates and commissions",
@@ -19,33 +91,15 @@
     "Loans": "Loans",
     "Certifications": "Certifications",
     "Certified titles": "Certified titles",
-    "Security titles": "Security titles",
+    "Security titles": "Security titles"
+  },
+  "Navbar": {
     "Languages": "Languages",
     "Movements": "Movements",
     "Transfers": "Transfers",
     "GEEK Store": "GEEK Store",
-    "Exch/Currency": "Exch/Currency",
-    "Investments": "Investments",
-    "Welcome!": "Welcome!",
-    "cuenta?" : "Do you already have an account?",
-    "Login to access all your web functionalities" : "Login to access all your web functionalities",
-    "Login" : "Login",
-    "Hello!" : "Hello!",
-    "SinCuenta" : "Don't have an account yet?",
-    "SinCuenta2" : "Creating one is quick and easy.",
-    "SinCuenta3" : "Click on the button below to start.",
-    "Register" : "Register here",
-    "Login2" : "",
-    "Name" : "Name",
-    "Email" : "E-mail address",
-    "Password" : "Password",
-    "Forgot" : "Forgot your password?",
-    "Recovery" : "Password recovery",
-    "Recovery2" : "Don't worry, we will help you regain access to your account. Enter the email address associated with your account. We will send you a verification code that you can use to reset your password.",
-    "Code" : "Code",
-    "Check" : "Check",
-    "Return" : "Return",
-    "Ready" : "Ready!",
-    "Create" : "Create an account",
-    "SendCode" : "Send code"
-  }
+    "Exch/Currency": "Exchange/Currency",
+    "Investments": "Investments"
+  },
+  "Recovery2" : "associated with your account. We will send you a verification code that you can use to reset your password."
+}
