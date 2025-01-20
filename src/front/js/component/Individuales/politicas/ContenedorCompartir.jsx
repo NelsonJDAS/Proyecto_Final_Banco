@@ -48,9 +48,11 @@ const ContenedorCompartir = () => {
                 Solo compartimos sus datos con terceros en los siguientes casos:
             </p>
             <div className="row my-3">
-                <ColLateral width="w-25" text="Servicios" position="left" userLoad={userLoad} />
+                <div className="col-12 col-md-6"><ColLateral width="w-50" text="Servicios" position="left" userLoad={userLoad} /></div>
+                <div className="col-6 d-none d-md-block"></div>
                 <ColLateral width="w-25" text="Legales" position="" userLoad={userLoad} />
-                <ColLateral width="w-25" text="Consentimiento" position="left" userLoad={userLoad} />
+                <div className="col-6  d-none d-md-block"></div>
+                <div className="col-12 col-md-6"><ColLateral width="w-50" text="Consentimiento" position="left" userLoad={userLoad} /></div>
             </div>
             <p className={`fs-3 text-center my-3 ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>
                 Servicios

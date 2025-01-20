@@ -56,9 +56,9 @@ const ContenedorResponsabilidad = () => {
                 estos términos para garantizar una experiencia segura y eficiente.
             </p>
             <div className="row">
-                <div className="col-4"><ContenedorCuadrado position="left" text="Proveer información veraz y actualizada" title="Informacion" logo={<IoDocumentOutline />} /></div>
-                <div className="col-4"><ContenedorCuadrado position="bottom" text="Proteger la confidencialidad de sus credenciales" title="Confidencialidad" logo={<CiLock />} /></div>
-                <div className="col-4"><ContenedorCuadrado position="right" text="Notificar inmediatamente cualquier uso no autorizado de su cuenta" title="Responsabilidad" logo={<IoIosInformationCircleOutline />} /></div>
+                <div className="col-12 col-lg-4"><ContenedorCuadrado position="left" text="Proveer información veraz y actualizada" title="Informacion" logo={<IoDocumentOutline />} /></div>
+                <div className="col-12 col-md-6 col-lg-4"><ContenedorCuadrado position="bottom" text="Proteger la confidencialidad de sus credenciales" title="Confidencialidad" logo={<CiLock />} /></div>
+                <div className="col-12 col-md-6 col-lg-4"><ContenedorCuadrado position="right" text="Notificar inmediatamente cualquier uso no autorizado de su cuenta" title="Responsabilidad" logo={<IoIosInformationCircleOutline />} /></div>
             </div>
         </div>
     )
