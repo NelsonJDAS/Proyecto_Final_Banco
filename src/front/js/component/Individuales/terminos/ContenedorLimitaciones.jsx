@@ -41,9 +41,9 @@ const ContenedorLimitaciones = () => {
         }
     }, [isVisible])
     return (
-        <div className="container espaciado-fondo ">
-            <h1 className={`text-center titulo-politica ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>Limitaciones de Responsabilidad</h1>
-            <p className={`fs-3 text-center ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`} ref={sectionRef}>
+        <div className="container espaciado-fondo " ref={sectionRef}>
+            <h1 className={`text-center titulo-politica ${userLoad ? "animacion-der visible" : "animacion-der"}`}>Limitaciones de Responsabilidad</h1>
+            <p className={`fs-3 text-center ${userLoad ? "animacion-der visible" : "animacion-der"}`}>
                 GeekBank no será responsable por pérdidas o daños derivados de:
             </p>
             <div className="row my-3">
