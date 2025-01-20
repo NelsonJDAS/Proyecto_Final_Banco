@@ -42,8 +42,8 @@ const ContenedorInfoAviso = () => {
     }, [isVisible])
     return (
         <div className="container" ref={sectionRef}>
-            <h1 className={`text-center titulo-politica ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>Información Legal y de Contacto de GeekBank</h1>
-            <p className={`fs-3 text-center ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>
+            <h1 className={`text-center titulo-politica ${userLoad ? "animacion-der visible" : "animacion-der"}`}>Información Legal y de Contacto de GeekBank</h1>
+            <p className={`fs-3 text-center ${userLoad ? "animacion-der visible" : "animacion-der"}`}>
                 GeekBank es una entidad financiera que opera de manera completamente legítima, cumpliendo con todas las normativas
                 legales y regulaciones establecidas por las autoridades competentes. Como institución responsable, nos comprometemos
                 a garantizar la seguridad, la transparencia y la confianza de nuestros clientes en cada uno de los servicios que ofrecemos.
