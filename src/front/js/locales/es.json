@@ -10,7 +10,7 @@
     "p1_1": "Beneficios de GeekBank",
     "p1_2": "Soporte 24/7",
     "p1_3": "para que nunca estés solo",
-    "p2_1": "Crece con Geek Bank",
+    "p2": "Crece con Geek Bank",
     "p3": "Sin comisiones ocultas",
     "p4": "Créditos y préstamos con intereses competitivos",
     "p5": "Seguridad",
@@ -71,10 +71,6 @@
     "ready" : "¡Listo!"
   },
   "Footer": {
-
-  },
-
-
     "Contact information": "Información de contacto",
     "Contact": "Contacto",
     "Chat": "Chat",
@@ -95,20 +91,16 @@
     "Loans": "Prestamos",
     "Certifications": "Certificaciones",
     "Certified titles": "Titulos certificados",
-    "Security titles": "Titulos de seguridad",
+    "Security titles": "Titulos de seguridad"
+  },
+  "Navbar": {
     "Languages": "Idiomas",
     "Movements": "Movimientos",
     "Transfers": "Transferencias",
     "GEEK Store": "Tienda GEEK",
     "Exch/Currency": "Cambio/Divisas",
-    "Investments": "Inversiones",
-    "Welcome!": "¡Bienvenido!",
-    "Login to access all your web functionalities" : "Inicia sesión para acceder a todas tus funcionalidades de la web",
-    "Hello!" : "¡Hola!",
-    "Login2" : "",
-    "Recovery2" : "No te preocupes, te ayudaremos a recuperar el acceso a tu cuenta. Introduzca la dirección de correo electrónico asociada a su cuenta. Te enviaremos un código de verificación que podrás utilizar para restablecer tu contraseña.",
-    "Return" : "Volver Atrás",
-    "Ready" : "¡Listo!",
-    "Create" : "Crear una cuenta",
-    "SendCode" : "Enviar código"
+    "Investments": "Inversiones"
+  },
+    "Recovery2" : "sociada a su cuenta. Te enviaremos un código de verificación que podrás utilizar para restablecer tu contraseña."
+    
   }
