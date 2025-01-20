@@ -7,9 +7,9 @@ const ColLateral = ({ width, position, text, userLoad }) => {
 
     return (
         <div className={`col-12 text-center my-3 ${userLoad ? `${positionCol} visible` : positionCol}`}>
-            <div className={`container ${width}`}>
-                <div className={`p-2 rounded-pill fw-bold text-center contenedor-col ${store.fondo === "fondo-modo-claro" ? "bg-dark text-white" : "bg-white text-dark"}`}>
-                    <span className="fs-4">{text}</span>
+            <div className={`container ${width} contenedor-col-lateral`}>
+                <div className={`p-1 p-xl-2 rounded-pill fw-bold text-center contenedor-col ${store.fondo === "fondo-modo-claro" ? "bg-dark text-white" : "bg-white text-dark"}`}>
+                    <span className="fs-4 texto-col-lateral">{text}</span>
                 </div>
             </div>
         </div>

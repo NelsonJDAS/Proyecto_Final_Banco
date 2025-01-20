@@ -18,3 +18,87 @@
   box-shadow: 0 20px 20px rgba(0, 0, 0, 0.3);
   cursor: pointer;
 }
+
+@media (max-width: 767px) {
+  .titulo-principal-politica {
+    font-size: 30px !important;
+    padding: 60px 0px 45px 0px;
+  }
+
+  .titulo-politica {
+    font-size: 30px !important;
+    padding: 60px 0px 45px 0px;
+  }
+
+  .texto-col-lateral {
+    font-size: 15px !important;
+  }
+
+  .contenedor-col-lateral {
+    width: 100% !important;
+  }
+
+  .espaciado-fondo {
+    margin-bottom: 40px !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+  .titulo-principal-politica {
+    font-size: 30px !important;
+    padding: 60px 0px 45px 0px;
+  }
+
+  .titulo-politica {
+    font-size: 30px !important;
+    padding: 60px 0px 45px 0px;
+  }
+
+  .texto-col-lateral {
+    font-size: 15px !important;
+  }
+
+  .espaciado-fondo {
+    margin-bottom: 70px !important;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1300px) {
+  .titulo-landing {
+    font-size: 40px !important;
+  }
+
+  .contenedor-landing {
+    margin: 25px 0 !important;
+  }
+
+  .logo-ventajas {
+    font-size: 40px !important;
+  }
+
+  .contenedor-ventajas {
+    height: 240px !important;
+  }
+
+  .btn-landing {
+    width: 80% !important;
+  }
+
+  .contenedor-comentario {
+    height: 110px !important;
+    font-size: 15px !important;
+  }
+
+  .contenedor-ventajas:hover p {
+    transform: scale(1.05) !important;
+  }
+
+  .contenedor-ventajas {
+    height: 270px !important;
+  }
+
+  .contenedor-comentario {
+    height: 140px !important;
+    font-size: 15px !important;
+  }
+}
