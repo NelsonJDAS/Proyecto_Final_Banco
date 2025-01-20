@@ -10,7 +10,6 @@ const ContenedorNotificaciones = () => {
     useEffect(() => {
         SetUserLoad("elemento visible")
     }, [])
-
     return (
         <>
             <div className="row">

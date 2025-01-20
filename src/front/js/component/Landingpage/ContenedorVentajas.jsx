@@ -1,11 +1,12 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState, useTransition } from "react";
 import { Context } from "../../store/appContext";
 import { TbPigMoney } from "react-icons/tb";
 import { TiDocumentText } from "react-icons/ti";
 import { IoMdTime } from "react-icons/io";
+import { useTranslation } from "react-i18next";
 
 const ContenedorVentajas = () => {
-
+    const { t } = useTranslation()
     const { store, actions } = useContext(Context);
 
     const [userLoad, SetUserLoad] = useState(false);
@@ -56,7 +57,7 @@ const ContenedorVentajas = () => {
     return (<div className="contenedor-landing">
         <div className="container">
             <div className="row">
-                <div className="col-12 text-center"><h2 className={`titulo-landing ${userLoadv2 ? "animacion-der visible" : "animacion-der"}`}>¿Por qué elegir GeekBank?</h2></div>
+                <div className="col-12 text-center"><h2 className={`titulo-landing ${userLoadv2 ? "animacion-der visible" : "animacion-der"}`}>{t('Landing4.h2')}</h2></div>
             </div>
             <div className="row" ref={sectionRef}>
                 <div className="col-12 col-lg-4 col-md-6 my-3 my-lg-0">
@@ -64,8 +65,8 @@ const ContenedorVentajas = () => {
                         <div className="d-flex flex-column text-center">
                             <i className="logo-ventajas"><TbPigMoney /></i>
                             <div className="text-center fs-4">
-                                <span className="fw-bold my-2">Servicio de tus finanzas</span>
-                                <p>Nuestra plataforma es intuitiva y está diseñada para simplificar tu vida.</p>
+                                <span className="fw-bold my-2">{t('Landing4.p1_1')}</span>
+                                <p>{t('Landing4.p1_2')}</p>
                             </div>
                         </div>
                     </div>
@@ -75,8 +76,8 @@ const ContenedorVentajas = () => {
                         <div className="d-flex flex-column text-center">
                             <i className="logo-ventajas"><TiDocumentText /></i>
                             <div className="text-center fs-4">
-                                <span className="fw-bold my-2">Transparencia</span>
-                                <p> Sin comisiones ocultas ni sorpresas desagradables.</p>
+                                <span className="fw-bold my-2">{t('Landing4.p2_1')}</span>
+                                <p>{t('Landing4.p2_2')}</p>
                             </div>
                         </div>
                     </div>
@@ -86,8 +87,8 @@ const ContenedorVentajas = () => {
                         <div className="d-flex flex-column text-center">
                             <i className="logo-ventajas"><IoMdTime /></i>
                             <div className="text-center fs-4">
-                                <span className="fw-bold my-2">Valoramos tu tiempo</span>
-                                <p>Realiza transacciones y gestiona tus cuentas en cuestión de segundos, estés donde estés.</p>
+                                <span className="fw-bold my-2">{t('Landing4.p3_1')}</span>
+                                <p>{t('Landing4.p3_2')}</p>
                             </div>
                         </div>
                     </div>

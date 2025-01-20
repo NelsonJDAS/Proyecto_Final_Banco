@@ -20,82 +20,82 @@ export const Footer = () => {
 		<footer className={`footer mt-auto py-md-3 border-end-0 border-start-0 ${store.borde} ${store.texto} ${store.fondo}`}> {/* modo oscuro y claro */}
 			<div className="row px-0 px-md-3 m-0"> {/* Links */}
 				<div className="col-4 col-md-3 col-lg-2 px-0 px-md-3 flex-column animation">
-					<h6 className="subtitulo d-flex ">{t('Contact information')}</h6>
+					<h6 className="subtitulo d-flex ">{t('Footer.Contact information')}</h6>
 					<span className={`d-flex link-footer ${store.borde_hover}`} onClick={() => {
 						actions.Scroll()
 						navigate("/example")
-					}}>{t('Contact')}</span>
+					}}>{t('Footer.Contact')}</span>
 					<span className={`d-flex link-footer ${store.borde_hover}`} onClick={() => {
 						actions.Scroll()
 						navigate("/example")
-					}}>{t('Chat')}</span>
+					}}>{t('Footer.Chat')}</span>
 				</div>
 				<div className="col-4 col-md-3 col-lg-2 px-0 px-md-3 flex-column animation">
-					<h6 className="subtitulo d-flex ">{t('Legal links')}</h6>
+					<h6 className="subtitulo d-flex ">{t('Footer.Legal links')}</h6>
 					<span className={`d-flex link-footer ${store.borde_hover}`} onClick={() => {
 						actions.Scroll()
 						navigate("/politicas")
-					}}>{t('Privacy Policy')}</span>
+					}}>{t('Footer.Privacy Policy')}</span>
 					<span className={`d-flex link-footer ${store.borde_hover}`} onClick={() => {
 						actions.Scroll()
 						navigate("/terminos")
-					}}>{t('Term of conditions')}</span>
+					}}>{t('Footer.Term of conditions')}</span>
 					<span className={`d-flex link-footer ${store.borde_hover}`} onClick={() => {
 						actions.Scroll()
 						navigate("/aviso")
-					}}>{t('Legal notice')}</span>
+					}}>{t('Footer.Legal notice')}</span>
 				</div>
 				<div className="col-4 col-md-3 col-lg-2 px-0 px-md-3 flex-column animation">
-					<h6 className="subtitulo d-flex ">{t('Links to resources')}</h6>
+					<h6 className="subtitulo d-flex ">{t('Footer.Links to resources')}</h6>
 					<span className={`d-flex link-footer ${store.borde_hover}`} onClick={() => {
 						actions.Scroll()
 						navigate("/tarifas")
-					}}>{t('Rates and commissions')}</span>
+					}}>{t('Footer.Rates and commissions')}</span>
 					<span className={`d-flex link-footer ${store.borde_hover}`} onClick={() => {
 						actions.Scroll()
 						navigate("/educacion")
-					}}>{t('Education')}</span>
+					}}>{t('Footer.Education')}</span>
 				</div>
 				<div className="col-4 col-md-3 col-lg-2 px-0 px-md-3 flex-column animation">
-					<h6 className="subtitulo d-flex ">{t('Security')}</h6>
+					<h6 className="subtitulo d-flex ">{t('Footer.Security')}</h6>
 					<span className={`d-flex link-footer ${store.borde_hover}`} onClick={() => {
 						actions.Scroll()
 						navigate("/consejos")
-					}}>{t('Tips')}</span>
+					}}>{t('Footer.Tips')}</span>
 					<span className={`d-flex link-footer ${store.borde_hover}`} onClick={() => {
 						actions.Scroll()
 						navigate("/metodos")
-					}}>{t('Security methods')}</span>
+					}}>{t('Footer.Security methods')}</span>
 					<span className={`d-flex link-footer ${store.borde_hover}`} onClick={() => {
 						actions.Scroll()
 						navigate("/example")
-					}}>{t('Coordinate card')}</span>
+					}}>{t('Footer.Coordinate card')}</span>
 				</div>
 				<div className="col-4 col-md-3 col-lg-2 px-0 px-md-3 flex-column animation">
-					<h6 className="subtitulo d-flex ">{t('Products and services')}</h6>
+					<h6 className="subtitulo d-flex ">{t('Footer.Products and services')}</h6>
 					<span className={`d-flex link-footer ${store.borde_hover}`} onClick={() => {
 						actions.Scroll()
 						navigate("/example")
-					}}>{t('Shop')}</span>
+					}}>{t('Footer.Shop')}</span>
 					<span className={`d-flex link-footer ${store.borde_hover}`} onClick={() => {
 						actions.Scroll()
 						navigate("/example")
-					}}>{t('Insurance')}</span>
+					}}>{t('Footer.Insurance')}</span>
 					<span className={`d-flex link-footer ${store.borde_hover}`} onClick={() => {
 						actions.Scroll()
 						navigate("/example")
-					}}>{t('Loans')}</span>
+					}}>{t('Footer.Loans')}</span>
 				</div>
 				<div className="col-4 col-md-3 col-lg-2 px-0 px-md-3 flex-column animation">
-					<h6 className="subtitulo d-flex ">{t('Certifications')}</h6>
+					<h6 className="subtitulo d-flex ">{t('Footer.Certifications')}</h6>
 					<span className={`d-flex link-footer ${store.borde_hover}`} onClick={() => {
 						actions.Scroll()
 						navigate("/example")
-					}}>{t('Certified titles')}</span>
+					}}>{t('Footer.Certified titles')}</span>
 					<span className={`d-flex link-footer ${store.borde_hover}`} onClick={() => {
 						actions.Scroll()
 						navigate("/example")
-					}}>{t('Security titles')}</span>
+					}}>{t('Footer.Security titles')}</span>
 				</div>
 			</div>
 			<div className="row mx-0">

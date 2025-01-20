@@ -51,39 +51,89 @@ def addUser():
     password = data.get("password")
     is_active = data.get("is_active")
     
-    
-    if email is None or email is "":
+    if email is None or email == "":
         return jsonify({"Mensaje": "The email is missing"}), 400
-    elif name is None or name is "":
+    elif name is None or name == "":
         return jsonify({"Mensaje": "The name is missing"}), 400
-    elif password is None or password is "":
+    elif password is None or password == "":
         return jsonify({"Mensaje": "The password is missing"}), 400
-    elif is_active is None or is_active is "":
+    elif is_active is None or is_active == "":
         return jsonify({"Mensaje": "The is_active is missing"}), 400
+
     try:
         new_user = User(
-            name= data.get("name"),
-            email= data.get("email"),
-            password= data.get("password"),
-            is_active=data.get("is_active")
+            name=name,
+            email=email,
+            password=password,
+            is_active=is_active
         )
         db.session.add(new_user)
         db.session.commit()
         
-        access_token = create_access_token(identity=data.get('id'))
-        return jsonify({"mensaje": 'Usuario Agregado',"token" : access_token}), 201    
+        access_token = create_access_token(identity=new_user.id)
+        return jsonify({"mensaje": 'Usuario Agregado', "token": access_token}), 201
     except Exception as e:
-        return jsonify({"error": str(e)}), 400         
+        return jsonify({"error": str(e)}), 400      
 
 @api.route('/User/<user_id>')
-def get_user(user_id):
-    if user_id is None:
-        return jsonify({"Mensaje": "invalid user_id"}), 400
+def get_user_details(user_id):
     try:
-        user = User.query.filter_by(id=user_id).first()
-        return jsonify(user.serialize()), 201  
+        # Buscar el usuario por ID
+        user = User.query.get(user_id)
+        if not user:
+            return jsonify({"error": "Usuario no encontrado"}), 404
+        # Obtener el cliente asociado al usuario
+        cliente = user.cliente
+        if not cliente:
+            return jsonify({"error": "El usuario no tiene un cliente asociado"}), 404
+        # Obtener las cuentas del cliente
+        cuentas = cliente.cuentas
+        cuentas_data = []
+        for cuenta in cuentas:
+            # Calcular el saldo total de todas las cuentas
+            # Obtener las transacciones asociadas a esta cuenta
+            transacciones = cuenta.transacciones
+            transacciones_data = [
+                {
+                    "id": transaccion.id,
+                    "tipo": transaccion.tipo,
+                    "monto": transaccion.monto,
+                    "fecha": transaccion.fecha,
+                    "descripcion": transaccion.descripcion
+                }
+                for transaccion in transacciones
+            ]
+            # Añadir los datos de la cuenta
+            cuentas_data.append({
+                "id": cuenta.id,
+                "numero_cuenta": cuenta.numero_cuenta,
+                "numero_tarjeta": cuenta.numero_tarjeta,
+                "cvv": cuenta.cvv,
+                "tipo_cuenta": cuenta.tipo_cuenta,
+                "saldo": cuenta.saldo,
+                "saldo_retenido": cuenta.saldo_retenido,
+                "transacciones": transacciones_data
+            })
+        # Formar la respuesta con los datos serializados
+        response = {
+            "user": {
+                "id": user.id,
+                "name": user.name,
+                "email": user.email
+            },
+            "cliente": {
+                "id": cliente.id,
+                "name": cliente.name,
+                "telefono": cliente.telefono,
+                "direccion": cliente.direccion,
+                "Tipo de documento": cliente.tipo_documento,
+                "Numero de documento": cliente.numero_documento,
+            },
+            "cuentas": cuentas_data
+        }
+        return jsonify(response), 200
     except Exception as e:
-        return jsonify({"error": str(e)}), 400         
+        return jsonify({"error": "Ha ocurrido un error", "details": str(e)}), 500       
 
 @api.route('/User/Login', methods=['POST'])
 def user_autentication():
@@ -110,17 +160,24 @@ def user_autentication():
             return jsonify({"mensaje": "Invalid password or email"}), 400
         
         # Crear token de acceso
-        access_token = create_access_token(identity=user.id)
+        access_token = create_access_token(identity=user.name)
 
         # Responder con el usuario y el token
         return jsonify({
             "Usuario Identificado": user.serialize(),
-            "token": access_token
+            "token": access_token,
+            "name": name
         }), 200  # 200 para indicar éxito en login
 
     except Exception as e:
         print("Error en el backend:", str(e))  # Log para debugging
         return jsonify({"error": "An error occurred during login"}), 500
+    
+@api.route('/private', methods=['POST'])
+@jwt_required()
+def private():
+    current_user = get_jwt_identity()
+    return jsonify({"ok" : True, "current_user" : current_user}), 200
 
 # Endpoint para codigo de seguridad
 @api.route('/send-code', methods=['POST'])
