@@ -1,3 +1,4 @@
+/* clases btn para subir datos */
 .btn-perfil {
     transition: background-color 0.8s ease;
 }
@@ -6,6 +7,8 @@
     background-color: transparent !important;
 }
 
+
+/* clases fondo para sobreponerlo el navbar encima de el */
 .img-fondo-perfil {
     background-image: url(https://www.bartolomeconsultores.com/wp-content/uploads/2015/10/fondo-formulario.jpg);
     background-size: cover;
