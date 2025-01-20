@@ -60,11 +60,11 @@ export const Footer = () => {
 					<h6 className="subtitulo d-flex ">{t('Security')}</h6>
 					<span className={`d-flex link-footer ${store.borde_hover}`} onClick={() => {
 						actions.Scroll()
-						navigate("/example")
+						navigate("/consejos")
 					}}>{t('Tips')}</span>
 					<span className={`d-flex link-footer ${store.borde_hover}`} onClick={() => {
 						actions.Scroll()
-						navigate("/example")
+						navigate("/metodos")
 					}}>{t('Security methods')}</span>
 					<span className={`d-flex link-footer ${store.borde_hover}`} onClick={() => {
 						actions.Scroll()

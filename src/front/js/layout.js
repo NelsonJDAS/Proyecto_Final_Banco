@@ -4,13 +4,15 @@ import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 
 import { Landingpage } from "./pages/landingpage.js";
-import { Login } from "./pages/login";
-import { Home } from "./pages/home";
-import { Politicas } from "./pages/politicas";
-import { Terminos } from "./pages/terminos";
-import { Aviso } from "./pages/aviso";
-import { Tarifas } from "./pages/tarifas";
+import { Login } from "./pages/login.js";
+import { Home } from "./pages/home.js";
+import { Politicas } from "./pages/politicas.js";
+import { Terminos } from "./pages/terminos.js";
+import { Aviso } from "./pages/aviso.js";
+import { Tarifas } from "./pages/tarifas.js";
 import { Educacion } from "./pages/educacion.js";
+import { Consejos } from "./pages/consejos.js";
+import { Metodos } from "./pages/metodos.js";
 
 import { Not_found } from "./pages/not_found.js";
 
@@ -45,6 +47,8 @@ const Layout = () => {
               <Route element={<Aviso />} path="/aviso" />
               <Route element={<Tarifas />} path="/tarifas" />
               <Route element={<Educacion />} path="/educacion" />
+              <Route element={<Consejos />} path="/consejos" />
+              <Route element={<Metodos />} path="/metodos" />
               <Route element={<Perfil />} path="/perfil" />
               <Route element={<Not_found />} path="*" />
             </Routes>
