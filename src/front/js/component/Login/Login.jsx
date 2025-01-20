@@ -75,7 +75,6 @@ export const Login = () => {
             const token = localStorage.getItem("token");
 
             if (token) {
-                console.log("Redirigiendo a /home");
                 navigate("/home");
             } else {
                 console.error("Token no encontrado");
@@ -110,9 +109,9 @@ export const Login = () => {
                                 <span className={`text-end mx-md-3 label-login ${store.borde_hover}`} onClick={() => { SetuserForgotPassword(true) }}>{t('Forgot')}</span>
                                 <div className="text-center">
                                     <button type="button" className={`btn btn-light mt-3 w-50 rounded-pill btn-login ${store.borde}`} onClick={() => {
-                                        // HandleLogin()
-                                        localStorage.setItem("token", "amfoidoiafoijdoiajsfiojadsioj")
-                                        navigate("/home")
+                                        HandleLogin()
+                                        // localStorage.setItem("token", "amfoidoiafoijdoiajsfiojadsioj")
+                                        // navigate("/home")
                                     }}>{t('Login')}</button>
                                 </div>
                             </>

@@ -66,6 +66,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           const data = await response.json();
           // Guardamos el token en el localStorage
           localStorage.setItem("token", data.token);
+          localStorage.setItem("name", data.name)
 
           // Actualizamos el store con el token y los datos del usuario
           setStore({

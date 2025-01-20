@@ -159,17 +159,24 @@ def user_autentication():
             return jsonify({"mensaje": "Invalid password or email"}), 400
         
         # Crear token de acceso
-        access_token = create_access_token(identity=user.id)
+        access_token = create_access_token(identity=user.name)
 
         # Responder con el usuario y el token
         return jsonify({
             "Usuario Identificado": user.serialize(),
-            "token": access_token
+            "token": access_token,
+            "name": name
         }), 200  # 200 para indicar éxito en login
 
     except Exception as e:
         print("Error en el backend:", str(e))  # Log para debugging
         return jsonify({"error": "An error occurred during login"}), 500
+    
+@api.route('/private', methods=['POST'])
+@jwt_required()
+def private():
+    current_user = get_jwt_identity()
+    return jsonify({"ok" : True, "current_user" : current_user}), 200
 
 # Endpoint para codigo de seguridad
 @api.route('/send-code', methods=['POST'])

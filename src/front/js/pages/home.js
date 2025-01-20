@@ -1,6 +1,7 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
+import { useNavigate } from "react-router-dom";
 import SaldoUsuario from "../component/Home/SaldoUsuario.jsx";
 import TablaMovimientosUsuario from "../component/Home/TablaMovimientosUsuario.jsx";
 import ListaInteractiva from "../component/Home/Lista_Componentes/ListaInteractiva.jsx";
@@ -8,6 +9,35 @@ import ContenedorNotificaciones from "../component/Home/ContenedorNotificaciones
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const getUserData = async () => {
+      const token = localStorage.getItem("token");
+      const storedUserName = localStorage.getItem("name");
+
+      if (!token) {
+        navigate("/login", { replace: true });
+        alert("No ha iniciado sesion. Redirigiendo al login...");
+        return;
+      }
+
+        const response = await fetch(process.env.BACKEND_URL + "/api/private", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (response.ok) {
+          // setUserName(storedUserName);
+          setLoading(false);
+        }
+    };
+
+    getUserData();
+  }, [navigate]);
 
   return (
     <div className={`${store.texto}`}>
