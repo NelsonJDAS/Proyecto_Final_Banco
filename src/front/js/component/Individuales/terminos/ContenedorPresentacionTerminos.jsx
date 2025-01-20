@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 
-const ContenedorPresentacionPoliticas = () => {
+const ContenedorPresentacionTerminos = () => {
     const [userLoad, SetUserLoad] = useState(false);
     // logica para mostrar el conteindo si el usuario esta en la seccion del componente
     const [isVisible, setIsVisible] = useState(false);
@@ -41,18 +41,16 @@ const ContenedorPresentacionPoliticas = () => {
     }, [isVisible])
     return (
         <div className="container" ref={sectionRef}>
-            <h1 className={`text-center titulo-principal-politica ${userLoad ? "animacion-arriba visible" : "animacion-arriba"}`}>Politicas de Privacidad</h1>
-            <p className={`fs-3 text-center ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>
-                En GeekBank, valoramos profundamente y protegemos con el máximo compromiso
-                la privacidad de todos y cada uno de nuestros clientes. Somos conscientes de
-                que la confianza que depositan en nosotros es fundamental para construir relaciones
-                sólidas y duraderas. Por ello, implementamos políticas estrictas para garantizar que
-                su información personal esté siempre protegida. Esta política de privacidad tiene como
-                objetivo detallar cómo recopilamos, usamos, almacenamos y salvaguardamos su información
-                personal, asegurando que se trate con total cuidado, respeto y confidencialidad.
+            <h1 className={`text-center titulo-principal-politica ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>Términos y Condiciones - GeekBank</h1>
+            <p className={`fs-3 text-center ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>
+                Bienvenido a GeekBank. Al acceder y utilizar nuestros servicios, usted acepta cumplir
+                con los siguientes términos y condiciones. Estos términos son un acuerdo legal entre usted
+                y GeekBank, y su aceptación es necesaria para hacer uso de nuestros productos y servicios. Le recomendamos
+                leer detenidamente toda la información contenida en este documento, ya que al utilizar nuestros servicios,
+                está aceptando los términos aquí establecidos.
             </p>
         </div>
     )
 }
 
-export default ContenedorPresentacionPoliticas
+export default ContenedorPresentacionTerminos

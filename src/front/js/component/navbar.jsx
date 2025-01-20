@@ -11,12 +11,13 @@ import { IoIosArrowDown } from "react-icons/io";
 // Importacion de la traduccion
 import { useTranslation } from "react-i18next";
 import { Context } from "../store/appContext";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { IoIosLogOut } from "react-icons/io";
 
 export const Navbar = () => {
 	const { store, actions } = useContext(Context);
 
+	const location = useLocation();
 	// Logica para botones onclick modal/traduccion
 	const { t, i18n } = useTranslation();
 	const handleLanguageChange = (language) => {
@@ -31,7 +32,7 @@ export const Navbar = () => {
 	}, [btn])
 
 	return (
-		<div> {/* modo oscuro y claro */}
+		<div className={`contenedor-nav ${location.pathname === "/perfil" ? "text-white z-1" : ""}`} id="navbar"> {/* modo oscuro y claro */}
 			<div className="modal fade" id="lenguajes" tabIndex="-1" aria-labelledby="label" aria-hidden="true">
 				{/* Modal selector de idiomas */}
 				<div className="modal-dialog contenedor-modal">
@@ -92,9 +93,11 @@ export const Navbar = () => {
 			<nav>
 				<div className="row my-2 mx-0">
 					<div className="col-3 col-md-2 text-end d-flex justify-content-end">
-						<img src={logo_negro} className={`img-fluid hover img ${store.fondo == "fondo-modo-oscuro" ? "d-block" : "d-none"}`} onClick={() => {
-							localStorage.getItem('token') === null ? navigate("/") : navigate("/home")
-						}} /><img src={logo_blanco} className={`img-fluid img ${store.fondo == "fondo-modo-oscuro" ? "d-none" : "d-block"}`} />
+						<div className={location.pathname === "/perfil" ? "d-none" : ""}>
+							<img src={logo_negro} className={`img-fluid hover img ${store.fondo == "fondo-modo-oscuro" ? "d-block" : "d-none"}`} onClick={() => {
+								localStorage.getItem('token') === null ? navigate("/") : navigate("/home")
+							}} /><img src={logo_blanco} className={`img-fluid img ${store.fondo == "fondo-modo-oscuro" ? "d-none" : "d-block"}`} />
+						</div>
 					</div>
 
 					<div className="col-2 col-md-2 text-start fs-3 titulo-nav fw-bold  px-0 align-content-center hover" onClick={() => {
@@ -108,7 +111,7 @@ export const Navbar = () => {
 						<>
 							<div className="col-3 col-md-4 d-lg-none align-content-center text-center">
 								<div className="btn-group w-50">
-									<button className={`btn ${store.texto} fs-2`} type="button" data-bs-toggle="dropdown" aria-expanded="false">
+									<button className={`btn ${store.texto} ${location.pathname === "/perfil" ? "text-white" : ""} fs-2`} type="button" data-bs-toggle="dropdown" aria-expanded="false">
 										<IoIosArrowDown />
 									</button>
 									<ul className={`dropdown-menu fw-bold ${store.fondo === "fondo-modo-claro" ? "bg-dark" : "bg-white"}`}>

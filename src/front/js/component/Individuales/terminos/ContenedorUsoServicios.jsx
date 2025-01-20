@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 
-const ContenedorPresentacionPoliticas = () => {
+const ContenedorUsoServicios = () => {
     const [userLoad, SetUserLoad] = useState(false);
     // logica para mostrar el conteindo si el usuario esta en la seccion del componente
     const [isVisible, setIsVisible] = useState(false);
@@ -40,19 +40,19 @@ const ContenedorPresentacionPoliticas = () => {
         }
     }, [isVisible])
     return (
-        <div className="container" ref={sectionRef}>
-            <h1 className={`text-center titulo-principal-politica ${userLoad ? "animacion-arriba visible" : "animacion-arriba"}`}>Politicas de Privacidad</h1>
-            <p className={`fs-3 text-center ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>
-                En GeekBank, valoramos profundamente y protegemos con el máximo compromiso
-                la privacidad de todos y cada uno de nuestros clientes. Somos conscientes de
-                que la confianza que depositan en nosotros es fundamental para construir relaciones
-                sólidas y duraderas. Por ello, implementamos políticas estrictas para garantizar que
-                su información personal esté siempre protegida. Esta política de privacidad tiene como
-                objetivo detallar cómo recopilamos, usamos, almacenamos y salvaguardamos su información
-                personal, asegurando que se trate con total cuidado, respeto y confidencialidad.
+        <div className="container">
+            <h1 className={`text-center titulo-politica ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>Uso de Nuestros Servicios</h1>
+            <p className={`fs-3 text-center ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`} ref={sectionRef}>
+                En GeekBank, ofrecemos soluciones bancarias seguras y eficientes para satisfacer sus necesidades financieras.
+                Al utilizar nuestros servicios, usted se compromete a hacerlo de manera responsable y conforme a las leyes y
+                regulaciones aplicables. Es su responsabilidad proporcionar información precisa y actualizada al registrarse y realizar
+                transacciones. No debe utilizar nuestros servicios para actividades ilegales, fraudulentas o malintencionadas. GeekBank
+                se reserva el derecho de suspender o cancelar su acceso si detectamos un uso inapropiado. Además, le recomendamos proteger
+                sus dispositivos y datos personales con medidas de seguridad adecuadas. Al acceder a nuestros servicios, se compromete a seguir
+                estos términos para garantizar una experiencia segura y eficiente.
             </p>
         </div>
     )
 }
 
-export default ContenedorPresentacionPoliticas
+export default ContenedorUsoServicios

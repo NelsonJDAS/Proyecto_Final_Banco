@@ -1,6 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { Context } from "../../store/appContext";
 
-const ContenedorPresentacionPoliticas = () => {
+
+const ContenedorCuadrado = ({ logo, position, text, title }) => {
+    const { store, actions } = useContext(Context);
+    const [positionCol, SetPositionCol] = useState(position === "left" ? "animacion-izq" : "" || position === "bottom" ? "animacion-abajo" : "" || position === "up" ? "animacion-arriba" : "" || position === "right" ? "animacion-der" : "");
+
+
     const [userLoad, SetUserLoad] = useState(false);
     // logica para mostrar el conteindo si el usuario esta en la seccion del componente
     const [isVisible, setIsVisible] = useState(false);
@@ -40,19 +46,15 @@ const ContenedorPresentacionPoliticas = () => {
         }
     }, [isVisible])
     return (
-        <div className="container" ref={sectionRef}>
-            <h1 className={`text-center titulo-principal-politica ${userLoad ? "animacion-arriba visible" : "animacion-arriba"}`}>Politicas de Privacidad</h1>
-            <p className={`fs-3 text-center ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>
-                En GeekBank, valoramos profundamente y protegemos con el máximo compromiso
-                la privacidad de todos y cada uno de nuestros clientes. Somos conscientes de
-                que la confianza que depositan en nosotros es fundamental para construir relaciones
-                sólidas y duraderas. Por ello, implementamos políticas estrictas para garantizar que
-                su información personal esté siempre protegida. Esta política de privacidad tiene como
-                objetivo detallar cómo recopilamos, usamos, almacenamos y salvaguardamos su información
-                personal, asegurando que se trate con total cuidado, respeto y confidencialidad.
-            </p>
+        <div className={`mx-md-2 contenedor-cuadrado espaciado-abajo  text-warning align-content-center ${store.borde} ${userLoad ? `${positionCol} visible` : positionCol} ${store.fondo === "fondo-modo-claro" ? "bg-dark text-white" : "bg-white text-dark"}`} ref={sectionRef}>
+            <div className="d-flex flex-column text-center">
+                {logo === null ? "" : <i className="logo-ventajas">{logo}</i>}
+                <div className="text-center fs-4">
+                    {title === null ? "" : <span className="fw-bold my-2">{title}</span>}
+                    {text === null ? "" : <p>{text}</p>}
+                </div>
+            </div>
         </div>
     )
 }
-
-export default ContenedorPresentacionPoliticas
+export default ContenedorCuadrado

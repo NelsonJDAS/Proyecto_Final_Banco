@@ -15,6 +15,15 @@ const getState = ({ getStore, getActions, setStore }) => {
       CambiarIncognito: (estado) => {
         setStore({ ...getStore(), hidden: estado });
       },
+      Scroll: () => {
+        const navbar = document.getElementById("navbar"); // Seleccionamos el elemento por ID
+        if (navbar) {
+          navbar.scrollIntoView({
+            behavior: "smooth", // Desplazamiento suave
+            block: "start", // Alinear al inicio del elemento
+          });
+        }
+      },
       CambiarModo: (estado) => {
         if (estado === true) {
           setStore({
@@ -40,6 +49,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       loginUser: async (name, email, password) => {
         const store = getStore();
         const actions = getActions();
+
 
         try {
           const response = await fetch(process.env.BACKEND_URL + "/api/User/Login", {
@@ -68,11 +78,23 @@ const getState = ({ getStore, getActions, setStore }) => {
         } catch (error) {
           console.error("Error en loginUser:", error.message);
           throw error; // Lanzamos el error para que HandleLogin lo maneje
+          console.error("Error en loginUser:", error.message);
+          throw error; // Lanzamos el error para que HandleLogin lo maneje
         }
       },
 
       registerUser: (name, email, password) => {
         return fetch(process.env.BACKEND_URL + "/api/User/Register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            password: password,
+            email: email,
+            name: name,
+            is_active: true,
+          }),
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -99,6 +121,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.error("Error al registrar usuario:", error);
           });
       },
+      
       getUserData: (userId) => {
         const store = getStore();
         const actions = getActions();
@@ -157,7 +180,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       verifyCode: (email, code) => {
         const store = getStore();
         setStore({ email });
-        setStore({ code })
+        setStore({ code });
 
         fetch(process.env.BACKEND_URL + "/api/verify-code", {
           method: "POST",
@@ -174,21 +197,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             }
           });
       },
-
-
-      // Funcion Ejemplo
-      //   changeColor: (index, color) => {
-      //     //get the store
-      //     const store = getStore();
-      //     //we have to loop the entire demo array to look for the respective index
-      //     //and change its color
-      //     const demo = store.demo.map((elm, i) => {
-      //       if (i === index) elm.background = color;
-      //       return elm;
-      //     });
-      //     //reset the global store
-      //     setStore({ demo: demo });
-      //   },
     },
   };
 };
