@@ -89,10 +89,8 @@ def get_user_details(user_id):
         # Obtener las cuentas del cliente
         cuentas = cliente.cuentas
         cuentas_data = []
-        saldo_total = 0
         for cuenta in cuentas:
             # Calcular el saldo total de todas las cuentas
-            saldo_total += cuenta.saldo
             # Obtener las transacciones asociadas a esta cuenta
             transacciones = cuenta.transacciones
             transacciones_data = [
@@ -113,6 +111,7 @@ def get_user_details(user_id):
                 "cvv": cuenta.cvv,
                 "tipo_cuenta": cuenta.tipo_cuenta,
                 "saldo": cuenta.saldo,
+                "saldo_retenido": cuenta.saldo_retenido,
                 "transacciones": transacciones_data
             })
         # Formar la respuesta con los datos serializados
@@ -124,10 +123,12 @@ def get_user_details(user_id):
             },
             "cliente": {
                 "id": cliente.id,
+                "name": cliente.name,
                 "telefono": cliente.telefono,
                 "direccion": cliente.direccion,
+                "Tipo de documento": cliente.tipo_documento,
+                "Numero de documento": cliente.numero_documento,
             },
-            "saldo_total": saldo_total,
             "cuentas": cuentas_data
         }
         return jsonify(response), 200

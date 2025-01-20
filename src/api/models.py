@@ -90,6 +90,7 @@ class Cuenta(db.Model):
     cvv = db.Column(db.String(3), unique=True)
     tipo_cuenta = db.Column(db.String(50))
     saldo = db.Column(db.Float)
+    saldo_retenido = db.Column(db.Float)
     cliente_id = db.Column(db.Integer, db.ForeignKey('cliente.id'))
     estado = db.Column(db.Integer)
     cliente = db.relationship("Cliente", back_populates="cuentas")
@@ -108,6 +109,7 @@ class Cuenta(db.Model):
             "cvv": self.cvv,
             "tipo_cuenta": self.tipo_cuenta,
             "saldo": self.saldo,
+            "saldo_retenido": self.saldo_retenido,
             "estado": self.estado,
             "cliente_id": self.cliente_id,
             "seguro_id": self.seguro_id,

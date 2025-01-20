@@ -8,9 +8,10 @@ import { RiSecurePaymentLine } from "react-icons/ri";
 import { MdOutlineSystemSecurityUpdateGood } from "react-icons/md";
 import { AiOutlineGlobal } from "react-icons/ai";
 import { BsGraphUpArrow } from "react-icons/bs";
+import { useTranslation } from "react-i18next";// importacion de traducción
 
 const ContenedorBeneficios = () => {
-
+    const { t } = useTranslation();
     const { store, actions } = useContext(Context);
 
     const [userLoad, SetUserLoad] = useState(false);
@@ -62,7 +63,7 @@ const ContenedorBeneficios = () => {
         <div className="contenedor-landing">
             <div className="container" ref={sectionRef}>
                 <div className="row my-3">
-                    <div className="col-12 text-center"><h2 className={`titulo-landing ${userLoadv2 ? "animacion-izq visible" : "animacion-izq"}`}>Beneficios de GeekBank</h2></div>
+                    <div className="col-12 text-center"><h2 className={`titulo-landing ${userLoadv2 ? "animacion-izq visible" : "animacion-izq"}`}>{t('Landing2.p1_1')}</h2></div>
                 </div>
                 <div className="row">
                     <div className="col-lg-3 my-3 col-md-8 col-6">
@@ -70,8 +71,8 @@ const ContenedorBeneficios = () => {
                             <div className="d-flex flex-column text-center">
                                 <i className="logo-ventajas"><FaUsers /></i>
                                 <div className="text-center fs-4 fw-bold">
-                                    <p>Soporte 24/7</p>
-                                    <p>para que nunca estés solo</p>
+                                    <p>{t('Landing2.p1_2')}</p>
+                                    <p>{t('Landing2.p1_3')}</p>
                                 </div>
                             </div>
                         </div>
@@ -81,7 +82,7 @@ const ContenedorBeneficios = () => {
                             <div className="d-flex flex-column text-center">
                                 <i className="logo-ventajas"><BsGraphUpArrow /></i>
                                 <div className="text-center fs-4">
-                                    <p className="fw-bold">Crece con Geek Bank</p>
+                                    <p className="fw-bold">{t('Landing2.p2')}</p>
                                 </div>
                             </div>
                         </div>
@@ -91,7 +92,7 @@ const ContenedorBeneficios = () => {
                             <div className="d-flex flex-column text-center">
                                 <i className="logo-ventajas"><MdOutlinePercent /></i>
                                 <div className="text-center fs-4">
-                                    <p className="fw-bold">Sin comisiones ocultas</p>
+                                    <p className="fw-bold">{t('Landing2.p3')}</p>
                                 </div>
                             </div>
                         </div>
@@ -101,7 +102,7 @@ const ContenedorBeneficios = () => {
                             <div className="d-flex flex-column text-center">
                                 <i className="logo-ventajas"><FaRegMoneyBillAlt /></i>
                                 <div className="text-center fs-4">
-                                    <p className="fw-bold">Créditos y préstamos con intereses competitivos</p>
+                                    <p className="fw-bold">{t('Landing2.p4')}</p>
                                 </div>
                             </div>
                         </div>
@@ -111,7 +112,7 @@ const ContenedorBeneficios = () => {
                             <div className="d-flex flex-column text-center">
                                 <i className="logo-ventajas"><RiSecurePaymentLine /></i>
                                 <div className="text-center fs-4">
-                                    <p className="fw-bold">Seguridad</p>
+                                    <p className="fw-bold">{t('Landing2.p5')}</p>
                                 </div>
                             </div>
                         </div>
@@ -121,7 +122,7 @@ const ContenedorBeneficios = () => {
                             <div className="d-flex flex-column text-center">
                                 <i className="logo-ventajas"><MdOutlineSystemSecurityUpdateGood /></i>
                                 <div className="text-center fs-4">
-                                    <p className="fw-bold">Banca Movil</p>
+                                    <p className="fw-bold">{t('Landing2.p6')}</p>
                                 </div>
                             </div>
                         </div>
@@ -131,7 +132,7 @@ const ContenedorBeneficios = () => {
                             <div className="d-flex flex-column text-center">
                                 <i className="logo-ventajas"><AiOutlineGlobal /></i>
                                 <div className="text-center fs-4">
-                                    <p className="fw-bold">Banca Global</p>
+                                    <p className="fw-bold">{t('Landing2.p7')}</p>
                                 </div>
                             </div>
                         </div>
@@ -141,7 +142,7 @@ const ContenedorBeneficios = () => {
                             <div className="d-flex flex-column text-center">
                                 <i className="logo-ventajas"><TbClick /></i>
                                 <div className="text-center fs-4">
-                                    <p className="fw-bold">Ahorro automatizado con solo un click</p>
+                                    <p className="fw-bold">{t('Landing2.p8')}</p>
                                 </div>
                             </div>
                         </div>

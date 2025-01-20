@@ -7,8 +7,13 @@ const SaldoUsuario = () => {
     const { store, actions } = useContext(Context);
     const [hidden, SetHidden] = useState(false);
     const [userLoad, SetUserLoad] = useState("elemento-segundario");
+    const [name, SetName] = useState("");
+
     useEffect(() => {
+        const storedName = localStorage.getItem("name");
         SetUserLoad("elemento-segundario visible")
+        SetName(storedName)
+        
     }, [])
 
 
@@ -17,7 +22,7 @@ const SaldoUsuario = () => {
             <div className="col-12">
                 <div className="row">
                     <div className="col-xl-4 col-8 d-flex flex-column text-center">
-                        <p className="fs-1 fw-light">Hola, <span className="fw-bold">User</span></p>
+                        <p className="fs-1 fw-light">Hola, <span className="fw-bold">{name}</span></p>
                     </div>
                     <div className="col-4 col-xl-8 text-end"><span className="hover fs-3" onClick={() => {
                         SetHidden(prevHidden => !prevHidden)

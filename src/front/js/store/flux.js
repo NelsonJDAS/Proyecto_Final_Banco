@@ -10,6 +10,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       email: "",
       code: "",
       token: null,
+      usuario: "",
     },
     actions: {
       CambiarIncognito: (estado) => {
@@ -123,39 +124,64 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
       },
       
-      getUserData: (userId) => {
-        const store = getStore();
-        const actions = getActions();
-
-        fetch(process.env.BACKEND_URL + `/api/User/${userId}`, {
-          method: "GET",
+      fetchUserDetails: (userId) => {
+        fetch(`${process.env.BACKEND_URL}/api/User/${userId}`, {
+          method: "GET", // Método HTTP
           headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${store.token}`, // Asegúrate de enviar el token si es necesario para la autenticación
+            "Content-Type": "application/json", // Indicamos que esperamos JSON como respuesta
           },
         })
           .then((response) => {
+            // Verificamos si la respuesta es exitosa
             if (!response.ok) {
-              return response.json().then((errorData) => {
-                throw new Error(errorData.mensaje || "Error al obtener los datos del usuario");
-              });
+              throw new Error(`Error: ${response.status} - ${response.statusText}`);
             }
-            return response.json();
+            return response.json(); // Convertimos la respuesta a JSON
           })
           .then((data) => {
-            // Guardamos la información del usuario en el store
-            setStore({
-              ...store,
-              userData: data,  // Aquí se actualiza el store con los datos del usuario
-            });
-
-            console.log("Datos del usuario obtenidos exitosamente.");
+            // Guardamos los datos del usuario en el store bajo la propiedad "usuario"
+            setStore({ ...getStore(), usuario: data });
+            console.log("Datos del usuario guardados en el store:", data);
           })
           .catch((error) => {
-            console.error("Error al obtener los datos del usuario:", error.message);
-            // Aquí podrías manejar el error de otra forma si lo necesitas
+            // Manejamos cualquier error que ocurra durante el fetch
+            console.error("Hubo un problema al obtener los detalles del usuario:", error);
           });
       },
+
+      // getUserData: (userId) => {
+      //   const store = getStore();
+      //   const actions = getActions();
+
+      //   fetch(process.env.BACKEND_URL + `/api/User/${userId}`, {
+      //     method: "GET",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //       "Authorization": `Bearer ${store.token}`, // Asegúrate de enviar el token si es necesario para la autenticación
+      //     },
+      //   })
+      //     .then((response) => {
+      //       if (!response.ok) {
+      //         return response.json().then((errorData) => {
+      //           throw new Error(errorData.mensaje || "Error al obtener los datos del usuario");
+      //         });
+      //       }
+      //       return response.json();
+      //     })
+      //     .then((data) => {
+      //       // Guardamos la información del usuario en el store
+      //       setStore({
+      //         ...store,
+      //         userData: data,  // Aquí se actualiza el store con los datos del usuario
+      //       });
+
+      //       console.log("Datos del usuario obtenidos exitosamente.");
+      //     })
+      //     .catch((error) => {
+      //       console.error("Error al obtener los datos del usuario:", error.message);
+      //       // Aquí podrías manejar el error de otra forma si lo necesitas
+      //     });
+      // },
 
       sendCode: (email) => {
         const store = getStore();

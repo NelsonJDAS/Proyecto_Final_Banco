@@ -31,8 +31,11 @@ export const Home = () => {
         });
 
         if (response.ok) {
+          console.log("privado con jwt");
+          actions.fetchUserDetails()
+          
           // setUserName(storedUserName);
-          setLoading(false);
+          // setLoading(false);
         }
     };
 

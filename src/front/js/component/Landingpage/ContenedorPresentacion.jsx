@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";// importacion de traducción
 
 const ContenedorPresentacion = () => {
-
+    const { t } = useTranslation();
     const [userLoad, SetUserLoad] = useState(false);
 
     useEffect(() => {
@@ -11,11 +12,11 @@ const ContenedorPresentacion = () => {
     return (<div className="contenedor-landing">
         <div className="container">
             <div className="d-flex flex-column text-center">
-                <h1 className={`titulo-landing ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}> ¡Bienvenido a GeekBank!</h1>
+                <h1 className={`titulo-landing ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}> {t('Landing1.welcome')} </h1>
                 <div className={`fs-2 ${userLoad ? "animacion-der visible" : "animacion-der"}`}>
-                    <p>En Geek Bank reinventamos la forma en que interactúas con tu dinero. Somos más que un banco</p>
-                    <p>tradicional; somos una plataforma diseñada para brindarte comodidad, transparencia y control total</p>
-                    <p>sobre tus finanzas, todo respaldado por la última tecnología financiera.</p>
+                    <p>{t('Landing1.welcome1')}</p>
+                    <p>{t('Landing1.welcome2')}</p>
+                    <p>{t('Landing1.welcome3')}</p>
                 </div>
             </div>
         </div>

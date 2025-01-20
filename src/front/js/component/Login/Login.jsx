@@ -92,7 +92,7 @@ export const Login = () => {
     return (
         <div className="login">
             <form action="#" className={`d-flex flex-column align-content-center text-center ${store.fondo}`}>
-                <h1 className="titulo-login">{t(userForgotPassword === false ? 'Login' : 'Recovery')}</h1>
+                <h1 className="titulo-login">{t(userForgotPassword === false ? 'Login.login' : 'Login.recovery')}</h1>
                 {/* hace la transicion mas suave  */}
                 <div className={userForgotPassword ? "transicion-recuperar-password " : "transicion-Iniciar-Sesion "}>
                     {/*muestra dependiendo del estado userForgotPassword el contenedor de iniciar sesion o password olvidada*/}
@@ -100,29 +100,29 @@ export const Login = () => {
                         {userForgotPassword === false ? (
                             <>
                                 {/* cotenedor inciar sesion */}
-                                <label className="my-1 fw-bold label-login">{t('Name')}</label>
+                                <label className="my-1 fw-bold label-login">{t('Login.name')}</label>
                                 <input className=" mx-2 mx-md-3 text-center py-1 rounded-pill input" type="text" onChange={HandleName} maxLength="40" ref={inputName} />
-                                <label className="my-1 fw-bold label-login">{t('Email')}</label>
+                                <label className="my-1 fw-bold label-login">{t('Login.email')}</label>
                                 <input className=" mx-2 mx-md-3 text-center py-1 rounded-pill input" type="email" onChange={HandleEmail} ref={inputMail} />
-                                <label className="my-1 fw-bold label-login">{t('Password')}</label>
+                                <label className="my-1 fw-bold label-login">{t('Login.password')}</label>
                                 <input className=" mx-2 mx-md-3 text-center py-1 rounded-pill input" type="password" onChange={HandlePassword} ref={inputPassword} />
-                                <span className={`text-end mx-md-3 label-login ${store.borde_hover}`} onClick={() => { SetuserForgotPassword(true) }}>{t('Forgot')}</span>
+                                <span className={`text-end mx-md-3 label-login ${store.borde_hover}`} onClick={() => { SetuserForgotPassword(true) }}>{t('Login.forgot')}</span>
                                 <div className="text-center">
                                     <button type="button" className={`btn btn-light mt-3 w-50 rounded-pill btn-login ${store.borde}`} onClick={() => {
-                                        HandleLogin()
-                                        // localStorage.setItem("token", "amfoidoiafoijdoiajsfiojadsioj")
-                                        // navigate("/home")
-                                    }}>{t('Login')}</button>
+                                        // HandleLogin()
+                                        localStorage.setItem("token", "amfoidoiafoijdoiajsfiojadsioj")
+                                        navigate("/home")
+                                    }}>{t('Login.login')}</button>
                                 </div>
                             </>
                         ) : (
                             <>
                                 {/* contenedor password olvidada */}
                                 <div className="text-center my-md-2">
-                                    <span className="fw-bold d-none d-md-block">{t('Forgot')}</span>
-                                    <p className="mx-3 text-center py-md-1 py-0 rounded-3 texto-login">{t('Recovery2')}</p>
+                                    <span className="fw-bold d-none d-md-block">{t('Login.forgot')}</span>
+                                    <p className="mx-3 text-center py-md-1 py-0 rounded-3 texto-login">{t('Forgot.recovery2')}</p>
                                 </div>
-                                <label className="my-md-1 fw-bold label-login">{t('Email')}</label>
+                                <label className="my-md-1 fw-bold label-login">{t('Login.email')}</label>
                                 <input className="mx-md-3 mx-2 text-center py-0 py-md-1 rounded-pill input" placeholder="Email" type="email" onChange={HandleForgotMail} />
                                 <div className="text-center row mx-1 my-2">
                                     <div className="col-12 col-xl-6 col-md-6 my-md-3 my-1 text-start">
@@ -133,11 +133,11 @@ export const Login = () => {
 
                                         }}>{code ?
                                             `( ${timeCode} ) s`
-                                            : t('SendCode')}</button>
+                                            : t('Forgot.sendCode')}</button>
                                     </div>
                                     <div className="col-12 col-md-6 col-xl-3 my-md-3 text-center">
                                         <input className="text-center py-1 rounded-pill input w-100 fw-bold input-code" type="text" onChange={HandleCodeSeg} maxLength={6} ref={InputCode} placeholder="******" />
-                                        <label className="fw-bold d-none d-md-block">{t('Code')}</label>
+                                        <label className="fw-bold d-none d-md-block">{t('Forgot.code')}</label>
                                     </div>
                                     <div className="col-12 col-xl-3">
                                         <div className="col-12 text-center">
@@ -147,13 +147,13 @@ export const Login = () => {
                                                 console.log(forgotMail, CodeSend);
 
                                                 ;
-                                            }}>{t('Check')}</button>
+                                            }}>{t('Forgot.check')}</button>
                                         </div>
                                     </div>
                                 </div>
                                 <span className={`mx-3 ${store.borde_hover}`} onClick={() => {
                                     SetuserForgotPassword(false);
-                                }}>{t('Return')}</span>
+                                }}>{t('Forgot.return')}</span>
                             </>
                         )}
                     </div>

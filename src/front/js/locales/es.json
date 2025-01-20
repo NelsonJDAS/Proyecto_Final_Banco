@@ -1,4 +1,80 @@
 {
+  "Landing1": {
+    "welcome": "¡Bienvenido a GeekBank!",
+    "welcome1": "En Geek Bank reinventamos la forma en que interactúas con tu dinero. Somos más que un banco",
+    "welcome2": "tradicional; somos una plataforma diseñada para brindarte comodidad, transparencia y control total",
+    "welcome3": "sobre tus finanzas, todo respaldado por la última tecnología financiera."
+  },
+
+  "Landing2": {
+    "p1_1": "Beneficios de GeekBank",
+    "p1_2": "Soporte 24/7",
+    "p1_3": "para que nunca estés solo",
+    "p2_1": "Crece con Geek Bank",
+    "p3": "Sin comisiones ocultas",
+    "p4": "Créditos y préstamos con intereses competitivos",
+    "p5": "Seguridad",
+    "p6": "Banca Movil",
+    "p7": "Banca Global",
+    "p8": "Ahorro automatizado con solo un click"
+  },
+
+  "Landing3": {
+    "p1": "¡Empieza Ahora!",
+    "p2": "Regístrate ahora para disfrutar de todos nuestros beneficios.",
+    "btn": "Entrar"
+  },
+
+  "Landing4": {
+    "h2": "¿Por qué elegir GeekBank?",
+    "p1_1": "Servicio de tus finanzas",
+    "p1_2": "Nuestra plataforma es intuitiva y está diseñada para simplificar tu vida.",
+    "p2_1": "Transparencia",
+    "p2_2": "Sin comisiones ocultas ni sorpresas desagradables.",
+    "p3_1": "Valoramos tu tiempo",
+    "p3_2": "Realiza transacciones y gestiona tus cuentas en cuestión de segundos, estés donde estés."
+  },
+
+  "Landing5": {
+    "t1": "Desde que me cambié a este banco, todo ha sido mucho más sencillo. La interfaz de la app es súper fácil de usar y las transferencias son rápidas. Además, no tengo que preocuparme por comisiones ocultas.",
+    "t2": "Claro, transparente y con excelente soporte. No hay comisiones escondidas. ¡Muy recomendable!",
+    "t3": "El soporte es rápido, útil y siempre está disponible. Me resolvieron todas mis dudas al instante."
+  },
+
+  "Login": {
+    "login": "Iniciar sesión",
+    "recovery": "Recuperar contraseña",
+    "name" : "Nombre",
+    "email" : "Dirección de correo electrónico",
+    "password" : "Contraseña",
+    "forgot": "¿Ha olvidado su contraseña?"
+  },
+
+  "Forgot": {
+    "recovery2" : "No te preocupes, te ayudaremos a recuperar el acceso a tu cuenta. Introduzca la dirección de correo electrónico asociada a su cuenta. Te enviaremos un código de verificación que podrás utilizar para restablecer tu contraseña.",
+    "sendCode" : "Enviar código",
+    "code" : "Código",
+    "check" : "Comprobar",
+    "return": "Volver Atrás"
+  },
+
+  "Register": {
+    "welcome!": "",
+    "register" : "Regístrese aquí",
+    "cuenta?" : "¿Ya tienes una cuenta?",
+    "loginfunc": "Inicia sesión para acceder a todas tus funcionalidades de la web",
+    "hello!" : "¡Hola!",
+    "sinCuenta" : "¿Aún no tiene cuenta?",
+    "sinCuenta2" : "Crear una es rapido y sencillo",
+    "sinCuenta3" : "Haz clic en el botón de abajo para comenzar.",
+    "create" : "Crear una cuenta",
+    "ready" : "¡Listo!"
+  },
+  "Footer": {
+
+  },
+
+
     "Contact information": "Información de contacto",
     "Contact": "Contacto",
     "Chat": "Chat",
@@ -27,23 +103,10 @@
     "Exch/Currency": "Cambio/Divisas",
     "Investments": "Inversiones",
     "Welcome!": "¡Bienvenido!",
-    "cuenta?" : "¿Ya tienes una cuenta?",
     "Login to access all your web functionalities" : "Inicia sesión para acceder a todas tus funcionalidades de la web",
-    "Login" : "Iniciar sesión",
     "Hello!" : "¡Hola!",
-    "SinCuenta" : "¿Aún no tiene cuenta?",
-    "SinCuenta2" : "Crear una es rapido y sencillo",
-    "SinCuenta3" : "Haz clic en el botón de abajo para comenzar.",
-    "Register" : "Regístrese aquí",
     "Login2" : "",
-    "Name" : "Nombre",
-    "Email" : "Dirección de correo electrónico",
-    "Password" : "Contraseña",
-    "Forgot" : "¿Ha olvidado su contraseña?",
-    "Recovery"  : "Recuperar contraseña",
     "Recovery2" : "No te preocupes, te ayudaremos a recuperar el acceso a tu cuenta. Introduzca la dirección de correo electrónico asociada a su cuenta. Te enviaremos un código de verificación que podrás utilizar para restablecer tu contraseña.",
-    "Code" : "Código",
-    "Check" : "Comprobar",
     "Return" : "Volver Atrás",
     "Ready" : "¡Listo!",
     "Create" : "Crear una cuenta",
