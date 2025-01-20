@@ -69,7 +69,7 @@
     transform: scale(0.9);
 }
 
-
+/* Responsive */
 @media (max-width: 768px) {
     .titulo-landing {
         font-size: 40px !important;
@@ -173,6 +173,8 @@
 
 
 
+/* clases para el banner  */
+
 .img-banner {
     background-size: cover;
     background-position: center;
@@ -194,9 +196,7 @@
 }
 
 
-
-
-
+/* clases para los comentarios */
 .contenedor-comentario {
     height: 220px;
     padding: 0px 50px;

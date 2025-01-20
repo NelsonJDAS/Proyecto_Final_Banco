@@ -1,5 +1,5 @@
 import React from "react";
-import "../../styles/politicas.css";
+import "../../styles/individuales.css";
 import "../../styles/tarifas.css";
 import ContenedorPresentacionTarifas from "../component/Individuales/tarifas/ContenedorPresentacionTarifas.jsx";
 import ContenedorCuentasTarifas from "../component/Individuales/tarifas/ContenedorCuentasTarifas.jsx";

@@ -1,5 +1,5 @@
 import React from "react";
-import "../../styles/politicas.css";
+import "../../styles/individuales.css";
 import ContenedorPresentacionPoliticas from "../component/Individuales/politicas/ContenedorPresentacionPoliticas.jsx";
 import ContenedorInformacion from "../component/Individuales/politicas/ContenedorInformacion.jsx";
 import ContenedorUsoInformacion from "../component/Individuales/politicas/ContenedorUsoInformacion.jsx";
