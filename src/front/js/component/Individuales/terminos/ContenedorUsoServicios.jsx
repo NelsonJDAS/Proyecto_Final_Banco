@@ -40,7 +40,7 @@ const ContenedorUsoServicios = () => {
         }
     }, [isVisible])
     return (
-        <div className="container">
+        <div className="container" ref={sectionRef}>
             <h1 className={`text-center titulo-politica ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>Uso de Nuestros Servicios</h1>
             <p className={`fs-3 text-center ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`} ref={sectionRef}>
                 En GeekBank, ofrecemos soluciones bancarias seguras y eficientes para satisfacer sus necesidades financieras.

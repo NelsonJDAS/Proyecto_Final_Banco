@@ -42,8 +42,8 @@ const ContenedorCompartir = () => {
     }, [isVisible])
     return (
         <div className="container espaciado-fondo" ref={sectionRef}>
-            <h1 className={`text-center titulo-politica my-3 ${userLoad ? "animacion-arriba visible" : "animacion-arriba"}`}>Política de Compartición de Datos en GeekBank</h1>
-            <p className={`fs-3 text-center my-3 ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>
+            <h1 className={`text-center titulo-politica my-3 ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>Política de Compartición de Datos en GeekBank</h1>
+            <p className={`fs-3 text-center my-3 ${userLoad ? "animacion-der visible" : "animacion-der"}`}>
                 En GeekBank, valoramos su privacidad y nos comprometemos a proteger su información personal.
                 Solo compartimos sus datos con terceros en los siguientes casos:
             </p>
@@ -54,7 +54,7 @@ const ContenedorCompartir = () => {
                 <div className="col-6  d-none d-md-block"></div>
                 <div className="col-12 col-md-6"><ColLateral width="w-50" text="Consentimiento" position="left" userLoad={userLoad} /></div>
             </div>
-            <p className={`fs-3 text-center my-3 ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>
+            <p className={`fs-3 text-center my-3 ${userLoad ? "animacion-der visible" : "animacion-der"}`}>
                 Servicios
                 Legales
                 Consentimiento

@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { Context } from "../../../../store/appContext";
-import { BiTransfer } from "react-icons/bi";
 import { FaCcMastercard } from "react-icons/fa";
 import { LuNfc } from "react-icons/lu";
 import { RiMastercardFill } from "react-icons/ri";

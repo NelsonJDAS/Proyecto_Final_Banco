@@ -17,6 +17,7 @@ import { IoIosLogOut } from "react-icons/io";
 export const Navbar = () => {
 	const { store, actions } = useContext(Context);
 
+	// usamos el location para modificar el navbar si esta en la view de perfil
 	const location = useLocation();
 	// Logica para botones onclick modal/traduccion
 	const { t, i18n } = useTranslation();
