@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const ContenedorPresentacionTerminos = () => {
+    const { t } = useTranslation()
     const [userLoad, SetUserLoad] = useState(false);
     // logica para mostrar el conteindo si el usuario esta en la seccion del componente
     const [isVisible, setIsVisible] = useState(false);
@@ -41,14 +43,8 @@ const ContenedorPresentacionTerminos = () => {
     }, [isVisible])
     return (
         <div className="container" ref={sectionRef}>
-            <h1 className={`text-center titulo-principal-politica ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>Términos y Condiciones - GeekBank</h1>
-            <p className={`fs-3 text-center ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>
-                Bienvenido a GeekBank. Al acceder y utilizar nuestros servicios, usted acepta cumplir
-                con los siguientes términos y condiciones. Estos términos son un acuerdo legal entre usted
-                y GeekBank, y su aceptación es necesaria para hacer uso de nuestros productos y servicios. Le recomendamos
-                leer detenidamente toda la información contenida en este documento, ya que al utilizar nuestros servicios,
-                está aceptando los términos aquí establecidos.
-            </p>
+            <h1 className={`text-center titulo-principal-politica ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>{t('terminos.p1')}</h1>
+            <p className={`fs-3 text-center ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>{t('terminos.p2')}</p>
         </div>
     )
 }

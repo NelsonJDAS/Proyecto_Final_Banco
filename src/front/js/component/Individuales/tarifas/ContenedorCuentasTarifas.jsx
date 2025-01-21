@@ -3,8 +3,10 @@ import ContenedorCuadrado from "../ContenedorCuadrado.jsx";
 import { FaMoneyBillTransfer } from "react-icons/fa6";
 import { BsCreditCard2Back } from "react-icons/bs";
 import { TbWorld } from "react-icons/tb";
+import { useTranslation } from "react-i18next";
 
 const ContenedorCuentasTarifas = () => {
+    const { t } = useTranslation()
     const [userLoad, SetUserLoad] = useState(false);
     // logica para mostrar el conteindo si el usuario esta en la seccion del componente
     const [isVisible, setIsVisible] = useState(false);
@@ -45,18 +47,12 @@ const ContenedorCuentasTarifas = () => {
     }, [isVisible])
     return (
         <div className="container" ref={sectionRef}>
-            <h1 className={`text-center titulo-politica ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>Cuentas Bancarias</h1>
-            <p className={`fs-3 text-center ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>
-                En GeekBank, trabajamos incansablemente para garantizar que nuestros clientes tengan acceso a información clara,
-                precisa y completamente transparente sobre nuestras tarifas y comisiones. Nos enorgullece ofrecer una experiencia
-                bancaria excepcional que prioriza la confianza y la claridad en cada interacción. Sabemos que entender los costos asociados
-                con los servicios bancarios es fundamental para tomar decisiones informadas, por lo que nos aseguramos de que toda la información
-                relacionada con nuestras tarifas y comisiones sea presentada de manera detallada, comprensible y sin sorpresas.
-            </p>
+            <h1 className={`text-center titulo-politica ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>{t('tarifas.p3')}</h1>
+            <p className={`fs-3 text-center ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>{t('tarifas.p4')}</p>
             <div className="row">
-                <div className="col-12 col-lg-4"><ContenedorCuadrado position="left" text="5 € mensuales, exento con saldo promedio mayor a 1,000 €." title="Mantenimiento de cuenta" logo={<BsCreditCard2Back />} /></div>
-                <div className="col-12 col-md-6 col-lg-4"><ContenedorCuadrado position="left" text="Sin costo. Puedes enviar dinero entre cuentas del mismo banco de forma gratuita" title="Transferencias internas" logo={<FaMoneyBillTransfer />} /></div>
-                <div className="col-12 col-md-6 col-lg-4"><ContenedorCuadrado position="left" text="15 € por transacción. Este costo se aplica cuando realizas transferencias a bancos en otros países" title="Transferencias internacionales" logo={<TbWorld />} /></div>
+                <div className="col-12 col-lg-4"><ContenedorCuadrado position="left" text={t('tarifas.text1')} title={t('tarifas.t1')} logo={<BsCreditCard2Back />} /></div>
+                <div className="col-12 col-md-6 col-lg-4"><ContenedorCuadrado position="left" text={t('tarifas.text2')} title={t('tarifas.t2')} logo={<FaMoneyBillTransfer />} /></div>
+                <div className="col-12 col-md-6 col-lg-4"><ContenedorCuadrado position="left" text={t('tarifas.text3')} title={t('tarifas.t3')} logo={<TbWorld />} /></div>
             </div>
         </div>
     )

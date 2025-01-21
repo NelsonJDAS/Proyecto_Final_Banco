@@ -1,7 +1,9 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import ColLateral from "../ColLateral.jsx";
+import { useTranslation } from "react-i18next";
 
 const ContenedorLimitaciones = () => {
+    const { t } = useTranslation()
     const [userLoad, SetUserLoad] = useState(false);
     // logica para mostrar el conteindo si el usuario esta en la seccion del componente
     const [isVisible, setIsVisible] = useState(false);
@@ -42,14 +44,12 @@ const ContenedorLimitaciones = () => {
     }, [isVisible])
     return (
         <div className="container espaciado-fondo " ref={sectionRef}>
-            <h1 className={`text-center titulo-politica ${userLoad ? "animacion-der visible" : "animacion-der"}`}>Limitaciones de Responsabilidad</h1>
-            <p className={`fs-3 text-center ${userLoad ? "animacion-der visible" : "animacion-der"}`}>
-                GeekBank no será responsable por pérdidas o daños derivados de:
-            </p>
+            <h1 className={`text-center titulo-politica ${userLoad ? "animacion-der visible" : "animacion-der"}`}>{t('terminos.p7')}</h1>
+            <p className={`fs-3 text-center ${userLoad ? "animacion-der visible" : "animacion-der"}`}>{t('terminos.p8')}</p>
             <div className="row my-3">
-                <ColLateral width="w-100" text="El uso indebido de los servicios por parte del cliente" position="left" userLoad={userLoad} />
-                <ColLateral width="w-100" text="Interrupciones en el servicio por causas fuera de nuestro control" position="" userLoad={userLoad} />
-                <ColLateral width="w-100" text="Errores en la información proporcionada por el cliente" position="left" userLoad={userLoad} />
+                <ColLateral width="w-100" text={t('terminos.c1')} position="left" userLoad={userLoad} />
+                <ColLateral width="w-100" text={t('terminos.c2')} position="" userLoad={userLoad} />
+                <ColLateral width="w-100" text={t('terminos.c3')} position="left" userLoad={userLoad} />
             </div>
         </div>
     )

@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const ContenedorPropiedadAviso = () => {
+    const { t } = useTranslation()
     const [userLoad, SetUserLoad] = useState(false);
     // logica para mostrar el conteindo si el usuario esta en la seccion del componente
     const [isVisible, setIsVisible] = useState(false);
@@ -41,13 +43,8 @@ const ContenedorPropiedadAviso = () => {
     }, [isVisible])
     return (
         <div className="container" ref={sectionRef}>
-            <h1 className={`text-center titulo-politica ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>Propiedad Intelectual</h1>
-            <p className={`fs-3 text-center ${userLoad ? "animacion-der visible" : "animacion-der"}`}>
-                Todos los contenidos, marcas, logos, imágenes, textos y diseños
-                presentes en este sitio web son propiedad exclusiva de GeekBank o de sus
-                licenciantes, y están protegidos por las leyes de propiedad intelectual
-                aplicables.
-            </p>
+            <h1 className={`text-center titulo-politica ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>{t('aviso.p5')}</h1>
+            <p className={`fs-3 text-center ${userLoad ? "animacion-der visible" : "animacion-der"}`}>{t('aviso.p6')}</p>
         </div>
     )
 }

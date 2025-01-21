@@ -1,7 +1,9 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import ColLateral from "../ColLateral.jsx";
+import { useTranslation } from "react-i18next";
 
 const ContenedorServiciosTarifas = () => {
+    const { t } = useTranslation()
     const [userLoad, SetUserLoad] = useState(false);
     // logica para mostrar el conteindo si el usuario esta en la seccion del componente
     const [isVisible, setIsVisible] = useState(false);
@@ -42,14 +44,14 @@ const ContenedorServiciosTarifas = () => {
     }, [isVisible])
     return (
         <div className="container espaciado-fondo" ref={sectionRef}>
-            <h1 className={`text-center titulo-politica ${userLoad ? "animacion-der visible" : "animacion-der"}`}>Otros Servicios</h1>
+            <h1 className={`text-center titulo-politica ${userLoad ? "animacion-der visible" : "animacion-der"}`}>{t('tarifas.p9')}</h1>
             <p className={`fs-3 text-center ${userLoad ? "animacion-der visible" : "animacion-der"}`}>
-                Conoce los costos asociados a servicios adicionales.
+                {t('tarifas.p10')}
             </p>
             <div className="row my-3">
-                <ColLateral width="w-100" text="Emisión de cheques de gerencia: 10 € por cada cheque emitido." position="left" userLoad={userLoad} />
-                <ColLateral width="w-100" text="Reposición de tarjeta: 15 € por reemplazo en caso de pérdida o daño." position="" userLoad={userLoad} />
-                <ColLateral width="w-100" text="Consulta de saldo en cajeros externos: 1 € por cada consulta realizada fuera de nuestra red." position="left" userLoad={userLoad} />
+                <ColLateral width="w-100" text={t('tarifas.c1')} position="left" userLoad={userLoad} />
+                <ColLateral width="w-100" text={t('tarifas.c2')} position="" userLoad={userLoad} />
+                <ColLateral width="w-100" text={t('tarifas.c3')} position="left" userLoad={userLoad} />
             </div>
         </div>
     )

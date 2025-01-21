@@ -1,18 +1,18 @@
 {
   "Landing1": {
     "welcome": "Welcome to GeekBank!",
-    "welcome1": "At Geek Bank, we reinvent the way you interact with your money. We are more than a traditional bank;",
-    "welcome2": "we are a platform designed to provide you with convenience, transparency, and full control",
+    "welcome1": "At GeekBank, we reinvent the way you interact with your money. We are more than a traditional bank;",
+    "welcome2": "we are a platform designed to provide you with convenience, transparency, and total control",
     "welcome3": "over your finances, all backed by the latest financial technology."
   },
 
   "Landing2": {
     "p1_1": "Benefits of GeekBank",
     "p1_2": "24/7 Support",
-    "p1_3": "so you are never alone",
-    "p2": "Grow with Geek Bank",
+    "p1_3": "so you're never alone",
+    "p2": "Grow with GeekBank",
     "p3": "No hidden fees",
-    "p4": "Competitive interest rates on loans and credits",
+    "p4": "Credits and loans with competitive interest rates",
     "p5": "Security",
     "p6": "Mobile Banking",
     "p7": "Global Banking",
@@ -20,86 +20,196 @@
   },
 
   "Landing3": {
-    "p1": "Start Now!",
+    "p1": "Get Started Now!",
     "p2": "Sign up now to enjoy all our benefits.",
     "btn": "Enter"
   },
 
   "Landing4": {
-    "h2": "Why choose GeekBank?",
-    "p1_1": "Manage your finances",
+    "h2": "Why Choose GeekBank?",
+    "p1_1": "Your financial services",
     "p1_2": "Our platform is intuitive and designed to simplify your life.",
     "p2_1": "Transparency",
     "p2_2": "No hidden fees or unpleasant surprises.",
     "p3_1": "We value your time",
-    "p3_2": "Make transactions and manage your accounts in seconds, wherever you are."
+    "p3_2": "Perform transactions and manage your accounts in seconds, wherever you are."
   },
 
   "Landing5": {
-    "t1": "Since I switched to this bank, everything has been much easier. The app interface is super easy to use and transfers are fast. Also, I don't have to worry about hidden fees.",
+    "t1": "Since I switched to this bank, everything has been much easier. The app interface is super easy to use, and transfers are fast. Plus, I don’t have to worry about hidden fees.",
     "t2": "Clear, transparent, and with excellent support. No hidden fees. Highly recommended!",
-    "t3": "The support is fast, helpful, and always available. They solved all my questions instantly."
+    "t3": "The support is fast, helpful, and always available. They resolved all my doubts instantly."
   },
 
   "Login": {
-    "login": "Login",
-    "recovery": "Recover password",
-    "name" : "Name",
-    "email" : "Email address",
-    "password" : "Password",
+    "login": "Log In",
+    "recovery": "Recover Password",
+    "name": "Name",
+    "email": "Email Address",
+    "password": "Password",
     "forgot": "Forgot your password?"
   },
 
   "Forgot": {
-    "recovery2" : "Don’t worry, we’ll help you recover access to your account. Please enter the email address associated with your account. We will send you a verification code that you can use to reset your password.",
-    "sendCode" : "Send code",
-    "code" : "Code",
-    "check" : "Check",
+    "recovery2": "Don’t worry, we’ll help you regain access to your account. Enter the email address associated with your account. We’ll send you a verification code that you can use to reset your password.",
+    "sendCode": "Send Code",
+    "code": "Code",
+    "check": "Verify",
     "return": "Go Back"
   },
 
   "Register": {
     "welcome!": "",
-    "register" : "Sign up here",
-    "cuenta?" : "Already have an account?",
-    "loginfunc": "Log in to access all the features of the website",
-    "hello!" : "Hello!",
-    "sinCuenta" : "Don't have an account yet?",
-    "sinCuenta2" : "Creating one is quick and easy",
-    "sinCuenta3" : "Click the button below to get started.",
-    "create" : "Create an account",
-    "ready" : "Ready!"
+    "register": "Register here",
+    "cuenta?": "Already have an account?",
+    "loginfunc": "Log in to access all the features of the site",
+    "hello!": "Hello!",
+    "sinCuenta": "Don’t have an account yet?",
+    "sinCuenta2": "Creating one is quick and easy",
+    "sinCuenta3": "Click the button below to get started.",
+    "create": "Create an Account",
+    "ready": "Ready!"
   },
+
   "Footer": {
-    "Contact information": "Contact information",
+    "Contact information": "Contact Information",
     "Contact": "Contact",
     "Chat": "Chat",
-    "Legal links": "Legal links",
+    "Legal links": "Legal Links",
     "Privacy Policy": "Privacy Policy",
-    "Term of conditions": "Terms and conditions",
-    "Legal notice": "Legal notice",
-    "Links to resources": "Links to resources",
-    "Rates and commissions": "Rates and commissions",
+    "Term of conditions": "Terms and Conditions",
+    "Legal notice": "Legal Notice",
+    "Links to resources": "Resource Links",
+    "Rates and commissions": "Rates and Fees",
     "Education": "Education",
     "Security": "Security",
     "Tips": "Tips",
-    "Security methods": "Security methods",
-    "Coordinate card": "Coordinate card",
-    "Products and services": "Products and services",
+    "Security methods": "Security Methods",
+    "Coordinate card": "Coordinate Card",
+    "Products and services": "Products and Services",
     "Shop": "Shop",
     "Insurance": "Insurance",
     "Loans": "Loans",
     "Certifications": "Certifications",
-    "Certified titles": "Certified titles",
-    "Security titles": "Security titles"
+    "Certified titles": "Certified Titles",
+    "Security titles": "Security Titles"
   },
+
   "Navbar": {
     "Languages": "Languages",
-    "Movements": "Movements",
+    "Movements": "Transactions",
     "Transfers": "Transfers",
     "GEEK Store": "GEEK Store",
     "Exch/Currency": "Exchange/Currency",
     "Investments": "Investments"
   },
-  "Recovery2" : "associated with your account. We will send you a verification code that you can use to reset your password."
-}
+
+  "Politicas": {
+    "p1": "Privacy Policy",
+    "p2": "At GeekBank, we deeply value and are fully committed to protecting the privacy of each and every one of our customers. We understand that the trust you place in us is essential for building strong and lasting relationships. For this reason, we implement strict policies to ensure that your personal information is always protected. This privacy policy aims to detail how we collect, use, store, and safeguard your personal information, ensuring that it is treated with total care, respect, and confidentiality.",
+    "p3": "Information We Collect",
+    "p4": "We collect personal information that you provide when opening an account, such as your name, address, email, phone number, and financial data.",
+    "p5": "Benefits of Using the Information",
+    "c1": "Providing and managing banking services",
+    "c2": "Processing transactions and payments",
+    "c3": "Improving our products and services",
+    "c4": "Complying with legal and regulatory obligations",
+    "p6": "Privacy Protection",
+    "p7": "At GeekBank, the security of your personal and financial information is our top priority. We implement advanced encryption technology and multi-factor authentication to protect your data and prevent unauthorized access. We use continuous monitoring systems to detect and block any fraudulent attempts, ensuring that your transactions are carried out securely. Access to your information is restricted to authorized employees who receive continuous training in security practices. Our digital banking platform is designed to provide you with a secure experience, with regular audits to ensure your protection. We never share your personal information without your consent, and we are committed to the continuous improvement of our security measures to keep your data protected against any threats. At GeekBank, your trust and security are our priority. If you have any questions, feel free to contact us.",
+    "p8": "Data Sharing Policy at GeekBank",
+    "p9": "At GeekBank, we value your privacy and are committed to protecting your personal information. We only share your data with third parties in the following cases:",
+    "c5": "Services",
+    "c6": "Legal",
+    "c7": "Consent",
+    "p10": "At all times, we ensure that any data sharing is conducted responsibly and transparently, always prioritizing your security and privacy. If you have any questions about how we share your data, you can contact us at any time."
+  },
+
+  "terminos": {
+    "p1": "Terms and Conditions - GeekBank",
+    "p2": "Welcome to GeekBank. By accessing and using our services, you agree to comply with the following terms and conditions. These terms are a legal agreement between you and GeekBank, and your acceptance is necessary to use our products and services. We recommend carefully reading all the information contained in this document, as by using our services, you accept the terms established herein.",
+    "p3": "Use of Our Services",
+    "p4": "At GeekBank, we offer secure and efficient banking solutions to meet your financial needs. By using our services, you agree to do so responsibly and in compliance with applicable laws and regulations. It is your responsibility to provide accurate and updated information when registering and making transactions. You must not use our services for illegal, fraudulent, or malicious activities. GeekBank reserves the right to suspend or cancel your access if we detect inappropriate use. Additionally, we recommend protecting your devices and personal data with adequate security measures. By accessing our services, you agree to follow these terms to ensure a safe and efficient experience.",
+    "p5": "Customer Responsibilities",
+    "p6": "At GeekBank, we offer secure and efficient banking solutions to meet your financial needs. By using our services, you agree to do so responsibly and in compliance with applicable laws and regulations. It is your responsibility to provide accurate and updated information when registering and making transactions. You must not use our services for illegal, fraudulent, or malicious activities. GeekBank reserves the right to suspend or cancel your access if we detect inappropriate use. Additionally, we recommend protecting your devices and personal data with adequate security measures. By accessing our services, you agree to follow these terms to ensure a safe and efficient experience.",
+    "ti1": "Information",
+    "text1": "Provide truthful and updated information",
+    "ti2": "Confidentiality",
+    "text2": "Protect the confidentiality of your credentials",
+    "ti3": "Responsibility",
+    "text3": "Immediately report any unauthorized use of your account",
+    "p7": "Liability Limitations",
+    "p8": "GeekBank will not be responsible for losses or damages arising from:",
+    "c1": "Improper use of the services by the customer",
+    "c2": "Service interruptions due to causes beyond our control",
+    "c3": "Errors in the information provided by the customer"
+  },
+
+  "aviso": {
+    "p1": "Legal Notice - GeekBank",
+    "p2": "This legal notice aims to regulate access, use, and navigation within the website, as well as the services provided by GeekBank. By accessing and using this website, you expressly and unreservedly accept the terms and conditions established in this notice. It is important for the user to carefully read this document, as it details the rules governing interaction with the content and services offered by GeekBank, as well as the responsibilities and rights applicable to both the user and the website administrators. By continuing to use the website, it is understood that the user has fully understood and accepted all the provisions set forth herein. If you do not agree with any of the specified conditions, we recommend refraining from using the website or any related services. GeekBank reserves the right to modify, update, or delete the terms of this legal notice at any time, and it is the user's responsibility to review it periodically to stay informed of any changes. These modifications will take effect from the moment they are published on the website. Access to and use of the website are subject to compliance with applicable regulations, including but not limited to intellectual property laws, data protection, and electronic commerce.",
+    "p3": "Legal Information and Contact Details for GeekBank",
+    "p4": "GeekBank is a financial entity operating entirely legitimately, complying with all legal norms and regulations established by competent authorities. As a responsible institution, we are committed to ensuring the security, transparency, and trust of our customers in each of the services we offer. For more information or inquiries, you can contact us through the following means:",
+    "c1": "Address -- Calle Ficticia 123, Ciudad Geek.",
+    "c2": "Email -- legal@geekbank.com.",
+    "c3": "Phone -- +1 (800) 123-4567.",
+    "p5": "Intellectual Property",
+    "p6": "All content, trademarks, logos, images, texts, and designs present on this website are the exclusive property of GeekBank or its licensors and are protected by applicable intellectual property laws.",
+    "p7": "Permitted Use",
+    "c4": "Reproduce, distribute, or modify the content of the website without prior authorization.",
+    "c5": "Use the website for fraudulent or illicit activities.",
+    "c6": "Attempt unauthorized access to GeekBank's systems or data."
+  },
+  "tarifas": {
+    "p1": "Tariffs - GeekBank",
+    "p2": "At GeekBank, we work tirelessly to ensure that our customers have access to clear, precise, and fully transparent information about our rates and fees. We take pride in offering an exceptional banking experience that prioritizes trust and clarity in every interaction. We know that understanding the costs associated with banking services is essential for making informed decisions, so we make sure all information related to our rates and fees is presented in a detailed, comprehensible, and surprise-free manner.",
+    "p3": "Bank Accounts",
+    "p4": "At GeekBank, we work tirelessly to ensure that our customers have access to clear, precise, and fully transparent information about our rates and fees. We take pride in offering an exceptional banking experience that prioritizes trust and clarity in every interaction. We know that understanding the costs associated with banking services is essential for making informed decisions, so we make sure all information related to our rates and fees is presented in a detailed, comprehensible, and surprise-free manner.",
+    "t1": "Account maintenance",
+    "text1": "€5 per month, waived for average balances over €1,000.",
+    "t2": "Internal transfers",
+    "text2": "No cost. You can send money between accounts within the same bank for free.",
+    "t3": "International transfers",
+    "text3": "€15 per transaction. This fee applies when you transfer money to banks in other countries.",
+    "p5": "Cards",
+    "p6": "At GeekBank, we work tirelessly to ensure that our customers have access to clear, precise, and fully transparent information about our rates and fees. We take pride in offering an exceptional banking experience that prioritizes trust and clarity in every interaction. We know that understanding the costs associated with banking services is essential for making informed decisions, so we make sure all information related to our rates and fees is presented in a detailed, comprehensible, and surprise-free manner.",
+    "p7": "Loans and Credits",
+    "p8": "We offer clear and flexible conditions for our loans.",
+    "t4": "Opening fee",
+    "text4": "1.5% of the requested amount",
+    "t5": "Early repayment",
+    "text5": "No additional cost",
+    "t6": "Late payment interest",
+    "text6": "3% monthly on overdue balances",
+    "p9": "Other Services",
+    "p10": "Learn about the costs associated with additional services.",
+    "c1": "Issuance of manager's checks: €10 per check issued.",
+    "c2": "Card replacement: €15 per replacement in case of loss or damage.",
+    "c3": "Balance inquiries at external ATMs: €1 per inquiry made outside our network."
+  },
+  "educacion" : {
+    "p1": "Financial Education - GeekBank",
+    "p2": "At GeekBank, we believe financial education is key to helping our customers make informed decisions and manage their money efficiently. We are committed to being more than just a financial institution by offering educational resources designed for all knowledge levels. From guides on budgeting, saving, and investing to interactive tools and financial planning tips, we are here to provide the support you need every step of the way. Our goal is to ensure that you can make decisions confidently, with access to the most relevant and updated information to improve your financial health and achieve your goals.",
+    "p3": "Why is financial education important?",
+    "p4": "Understanding basic financial concepts allows you to:",
+    "text1": "Plan and manage your personal budget effectively",
+    "text2": "Avoid unnecessary debts and manage existing ones",
+    "text3": "Save for future goals such as buying a house or retirement",
+    "p5": "Cards",
+    "p6": "At GeekBank, we offer the following resources to support your financial education:",
+    "t1": "Guides and articles",
+    "t1t": "Content about loans, investments, and saving",
+    "t2": "Financial simulators",
+    "t2t": "Participate in our free sessions on personal finance",
+    "t3": "Webinars",
+    "t3t": "Tools to calculate budgets and loans",
+    "p7": "Practical Tips",
+    "c1": "Guides and articles: Content about loans, investments, and saving",
+    "c2": "Webinars: Free sessions on personal finance",
+    "c3": "Financial simulators: Tools to calculate budgets and loans"
+  },
+  "consejos": {
+    "p1": "Security Tips - GeekBank",
+    "p2": "At GeekBank, the security of our customers is our top priority. Below, we provide a series of useful tips to protect your information and keep your transactions secure."
+  }
+    
+  }

@@ -1,6 +1,8 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const ContenedorProteccionConsejos = () => {
+    const { t } = useTranslation()
     return (
         <div className="container">
             <h1 className="text-center">Proteja su Información Personal</h1>

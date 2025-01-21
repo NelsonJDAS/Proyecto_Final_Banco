@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const ContenedorPresentacionTarifas = () => {
+    const { t } = useTranslation()
     const [userLoad, SetUserLoad] = useState(false);
     // logica para mostrar el conteindo si el usuario esta en la seccion del componente
     const [isVisible, setIsVisible] = useState(false);
@@ -41,14 +43,8 @@ const ContenedorPresentacionTarifas = () => {
     }, [isVisible])
     return (
         <div className="container" ref={sectionRef}>
-            <h1 className={`text-center titulo-principal-politica ${userLoad ? "animacion-der visible" : "animacion-der"}`}>Tarifas - GeekBank</h1>
-            <p className={`fs-3 text-center ${userLoad ? "animacion-der visible" : "animacion-der"}`}>
-                En GeekBank, trabajamos incansablemente para garantizar que nuestros clientes tengan acceso a información clara,
-                precisa y completamente transparente sobre nuestras tarifas y comisiones. Nos enorgullece ofrecer una experiencia
-                bancaria excepcional que prioriza la confianza y la claridad en cada interacción. Sabemos que entender los costos asociados
-                con los servicios bancarios es fundamental para tomar decisiones informadas, por lo que nos aseguramos de que toda la información
-                relacionada con nuestras tarifas y comisiones sea presentada de manera detallada, comprensible y sin sorpresas.
-            </p>
+            <h1 className={`text-center titulo-principal-politica ${userLoad ? "animacion-der visible" : "animacion-der"}`}>{t('tarifas.p1')}</h1>
+            <p className={`fs-3 text-center ${userLoad ? "animacion-der visible" : "animacion-der"}`}>{t('tarifas.p2')} </p>
         </div>
     )
 }

@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import ColLateral from "../ColLateral.jsx";
+import { useTranslation } from "react-i18next";
 
 const ContenedorUsoAviso = () => {
+    const { t } = useTranslation()
     const [userLoad, SetUserLoad] = useState(false);
     // logica para mostrar el conteindo si el usuario esta en la seccion del componente
     const [isVisible, setIsVisible] = useState(false);
@@ -42,14 +44,13 @@ const ContenedorUsoAviso = () => {
     }, [isVisible])
     return (
         <div className="container espaciado-fondo" ref={sectionRef}>
-            <h1 className={`text-center titulo-politica ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>Uso Permitido</h1>
+            <h1 className={`text-center titulo-politica ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>{t('aviso.p7')}</h1>
             <div className="row my-md-3">
-                <ColLateral width="w-100" text="Reproducir, distribuir o modificar los contenidos del sitio sin
-                        autorización previa." position="left" userLoad={userLoad} />
+                <ColLateral width="w-100" text={t('aviso.c4')} position="left" userLoad={userLoad} />
 
-                <ColLateral width="w-100" text="Utilizar el sitio para actividades fraudulentas o ilícitas." position="" userLoad={userLoad} />
+                <ColLateral width="w-100" text={t('aviso.c5')} position="" userLoad={userLoad} />
 
-                <ColLateral width="w-100" text="Intentar acceder sin autorización a sistemas o datos de GeekBank." position="left" userLoad={userLoad} />
+                <ColLateral width="w-100" text={t('aviso.c6')} position="left" userLoad={userLoad} />
             </div >
         </div >
     )

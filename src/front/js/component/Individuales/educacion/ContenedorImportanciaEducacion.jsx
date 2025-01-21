@@ -1,7 +1,9 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import ColLateral from "../ColLateral.jsx";
+import { useTranslation } from "react-i18next";
 
 const ContenedorImportanciaEducacion = () => {
+    const { t } = useTranslation()
     const [userLoad, SetUserLoad] = useState(false);
     // logica para mostrar el conteindo si el usuario esta en la seccion del componente
     const [isVisible, setIsVisible] = useState(false);
@@ -42,14 +44,12 @@ const ContenedorImportanciaEducacion = () => {
     }, [isVisible])
     return (
         <div className="container" ref={sectionRef}>
-            <h1 className={`text-center titulo-politica ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>¿Por qué es importante la educación financiera?</h1>
-            <p className={`fs-3 text-center ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>
-                Comprender los conceptos financieros básicos le permite:
-            </p>
+            <h1 className={`text-center titulo-politica ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>{t('educacion.p3')}</h1>
+            <p className={`fs-3 text-center ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>{t('educacion.p4')}</p>
             <div className="row my-3">
-                <ColLateral width="w-100" text="Planificar y administrar su presupuesto personal de manera efectiva" position="" userLoad={userLoad} />
-                <ColLateral width="w-100" text="Evitar deudas innecesarias y manejar las existentes" position="" userLoad={userLoad} />
-                <ColLateral width="w-100" text="Ahorrar para metas futuras como la compra de una casa o la jubilación" position="" userLoad={userLoad} />
+                <ColLateral width="w-100" text={t('educacion.text1')} position="" userLoad={userLoad} />
+                <ColLateral width="w-100" text={t('educacion.text2')} position="" userLoad={userLoad} />
+                <ColLateral width="w-100" text={t('educacion.text3')} position="" userLoad={userLoad} />
             </div>
         </div>
     )
