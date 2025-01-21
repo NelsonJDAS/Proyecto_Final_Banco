@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import TarjetaTarifa from "./TarjetaTarifa.jsx";
+import { useTranslation } from "react-i18next";
 
 const ContenedorTarjetasTarifas = () => {
+    const { t } = useTranslation()
     const [userLoad, SetUserLoad] = useState(false);
     // logica para mostrar el conteindo si el usuario esta en la seccion del componente
     const [isVisible, setIsVisible] = useState(false);
@@ -42,14 +44,8 @@ const ContenedorTarjetasTarifas = () => {
     }, [isVisible])
     return (
         <div className="container" ref={sectionRef}>
-            <h1 className={`text-center titulo-politica ${userLoad ? "animacion-der visible" : "animacion-der"}`}>Tarjetas</h1>
-            <p className={`fs-3 text-center ${userLoad ? "animacion-der visible" : "animacion-der"}`}>
-                En GeekBank, trabajamos incansablemente para garantizar que nuestros clientes tengan acceso a información clara,
-                precisa y completamente transparente sobre nuestras tarifas y comisiones. Nos enorgullece ofrecer una experiencia
-                bancaria excepcional que prioriza la confianza y la claridad en cada interacción. Sabemos que entender los costos asociados
-                con los servicios bancarios es fundamental para tomar decisiones informadas, por lo que nos aseguramos de que toda la información
-                relacionada con nuestras tarifas y comisiones sea presentada de manera detallada, comprensible y sin sorpresas.
-            </p>
+            <h1 className={`text-center titulo-politica ${userLoad ? "animacion-der visible" : "animacion-der"}`}>{t('tarifas.p5')}</h1>
+            <p className={`fs-3 text-center ${userLoad ? "animacion-der visible" : "animacion-der"}`}>{t('tarifas.p6')}</p>
             <div className="row">
                 <div className="col-xl-4 my-2 my-lg-0 col-md-6"><TarjetaTarifa titulo="Tarjeta Básica" cuota="30 € (exenta el primer año)" beneficio="Pagos nacionales y compras en línea" ventaja="1% de devolución en compras nacionales" retiros="Comisión del 3%, mínimo 2 €" userload={userLoad} background="bg-tarjetas" /></div>
                 <div className="col-xl-4 my-2 my-lg-0 col-md-6"><TarjetaTarifa titulo="Tarjeta Premium" cuota="70 € (exenta el primer año)" beneficio="Pagos nacionales e internacionales, asistencia en viajes." ventaja="2% de reembolso y ofertas exclusivas." retiros=" Comisión del 2%, mínimo 3 €." userload={userLoad} background="bg-premium" /></div>

@@ -3,8 +3,10 @@ import ContenedorCuadrado from "../ContenedorCuadrado.jsx";
 import { IoRocketOutline } from "react-icons/io5";
 import { GrMoney } from "react-icons/gr";
 import { FaRegHourglassHalf } from "react-icons/fa6";
+import { useTranslation } from "react-i18next";
 
 const ContenedorPrestamosTarifas = () => {
+    const { t } = useTranslation()
     const [userLoad, SetUserLoad] = useState(false);
     // logica para mostrar el conteindo si el usuario esta en la seccion del componente
     const [isVisible, setIsVisible] = useState(false);
@@ -45,14 +47,12 @@ const ContenedorPrestamosTarifas = () => {
     }, [isVisible])
     return (
         <div className="container" ref={sectionRef}>
-            <h1 className={`text-center titulo-politica ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>Prestamos y Créditos</h1>
-            <p className={`fs-3 text-center ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>
-                Ofrecemos condiciones claras y flexibles para nuestros préstamos.
-            </p>
+            <h1 className={`text-center titulo-politica ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>{t('tarifas.p7')}</h1>
+            <p className={`fs-3 text-center ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>{t('tarifas.p8')}</p>
             <div className="row">
-                <div className="col-12 col-lg-4"><ContenedorCuadrado position="left" text="1.5% del monto solicitado" title="Comisión por apertura" logo={<GrMoney />} /></div>
-                <div className="col-12 col-md-6 col-lg-4"><ContenedorCuadrado position="left" text="No genera ningún costo adicional" title="Pago anticipado" logo={<IoRocketOutline />} /></div>
-                <div className="col-12 col-md-6 col-lg-4"><ContenedorCuadrado position="left" text="3% mensual sobre saldos vencidos" title="Intereses moratorios" logo={<FaRegHourglassHalf />} /></div>
+                <div className="col-12 col-lg-4"><ContenedorCuadrado position="left" text={t('tarifas.text4')} title={t('tarifas.t4')} logo={<GrMoney />} /></div>
+                <div className="col-12 col-md-6 col-lg-4"><ContenedorCuadrado position="left" text={t('tarifas.text5')} title={t('tarifas.t5')} logo={<IoRocketOutline />} /></div>
+                <div className="col-12 col-md-6 col-lg-4"><ContenedorCuadrado position="left" text={t('tarifas.text6')} title={t('tarifas.t6')} logo={<FaRegHourglassHalf />} /></div>
             </div>
         </div>
     )

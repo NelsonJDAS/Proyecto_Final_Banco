@@ -3,8 +3,10 @@ import ContenedorCuadrado from "../ContenedorCuadrado.jsx";
 import { FaBookOpen } from "react-icons/fa";
 import { IoCameraSharp } from "react-icons/io5";
 import { FaBitcoin } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 const ContenedorRecursosEducacion = () => {
+    const { t } = useTranslation()
     const [userLoad, SetUserLoad] = useState(false);
     // logica para mostrar el conteindo si el usuario esta en la seccion del componente
     const [isVisible, setIsVisible] = useState(false);
@@ -45,14 +47,12 @@ const ContenedorRecursosEducacion = () => {
     }, [isVisible])
     return (
         <div className="container " ref={sectionRef}>
-            <h1 className={`text-center titulo-politica ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>Recursos Disponibles</h1>
-            <p className={`fs-3 text-center ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>
-                En GeekBank, ofrecemos los siguientes recursos para apoyar su educación financiera:
-            </p>
+            <h1 className={`text-center titulo-politica ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>{t('educacion.p5')}</h1>
+            <p className={`fs-3 text-center ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>{t('educacion.p6')}</p>
             <div className="row">
-                <div className="col-12 col-lg-4"><ContenedorCuadrado position="left" text="Contenido sobre préstamos, inversiones y ahorro" title="Guías y artículos" logo={<FaBookOpen />} /></div>
-                <div className="col-12 col-md-6 col-lg-4"><ContenedorCuadrado position="bottom" text="Participe en nuestras sesiones gratuitas sobre finanzas personales" title="Simuladores financieros" logo={<FaBitcoin />} /></div>
-                <div className="col-12 col-md-6 col-lg-4"><ContenedorCuadrado position="right" text="Herramientas para calcular presupuestos y préstamos" title="Seminarios web" logo={<IoCameraSharp />} /></div>
+                <div className="col-12 col-lg-4"><ContenedorCuadrado position="left" text={t('educacion.t1t')} title={t('educacion.t1')} logo={<FaBookOpen />} /></div>
+                <div className="col-12 col-md-6 col-lg-4"><ContenedorCuadrado position="bottom" text={t('educacion.t2t')} title={t('educacion.t2')} logo={<FaBitcoin />} /></div>
+                <div className="col-12 col-md-6 col-lg-4"><ContenedorCuadrado position="right" text={t('educacion.t3t')} title={t('educacion.t3')} logo={<IoCameraSharp />} /></div>
             </div>
         </div>
     )

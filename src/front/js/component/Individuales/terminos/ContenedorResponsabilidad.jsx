@@ -3,8 +3,10 @@ import ContenedorCuadrado from "../ContenedorCuadrado.jsx";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import { IoDocumentOutline } from "react-icons/io5";
 import { CiLock } from "react-icons/ci";
+import { useTranslation } from "react-i18next";
 
 const ContenedorResponsabilidad = () => {
+    const { t } = useTranslation()
     const [userLoad, SetUserLoad] = useState(false);
     // logica para mostrar el conteindo si el usuario esta en la seccion del componente
     const [isVisible, setIsVisible] = useState(false);
@@ -45,20 +47,12 @@ const ContenedorResponsabilidad = () => {
     }, [isVisible])
     return (
         <div className="container">
-            <h1 className={`text-center titulo-politica ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>Responsabilidades Del Cliente</h1>
-            <p className={`fs-3 text-center ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`} ref={sectionRef}>
-                En GeekBank, ofrecemos soluciones bancarias seguras y eficientes para satisfacer sus necesidades financieras.
-                Al utilizar nuestros servicios, usted se compromete a hacerlo de manera responsable y conforme a las leyes y
-                regulaciones aplicables. Es su responsabilidad proporcionar información precisa y actualizada al registrarse y realizar
-                transacciones. No debe utilizar nuestros servicios para actividades ilegales, fraudulentas o malintencionadas. GeekBank
-                se reserva el derecho de suspender o cancelar su acceso si detectamos un uso inapropiado. Además, le recomendamos proteger
-                sus dispositivos y datos personales con medidas de seguridad adecuadas. Al acceder a nuestros servicios, se compromete a seguir
-                estos términos para garantizar una experiencia segura y eficiente.
-            </p>
+            <h1 className={`text-center titulo-politica ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>{t('terminos.p5')}</h1>
+            <p className={`fs-3 text-center ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`} ref={sectionRef}>{t('terminos.p6')}</p>
             <div className="row">
-                <div className="col-12 col-lg-4"><ContenedorCuadrado position="left" text="Proveer información veraz y actualizada" title="Informacion" logo={<IoDocumentOutline />} /></div>
-                <div className="col-12 col-md-6 col-lg-4"><ContenedorCuadrado position="bottom" text="Proteger la confidencialidad de sus credenciales" title="Confidencialidad" logo={<CiLock />} /></div>
-                <div className="col-12 col-md-6 col-lg-4"><ContenedorCuadrado position="right" text="Notificar inmediatamente cualquier uso no autorizado de su cuenta" title="Responsabilidad" logo={<IoIosInformationCircleOutline />} /></div>
+                <div className="col-12 col-lg-4"><ContenedorCuadrado position="left" text={t('terminos.text1')} title={t('terminos.ti1')} logo={<IoDocumentOutline />} /></div>
+                <div className="col-12 col-md-6 col-lg-4"><ContenedorCuadrado position="bottom" text={t('terminos.text2')} title={t('terminos.ti2')} logo={<CiLock />} /></div>
+                <div className="col-12 col-md-6 col-lg-4"><ContenedorCuadrado position="right" text={t('terminos.text3')} title={t('terminos.ti3')} logo={<IoIosInformationCircleOutline />} /></div>
             </div>
         </div>
     )

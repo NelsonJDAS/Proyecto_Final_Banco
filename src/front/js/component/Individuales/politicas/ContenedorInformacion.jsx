@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const ContenedorInformacion = () => {
+    const { t } = useTranslation()
     const [userLoad, SetUserLoad] = useState(false);
     // logica para mostrar el conteindo si el usuario esta en la seccion del componente
     const [isVisible, setIsVisible] = useState(false);
@@ -41,12 +43,8 @@ const ContenedorInformacion = () => {
     }, [isVisible])
     return (
         <div className="container">
-            <h2 className={`text-center titulo-politica ${userLoad ? "animacion-izq visible" : "animacion-izq"}`} ref={sectionRef}> Información que Recopilamos</h2>
-            <p className={`text-center fs-3 ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>
-                Recopilamos información personal que usted nos proporciona al abrir una
-                cuenta, como su nombre, dirección, correo electrónico, número de
-                teléfono y datos financieros.
-            </p>
+            <h2 className={`text-center titulo-politica ${userLoad ? "animacion-izq visible" : "animacion-izq"}`} ref={sectionRef}>{t('Politicas.p3')}</h2>
+            <p className={`text-center fs-3 ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>{t('Politicas.p4')}</p>
         </div>
     )
 }

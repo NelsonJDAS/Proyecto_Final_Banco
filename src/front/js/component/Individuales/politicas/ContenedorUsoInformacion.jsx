@@ -1,8 +1,10 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Context } from "../../../store/appContext";
 import ColLateral from "../ColLateral.jsx";
+import { useTranslation } from "react-i18next";
 
 const ContenedorUsoInformacion = () => {
+    const { t } = useTranslation()
     const { store, actions } = useContext(Context);
 
     const [userLoad, SetUserLoad] = useState(false);
@@ -47,12 +49,12 @@ const ContenedorUsoInformacion = () => {
 
     return (
         <div className="container">
-            <h2 className="text-center titulo-politica my-3">Beneficios del Uso de la Información</h2>
+            <h2 className="text-center titulo-politica my-3">{t('Politicas.p5')}</h2>
             <div ref={sectionRef} className="row">
-                <ColLateral width="w-75" text="Proveer y gestionar los servicios bancarios" position="left" userLoad={userLoad} />
-                <ColLateral width="w-75" text="Procesar transacciones y pagos" position="" userLoad={userLoad} />
-                <ColLateral width="w-75" text=" Mejorar nuestros productos y servicios" position="left" userLoad={userLoad} />
-                <ColLateral width="w-75" text="Cumplir con obligaciones legales y regulatorias" position="" userLoad={userLoad} />
+                <ColLateral width="w-75" text={t('Politicas.c1')} position="left" userLoad={userLoad} />
+                <ColLateral width="w-75" text={t('Politicas.c2')} position="" userLoad={userLoad} />
+                <ColLateral width="w-75" text={t('Politicas.c3')} position="left" userLoad={userLoad} />
+                <ColLateral width="w-75" text={t('Politicas.c4')} position="" userLoad={userLoad} />
             </div >
         </div >
     )

@@ -3,8 +3,10 @@ import { FaCcMastercard } from "react-icons/fa";
 import { LuNfc } from "react-icons/lu";
 import { RiMastercardFill } from "react-icons/ri";
 import { Context } from "../../../store/appContext";
+import { useTranslation } from "react-i18next";
 
 const TarjetaTarifa = ({ titulo, cuota, beneficio, ventaja, retiros, userload, background }) => {
+    const { t } = useTranslation()
     const { store, actions } = useContext(Context);
 
     return (

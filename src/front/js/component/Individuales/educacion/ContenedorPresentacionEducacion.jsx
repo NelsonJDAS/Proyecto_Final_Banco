@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const ContenedorPresentacionEducacion = () => {
+    const { t } = useTranslation()
     const [userLoad, SetUserLoad] = useState(false);
     // logica para mostrar el conteindo si el usuario esta en la seccion del componente
     const [isVisible, setIsVisible] = useState(false);
@@ -41,16 +43,8 @@ const ContenedorPresentacionEducacion = () => {
     }, [isVisible])
     return (
         <div className="container" ref={sectionRef}>
-            <h1 className={`text-center titulo-principal-politica ${userLoad ? "animacion-arriba visible" : "animacion-arriba"}`}>Educación Financiera - GeekBank</h1>
-            <p className={`fs-3 text-center ${userLoad ? "animacion-arriba visible" : "animacion-arriba"}`}>
-
-                En GeekBank, creemos que la educación financiera es clave para ayudar a nuestros clientes a tomar
-                decisiones informadas y gestionar su dinero de manera eficiente. Nos comprometemos a ser más que una institución financiera,
-                ofreciendo recursos educativos diseñados para todos los niveles de conocimiento. Desde guías sobre presupuestos, ahorro e inversiones,
-                hasta herramientas interactivas y consejos sobre planificación financiera, estamos aquí para brindarle el apoyo necesario en cada paso.
-                Nuestro objetivo es asegurarnos de que pueda tomar decisiones con confianza, con acceso a la información más relevante y actualizada para mejorar
-                su salud financiera y alcanzar sus metas.
-            </p>
+            <h1 className={`text-center titulo-principal-politica ${userLoad ? "animacion-arriba visible" : "animacion-arriba"}`}>{t('educacion.p1')}</h1>
+            <p className={`fs-3 text-center ${userLoad ? "animacion-arriba visible" : "animacion-arriba"}`}>{t('educacion.p2')}</p>
         </div>
     )
 }
