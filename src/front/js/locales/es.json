@@ -70,6 +70,19 @@
     "create" : "Crear una cuenta",
     "ready" : "¡Listo!"
   },
+  "perfil": {
+    "modify": "Modifica tus datos aqui!",
+    "name": "Nombre Completo",
+    "subname": "Apellidos",
+    "address": "Direccion",
+    "phone": "Telefono",
+    "doctype": "Tipo de documento",
+    "type1": "DNI",
+    "type2": "NIE",
+    "type3": "Pasaporte",
+    "docnumb": "Num Documento",
+    "btn": "Confirmar Cambios"
+  },
   "Footer": {
     "Contact information": "Información de contacto",
     "Contact": "Contacto",

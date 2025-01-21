@@ -71,6 +71,20 @@
     "ready": "Ready!"
   },
 
+  "perfil": {
+    "modify": "Modify your data here!",
+    "name": "Full Name",
+    "subname": "Last Name",
+    "address": "Address",
+    "phone": "Phone",
+    "doctype": "Document Type",
+    "type1": "ID Card",
+    "type2": "Foreign ID Number (NIE)",
+    "type3": "Passport",
+    "docnumb": "Document Number",
+    "btn": "Confirm Changes"
+  },
+
   "Footer": {
     "Contact information": "Contact Information",
     "Contact": "Contact",
