@@ -165,6 +165,11 @@ export const Navbar = () => {
 							</div>
 							<div className="col-1 align-content-center link  fw-bold text-center d-none d-lg-block">
 								<span className={store.borde_hover} onClick={() => {
+									navigate("/perfil")
+								}}>{t('Navbar.perfil')}</span>{/* Seccion perfil */}
+							</div>
+							<div className="col-1 align-content-center link  fw-bold text-center d-none d-lg-block">
+								<span className={store.borde_hover} onClick={() => {
 									navigate("/example")
 								}}>{t('Navbar.Movements')} </span>{/* Seccion movimientos */}
 							</div>
@@ -172,11 +177,6 @@ export const Navbar = () => {
 								<span className={store.borde_hover} onClick={() => {
 									navigate("/example")
 								}}>{t('Navbar.Transfers')}</span> {/* Seccion transferencias */}
-							</div>
-							<div className="col-1 align-content-center link  fw-bold text-center d-none d-lg-block">
-								<span className={store.borde_hover} onClick={() => {
-									navigate("/example")
-								}}>{t('GEEK Store')}</span>{/* Seccion tienda */}
 							</div>
 							<div className="col-1 align-content-center link  fw-bold text-center d-none d-lg-block">
 								<span className={store.borde_hover} onClick={() => {
