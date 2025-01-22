@@ -22,21 +22,21 @@ export const Home = () => {
         return;
       }
 
-        const response = await fetch(process.env.BACKEND_URL + "/api/private", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
+      const response = await fetch(process.env.BACKEND_URL + "/api/private", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-        if (response.ok) {
-          console.log("privado con jwt");
-          actions.fetchUserDetails()
-          
-          // setUserName(storedUserName);
-          // setLoading(false);
-        }
+      if (response.ok) {
+        console.log("privado con jwt");
+        actions.fetchUserDetails()
+
+        // setUserName(storedUserName);
+        // setLoading(false);
+      }
     };
 
     getUserData();
@@ -53,8 +53,6 @@ export const Home = () => {
           <ContenedorNotificaciones />
         </div>
       </div>
-      <ListaInteractiva />
-      <ListaInteractiva />
       <ListaInteractiva />
     </div>
   );

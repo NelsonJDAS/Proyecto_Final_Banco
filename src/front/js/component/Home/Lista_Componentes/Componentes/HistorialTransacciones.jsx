@@ -5,7 +5,7 @@ const HistorialTransacciones = () => {
     const { store, actions } = useContext(Context);
 
     return (
-        <div className={`bg-transferencias animacion-contenedor hover contenedor-componente-interactivo my-2 rounded text-center fw-bold ${store.borde} text-dark d-flex flex-column`}>
+        <div className={`bg-transferencias animacion-contenedor hover contenedor-componente-interactivo my-2 text-center fw-bold ${store.borde} text-dark d-flex flex-column`}>
             <p className="fs-1 objeto-animado"><BiTransfer /></p>
             <p>Lista detallada</p>
             <p>con cada transferencia</p>
