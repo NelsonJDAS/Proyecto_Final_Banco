@@ -13,6 +13,7 @@ import { Tarifas } from "./pages/tarifas.js";
 import { Educacion } from "./pages/educacion.js";
 import { Consejos } from "./pages/consejos.js";
 import { Metodos } from "./pages/metodos.js";
+import { Transferencias } from "./pages/transferencias.js";
 
 import { Not_found } from "./pages/not_found.js";
 
@@ -50,6 +51,7 @@ const Layout = () => {
               <Route element={<Consejos />} path="/consejos" />
               <Route element={<Metodos />} path="/metodos" />
               <Route element={<Perfil />} path="/perfil" />
+              <Route element={<Transferencias />} path="/transferencias" />
               <Route element={<Not_found />} path="*" />
             </Routes>
           </div>
