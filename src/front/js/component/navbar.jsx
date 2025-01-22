@@ -37,7 +37,7 @@ export const Navbar = () => {
 			<div className="modal fade" id="lenguajes" tabIndex="-1" aria-labelledby="label" aria-hidden="true">
 				{/* Modal selector de idiomas */}
 				<div className="modal-dialog contenedor-modal">
-					<div className={`modal-content rounded-3 ${store.fondo} borde-brillante`}>
+					<div className={`modal-content rounded-3 ${store.fondo} borde-brillante ${location.pathname === "/perfil" ? "bg-dark" : ""}`}>
 						<div className="modal-header">
 							<h1 className="modal-title fs-5 " id="label">{t('Navbar.Languages')}</h1>
 							<div className="hover fs-3" data-bs-dismiss="modal"><IoClose /></div>
