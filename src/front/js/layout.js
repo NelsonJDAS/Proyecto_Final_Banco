@@ -14,13 +14,14 @@ import { Educacion } from "./pages/educacion.js";
 import { Consejos } from "./pages/consejos.js";
 import { Metodos } from "./pages/metodos.js";
 import { Transferencias } from "./pages/transferencias.js";
+import { Movimientos } from "./pages/movimientos.js";
+import { Perfil } from "./pages/perfil.js";
 
 import { Not_found } from "./pages/not_found.js";
 
 import injectContext, { Context } from "./store/appContext";
 import { Navbar } from "./component/navbar.jsx";
 import { Footer } from "./component/footer.jsx";
-import { Perfil } from "./pages/perfil.js";
 
 //create your first component
 const Layout = () => {
@@ -52,6 +53,7 @@ const Layout = () => {
               <Route element={<Metodos />} path="/metodos" />
               <Route element={<Perfil />} path="/perfil" />
               <Route element={<Transferencias />} path="/transferencias" />
+              <Route element={<Movimientos />} path="/movimientos" />
               <Route element={<Not_found />} path="*" />
             </Routes>
           </div>
