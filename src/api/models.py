@@ -92,7 +92,7 @@ class Cuenta(db.Model):
     numero_cuenta = db.Column(db.String(20), unique=True)
     numero_tarjeta = db.Column(db.String(20), unique=True)
     cvv = db.Column(db.String(3), unique=True)
-    caducidad = db.Column(db.String(3), unique=True)
+    caducidad = db.Column(db.String(40))
     tipo_cuenta = db.Column(db.String(50))
     saldo = db.Column(db.Float)
     saldo_retenido = db.Column(db.Float)
@@ -112,6 +112,7 @@ class Cuenta(db.Model):
             "numero_cuenta": self.numero_cuenta,
             "numero_tarjeta": self.numero_tarjeta,
             "cvv": self.cvv,
+            "caducidad": self.caducidad,
             "tipo_cuenta": self.tipo_cuenta,
             "saldo": self.saldo,
             "saldo_retenido": self.saldo_retenido,

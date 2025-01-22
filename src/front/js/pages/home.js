@@ -26,8 +26,6 @@ export const Home = () => {
         </div>
       </div>
       <ListaInteractiva />
-      <ListaInteractiva />
-      <ListaInteractiva />
     </div>
   );
 };
