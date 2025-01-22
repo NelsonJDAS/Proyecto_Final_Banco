@@ -182,7 +182,7 @@
 }
 
 .bg-transferencias {
-    background-color: rgb(221 210 210 / 90%);
+    background-color: #AEEEEE;
 }
 
 .bg-tarjetas {
@@ -227,6 +227,10 @@
 
 .bg-divisas {
     background: linear-gradient(135deg, #BDC3C7, #95A5A6, #7F8C8D, #ffffff);
+}
+
+.bg-coordenadas {
+    background: linear-gradient(135deg, #f9f9f9, #e6e6e6);
 }
 
 /*responsive*/
