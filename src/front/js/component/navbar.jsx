@@ -119,7 +119,7 @@ export const Navbar = () => {
 										<li>
 											<a className={`dropdown-item text-center hover ${store.fondo === "fondo-modo-claro" ? "text-white" : "text-dark"}`} href="#">
 												<span className={store.borde_hover} onClick={() => {
-													navigate("/example")
+													navigate("/movimientos")
 												}}>{t('Navbar.Movements')} </span>
 											</a>
 										</li>
@@ -170,7 +170,7 @@ export const Navbar = () => {
 							</div>
 							<div className="col-1 align-content-center link  fw-bold text-center d-none d-lg-block">
 								<span className={store.borde_hover} onClick={() => {
-									navigate("/example")
+									navigate("/movimientos")
 								}}>{t('Navbar.Movements')} </span>{/* Seccion movimientos */}
 							</div>
 							<div className="col-1 align-content-center link  fw-bold text-center d-none d-lg-block">

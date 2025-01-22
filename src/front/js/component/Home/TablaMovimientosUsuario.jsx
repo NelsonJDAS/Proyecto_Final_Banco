@@ -27,7 +27,8 @@ const TablaMovimientoUsuario = () => {
             <TablaCol fecha="01/03/2024" cuerpo="Transferencia" importe={200} saldo={600} />
             <TablaCol fecha="01/03/2024" cuerpo="Alquiler" importe={800} saldo={1400} />
             <TablaCol fecha="01/03/2024" cuerpo="Nomina" monto={1000} saldo={400} />
-            <TablaCol fecha="01/03/2024" cuerpo="Mc Donalds / Sevilla" importe={12.9} saldo={400} /></div>
+            <TablaCol fecha="01/03/2024" cuerpo="Mc Donalds / Sevilla" importe={12.9} saldo={400} />
+        </div>
     </div>)
 }
 
