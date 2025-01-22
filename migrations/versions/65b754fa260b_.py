@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 18812bc6c2cb
+Revision ID: 65b754fa260b
 Revises: 
-Create Date: 2025-01-17 15:40:32.683642
+Create Date: 2025-01-20 20:25:18.502397
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '18812bc6c2cb'
+revision = '65b754fa260b'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -62,15 +62,20 @@ def upgrade():
     op.create_table('cuenta',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('numero_cuenta', sa.String(length=20), nullable=True),
+    sa.Column('numero_tarjeta', sa.String(length=20), nullable=True),
+    sa.Column('cvv', sa.String(length=3), nullable=True),
     sa.Column('tipo_cuenta', sa.String(length=50), nullable=True),
     sa.Column('saldo', sa.Float(), nullable=True),
+    sa.Column('saldo_retenido', sa.Float(), nullable=True),
     sa.Column('cliente_id', sa.Integer(), nullable=True),
     sa.Column('estado', sa.Integer(), nullable=True),
     sa.Column('seguro_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['cliente_id'], ['cliente.id'], ),
     sa.ForeignKeyConstraint(['seguro_id'], ['seguro.id'], ),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('numero_cuenta')
+    sa.UniqueConstraint('cvv'),
+    sa.UniqueConstraint('numero_cuenta'),
+    sa.UniqueConstraint('numero_tarjeta')
     )
     op.create_table('user',
     sa.Column('id', sa.Integer(), nullable=False),
