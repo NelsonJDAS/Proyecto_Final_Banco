@@ -134,7 +134,7 @@ export const Navbar = () => {
 											<a className={`dropdown-item text-center hover ${store.fondo === "fondo-modo-claro" ? "text-white" : "text-dark"}`} href="#">
 												<span className={store.borde_hover} onClick={() => {
 													navigate("/example")
-												}}>{t('GEEK Store')}</span>
+												}}>{t('Navbar.perfil')}</span>
 											</a>
 										</li>
 										<li>

@@ -29,6 +29,8 @@ class Cliente(db.Model):
     __tablename__ = 'cliente'
 
     id = db.Column(db.Integer, primary_key=True)
+    nombre_completo = db.Column(db.String(20))
+    apellidos = db.Column(db.String(20))
     telefono = db.Column(db.String(15))
     direccion = db.Column(db.String(200))
     fecha_creacion = db.Column(db.DateTime, default=datetime.utcnow)
@@ -47,12 +49,14 @@ class Cliente(db.Model):
     def serialize(self):
         return {
             "id": self.id,
+            "nombre_completo": self.nombre_completo,
+            "apellidos": self.apellidos,
             "telefono": self.telefono,
             "direccion": self.direccion,
-            "fecha_creacion": self.fecha_creacion,
-            "fecha_nacimiento": self.fecha_nacimiento,
             "tipo_documento": self.tipo_documento,
             "numero_documento": self.numero_documento,
+            "fecha_nacimiento": self.fecha_nacimiento,
+            "fecha_creacion": self.fecha_creacion,
         }
 
 
@@ -88,6 +92,7 @@ class Cuenta(db.Model):
     numero_cuenta = db.Column(db.String(20), unique=True)
     numero_tarjeta = db.Column(db.String(20), unique=True)
     cvv = db.Column(db.String(3), unique=True)
+    caducidad = db.Column(db.String(3), unique=True)
     tipo_cuenta = db.Column(db.String(50))
     saldo = db.Column(db.Float)
     saldo_retenido = db.Column(db.Float)

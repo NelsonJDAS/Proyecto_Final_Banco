@@ -75,11 +75,11 @@ def addUser():
     except Exception as e:
         return jsonify({"error": str(e)}), 400      
 
-@api.route('/User/<user_id>')
-def get_user_details(user_id):
+@api.route('/User/<int:id>')
+def get_user_details(id):
     try:
         # Buscar el usuario por ID
-        user = User.query.get(user_id)
+        user = User.query.get(id)
         if not user:
             return jsonify({"error": "Usuario no encontrado"}), 404
         # Obtener el cliente asociado al usuario
@@ -88,7 +88,6 @@ def get_user_details(user_id):
             return jsonify({"error": "El usuario no tiene un cliente asociado"}), 404
         # Obtener las cuentas del cliente
         cuentas = cliente.cuentas
-        cuentas_data = []
         for cuenta in cuentas:
             # Calcular el saldo total de todas las cuentas
             # Obtener las transacciones asociadas a esta cuenta
@@ -103,18 +102,6 @@ def get_user_details(user_id):
                 }
                 for transaccion in transacciones
             ]
-            # Añadir los datos de la cuenta
-            cuentas_data.append({
-                "id": cuenta.id,
-                "numero_cuenta": cuenta.numero_cuenta,
-                "numero_tarjeta": cuenta.numero_tarjeta,
-                "cvv": cuenta.cvv,
-                "tipo_cuenta": cuenta.tipo_cuenta,
-                "saldo": cuenta.saldo,
-                "saldo_retenido": cuenta.saldo_retenido,
-                "transacciones": transacciones_data
-            })
-        # Formar la respuesta con los datos serializados
         response = {
             "user": {
                 "id": user.id,
@@ -123,13 +110,23 @@ def get_user_details(user_id):
             },
             "cliente": {
                 "id": cliente.id,
-                "name": cliente.name,
+                "nombre_completo": cliente.nombre_completo,
+                "apellidos": cliente.apellidos,
                 "telefono": cliente.telefono,
                 "direccion": cliente.direccion,
                 "Tipo de documento": cliente.tipo_documento,
                 "Numero de documento": cliente.numero_documento,
             },
-            "cuentas": cuentas_data
+            "cuentas": {
+                "id": cuenta.id,
+                "numero_cuenta": cuenta.numero_cuenta,
+                "numero_tarjeta": cuenta.numero_tarjeta,
+                "cvv": cuenta.cvv,
+                "tipo_cuenta": cuenta.tipo_cuenta,
+                "saldo": cuenta.saldo,
+                "saldo_retenido": cuenta.saldo_retenido,
+                "transacciones": transacciones_data
+            }
         }
         return jsonify(response), 200
     except Exception as e:
@@ -164,9 +161,12 @@ def user_autentication():
 
         # Responder con el usuario y el token
         return jsonify({
-            "Usuario Identificado": user.serialize(),
-            "token": access_token,
-            "name": name
+            "user": {
+                "id": user.id,
+                "name": user.name,
+                "email": user.email
+    },
+    "token": access_token
         }), 200  # 200 para indicar éxito en login
 
     except Exception as e:
