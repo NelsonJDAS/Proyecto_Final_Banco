@@ -3,7 +3,7 @@ const getState = ({ getStore, getActions, setStore }) => {
     store: {
       texto: "text-dark",
       fondo: "fondo-modo-oscuro",
-      borde: "border border-danger",
+      borde: "border border-white",
       borde_hover: "enlace-oscuro",
       hidden: false,
       codeSent: false,
@@ -30,7 +30,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           setStore({
             texto: "text-dark",
             fondo: "fondo-modo-claro",
-            borde: "border border-dark",
+            borde: "border border-secondary",
             borde_hover: "enlace-oscuro",
           });
           document.body.classList.remove("fondo-modo-oscuro");
@@ -123,7 +123,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.error("Error al registrar usuario:", error);
           });
       },
-      
+
       fetchUserDetails: (userId) => {
         fetch(`${process.env.BACKEND_URL}/api/User/${userId}`, {
           method: "GET", // Método HTTP

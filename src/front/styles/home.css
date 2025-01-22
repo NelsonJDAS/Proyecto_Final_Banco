@@ -131,7 +131,8 @@
 
 /*animacion para cada contenedor*/
 .animacion-contenedor {
-    transition: transform 0.5s ease, box-shadow 1s ease;
+    transition: transform 0.3s ease, box-shadow 0.5s ease;
+    border-radius: 10px;
 }
 
 .animacion-contenedor:hover {
@@ -142,7 +143,7 @@
 .animacion-contenedor span {
     position: relative;
     display: inline-block;
-    transition: transform 0.5s ease;
+    transition: transform 0.3s ease;
 }
 
 .animacion-contenedor span::after {
@@ -158,7 +159,7 @@
 }
 
 .animacion-contenedor:hover span::after {
-    width: 70%;
+    width: 60%;
 }
 
 .animacion-contenedor:hover span {
@@ -181,7 +182,7 @@
 }
 
 .bg-transferencias {
-    background-color: rgb(221 210 210 / 75%);
+    background-color: rgb(221 210 210 / 90%);
 }
 
 .bg-tarjetas {
@@ -196,6 +197,36 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+}
+
+.bg-tienda:hover .animacion-store {
+    transform: scale(1.05);
+}
+
+.bg-productos {
+    background: linear-gradient(135deg, #1E3A8A, #2563EB);
+}
+
+.bg-configuracion {
+    background: #F0F4F8;
+}
+
+.bg-atencion {
+    background: linear-gradient(135deg, #00B0FF, #4CAF50);
+}
+
+.bg-redes {
+    background: linear-gradient(135deg, #3b5998, #1da1f2, #e1306c, #ff0000);
+}
+
+.icono-redes-home {
+    transition: transform 0.3s ease, box-shadow 0.5s ease;
+    margin: 0 3px;
+    font-size: 30px;
+}
+
+.bg-divisas {
+    background: linear-gradient(135deg, #BDC3C7, #95A5A6, #7F8C8D, #ffffff);
 }
 
 /*responsive*/
