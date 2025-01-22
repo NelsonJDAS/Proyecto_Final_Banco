@@ -44,7 +44,6 @@ const ContenedorPrincipalPerfil = () => {
                             <div className={`col-xl-3 my-xl-3 col-md-4 my-2 d-flex flex-column text-center ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>
                                 <label className="my-2 fw-bold fs-4 label-perfil">{t('perfil.doctype')}</label>
                                 <select className={`form-select form-select-sm rounded-pill text-center bg-white bg-opacity-75 fw-bold text-dark py-2 hover ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`} aria-label="Small select example">
-                                    <option selected>-----------</option>
                                     <option className="fw-bold text-dark" value="1">{t('perfil.type1')}</option>
                                     <option className="fw-bold text-dark" value="2">{t('perfil.type2')}</option>
                                     <option className="fw-bold text-dark" value="3">{t('perfil.type3')}</option>
