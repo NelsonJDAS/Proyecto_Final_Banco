@@ -11,7 +11,7 @@ const ContenedorPrincipalMovimientos = () => {
 
     return (
         <>
-            <h1 className="text-center my-3">Movimientos</h1>
+            <h1 className={`text-center my-3 ${userLoad ? "animacion-arriba visible" : "animacion-arriba"}`}>Movimientos</h1>
             <div className="container my-3">
                 <div className="row my-3">
                     <div className="col-3 text-center fw-bold"><p className="cabecera-movimientos">Dia</p></div>
