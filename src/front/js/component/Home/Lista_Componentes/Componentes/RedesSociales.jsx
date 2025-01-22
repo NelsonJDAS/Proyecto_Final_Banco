@@ -16,16 +16,16 @@ const RedesSociales = () => {
             <div className="d-flex flex-column">
                 <p className="my-2 objeto-animado">Redes Sociales</p>
                 <div className="d-flex justify-content-evenly">
-                    <div className="icono-redes-home objeto-animado"><FaFacebookSquare /></div>
-                    <div className="icono-redes-home objeto-animado"><FaSquareXTwitter /></div>
+                    <a href="https://facebook.com/" target="_blank" className="icono-redes-home objeto-animado text-white"><FaFacebookSquare /></a>
+                    <a href="https://twitter.com/" target="_blank" className="icono-redes-home objeto-animado text-white"><FaSquareXTwitter /></a>
                 </div>
                 <div className="d-flex justify-content-evenly">
-                    <div className="icono-redes-home objeto-animado"><FaSquareInstagram /></div>
-                    <div className="icono-redes-home objeto-animado"><FaLinkedin /></div>
+                    <a href="https://instagram.com/" target="_blank" className="icono-redes-home objeto-animado text-white"><FaSquareInstagram /></a>
+                    <a href="https://linkedin.com/" target="_blank" className="icono-redes-home objeto-animado text-white"><FaLinkedin /></a>
                 </div>
                 <div className="d-flex justify-content-evenly">
-                    <div className="icono-redes-home objeto-animado"><IoLogoYoutube /></div>
-                    <div className="icono-redes-home objeto-animado"><FaSquareWhatsapp /></div>
+                    <a href="https://youtube.com/" target="_blank" className="icono-redes-home objeto-animado text-white"><IoLogoYoutube /></a>
+                    <a href="https://whatsapp.com/" target="_blank" className="icono-redes-home objeto-animado text-white"><FaSquareWhatsapp /></a>
                 </div>
             </div>
         </div >
