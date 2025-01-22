@@ -200,7 +200,7 @@
     "c2": "Card replacement: €15 per replacement in case of loss or damage.",
     "c3": "Balance inquiries at external ATMs: €1 per inquiry made outside our network."
   },
-  "educacion" : {
+  "educacion": {
     "p1": "Financial Education - GeekBank",
     "p2": "At GeekBank, we believe financial education is key to helping our customers make informed decisions and manage their money efficiently. We are committed to being more than just a financial institution by offering educational resources designed for all knowledge levels. From guides on budgeting, saving, and investing to interactive tools and financial planning tips, we are here to provide the support you need every step of the way. Our goal is to ensure that you can make decisions confidently, with access to the most relevant and updated information to improve your financial health and achieve your goals.",
     "p3": "Why is financial education important?",
@@ -208,7 +208,7 @@
     "text1": "Plan and manage your personal budget effectively",
     "text2": "Avoid unnecessary debts and manage existing ones",
     "text3": "Save for future goals such as buying a house or retirement",
-    "p5": "Cards",
+    "p5": "Resources",
     "p6": "At GeekBank, we offer the following resources to support your financial education:",
     "t1": "Guides and articles",
     "t1t": "Content about loans, investments, and saving",
@@ -225,5 +225,4 @@
     "p1": "Security Tips - GeekBank",
     "p2": "At GeekBank, the security of our customers is our top priority. Below, we provide a series of useful tips to protect your information and keep your transactions secure."
   }
-    
-  }
+}
