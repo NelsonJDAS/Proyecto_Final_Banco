@@ -101,12 +101,12 @@ export const Footer = () => {
 			<div className="row mx-0">
 				<div className="col-12 justify-content-end px-3 d-flex">
 
-					<div className="icono_redes"><FaFacebookSquare /></div>
-					<div className="icono_redes"><FaSquareXTwitter /></div>
-					<div className="icono_redes"><FaSquareInstagram /></div>
-					<div className="icono_redes"><FaLinkedin /></div>
-					<div className="icono_redes"><IoLogoYoutube /></div>
-					<div className="icono_redes"><FaSquareWhatsapp /></div>
+					<a className={`icono_redes ${store.texto}`} target="_blank" href="https://facebook.com/"><FaFacebookSquare /></a>
+					<a className={`icono_redes ${store.texto}`} target="_blank" href="https://twitter.com/"><FaSquareXTwitter /></a>
+					<a className={`icono_redes ${store.texto}`} target="_blank" href="https://instagram.com/"><FaSquareInstagram /></a>
+					<a className={`icono_redes ${store.texto}`} target="_blank" href="https://linkedin.com/"><FaLinkedin /></a>
+					<a className={`icono_redes ${store.texto}`} target="_blank" href="https://youtube.com/"><IoLogoYoutube /></a>
+					<a className={`icono_redes ${store.texto}`} target="_blank" href="https://web.whatsapp.com/"><FaSquareWhatsapp /></a>
 
 
 				</div>
