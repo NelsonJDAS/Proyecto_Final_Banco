@@ -62,7 +62,7 @@ const ListaInteractiva = () => {
     }, [isVisible])
 
     return (
-        <div className="container-fluid w-85" ref={sectionRef}>
+        <div className="container-fluid w-85 py-3" ref={sectionRef}>
             <div className="row">
                 <div className={`col-12 col-xl-3 ${firstCol}`}><HistorialTransacciones /></div>
                 <div className={`col-6 col-xl-3 ${thCol}`}><BloqueoDesbloqueoCuentas /></div>
