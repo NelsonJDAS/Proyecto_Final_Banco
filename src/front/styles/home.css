@@ -188,6 +188,16 @@
     background: linear-gradient(90deg, #1E3A8A, #2563EB);
 }
 
+.bg-alertas {
+    background: linear-gradient(45deg, #FF4C4C, #FFA500);
+}
+
+.bg-tienda {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
 /*responsive*/
 
 @media (max-width: 768px) {

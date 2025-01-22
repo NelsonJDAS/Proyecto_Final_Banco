@@ -3,6 +3,7 @@ import BloqueoDesbloqueoCuentas from "./Componentes/BloqueoDesbloqueoCuentas.jsx
 import HistorialTransacciones from "./Componentes/HistorialTransacciones.jsx";
 import Tarjetas from "./Componentes/Tarjetas.jsx";
 import Alertas from "./Componentes/Alertas.jsx";
+import Tienda from "./Componentes/Tienda.jsx";
 
 const ListaInteractiva = () => {
 
@@ -64,7 +65,7 @@ const ListaInteractiva = () => {
                 <div className={`col-12 col-xl-3 ${secCol}`}><Tarjetas /></div>
             </div>
             <div className="row">
-                <div className={`col-6 col-xl-4 ${firstCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Tienda</div></div>
+                <div className={`col-6 col-xl-4 ${firstCol}`}><Tienda /></div>
                 <div className={`col-6 col-xl-2 ${thCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Productos</div></div>
                 <div className={`col-6 col-xl-4 ${FoCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Configuracion</div></div>
                 <div className={`col-6 col-xl-2 ${secCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Atencion al Cliente</div></div>
