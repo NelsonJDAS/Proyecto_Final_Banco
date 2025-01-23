@@ -11,11 +11,28 @@ const Configuracion = () => {
             <p className="align-content-start objeto-animado">Configuración</p>
             <div className="container w-50">
                 <div class="form-check form-switch">
-                    <input class="form-check-input hover my-1 fs-4" type="checkbox" role="switch" />
+                    {store.fondo === "fondo-modo-claro" ? <>
+                        <input class="form-check-input hover my-1 fs-4" type="checkbox" role="switch" checked onClick={() => {
+                            actions.CambiarModo(false)
+                        }} />
+                    </> :
+                        <>
+                            <input class="form-check-input hover my-1 fs-4" type="checkbox" role="switch" onClick={() => {
+                                actions.CambiarModo(true)
+                            }} />
+                        </>}
                     <p>Modo Claro</p>
                 </div>
                 <div class="form-check form-switch">
-                    <input class="form-check-input hover my-1 fs-4" type="checkbox" role="switch" />
+                    {store.hidden ? <>
+                        <input class="form-check-input hover my-1 fs-4" type="checkbox" role="switch" checked onClick={() => {
+                            actions.CambiarIncognito(!store.hidden)
+                        }} />
+                    </> : <>
+                        <input class="form-check-input hover my-1 fs-4" type="checkbox" role="switch" onClick={() => {
+                            actions.CambiarIncognito(!store.hidden)
+                        }} />
+                    </>}
                     <p>Ocultar Saldo</p>
                 </div>
             </div>
