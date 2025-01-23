@@ -1,10 +1,10 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
-      texto: "text-dark",
+      texto: "text-white",
       fondo: "fondo-modo-oscuro",
       borde: "border border-white",
-      borde_hover: "enlace-oscuro",
+      borde_hover: "enlace-claro",
       hidden: false,
       codeSent: false,
       email: "",

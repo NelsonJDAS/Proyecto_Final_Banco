@@ -25,12 +25,7 @@ export const Navbar = () => {
 		i18n.changeLanguage(language);
 	};
 
-	const [btn, setbtn] = useState(false) // estado boton modo claro, modo oscuro
 	const navigate = useNavigate(null);
-
-	useEffect(() => {
-		btn === true ? actions.CambiarModo(true) : actions.CambiarModo(false)
-	}, [btn])
 
 	return (
 		<div className={`contenedor-nav ${location.pathname === "/perfil" ? "text-white z-1" : ""}`} id="navbar"> {/* modo oscuro y claro */}
@@ -203,12 +198,12 @@ export const Navbar = () => {
 					{/*------------------------------ eleccion de idiomas ------------ */}
 					{/*------------------------------ modo oscuro/ modo claro ------------ */}
 					<div className="col-1 align-content-center  fw-bold text-center ">
-						<div className={btn === true ? "dark-mode rounded-pill fondo-claro borde-brillante" : "dark-mode rounded-pill fondo-oscuro borde-brillante"}>
-							<div className={btn === true ? "text-warning circle rounded-circle bg-white w-50 border  fw-bold enlace position-relative d-flex justify-content-center active" : "circle rounded-circle w-50 border  bg-black  fw-bold enlace position-relative d-flex justify-content-center"} onClick={() => {
-								btn === true ? setbtn(false) : setbtn(true);
+						<div className={store.fondo === "fondo-modo-claro" ? "dark-mode rounded-pill fondo-claro borde-brillante" : "dark-mode rounded-pill fondo-oscuro borde-brillante"}>
+							<div className={store.fondo === "fondo-modo-claro" ? "text-warning circle rounded-circle bg-white w-50 border  fw-bold enlace position-relative d-flex justify-content-center active" : "circle rounded-circle w-50 border  bg-black  fw-bold enlace position-relative d-flex justify-content-center"} onClick={() => {
+								store.fondo === "fondo-modo-claro" ? actions.CambiarModo(false) : actions.CambiarModo(true)
 							}}>
 								<div className="icono hover">
-									{btn === false ? <FaMoon /> : <MdWbSunny />}
+									{store.fondo === "fondo-modo-claro" ? <MdWbSunny /> : <FaMoon />}
 								</div>
 							</div>
 						</div>
