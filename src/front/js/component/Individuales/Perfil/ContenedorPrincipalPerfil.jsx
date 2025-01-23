@@ -21,12 +21,12 @@ const ContenedorPrincipalPerfil = () => {
         SetUserLoad(true)
         const storedId = localStorage.getItem("userId")
         actions.fetchUserDetails(storedId)
-        setName(store.usuario.nombre_completo);
-        setSubname(store.usuario.apellidos);
-        setAdress(store.usuario.direccion);
-        setPhone(store.usuario.telefono);
-        setTypeDoc(store.usuario.Tipo_de_documento);
-        setNumDoc(store.usuario.Numero_de_documento);
+        setName(store.cliente.nombre);
+        setSubname(store.cliente.apellidos);
+        setAdress(store.cliente.direccion);
+        setPhone(store.cliente.telefono);
+        setTypeDoc(store.cliente.Tipo_de_documento);
+        setNumDoc(store.cliente.Numero_de_documento);
         console.log(name);
         
     }, [])

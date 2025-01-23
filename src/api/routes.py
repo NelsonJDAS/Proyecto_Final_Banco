@@ -151,7 +151,7 @@ def get_user_details(id):
             },
             "cliente": {
                 "id": cliente.id,
-                "nombre_completo": cliente.nombre_completo,
+                "nombre": cliente.nombre_completo,
                 "apellidos": cliente.apellidos,
                 "telefono": cliente.telefono,
                 "direccion": cliente.direccion,

@@ -23,7 +23,7 @@ const SaldoUsuario = () => {
             <div className="col-12">
                 <div className="row">
                     <div className="col-xl-4 col-8 d-flex flex-column text-center">
-                        <p className="fs-1 fw-light">Hola, <span className="fw-bold">{store.user.name}</span></p>
+                        <p className="fs-1 fw-light">Bienvenido <span className="fw-bold">{store.cliente.nombre}</span></p>
                     </div>
                     <div className="col-4 col-xl-8 text-end"><span className="hover fs-3" onClick={() => {
                         SetHidden(prevHidden => !prevHidden)
@@ -36,11 +36,11 @@ const SaldoUsuario = () => {
             <div className="col-6 col-xl-4 d-flex flex-column">
                 <div className="row">
                     <div className="col-6 px-1 text-end"><p className="fw-light my-2 saldo-disponible">Saldo Disponible:</p></div>
-                    <div className={`col-6  px-1 text-start ${hidden ? "desenfoque" : ""}`}><span className="fs-3 fw-bold num-saldo">{store.cliente.saldo}</span></div>
+                    <div className={`col-6  px-1 text-start ${hidden ? "desenfoque" : ""}`}><span className="fs-3 fw-bold num-saldo">{store.cuentas.saldo}</span></div>
                 </div>
                 <div className="row">
                     <div className="col-6 px-1 text-end"><p className="fw-light my-2 saldo-disponible">Saldo Retenido: </p></div>
-                    <div className={`col-6  px-1 text-start ${hidden ? "desenfoque" : ""}`}><span className="fs-3 fw-bold num-saldo">{store.cliente.saldo_retenido}</span></div>
+                    <div className={`col-6  px-1 text-start ${hidden ? "desenfoque" : ""}`}><span className="fs-3 fw-bold num-saldo">{store.cuentas.saldo_retenido}</span></div>
                 </div>
             </div>
             <div className="col-8"></div>

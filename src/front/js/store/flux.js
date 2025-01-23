@@ -71,15 +71,16 @@ const getState = ({ getStore, getActions, setStore }) => {
           localStorage.setItem("token", data.token);
           localStorage.setItem("name", data.user.name);
           localStorage.setItem("userId", data.user.id);
+          actions.fetchUserDetails(data.user.id)
 
           // Actualizamos el store con el token y los datos del usuario
           setStore({
             ...store,
             token: data.token,
             user: data.user, // Ajustar según lo que devuelva tu backend
+            
           });
-
-          console.log("Login exitoso. Token guardado en localStorage.", store.user);
+          console.log("Login exitoso. Token guardado en localStorage.", store.user, store.usuario);
         } catch (error) {
           console.error("Error en loginUser:", error.message);
           throw error; // Lanzamos el error para que HandleLogin lo maneje
@@ -142,10 +143,10 @@ const getState = ({ getStore, getActions, setStore }) => {
           })
           .then((data) => {
             // Guardamos los datos del usuario en el store bajo la propiedad "usuario"
-            setStore({ ...store, usuario: data.cliente});
-            setStore({ ...store, cliente: data.cuentas});
+            setStore({ ...store, cliente: data.cliente});
+            setStore({ ...store, cuentas: data.cuentas});
             setStore({ ...store, user: data.user});
-            console.log("Datos del usuario guardados en el store:","user", store.user, "Cliente", store.cliente, "usuario", store.usuario);
+            console.log("Datos del usuario guardados en el store:","user", store.user, "cliente", store.cliente, "cuentas", store.cuentas);
             
           })
           .catch((error) => {
