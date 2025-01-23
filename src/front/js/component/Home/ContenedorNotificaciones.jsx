@@ -16,15 +16,9 @@ const ContenedorNotificaciones = () => {
                 <div className="col-12 text-center fw-bold"><h3 className="text-center">Notificaciones</h3></div>
             </div>
             <div className={`row fw-bold ${store.borde} ${userLoad} py-2 px-3 scroll`}>
-                <NotificacionCol cuerpo="Si necesitas ayuda contacta con nosotros via Chat/Correo en contacto" />
-                <NotificacionCol cuerpo="Tranferencia realizada hace 10 minutos" />
-                <NotificacionCol cuerpo="Tranferencia realizada hace 10 minutos" />
-                <NotificacionCol cuerpo="Tranferencia realizada hace 10 minutos" />
-                <NotificacionCol cuerpo="Tranferencia realizada hace 10 minutos" />
-                <NotificacionCol cuerpo="Tranferencia realizada hace 10 minutos" />
-                <NotificacionCol cuerpo="Tranferencia realizada hace 10 minutos" />
-                <NotificacionCol cuerpo="Tranferencia realizada hace 10 minutos" />
-                <NotificacionCol cuerpo="Tranferencia realizada hace 10 minutos" />
+                <NotificacionCol cuerpo="No te olvides de solicitar tu tarjeta de coordenadas" />
+                <NotificacionCol cuerpo="Si eres nuevo usuario puedes modificar tus configuraciones en el componente de abajo" />
+                <NotificacionCol cuerpo="Necesitas ayuda? no dudes en contactar con nuestro Chat" />
                 <NotificacionCol cuerpo="Tranferencia realizada hace 10 minutos" />
             </div>
         </>
