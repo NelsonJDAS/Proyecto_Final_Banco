@@ -9,6 +9,7 @@ import Configuracion from "./Componentes/Configuracion.jsx";
 import AtencionCliente from "./Componentes/AtencionCliente.jsx";
 import RedesSociales from "./Componentes/RedesSociales.jsx";
 import Divisas from "./Componentes/Divisas.jsx";
+import TarjetasCoordenadas from "./Componentes/TarjetaCoordenadas.jsx";
 
 const ListaInteractiva = () => {
 
@@ -77,7 +78,7 @@ const ListaInteractiva = () => {
             </div>
             <div className="row">
                 <div className={`col-6 col-xl-3 ${firstCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Inversiones</div></div>
-                <div className={`col-6 col-xl-4 ${thCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Tarjeta de Cordenadas</div></div>
+                <div className={`col-6 col-xl-4 ${thCol}`}><TarjetasCoordenadas /></div>
                 <div className={`col-6 col-xl-3 ${FoCol}`}><Divisas /></div>
                 <div className={`col-6 col-xl-2 ${secCol}`}><RedesSociales /></div>
             </div>

@@ -178,11 +178,11 @@
 /*Fondos para la lista de componentes*/
 
 .bg-cuentas {
-    background-color: rgba(20, 20, 20, 1);
+    background: linear-gradient(to bottom right, black, grey, rgb(146, 146, 146));
 }
 
 .bg-transferencias {
-    background-color: rgb(221 210 210 / 90%);
+    background: linear-gradient(90deg, #AEEEEE, white);
 }
 
 .bg-tarjetas {
@@ -227,6 +227,10 @@
 
 .bg-divisas {
     background: linear-gradient(135deg, #BDC3C7, #95A5A6, #7F8C8D, #ffffff);
+}
+
+.bg-coordenadas {
+    background: linear-gradient(135deg, #f9f9f9, #e6e6e6);
 }
 
 /*responsive*/

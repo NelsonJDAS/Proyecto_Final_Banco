@@ -12,14 +12,14 @@ const Tarjetas = () => {
             <div className="d-flex justify-content-between"> <p className="text-start m-2">Geek Card</p> <p className="my-1 mx-2 objeto-animado"><FaCcMastercard /></p></div>
             <div className="d-flex justify-content-between fs-1 mx-2 my-3"><RiMastercardFill /><LuNfc /></div>
             <div className="d-flex justify-content-evenly">
-                <p className="fw-bold fs-4">1234</p>
-                <p className="fw-bold fs-4">1234</p>
-                <p className="fw-bold fs-4">1234</p>
-                <p className="fw-bold fs-4">1234</p>
+                <p className={`fw-bold fs-4 ${store.hidden ? "desenfoque" : ""}`}>1234</p>
+                <p className={`fw-bold fs-4 ${store.hidden ? "desenfoque" : ""}`}>1234</p>
+                <p className={`fw-bold fs-4 ${store.hidden ? "desenfoque" : ""}`}>1234</p>
+                <p className={`fw-bold fs-4 ${store.hidden ? "desenfoque" : ""}`}>1234</p>
             </div>
             <div className="text-end d-flex justify-content-around">
                 <p className="mb-auto my-1 objeto-animado">Tarjetas</p>
-                <p>01/26</p>
+                <p className={store.hidden ? "desenfoque" : ""}>01/26</p>
             </div>
         </div >
     )
