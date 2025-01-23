@@ -7,7 +7,7 @@ import { RiArrowGoBackFill } from "react-icons/ri";
 const ContenedorPrincipalPerfil = () => {
     const { t } = useTranslation()
     const { store, actions } = useContext(Context);
-    const navigate = useNavigate(null);
+    const navigate = useNavigate();
 
     const [name, setName] = useState('');
     const [subname, setSubname] = useState('');
@@ -27,7 +27,24 @@ const ContenedorPrincipalPerfil = () => {
         setPhone(store.usuario.telefono);
         setTypeDoc(store.usuario.Tipo_de_documento);
         setNumDoc(store.usuario.Numero_de_documento);
+        console.log(name);
+        
     }, [])
+
+    const actualizarPerfil = () => {
+        const storedId = localStorage.getItem("userId");
+        const perfil = {
+            nombre_completo: name,
+            apellidos: subname,
+            direccion: adress,
+            telefono: phone,
+            tipo_documento: typeDoc,
+            numero_documento: numDoc
+
+        }
+        actions.updateClienteProfile(storedId, perfil)
+        navigate ("/home")
+    }
 
 
     return (
@@ -57,7 +74,7 @@ const ContenedorPrincipalPerfil = () => {
                             </div>
                             <div className={`col-xl-3 my-xl-3 col-md-4 my-2 d-flex flex-column text-center ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>
                                 <label className="my-2 fw-bold fs-4 label-perfil">{t('perfil.doctype')}</label>
-                                <select className={`form-select form-select-sm rounded-pill text-center bg-white bg-opacity-75 fw-bold text-dark py-2 hover ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`} aria-label="Small select example">
+                                <select className={`form-select form-select-sm rounded-pill text-center bg-white bg-opacity-75 fw-bold text-dark py-2 hover ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`} onChange={(e) => setTypeDoc(e.target.value)} aria-label="Small select example">
                                     <option className="fw-bold text-dark" value="DNI">{t('perfil.type1')}</option>
                                     <option className="fw-bold text-dark" value="NIE">{t('perfil.type2')}</option>
                                     <option className="fw-bold text-dark" value="Pasaporte">{t('perfil.type3')}</option>
@@ -68,7 +85,7 @@ const ContenedorPrincipalPerfil = () => {
                                 <input className="mx-md-3 text-center py-1 rounded-pill bg-white border-2 border-white text-dark fs-4 bg-opacity-75 fw-bold input-perfil" value={numDoc} onChange={(e) => setNumDoc(e.target.value)} type="text" />
                             </div>
                             <div className={`col-xl-12 mx-0 py-3 text-center ${userLoad ? "animacion-arriba visible" : "animacion-arriba"}`}>
-                                <button className={`btn btn-perfil bg-white bg-opacity-25 fw-bold border-white mt-3 w-50 hover text-white fw-bold fs-4 rounded-3 py-2`}>{t('perfil.btn')}</button>
+                                <button className={`btn btn-perfil bg-white bg-opacity-25 fw-bold border-white mt-3 w-50 hover text-white fw-bold fs-4 rounded-3 py-2`} onClick={() => { actualizarPerfil() }}>{t('perfil.btn')}</button>
                             </div>
                         </div>
                     </form>

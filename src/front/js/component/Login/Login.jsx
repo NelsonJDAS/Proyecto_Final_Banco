@@ -78,7 +78,6 @@ export const Login = () => {
             const userId = localStorage.getItem("userId");  // Recuperar el id del usuario
     
             if (token && userId) {
-                console.log("Usuario ID:", userId);  // Aquí tienes la ID del usuario
                 navigate("/home");
             } else {
                 console.error("Token o userId no encontrados");

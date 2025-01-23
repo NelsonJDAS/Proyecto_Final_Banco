@@ -12,6 +12,9 @@ export const Home = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // const storedName = localStorage.getItem("name");
+    const storedId = localStorage.getItem("userId")
+    actions.fetchUserDetails(storedId)
   }, []);
 
   return (

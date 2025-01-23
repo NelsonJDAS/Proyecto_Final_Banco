@@ -73,7 +73,48 @@ def addUser():
         access_token = create_access_token(identity=new_user.id)
         return jsonify({"mensaje": 'Usuario Agregado', "token": access_token}), 201
     except Exception as e:
-        return jsonify({"error": str(e)}), 400      
+        return jsonify({"error": str(e)}), 400   
+       
+@api.route('/User/Login', methods=['POST'])
+def user_autentication():
+    # Obtener datos del cliente
+    data = request.get_json()
+    name = data.get("name")
+    email = data.get("email")
+    password = data.get("password")
+    print("Datos recibidos:", data)  # Log para depuración
+
+    # Validaciones
+    if not email:
+        return jsonify({"Mensaje": "The email is missing"}), 400
+    if not password:
+        return jsonify({"Mensaje": "The password is missing"}), 400
+    if not name:
+        return jsonify({"Mensaje": "The name is missing"}), 400
+
+    try:
+        # Buscar usuario en la base de datos
+        user = User.query.filter_by(name=name, email=email, password=password).first()
+
+        if user is None:
+            return jsonify({"mensaje": "Invalid password or email"}), 400
+        
+        # Crear token de acceso
+        access_token = create_access_token(identity=user.name)
+
+        # Responder con el usuario y el token
+        return jsonify({
+            "user": {
+                "id": user.id,
+                "name": user.name,
+                "email": user.email
+    },
+    "token": access_token
+        }), 200  # 200 para indicar éxito en login
+
+    except Exception as e:
+        print("Error en el backend:", str(e))  # Log para debugging
+        return jsonify({"error": "An error occurred during login"}), 500
 
 @api.route('/User/<int:id>')
 def get_user_details(id):
@@ -133,46 +174,52 @@ def get_user_details(id):
     except Exception as e:
         return jsonify({"error": "Ha ocurrido un error", "details": str(e)}), 500       
 
-@api.route('/User/Login', methods=['POST'])
-def user_autentication():
-    # Obtener datos del cliente
-    data = request.get_json()
-    name = data.get("name")
-    email = data.get("email")
-    password = data.get("password")
-    print("Datos recibidos:", data)  # Log para depuración
+@api.route('/User/<int:id>/Perfil', methods=['PUT'])
+def update_cliente_profile(id):
+    perfil = request.get_json()  # Obtener los datos enviados en la solicitud
 
-    # Validaciones
-    if not email:
-        return jsonify({"Mensaje": "The email is missing"}), 400
-    if not password:
-        return jsonify({"Mensaje": "The password is missing"}), 400
-    if not name:
-        return jsonify({"Mensaje": "The name is missing"}), 400
+    # Buscar el usuario por ID
+    user = User.query.get(id)
+    if not user:
+        return jsonify({"error": "Usuario no encontrado"}), 404
 
-    try:
-        # Buscar usuario en la base de datos
-        user = User.query.filter_by(name=name, email=email, password=password).first()
+    # Verificar si el usuario tiene un cliente asociado
+    cliente = user.cliente
+    if not cliente:
+        return jsonify({"error": "El usuario no tiene un cliente asociado"}), 404
 
-        if user is None:
-            return jsonify({"mensaje": "Invalid password or email"}), 400
-        
-        # Crear token de acceso
-        access_token = create_access_token(identity=user.name)
+    # Obtener los datos enviados en la solicitud
+    nombre_completo = perfil.get("nombre_completo")
+    apellidos = perfil.get("apellidos")
+    direccion = perfil.get("direccion")
+    telefono = perfil.get("telefono")
+    tipo_documento = perfil.get("tipo_documento")
+    numero_documento = perfil.get("numero_documento")
 
-        # Responder con el usuario y el token
-        return jsonify({
-            "user": {
-                "id": user.id,
-                "name": user.name,
-                "email": user.email
-    },
-    "token": access_token
-        }), 200  # 200 para indicar éxito en login
+    # Validar el número de documento si es único
+    if numero_documento:
+        existing_cliente = cliente.query.filter_by(numero_documento=numero_documento).first()
+        if existing_cliente and existing_cliente.id != cliente.id:
+            return jsonify({"error": "El número de documento ya está en uso por otro cliente"}), 400
 
-    except Exception as e:
-        print("Error en el backend:", str(e))  # Log para debugging
-        return jsonify({"error": "An error occurred during login"}), 500
+    # Actualizar solo los campos enviados
+    if nombre_completo:
+        cliente.nombre_completo = nombre_completo
+    if apellidos:
+        cliente.apellidos = apellidos
+    if telefono:
+        cliente.telefono = telefono
+    if direccion:
+        cliente.direccion = direccion
+    if tipo_documento:
+        cliente.tipo_documento = tipo_documento
+    if numero_documento:
+        cliente.numero_documento = numero_documento
+
+    # Guardar cambios en la base de datos
+    db.session.commit()
+
+    return jsonify({"mensaje": "Perfil del cliente actualizado exitosamente", "cliente": cliente.serialize()}), 200
     
 @api.route('/private', methods=['POST'])
 @jwt_required()

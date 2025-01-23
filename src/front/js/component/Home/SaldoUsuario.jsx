@@ -7,14 +7,13 @@ const SaldoUsuario = () => {
     const { store, actions } = useContext(Context);
     const [hidden, SetHidden] = useState(false);
     const [userLoad, SetUserLoad] = useState("elemento-segundario");
-    const [name, SetName] = useState("");
 
     useEffect(() => {
-        const storedName = localStorage.getItem("name");
-        const storedId = localStorage.getItem("userId")
-        actions.fetchUserDetails(storedId)
+        // const storedName = localStorage.getItem("name");
+        // const storedId = localStorage.getItem("userId")
+        // actions.fetchUserDetails(storedId)
         SetUserLoad("elemento-segundario visible")
-        SetName(storedName)
+        // SetName(storedName)
         
     }, [])
 

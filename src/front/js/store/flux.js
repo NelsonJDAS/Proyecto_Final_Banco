@@ -145,7 +145,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             setStore({ ...store, usuario: data.cliente});
             setStore({ ...store, cliente: data.cuentas});
             setStore({ ...store, user: data.user});
-            console.log("Datos del usuario guardados en el store:", store.user, store.cliente, store.usuario);
+            console.log("Datos del usuario guardados en el store:","user", store.user, "Cliente", store.cliente, "usuario", store.usuario);
             
           })
           .catch((error) => {
@@ -153,6 +153,31 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.error("Hubo un problema al obtener los detalles del usuario:", error);
           });
       },
+
+      updateClienteProfile: (id, perfil) => {
+        const store = getStore();
+    
+        fetch(`${process.env.BACKEND_URL}/api/User/${id}/Perfil`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(perfil)
+        })
+        .then(async (response) => {
+            if (response.ok) {
+                const data = await response.json(); // Procesar la respuesta como JSON
+                setStore({ ...store, usuario: data.cliente});
+                console.log("Perfil actualizado:", data);
+            } else {
+                const errorData = await response.json(); // Procesar el error como JSON
+                console.error("Error al actualizar el perfil:", errorData);
+            }
+        })
+        .catch((error) => {
+            console.error("Error de red o del servidor:", error);
+        });
+    },
 
       sendCode: (email) => {
         const store = getStore();
