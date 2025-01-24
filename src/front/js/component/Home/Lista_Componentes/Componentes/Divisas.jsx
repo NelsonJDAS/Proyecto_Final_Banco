@@ -34,10 +34,10 @@ const Divisas = () => {
 
 
     return (
-        <div className={`bg-divisas animacion-contenedor hover contenedor-componente-interactivo my-2 text-center text-dark fw-bold ${store.borde} d-flex flex-column`}>
+        <div className={`bg-divisas animacion-contenedor hover contenedor-componente-interactivo my-2 text-center text-white fw-bold ${store.borde} d-flex flex-column`}>
             <p className="align-content-start mb-auto objeto-animado my-1 fw-bold">Tasa de Cambio del Euro</p>
 
-            <div className="d-flex flex-column scroll container-fluid">
+            <div className="d-flex flex-column scroll-divisas container-fluid">
                 {
                     Object.entries(divisas).map(([currency, rate]) => {
                         return <div className={`row px-0 mx-0 ${currency === "EUR" ? "d-none" : "" || currency.includes(input) ? "" : "d-none"}`}>
@@ -54,7 +54,7 @@ const Divisas = () => {
                 }
             </div>
             <div className="row">
-                <div className="col-12"><input className="form-control w-100 bg-transparent text-center rounded-3 contorno-input border-none text-black fw-bold" placeholder="Buscar" type="text" onChange={HandleInput} /></div>
+                <div className="col-12"><input className="form-control w-100 bg-transparent text-center rounded-3 contorno-input border-none text-white fw-bold" placeholder="Buscar" type="text" onChange={HandleInput} /></div>
             </div>
         </div >
     )
