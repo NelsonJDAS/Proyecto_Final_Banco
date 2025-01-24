@@ -40,7 +40,7 @@ const Divisas = () => {
             <div className="d-flex flex-column scroll-divisas container-fluid">
                 {
                     Object.entries(divisas).map(([currency, rate]) => {
-                        return <div key={currency} className={`row px-0 mx-0 ${currency === "EUR" ? "d-none" : "" || currency.includes(input) ? "" : "d-none"}`}>
+                        return <div key={currency} className={`row px-0 mx-0 ${currency === "EUR" ? "d-none" : "" || currency.slice(0, input.length).includes(input) ? "" : "d-none"}`}>
                             <div className="col-3 align-content-center mb-3 " >
                                 <div className="d-flex justify-content-evenly">
                                     <i><AiOutlineEuro /></i>
