@@ -44,7 +44,7 @@ export const Register = () => {
 
     return (
         <div className="register">
-            <form action="#" className={`d-flex flex-column align-content-center text-center  ${store.fondo}`}>
+            <div className={`d-flex formulario-login flex-column align-content-center text-center  ${store.fondo}`}>
                 <h1 className="titulo-login">{t('Register.create')}</h1>
                 <div className="d-flex flex-column text-center container mb-3">
                     <label className="my-1 fw-bold label-login">{t('Login.name')}</label>
@@ -59,7 +59,7 @@ export const Register = () => {
                 <button className={`btn btn-light mt-3 w-50 rounded-pill btn-login ${store.borde}`} onClick={() => {handleRegister()}}>{t('Register.ready')}</button>
                         
                 </div>
-            </form>
+            </div>
         </div>
     )
 };

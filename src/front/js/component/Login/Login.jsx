@@ -72,11 +72,11 @@ export const Login = () => {
     const HandleLogin = async () => {
         try {
             await actions.loginUser(name, email, password);
-            
+
             // Obtener el token y la id del usuario desde localStorage
             const token = localStorage.getItem("token");
             const userId = localStorage.getItem("userId");  // Recuperar el id del usuario
-    
+
             if (token && userId) {
                 navigate("/home");
             } else {
@@ -94,7 +94,7 @@ export const Login = () => {
 
     return (
         <div className="login">
-            <form action="#" className={`d-flex flex-column align-content-center text-center ${store.fondo}`}>
+            <div className={`d-flex flex-column align-content-center text-center formulario-login ${store.fondo}`}>
                 <h1 className="titulo-login">{t(userForgotPassword === false ? 'Login.login' : 'Login.recovery')}</h1>
                 {/* hace la transicion mas suave  */}
                 <div className={userForgotPassword ? "transicion-recuperar-password " : "transicion-Iniciar-Sesion "}>
@@ -161,7 +161,7 @@ export const Login = () => {
                         )}
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
     )
 };
