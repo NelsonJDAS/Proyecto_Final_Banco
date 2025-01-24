@@ -47,7 +47,7 @@ const Divisas = () => {
                                     <i><FaArrowRight /></i>
                                 </div>
                             </div>
-                            <div className="col-4 align-content-center"><p>{(divisas.EUR / rate).toFixed(6)}</p></div>
+                            <div className="col-4 align-content-center"><p>{((divisas.USD / divisas.EUR) * rate).toFixed(6)}</p></div>
                             <div className="col-5 align-content-center mb-3 text-end"><b className="">{currency}</b></div>
                         </div>
                     })
