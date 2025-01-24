@@ -38,6 +38,8 @@ export const Register = () => {
         } else {
             console.error("Error en el registro");
         }
+        console.log("desde front", name, email, password);
+        
     };
 
     return (
@@ -48,7 +50,7 @@ export const Register = () => {
                     <label className="my-1 fw-bold label-login">{t('Login.name')}</label>
                     <input className="mx-2 mx-md-3 text-center py-1 rounded-pill input" type="text" onChange={HandleName} maxLength="40" ref={inputName} />
                     <label className="my-1 fw-bold label-login">{t('Login.email')}</label>
-                    <input className="mx-2 mx-md-3 text-center py-1 rounded-pill input" type="email" onChange={HandleEmail} ref={inputMail} />
+                    <input className="mx-2 mx-md-3 text-center py-1 rounded-pill input" type="text" onChange={HandleEmail} ref={inputMail} />
                     <label className="my-1 fw-bold label-login">{t('Login.password')}</label>
                     <input className="mx-2 mx-md-3 text-center py-1 rounded-pill input" type="password" onChange={HandlePassword} ref={inputPassword} />
                 </div>

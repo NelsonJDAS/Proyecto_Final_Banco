@@ -71,7 +71,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           localStorage.setItem("token", data.token);
           localStorage.setItem("name", data.user.name);
           localStorage.setItem("userId", data.user.id);
-          actions.fetchUserDetails(data.user.id)
+          // actions.fetchUserDetails(data.user.id)
 
           // Actualizamos el store con el token y los datos del usuario
           setStore({
@@ -88,6 +88,9 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       registerUser: (name, email, password) => {
+        const actions = getActions();
+        console.log("desde flux", name, email, password);
+        
         return fetch(process.env.BACKEND_URL + "/api/User/Register", {
           method: "POST",
           headers: {
@@ -117,13 +120,16 @@ const getState = ({ getStore, getActions, setStore }) => {
             return response.json(); // Parseamos la respuesta JSON
           })
           .then((data) => {
-            const token = data.token; // Accedemos al token desde la respuesta
-            localStorage.setItem("token", token); // Guardamos el token en localStorage
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("name", data.user.name);
+            localStorage.setItem("userId", data.user.id);
+            // actions.fetchUserDetails(data.user.id)
             return "success";
           })
           .catch((error) => {
             console.error("Error al registrar usuario:", error);
           });
+          
       },
 
       fetchUserDetails: (id) => {

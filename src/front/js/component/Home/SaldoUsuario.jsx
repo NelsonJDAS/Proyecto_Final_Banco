@@ -11,7 +11,7 @@ const SaldoUsuario = () => {
         SetUserLoad("elemento-segundario visible")
 
 
-    }, [])
+    }, [actions.fetchUserDetails])
 
     return (<div className={`container my-3 p-3 color-principal w-100 rounded-3 ${store.borde} ${userLoad} text-white`}>
         <div className="row">

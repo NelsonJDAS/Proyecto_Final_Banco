@@ -29,13 +29,13 @@ class Cliente(db.Model):
     __tablename__ = 'cliente'
 
     id = db.Column(db.Integer, primary_key=True)
-    nombre_completo = db.Column(db.String(20))
-    apellidos = db.Column(db.String(20))
-    telefono = db.Column(db.String(15))
+    nombre_completo = db.Column(db.String(50))
+    apellidos = db.Column(db.String(100))
+    telefono = db.Column(db.String(30))
     direccion = db.Column(db.String(200))
     fecha_creacion = db.Column(db.DateTime, default=datetime.utcnow)
     fecha_nacimiento = db.Column(db.Date)
-    tipo_documento = db.Column(db.String(20))
+    tipo_documento = db.Column(db.String(50))
     numero_documento = db.Column(db.String(50), unique=True)
     # Eliminamos nombre y email de aquí, ya que ahora están en User
     cuentas = db.relationship("Cuenta", back_populates="cliente")

@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User
+from api.models import db, User, Cliente, Cuenta
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from flask_jwt_extended import create_access_token
@@ -46,21 +46,21 @@ def getUsers():
 @api.route('/User/Register', methods=['POST'])
 def addUser():
     data = request.get_json()
+    print('desde routes', data)
+
+    # Datos del usuario
     name = data.get("name")
     email = data.get("email")
     password = data.get("password")
-    is_active = data.get("is_active")
-    
-    if email is None or email == "":
-        return jsonify({"Mensaje": "The email is missing"}), 400
-    elif name is None or name == "":
-        return jsonify({"Mensaje": "The name is missing"}), 400
-    elif password is None or password == "":
-        return jsonify({"Mensaje": "The password is missing"}), 400
-    elif is_active is None or is_active == "":
-        return jsonify({"Mensaje": "The is_active is missing"}), 400
+    is_active = data.get("is_active", True)  # Default: activo
+
+    # Validaciones básicas
+    if not email or not name or not password:
+        return jsonify({"mensaje": "Faltan datos obligatorios del usuario"}), 400
 
     try:
+        # Crear usuario
+        print("Creando usuario...")
         new_user = User(
             name=name,
             email=email,
@@ -68,12 +68,62 @@ def addUser():
             is_active=is_active
         )
         db.session.add(new_user)
+        db.session.flush()  # Esto asegura que new_user.id esté disponible
+        print("Usuario creado:", new_user)
+
+        # Crear cliente asociado al usuario
+        print("Creando cliente...")
+        nuevo_cliente = Cliente(
+            nombre_completo=name,
+            apellidos="Introduzca apellido",
+            telefono="Introduzca numero",
+            direccion="Introduzca direccion",
+            tipo_documento="",
+        )
+        db.session.add(nuevo_cliente)
+        db.session.flush()  # Esto asegura que nuevo_cliente.id esté disponible
+        print("Cliente creado:", nuevo_cliente)
+
+        # Asociar el cliente al usuario
+        new_user.cliente_id = nuevo_cliente.id
+        db.session.add(new_user)  # Actualizar el usuario con el cliente asociado
+
+        # Crear cuenta asociada al cliente
+        print("Creando cuenta...")
+        nueva_cuenta = Cuenta(
+            numero_cuenta=f"CUENTA-{random.randint(1000, 9999)}",
+            numero_tarjeta=f"TARJETA-{random.randint(1000, 9999)}",
+            cvv=f"{random.randint(100, 999)}",
+            caducidad="12/30",
+            tipo_cuenta="Debito",
+            saldo=0,
+            saldo_retenido=0,
+            cliente_id=nuevo_cliente.id,
+            estado=1,
+        )
+        db.session.add(nueva_cuenta)
+        print("Cuenta creada:", nueva_cuenta)
+
+        # Confirmar los cambios
         db.session.commit()
-        
+        print("Cambios confirmados")
+
+        # Generar un token para el usuario
         access_token = create_access_token(identity=new_user.id)
-        return jsonify({"mensaje": 'Usuario Agregado', "token": access_token}), 201
+        return jsonify({
+            "mensaje": "Usuario, cliente y cuenta creados exitosamente",
+            "user": {
+                "id": new_user.id,
+                "name": new_user.name,
+                "email": new_user.email
+            },
+            "token": access_token
+        }), 201
+
     except Exception as e:
-        return jsonify({"error": str(e)}), 400   
+        db.session.rollback()  # Revertir cambios si hay un error
+        print("Error:", str(e))
+        return jsonify({"error": str(e)}), 400
        
 @api.route('/User/Login', methods=['POST'])
 def user_autentication():
