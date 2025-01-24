@@ -29,11 +29,13 @@ class Cliente(db.Model):
     __tablename__ = 'cliente'
 
     id = db.Column(db.Integer, primary_key=True)
-    telefono = db.Column(db.String(15))
+    nombre_completo = db.Column(db.String(50))
+    apellidos = db.Column(db.String(100))
+    telefono = db.Column(db.String(30))
     direccion = db.Column(db.String(200))
     fecha_creacion = db.Column(db.DateTime, default=datetime.utcnow)
     fecha_nacimiento = db.Column(db.Date)
-    tipo_documento = db.Column(db.String(20))
+    tipo_documento = db.Column(db.String(50))
     numero_documento = db.Column(db.String(50), unique=True)
     # Eliminamos nombre y email de aquí, ya que ahora están en User
     cuentas = db.relationship("Cuenta", back_populates="cliente")
@@ -47,12 +49,14 @@ class Cliente(db.Model):
     def serialize(self):
         return {
             "id": self.id,
+            "nombre_completo": self.nombre_completo,
+            "apellidos": self.apellidos,
             "telefono": self.telefono,
             "direccion": self.direccion,
-            "fecha_creacion": self.fecha_creacion,
-            "fecha_nacimiento": self.fecha_nacimiento,
             "tipo_documento": self.tipo_documento,
             "numero_documento": self.numero_documento,
+            "fecha_nacimiento": self.fecha_nacimiento,
+            "fecha_creacion": self.fecha_creacion,
         }
 
 
@@ -88,6 +92,7 @@ class Cuenta(db.Model):
     numero_cuenta = db.Column(db.String(20), unique=True)
     numero_tarjeta = db.Column(db.String(20), unique=True)
     cvv = db.Column(db.String(3), unique=True)
+    caducidad = db.Column(db.String(40))
     tipo_cuenta = db.Column(db.String(50))
     saldo = db.Column(db.Float)
     saldo_retenido = db.Column(db.Float)
@@ -107,6 +112,7 @@ class Cuenta(db.Model):
             "numero_cuenta": self.numero_cuenta,
             "numero_tarjeta": self.numero_tarjeta,
             "cvv": self.cvv,
+            "caducidad": self.caducidad,
             "tipo_cuenta": self.tipo_cuenta,
             "saldo": self.saldo,
             "saldo_retenido": self.saldo_retenido,

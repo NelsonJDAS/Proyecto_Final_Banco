@@ -10,7 +10,9 @@ const getState = ({ getStore, getActions, setStore }) => {
       email: "",
       code: "",
       token: null,
-      usuario: "",
+      user: "",
+      cliente: "",
+      cuentas: ""
     },
     actions: {
       CambiarIncognito: (estado) => {
@@ -67,25 +69,28 @@ const getState = ({ getStore, getActions, setStore }) => {
           const data = await response.json();
           // Guardamos el token en el localStorage
           localStorage.setItem("token", data.token);
-          localStorage.setItem("name", data.name)
+          localStorage.setItem("name", data.user.name);
+          localStorage.setItem("userId", data.user.id);
+          // actions.fetchUserDetails(data.user.id)
 
           // Actualizamos el store con el token y los datos del usuario
           setStore({
             ...store,
             token: data.token,
-            user: data["Usuario Identificado"], // Ajustar según lo que devuelva tu backend
+            user: data.user, // Ajustar según lo que devuelva tu backend
+            
           });
-
-          console.log("Login exitoso. Token guardado en localStorage.");
+          console.log("Login exitoso. Token guardado en localStorage.", store.user, store.usuario);
         } catch (error) {
-          console.error("Error en loginUser:", error.message);
-          throw error; // Lanzamos el error para que HandleLogin lo maneje
           console.error("Error en loginUser:", error.message);
           throw error; // Lanzamos el error para que HandleLogin lo maneje
         }
       },
 
       registerUser: (name, email, password) => {
+        const actions = getActions();
+        console.log("desde flux", name, email, password);
+        
         return fetch(process.env.BACKEND_URL + "/api/User/Register", {
           method: "POST",
           headers: {
@@ -115,17 +120,21 @@ const getState = ({ getStore, getActions, setStore }) => {
             return response.json(); // Parseamos la respuesta JSON
           })
           .then((data) => {
-            const token = data.token; // Accedemos al token desde la respuesta
-            localStorage.setItem("token", token); // Guardamos el token en localStorage
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("name", data.user.name);
+            localStorage.setItem("userId", data.user.id);
+            // actions.fetchUserDetails(data.user.id)
             return "success";
           })
           .catch((error) => {
             console.error("Error al registrar usuario:", error);
           });
+          
       },
 
-      fetchUserDetails: (userId) => {
-        fetch(`${process.env.BACKEND_URL}/api/User/${userId}`, {
+      fetchUserDetails: (id) => {
+        const store = getStore();
+        fetch(`${process.env.BACKEND_URL}/api/User/${id}`, {
           method: "GET", // Método HTTP
           headers: {
             "Content-Type": "application/json", // Indicamos que esperamos JSON como respuesta
@@ -140,8 +149,11 @@ const getState = ({ getStore, getActions, setStore }) => {
           })
           .then((data) => {
             // Guardamos los datos del usuario en el store bajo la propiedad "usuario"
-            setStore({ ...getStore(), usuario: data });
-            console.log("Datos del usuario guardados en el store:", data);
+            setStore({ ...store, cliente: data.cliente});
+            setStore({ ...store, cuentas: data.cuentas});
+            setStore({ ...store, user: data.user});
+            console.log("Datos del usuario guardados en el store:","user", store.user, "cliente", store.cliente, "cuentas", store.cuentas);
+            
           })
           .catch((error) => {
             // Manejamos cualquier error que ocurra durante el fetch
@@ -149,39 +161,30 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
       },
 
-      // getUserData: (userId) => {
-      //   const store = getStore();
-      //   const actions = getActions();
-
-      //   fetch(process.env.BACKEND_URL + `/api/User/${userId}`, {
-      //     method: "GET",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //       "Authorization": `Bearer ${store.token}`, // Asegúrate de enviar el token si es necesario para la autenticación
-      //     },
-      //   })
-      //     .then((response) => {
-      //       if (!response.ok) {
-      //         return response.json().then((errorData) => {
-      //           throw new Error(errorData.mensaje || "Error al obtener los datos del usuario");
-      //         });
-      //       }
-      //       return response.json();
-      //     })
-      //     .then((data) => {
-      //       // Guardamos la información del usuario en el store
-      //       setStore({
-      //         ...store,
-      //         userData: data,  // Aquí se actualiza el store con los datos del usuario
-      //       });
-
-      //       console.log("Datos del usuario obtenidos exitosamente.");
-      //     })
-      //     .catch((error) => {
-      //       console.error("Error al obtener los datos del usuario:", error.message);
-      //       // Aquí podrías manejar el error de otra forma si lo necesitas
-      //     });
-      // },
+      updateClienteProfile: (id, perfil) => {
+        const store = getStore();
+    
+        fetch(`${process.env.BACKEND_URL}/api/User/${id}/Perfil`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(perfil)
+        })
+        .then(async (response) => {
+            if (response.ok) {
+                const data = await response.json(); // Procesar la respuesta como JSON
+                setStore({ ...store, usuario: data.cliente});
+                console.log("Perfil actualizado:", data);
+            } else {
+                const errorData = await response.json(); // Procesar el error como JSON
+                console.error("Error al actualizar el perfil:", errorData);
+            }
+        })
+        .catch((error) => {
+            console.error("Error de red o del servidor:", error);
+        });
+    },
 
       sendCode: (email) => {
         const store = getStore();

@@ -128,8 +128,8 @@ export const Navbar = () => {
 										<li>
 											<div className={`dropdown-item text-center hover ${store.fondo === "fondo-modo-claro" ? "text-white" : "text-dark"}`}>
 												<span className={store.borde_hover} onClick={() => {
-													navigate("/example")
-												}}>{t('GEEK Store')}</span>
+													navigate("/perfil")
+												}}>{t('Navbar.perfil')}</span>
 											</div>
 										</li>
 										<li>

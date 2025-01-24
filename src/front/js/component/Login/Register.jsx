@@ -38,17 +38,19 @@ export const Register = () => {
         } else {
             console.error("Error en el registro");
         }
+        console.log("desde front", name, email, password);
+        
     };
 
     return (
         <div className="register">
-            <form action="#" className={`d-flex flex-column align-content-center text-center  ${store.fondo}`}>
+            <div className={`d-flex formulario-login flex-column align-content-center text-center  ${store.fondo}`}>
                 <h1 className="titulo-login">{t('Register.create')}</h1>
                 <div className="d-flex flex-column text-center container mb-3">
                     <label className="my-1 fw-bold label-login">{t('Login.name')}</label>
                     <input className="mx-2 mx-md-3 text-center py-1 rounded-pill input" type="text" onChange={HandleName} maxLength="40" ref={inputName} />
                     <label className="my-1 fw-bold label-login">{t('Login.email')}</label>
-                    <input className="mx-2 mx-md-3 text-center py-1 rounded-pill input" type="email" onChange={HandleEmail} ref={inputMail} />
+                    <input className="mx-2 mx-md-3 text-center py-1 rounded-pill input" type="text" onChange={HandleEmail} ref={inputMail} />
                     <label className="my-1 fw-bold label-login">{t('Login.password')}</label>
                     <input className="mx-2 mx-md-3 text-center py-1 rounded-pill input" type="password" onChange={HandlePassword} ref={inputPassword} />
                 </div>
@@ -57,7 +59,7 @@ export const Register = () => {
                 <button className={`btn btn-light mt-3 w-50 rounded-pill btn-login ${store.borde}`} onClick={() => {handleRegister()}}>{t('Register.ready')}</button>
                         
                 </div>
-            </form>
+            </div>
         </div>
     )
 };

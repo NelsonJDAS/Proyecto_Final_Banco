@@ -12,35 +12,10 @@ export const Home = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const getUserData = async () => {
-      const token = localStorage.getItem("token");
-      const storedUserName = localStorage.getItem("name");
-
-      if (!token) {
-        navigate("/login", { replace: true });
-        alert("No ha iniciado sesion. Redirigiendo al login...");
-        return;
-      }
-
-      const response = await fetch(process.env.BACKEND_URL + "/api/private", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (response.ok) {
-        console.log("privado con jwt");
-        actions.fetchUserDetails()
-
-        // setUserName(storedUserName);
-        // setLoading(false);
-      }
-    };
-
-    getUserData();
-  }, [navigate]);
+    // const storedName = localStorage.getItem("name");
+    const storedId = localStorage.getItem("userId")
+    actions.fetchUserDetails(storedId)
+  }, []);
 
   return (
     <div className={`${store.texto}`}>

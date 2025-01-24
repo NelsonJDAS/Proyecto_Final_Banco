@@ -72,12 +72,15 @@ export const Login = () => {
     const HandleLogin = async () => {
         try {
             await actions.loginUser(name, email, password);
-            const token = localStorage.getItem("token");
 
-            if (token) {
+            // Obtener el token y la id del usuario desde localStorage
+            const token = localStorage.getItem("token");
+            const userId = localStorage.getItem("userId");  // Recuperar el id del usuario
+
+            if (token && userId) {
                 navigate("/home");
             } else {
-                console.error("Token no encontrado");
+                console.error("Token o userId no encontrados");
             }
         } catch (error) {
             console.error("Error en HandleLogin:", error);
@@ -91,7 +94,7 @@ export const Login = () => {
 
     return (
         <div className="login">
-            <form action="#" className={`d-flex flex-column align-content-center text-center ${store.fondo}`}>
+            <div className={`d-flex flex-column align-content-center text-center formulario-login ${store.fondo}`}>
                 <h1 className="titulo-login">{t(userForgotPassword === false ? 'Login.login' : 'Login.recovery')}</h1>
                 {/* hace la transicion mas suave  */}
                 <div className={userForgotPassword ? "transicion-recuperar-password " : "transicion-Iniciar-Sesion "}>
@@ -109,9 +112,9 @@ export const Login = () => {
                                 <span className={`text-end mx-md-3 label-login ${store.borde_hover}`} onClick={() => { SetuserForgotPassword(true) }}>{t('Login.forgot')}</span>
                                 <div className="text-center">
                                     <button type="button" className={`btn btn-light mt-3 w-50 rounded-pill btn-login ${store.borde}`} onClick={() => {
-                                        // HandleLogin()
-                                        localStorage.setItem("token", "amfoidoiafoijdoiajsfiojadsioj")
-                                        navigate("/home")
+                                        HandleLogin()
+                                        // localStorage.setItem("token", "amfoidoiafoijdoiajsfiojadsioj")
+                                        // navigate("/home")
                                     }}>{t('Login.login')}</button>
                                 </div>
                             </>
@@ -158,7 +161,7 @@ export const Login = () => {
                         )}
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
     )
 };
