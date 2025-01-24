@@ -50,7 +50,6 @@ const Layout = () => {
               <Route element={<Tarifas />} path="/tarifas" />
               <Route element={<Educacion />} path="/educacion" />
               <Route element={<Consejos />} path="/consejos" />
-              <Route element={<Metodos />} path="/metodos" />
               <Route element={<Perfil />} path="/perfil" />
               <Route element={<Transferencias />} path="/transferencias" />
               <Route element={<Movimientos />} path="/movimientos" />
@@ -65,3 +64,5 @@ const Layout = () => {
 };
 
 export default injectContext(Layout);
+
+// <Route element={<Metodos />} path="/metodos" />

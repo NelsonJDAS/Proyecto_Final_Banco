@@ -28,7 +28,7 @@ const ContenedorPrincipalPerfil = () => {
         setTypeDoc(store.cliente.Tipo_de_documento);
         setNumDoc(store.cliente.Numero_de_documento);
         console.log(name);
-        
+
     }, [])
 
     const actualizarPerfil = () => {
@@ -43,7 +43,7 @@ const ContenedorPrincipalPerfil = () => {
 
         }
         actions.updateClienteProfile(storedId, perfil)
-        navigate ("/home")
+        navigate("/home")
     }
 
 
@@ -89,8 +89,8 @@ const ContenedorPrincipalPerfil = () => {
                             </div>
                         </div>
                     </form>
-                </div>
-            </div>
+                </div >
+            </div >
         </>
     )
 }
