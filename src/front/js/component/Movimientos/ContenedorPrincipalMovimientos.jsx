@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import TablaCol from "../Home/TablaCol.jsx";
+import Graficas from "../graficas/Graficas.jsx";
 
 const ContenedorPrincipalMovimientos = () => {
 
@@ -11,6 +12,9 @@ const ContenedorPrincipalMovimientos = () => {
 
     return (
         <>
+        <div className="">
+            <Graficas />
+        </div>
             <h1 className={`text-center my-3 ${userLoad ? "animacion-arriba visible" : "animacion-arriba"}`}>Movimientos</h1>
             <div className="container my-3">
                 <div className="row my-3">

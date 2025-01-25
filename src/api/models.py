@@ -39,9 +39,9 @@ class Cliente(db.Model):
     numero_documento = db.Column(db.String(50), unique=True)
     # Eliminamos nombre y email de aquí, ya que ahora están en User
     cuentas = db.relationship("Cuenta", back_populates="cliente")
-    asesor = db.relationship("Asesor", back_populates="cliente", uselist=False)
     configuracion = db.relationship("ConfiguracionUsuario", back_populates="cliente", uselist=False)
     usuarios = db.relationship("User", back_populates="cliente")
+    notificaciones = db.relationship("Notificacion", back_populates="cliente")
 
     def __repr__(self):
         return f'<Cliente {self.id}>'
@@ -100,8 +100,6 @@ class Cuenta(db.Model):
     estado = db.Column(db.Integer)
     cliente = db.relationship("Cliente", back_populates="cuentas")
     transacciones = db.relationship("Transaccion", back_populates="cuenta")
-    seguro_id = db.Column(db.Integer, db.ForeignKey('seguro.id'))
-    seguro = db.relationship("Seguro", back_populates="cuentas")
 
     def __repr__(self):
         return f'<Cuenta {self.numero_cuenta}, Tipo: {self.tipo_cuenta}, Saldo: {self.saldo}>'
@@ -118,7 +116,6 @@ class Cuenta(db.Model):
             "saldo_retenido": self.saldo_retenido,
             "estado": self.estado,
             "cliente_id": self.cliente_id,
-            "seguro_id": self.seguro_id,
         }
 
 
@@ -168,44 +165,25 @@ class TipoTransaccion(db.Model):
             "descripcion": self.descripcion,
         }
 
-
-class Asesor(db.Model):
-    __tablename__ = 'asesor'
+class Notificacion(db.Model):
+    __tablename__ = 'notificacion'
 
     id = db.Column(db.Integer, primary_key=True)
-    nombre = db.Column(db.String(100))
-    puesto = db.Column(db.String(50))
-    fecha_contratacion = db.Column(db.DateTime, default=datetime.utcnow)
-    activo = db.Column(db.Boolean, default=True)
+    mensaje = db.Column(db.String(255), nullable=False)
+    leida = db.Column(db.Boolean, default=False)
+    fecha_creacion = db.Column(db.DateTime, default=datetime.utcnow)
     cliente_id = db.Column(db.Integer, db.ForeignKey('cliente.id'))
-    cliente = db.relationship("Cliente", back_populates="asesor")
+    cliente = db.relationship("Cliente", back_populates="notificaciones")
 
     def __repr__(self):
-        return f'<Asesor {self.nombre}, Puesto: {self.puesto}>'
+        return f'<Notificacion {self.mensaje}>'
 
     def serialize(self):
         return {
             "id": self.id,
-            "nombre": self.nombre,
-            "puesto": self.puesto,
-            "fecha_contratacion": self.fecha_contratacion,
-            "activo": self.activo,
-            "cliente_id": self.cliente_id,
+            "mensaje": self.mensaje,
+            "leida": self.leida,
+            "fecha_creacion": self.fecha_creacion,
+            "cliente_id": self.cliente_id
         }
-
-
-class Seguro(db.Model):
-    __tablename__ = 'seguro'
-
-    id = db.Column(db.Integer, primary_key=True)
-    tipo = db.Column(db.Integer)
-    cuentas = db.relationship("Cuenta", back_populates="seguro")
-
-    def __repr__(self):
-        return f'<Seguro {self.tipo}>'
-
-    def serialize(self):
-        return {
-            "id": self.id,
-            "tipo": self.tipo,
-        }
+    
