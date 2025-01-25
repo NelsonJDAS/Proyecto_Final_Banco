@@ -147,7 +147,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             setStore({ ...store, cuentas: data.cuentas });
             setStore({ ...store, user: data.user });
             setStore({ ...store, notificaciones: data.notificaciones});
-            console.log("Datos del usuario guardados en el store:", "user", store.user, "cliente", store.cliente, "cuentas", store.cuentas, notificaciones, store.notificaciones);
+            console.log("Datos del usuario guardados en el store:", "user", store.user, "cliente", store.cliente, "cuentas", store.cuentas, "notificaciones", store.notificaciones);
 
           })
           .catch((error) => {
@@ -180,6 +180,31 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.error("Error de red o del servidor:", error);
           });
       },
+
+      marcarNotificacionComoLeida: async (notificacionId) => {
+        try {
+            const response = await fetch(`${process.env.BACKEND_URL}/api/notificaciones/${notificacionId}/marcar-leida`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+    
+            if (!response.ok) {
+                throw new Error("Error al marcar la notificación como leída");
+            }
+    
+            const data = await response.json();
+            return data; // Devuelve la notificación actualizada
+        } catch (error) {
+            console.error("Error:", error);
+            throw error;
+        }
+    },
+    setNotificaciones:(notificaciones) => {
+      const store = getStore();
+      setStore({ ...store, notificaciones });
+  },
 
       sendCode: (email) => {
         const store = getStore();

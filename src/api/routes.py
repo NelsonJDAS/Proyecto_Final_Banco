@@ -191,17 +191,19 @@ def get_user_details(id):
         user = User.query.get(id)
         if not user:
             return jsonify({"error": "Usuario no encontrado"}), 404
+
         # Obtener el cliente asociado al usuario
         cliente = user.cliente
         if not cliente:
             return jsonify({"error": "El usuario no tiene un cliente asociado"}), 404
+
         # Obtener las cuentas del cliente
         cuentas = cliente.cuentas
+        transacciones_data = []
         for cuenta in cuentas:
-            # Calcular el saldo total de todas las cuentas
             # Obtener las transacciones asociadas a esta cuenta
             transacciones = cuenta.transacciones
-            transacciones_data = [
+            transacciones_data.extend([
                 {
                     "id": transaccion.id,
                     "tipo": transaccion.tipo,
@@ -210,7 +212,13 @@ def get_user_details(id):
                     "descripcion": transaccion.descripcion
                 }
                 for transaccion in transacciones
-            ]
+            ])
+
+        # Obtener las notificaciones del cliente
+        notificaciones = cliente.notificaciones
+        notificaciones_data = [notificacion.serialize() for notificacion in notificaciones]
+
+        # Construir la respuesta
         response = {
             "user": {
                 "id": user.id,
@@ -236,11 +244,12 @@ def get_user_details(id):
                 "saldo": cuenta.saldo,
                 "saldo_retenido": cuenta.saldo_retenido,
                 "transacciones": transacciones_data
-            }
+            },
+            "notificaciones": notificaciones_data  # Incluir notificaciones en la respuesta
         }
         return jsonify(response), 200
     except Exception as e:
-        return jsonify({"error": "Ha ocurrido un error", "details": str(e)}), 500       
+        return jsonify({"error": "Ha ocurrido un error", "details": str(e)}), 500  
 
 @api.route('/User/<int:id>/Perfil', methods=['PUT'])
 def update_cliente_profile(id):
@@ -348,7 +357,7 @@ def agregar_notificacion(cliente_id):
         return jsonify({"error": "Ha ocurrido un error", "details": str(e)}), 500
 
 @api.route('/notificaciones/<int:notificacion_id>/marcar-leida', methods=['PUT'])
-@jwt_required()
+# @jwt_required()
 def marcar_notificacion_leida(notificacion_id):
     try:
         # Buscar la notificación por ID
