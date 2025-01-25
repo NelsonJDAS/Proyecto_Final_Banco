@@ -13,7 +13,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       user: "",
       cliente: "",
       cuentas: "",
-      notificaciones: [],
+      listaNotificaciones: [],
       chartData: [], // Graficas
       stockData: null, // Datos de mercado
       notificaciones: false,
@@ -150,8 +150,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             setStore({ ...store, cliente: data.cliente });
             setStore({ ...store, cuentas: data.cuentas });
             setStore({ ...store, user: data.user });
-            setStore({ ...store, notificaciones: data.notificaciones });
-            console.log("Datos del usuario guardados en el store:", "user", store.user, "cliente", store.cliente, "cuentas", store.cuentas, notificaciones, store.notificaciones);
+            setStore({ ...store, listaNotificaciones: data.notificaciones});
+            console.log("Datos del usuario guardados en el store:", "user", store.user, "cliente", store.cliente, "cuentas", store.cuentas, "listaNotificaciones", store.listaNotificaciones);
 
           })
           .catch((error) => {
@@ -184,6 +184,32 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.error("Error de red o del servidor:", error);
           });
       },
+
+      marcarNotificacionComoLeida: async (notificacionId) => {
+        try {
+            const response = await fetch(`${process.env.BACKEND_URL}/api/notificaciones/${notificacionId}/marcar-leida`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+    
+            if (!response.ok) {
+                throw new Error("Error al marcar la notificación como leída");
+            }
+    
+            const data = await response.json();
+            return data; // Devuelve la notificación actualizada
+            
+        } catch (error) {
+            console.error("Error:", error);
+            throw error;
+        }
+    },
+    setNotificaciones:(listaNotificaciones) => {
+      const store = getStore();
+      setStore({ ...store, listaNotificaciones });
+  },
 
       sendCode: (email) => {
         const store = getStore();
