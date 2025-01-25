@@ -2,7 +2,7 @@ import React, { useEffect, useContext, useRef } from 'react';
 import { Context } from "../../store/appContext.js";
 import { createChart } from 'lightweight-charts';
 
-const Graficas = () => {
+const GraficaComponenteInversiones = () => {
     const { store, actions } = useContext(Context); // Accede al contexto
     const chartContainerRef = useRef(null);
 
@@ -15,20 +15,13 @@ const Graficas = () => {
         if (store.chartData.length > 0) {
             // Crear el gráfico
             const chart = createChart(chartContainerRef.current, {
+                height: 140,
                 layout: {
                     background: {
                         type: 'Solid', // También puedes usar 'VerticalGradient' o 'HorizontalGradient' para degradados
                         color: 'rgba(0, 0, 0, 0)' // Aquí pones el color de fondo deseado, por ejemplo, gris claro
                     },
-                    textColor: 'white', // Opcional: el color del texto (ejes y etiquetas)
-                },
-                grid: {
-                    vertLines: {
-                        color: 'transparent' // Líneas verticales transparentes (las oculta)
-                    },
-                    horzLines: {
-                        color: '#e0e0e0' // Opcional: Color de las líneas horizontales (puedes personalizarlo o hacerlo transparente también)
-                    }
+                    textColor: 'white' // Opcional: el color del texto (ejes y etiquetas)
                 }
             });
 
@@ -48,4 +41,4 @@ const Graficas = () => {
     return <div className='contenedor-componente-interactivo' ref={chartContainerRef} />;
 };
 
-export default Graficas;
+export default GraficaComponenteInversiones;

@@ -16,7 +16,7 @@ const ContenedorPrincipalTransferencias = () => {
                 <div className="row">
                     <div className={`my-2 col-lg-6 d-flex flex-column text-center ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>
                         <label className="my-1 fw-bold fs-4 label-t">Cuenta Remitente</label>
-                        <input className="mx-md-3 text-center py-1 rounded-3 bg-white border-1 border-white text-dark bg-opacity-50 fs-4 fw-bold input-transferencias" type="text" />
+                        <input className="mx-md-3 text-center py-1 rounded-3 bg-white border-1 border-white text-dark bg-opacity-50 fs-4 fw-bold input-transferencias" disabled type="text" />
                         <label className="my-1 fw-bold text-end label-t mx-3">Saldo:  6000</label>
                     </div>
                     <div className={`my-md-2  col-lg-6 d-flex flex-column text-center ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>

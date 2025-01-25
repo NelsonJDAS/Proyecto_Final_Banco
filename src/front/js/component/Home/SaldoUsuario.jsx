@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../../store/appContext";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
+import Graficas from "../graficas/Graficas.jsx";
 
 const SaldoUsuario = () => {
     const { store, actions } = useContext(Context);
@@ -37,7 +38,11 @@ const SaldoUsuario = () => {
                     <div className={`col-6  px-1 text-start ${store.hidden ? "desenfoque" : ""}`}><span className="fs-3 fw-bold num-saldo">{store.cuentas.saldo_retenido}</span></div>
                 </div>
             </div>
-            <div className="col-8"></div>
+            <div className="col-8">
+                <div className="container">
+                    <Graficas />
+                </div>
+            </div>
         </div>
     </div>)
 }

@@ -11,7 +11,7 @@ const ContenedorNotificaciones = () => {
         SetUserLoad("elemento visible")
     }, [])
     return (
-        <>
+        <div className={store.notificaciones ? "d-none" : ""}>
             <div className="row">
                 <div className="col-12 text-center fw-bold"><h3 className="text-center">Notificaciones</h3></div>
             </div>
@@ -21,7 +21,7 @@ const ContenedorNotificaciones = () => {
                 <NotificacionCol cuerpo="Necesitas ayuda? no dudes en contactar con nuestro Chat" />
                 <NotificacionCol cuerpo="Tranferencia realizada hace 10 minutos" />
             </div>
-        </>
+        </div>
     )
 }
 
