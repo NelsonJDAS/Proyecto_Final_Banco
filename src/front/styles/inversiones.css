@@ -1,0 +1,27 @@
+.titulo-inversiones {
+    font-size: 70px;
+    font-weight: 900;
+}
+
+.contenedor-cabecera {
+    border-radius: 10px;
+    padding: 40px;
+}
+
+.bg-modo-oscuro {
+    background-color: #2a2a2a;
+    border: 1px solid white;
+}
+
+.bg-modo-claro {
+    background-color: #f5f5f5;
+    border: 1px solid rgb(0, 0, 0);
+}
+
+.contenedor-grafica {
+    border-radius: 10px;
+}
+
+.separacion-filas {
+    margin: 40px 0px;
+}

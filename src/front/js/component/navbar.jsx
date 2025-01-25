@@ -98,7 +98,7 @@ export const Navbar = () => {
 
 					<div className="col-2 col-md-2 text-start fs-3 titulo-nav fw-bold  px-0 align-content-center hover" onClick={() => {
 						localStorage.getItem('token') === null ? navigate("/") : navigate("/home")
-					}}><span>GeekBank</span></div>
+					}}><span>{location.pathname === "/inversiones" ? "GeekInvest" : "GeekBank"}</span></div>
 					{localStorage.getItem('token') === null ? (<div className="col-3 col-md-5 col-lg-6 align-content-center  fw-bold text-center">
 						<span className={store.borde_hover} onClick={() => {
 							navigate("/example")

@@ -2,7 +2,7 @@ import React, { useEffect, useContext, useRef } from 'react';
 import { Context } from "../../store/appContext.js";
 import { createChart } from 'lightweight-charts';
 
-const GraficaComponenteInversiones = () => {
+const GraficaInversionVista = () => {
     const { store, actions } = useContext(Context); // Accede al contexto
     const chartContainerRef = useRef(null);
 
@@ -15,13 +15,13 @@ const GraficaComponenteInversiones = () => {
         if (store.chartData.length > 0) {
             // Crear el gráfico
             const chart = createChart(chartContainerRef.current, {
-                height: 140,
+                height: 200,
                 layout: {
                     background: {
                         type: 'Solid', // También puedes usar 'VerticalGradient' o 'HorizontalGradient' para degradados
                         color: 'rgba(0, 0, 0, 0)' // Aquí pones el color de fondo deseado, por ejemplo, gris claro
                     },
-                    textColor: 'white' // Opcional: el color del texto (ejes y etiquetas)
+                    textColor: 'gray' // Opcional: el color del texto (ejes y etiquetas)
                 },
                 timeScale: {
                     // Configura un rango de tiempo visible al cargar el gráfico
@@ -48,7 +48,7 @@ const GraficaComponenteInversiones = () => {
 
             // Agregar una serie de líneas y establecer los datos
             const lineSeries = chart.addLineSeries({
-                color: 'white', // Aquí defines el color de la línea (por ejemplo, rojo)
+                color: 'gray', // Aquí defines el color de la línea (por ejemplo, rojo)
                 lineWidth: 3      // Opcional: grosor de la línea
             });
             lineSeries.setData(store.chartData);
@@ -61,4 +61,4 @@ const GraficaComponenteInversiones = () => {
     return <div className='contenedor-componente-interactivo' ref={chartContainerRef} />;
 };
 
-export default GraficaComponenteInversiones;
+export default GraficaInversionVista;
