@@ -252,6 +252,7 @@ def get_user_details(id):
         return jsonify({"error": "Ha ocurrido un error", "details": str(e)}), 500  
 
 @api.route('/User/<int:id>/Perfil', methods=['PUT'])
+@jwt_required()
 def update_cliente_profile(id):
     perfil = request.get_json()  # Obtener los datos enviados en la solicitud
 

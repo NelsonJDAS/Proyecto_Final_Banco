@@ -196,6 +196,7 @@ const getState = ({ getStore, getActions, setStore }) => {
     
             const data = await response.json();
             return data; // Devuelve la notificación actualizada
+            
         } catch (error) {
             console.error("Error:", error);
             throw error;
