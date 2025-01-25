@@ -18,6 +18,7 @@ const ContenedorPrincipalPerfil = () => {
 
     const [userLoad, SetUserLoad] = useState(false);
     useEffect(() => {
+        actions.Scroll()
         SetUserLoad(true)
         const storedId = localStorage.getItem("userId")
         actions.fetchUserDetails(storedId)

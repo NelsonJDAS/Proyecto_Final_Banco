@@ -10,6 +10,7 @@ import AtencionCliente from "./Componentes/AtencionCliente.jsx";
 import RedesSociales from "./Componentes/RedesSociales.jsx";
 import Divisas from "./Componentes/Divisas.jsx";
 import TarjetasCoordenadas from "./Componentes/TarjetaCoordenadas.jsx";
+import Inversiones from "./Componentes/Inversiones.jsx";
 
 const ListaInteractiva = () => {
 
@@ -73,12 +74,12 @@ const ListaInteractiva = () => {
             <div className="row">
                 <div className={`col-6 col-xl-4 ${firstCol}`}><Tienda /></div>
                 <div className={`col-6 col-xl-2 ${thCol}`}><Productos /></div>
-                <div className={`col-6 col-xl-4 ${FoCol}`}><Configuracion /></div>
+                <div className={`col-6 col-xl-4 ${FoCol}`}><Inversiones /></div>
                 <div className={`col-6 col-xl-2 ${secCol}`}><AtencionCliente /></div>
             </div>
             <div className="row">
-                <div className={`col-6 col-xl-3 ${firstCol}`}><div className="color-principal contenedor-componente-interactivo my-2 rounded">Inversiones</div></div>
-                <div className={`col-6 col-xl-4 ${thCol}`}><TarjetasCoordenadas /></div>
+                <div className={`col-6 col-xl-4 ${firstCol}`}><Configuracion /></div>
+                <div className={`col-6 col-xl-3 ${thCol}`}><TarjetasCoordenadas /></div>
                 <div className={`col-6 col-xl-3 ${FoCol}`}><Divisas /></div>
                 <div className={`col-6 col-xl-2 ${secCol}`}><RedesSociales /></div>
             </div>

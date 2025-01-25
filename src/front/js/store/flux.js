@@ -16,10 +16,14 @@ const getState = ({ getStore, getActions, setStore }) => {
       notificaciones: [],
       chartData: [], // Graficas
       stockData: null, // Datos de mercado
+      notificaciones: false,
     },
     actions: {
       CambiarIncognito: (estado) => {
         setStore({ ...getStore(), hidden: estado });
+      },
+      CambiarNotificaciones: () => {
+        setStore({ ...getStore(), notificaciones: !getStore().notificaciones });
       },
       Scroll: () => {
         const navbar = document.getElementById("navbar"); // Seleccionamos el elemento por ID
@@ -146,7 +150,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             setStore({ ...store, cliente: data.cliente });
             setStore({ ...store, cuentas: data.cuentas });
             setStore({ ...store, user: data.user });
-            setStore({ ...store, notificaciones: data.notificaciones});
+            setStore({ ...store, notificaciones: data.notificaciones });
             console.log("Datos del usuario guardados en el store:", "user", store.user, "cliente", store.cliente, "cuentas", store.cuentas, notificaciones, store.notificaciones);
 
           })
