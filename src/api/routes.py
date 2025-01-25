@@ -511,7 +511,7 @@ def get_market_data():
 
         if response.status_code != 200:
             return jsonify({"error": "Error al obtener datos de Finnhub", "details": response.json()}), response.status_code
-
+        
         # Devuelve los datos al frontend
         return jsonify(response.json())
 

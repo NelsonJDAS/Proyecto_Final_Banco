@@ -22,7 +22,27 @@ const GraficaComponenteInversiones = () => {
                         color: 'rgba(0, 0, 0, 0)' // Aquí pones el color de fondo deseado, por ejemplo, gris claro
                     },
                     textColor: 'white' // Opcional: el color del texto (ejes y etiquetas)
+                },
+                timeScale: {
+                    // Configura un rango de tiempo visible al cargar el gráfico
+                    visible: true,
+                    timeVisible: true,
+                    minBarSpacing: 10,
+                    borderVisible: false,
+                    // Establecer un zoom inicial (puedes ajustar estos valores)
+                    zoomLevel: 2, // Ajusta el nivel de zoom inicial en el eje X
+                },
+                priceScale: {
+                    // Configura un rango de precios visible al cargar el gráfico
+                    visible: true,
+                    borderVisible: false,
+                    autoScale: true, // Esto asegura que el gráfico escale automáticamente para ajustarse a los datos
+                    scaleMargins: {
+                        top: 0.1,  // Margen superior
+                        bottom: 0.1 // Margen inferior
+                    }
                 }
+
             });
 
 
@@ -42,3 +62,5 @@ const GraficaComponenteInversiones = () => {
 };
 
 export default GraficaComponenteInversiones;
+
+

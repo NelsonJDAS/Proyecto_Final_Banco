@@ -11,6 +11,7 @@ const Inversiones = () => {
 
     return (
         <div className={`bg-dark animacion-contenedor hover contenedor-componente-interactivo my-2 text-center text-white fw-bold ${store.borde} text-white align-content-center`} onClick={() => {
+            actions.Scroll()
             navigate("/inversiones")
         }}>
             <div className="row mt-2">
