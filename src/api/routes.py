@@ -4,7 +4,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 from flask import Flask, request, jsonify, url_for, Blueprint
 import requests
 import os
-from api.models import db, User, Cliente, Cuenta, ConfiguracionUsuario, Transaccion, TipoTransaccion, Notificacion
+from api.models import db, User, Cliente, Cuenta, ConfiguracionUsuario, Transaccion, TipoTransaccion, Notificacion, TarjetaCoordenadas
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from flask_jwt_extended import create_access_token
@@ -81,7 +81,6 @@ def addUser():
             apellidos="Introduzca apellido",
             telefono="Introduzca numero",
             direccion="Introduzca direccion",
-            tipo_documento="",
         )
         db.session.add(nuevo_cliente)
         db.session.flush()  # Esto asegura que nuevo_cliente.id esté disponible
@@ -94,18 +93,32 @@ def addUser():
         # Crear cuenta asociada al cliente
         print("Creando cuenta...")
         nueva_cuenta = Cuenta(
-            numero_cuenta=f"CUENTA-{random.randint(1000, 9999)}",
-            numero_tarjeta=f"TARJETA-{random.randint(1000, 9999)}",
+            numero_cuenta=f"GEEK-ES24{random.randint(10000000, 99990000)}",
+            numero_tarjeta=f"GEEK-{random.randint(100000000000, 999999999999)}",
             cvv=f"{random.randint(100, 999)}",
             caducidad="12/30",
             tipo_cuenta="Debito",
-            saldo=0,
-            saldo_retenido=0,
+            saldo=1500,
+            saldo_retenido=50,
             cliente_id=nuevo_cliente.id,
             estado=1,
         )
         db.session.add(nueva_cuenta)
+        db.session.flush()
         print("Cuenta creada:", nueva_cuenta)
+
+        print("Generando tarjeta de coordenadas...")
+        posiciones = [f"{fila}{columna}" for fila in "ABCD" for columna in range(1, 5)]  # de A1 a D4
+        for pos in posiciones:
+            codigo = f"{random.randint(0, 9999):04d}"  # 4 dígitos
+            coordenada = TarjetaCoordenadas(
+                cuenta_id=nueva_cuenta.id,
+                posicion=pos,
+                valor=codigo,
+    )
+            db.session.add(coordenada)
+        print("Tarjeta de coordenadas generada")
+
 
         notificaciones_por_defecto = [
             "Bienvenido a Geek-Bank!",
@@ -145,6 +158,7 @@ def addUser():
         return jsonify({"error": str(e)}), 400
        
 @api.route('/User/Login', methods=['POST'])
+# @jwt_required()
 def user_autentication():
     # Obtener datos del cliente
     data = request.get_json()
@@ -186,6 +200,7 @@ def user_autentication():
         return jsonify({"error": "An error occurred during login"}), 500
 
 @api.route('/User/<int:id>')
+# @jwt_required()
 def get_user_details(id):
     try:
         # Buscar el usuario por ID
@@ -198,26 +213,32 @@ def get_user_details(id):
         if not cliente:
             return jsonify({"error": "El usuario no tiene un cliente asociado"}), 404
 
-        # Obtener las cuentas del cliente
-        cuentas = cliente.cuentas
-        transacciones_data = []
-        for cuenta in cuentas:
-            # Obtener las transacciones asociadas a esta cuenta
-            transacciones = cuenta.transacciones
-            transacciones_data.extend([
-                {
-                    "id": transaccion.id,
-                    "tipo": transaccion.tipo,
-                    "monto": transaccion.monto,
-                    "fecha": transaccion.fecha,
-                    "descripcion": transaccion.descripcion
-                }
-                for transaccion in transacciones
-            ])
+        # Obtener la única cuenta del cliente
+        if not cliente.cuentas:
+            return jsonify({"error": "El cliente no tiene cuentas"}), 404
+        
+        cuenta = cliente.cuentas[0]  # Tomamos la primera (y única) cuenta
 
-        # Obtener las notificaciones del cliente
-        notificaciones = cliente.notificaciones
-        notificaciones_data = [notificacion.serialize() for notificacion in notificaciones]
+        # Obtener transacciones y tarjeta de coordenadas de la cuenta
+        transacciones_data = [
+            {
+                "id": transaccion.id,
+                "tipo": transaccion.tipo,
+                "monto": transaccion.monto,
+                "fecha": transaccion.fecha.isoformat(),  # Formato ISO
+                "descripcion": transaccion.descripcion
+            }
+            for transaccion in cuenta.transacciones
+        ]
+
+        # Obtener coordenadas (¡expone datos sensibles!)
+        tarjeta_coordenadas_data = [
+            {
+                "posicion": coord.posicion,
+                "valor": coord.valor  # En producción, enmascara esto
+            }
+            for coord in cuenta.tarjetas_coordenadas
+        ]
 
         # Construir la respuesta
         response = {
@@ -235,7 +256,7 @@ def get_user_details(id):
                 "Tipo_de_documento": cliente.tipo_documento,
                 "Numero_de_documento": cliente.numero_documento,
             },
-            "cuentas": {
+            "cuentas": {  # Objeto (no lista)
                 "id": cuenta.id,
                 "numero_cuenta": cuenta.numero_cuenta,
                 "numero_tarjeta": cuenta.numero_tarjeta,
@@ -244,16 +265,17 @@ def get_user_details(id):
                 "tipo_cuenta": cuenta.tipo_cuenta,
                 "saldo": cuenta.saldo,
                 "saldo_retenido": cuenta.saldo_retenido,
-                "transacciones": transacciones_data
+                "transacciones": transacciones_data,
             },
-            "notificaciones": notificaciones_data  # Incluir notificaciones en la respuesta
+            "notificaciones": [notificacion.serialize() for notificacion in cliente.notificaciones],
+            "tarjeta_coordenadas": tarjeta_coordenadas_data  # ¡Aquí van!
         }
         return jsonify(response), 200
     except Exception as e:
-        return jsonify({"error": "Ha ocurrido un error", "details": str(e)}), 500  
+        return jsonify({"error": "Ha ocurrido un error", "details": str(e)}), 500
 
 @api.route('/User/<int:id>/Perfil', methods=['PUT'])
-@jwt_required()
+# @jwt_required()
 def update_cliente_profile(id):
     perfil = request.get_json()  # Obtener los datos enviados en la solicitud
 
@@ -307,7 +329,7 @@ def private():
     return jsonify({"ok" : True, "current_user" : current_user}), 200
 
 @api.route('/notificaciones/<int:cliente_id>', methods=['GET'])
-@jwt_required()
+# @jwt_required()
 def get_notificaciones(cliente_id):
     try:
         # Buscar el cliente por ID
@@ -327,7 +349,7 @@ def get_notificaciones(cliente_id):
         return jsonify({"error": "Ha ocurrido un error", "details": str(e)}), 500
 
 @api.route('/notificaciones/<int:cliente_id>/agregar', methods=['POST'])
-@jwt_required()
+# @jwt_required()
 def agregar_notificacion(cliente_id):
     try:
         # Buscar el cliente por ID

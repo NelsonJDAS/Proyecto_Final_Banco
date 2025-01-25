@@ -100,6 +100,7 @@ class Cuenta(db.Model):
     estado = db.Column(db.Integer)
     cliente = db.relationship("Cliente", back_populates="cuentas")
     transacciones = db.relationship("Transaccion", back_populates="cuenta")
+    tarjetas_coordenadas = db.relationship("TarjetaCoordenadas", back_populates="cuenta")
 
     def __repr__(self):
         return f'<Cuenta {self.numero_cuenta}, Tipo: {self.tipo_cuenta}, Saldo: {self.saldo}>'
@@ -108,6 +109,7 @@ class Cuenta(db.Model):
         return {
             "id": self.id,
             "numero_cuenta": self.numero_cuenta,
+            "tarjeta_coordenadas": self.tarjeta_coordenadas,
             "numero_tarjeta": self.numero_tarjeta,
             "cvv": self.cvv,
             "caducidad": self.caducidad,
@@ -116,6 +118,26 @@ class Cuenta(db.Model):
             "saldo_retenido": self.saldo_retenido,
             "estado": self.estado,
             "cliente_id": self.cliente_id,
+        }
+    
+class TarjetaCoordenadas(db.Model):
+    __tablename__ = 'tarjeta_coordenadas'
+
+    id = db.Column(db.Integer, primary_key=True)
+    cuenta_id = db.Column(db.Integer, db.ForeignKey('cuenta.id'), nullable=False)
+    posicion = db.Column(db.String(2), nullable=False)  # Ej: "A1", "B3", etc.
+    valor = db.Column(db.String(4), nullable=False)     # 4 dígitos (ej: "1234")
+
+    # Relación con Cuenta
+    cuenta = db.relationship("Cuenta", back_populates="tarjetas_coordenadas")
+
+    def __repr__(self):
+        return f'<TarjetaCoordenadas {self.posicion}: {self.valor}>'
+
+    def serialize(self):
+        return {
+            "posicion": self.posicion,
+            "valor": self.valor  # RECORDATORIO DE CIFRADO
         }
 
 
