@@ -23,5 +23,27 @@
 }
 
 .separacion-filas {
-    margin: 40px 0px;
+    margin: 20px 0px;
+}
+
+.animacion-contenedor-inversiones {
+    transition: transform 0.3s ease, box-shadow 0.5s ease;
+    border-radius: 10px;
+}
+
+.animacion-contenedor-inversiones:hover {
+    cursor: pointer;
+    transform: translateY(-5px);
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.3);
+}
+
+
+.animacion-inversiones {
+    opacity: 0.2;
+    transition: opacity 2.5s ease, color 0.6s ease;
+}
+
+.animacion-inversiones.visible {
+    opacity: 1;
+    transition: opacity 2.5s ease, color 0.6s ease;
 }

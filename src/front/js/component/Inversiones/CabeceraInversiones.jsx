@@ -1,11 +1,17 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../../store/appContext";
 
 const CabeceraInversiones = () => {
     const { store, actions } = useContext(Context);
 
+    const [userLoad, SetUserLoad] = useState(false);
+
+    useEffect(() => {
+        SetUserLoad(true)
+    }, [])
+
     return (
-        <div className={`container contenedor-cabecera ${store.fondo === "fondo-modo-claro" ? "bg-modo-claro" : "bg-modo-oscuro"}`}>
+        <div className={`container contenedor-cabecera ${store.fondo === "fondo-modo-claro" ? "bg-modo-claro" : "bg-modo-oscuro"} ${userLoad ? "animacion-arriba visible" : "animacion-arriba"}`}>
             <div className="row">
                 <div className="col-12 text-center titulo-inversiones "><h1>Geek Invest</h1></div>
                 <div className="col-12 text-center mt-3 fs-5">

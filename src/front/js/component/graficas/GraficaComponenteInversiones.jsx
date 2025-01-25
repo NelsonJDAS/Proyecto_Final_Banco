@@ -62,3 +62,5 @@ const GraficaComponenteInversiones = () => {
 };
 
 export default GraficaComponenteInversiones;
+
+

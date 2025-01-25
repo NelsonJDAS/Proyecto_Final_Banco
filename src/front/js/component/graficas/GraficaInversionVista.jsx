@@ -1,3 +1,4 @@
+
 import React, { useEffect, useContext, useRef } from 'react';
 import { Context } from "../../store/appContext.js";
 import { createChart } from 'lightweight-charts';
@@ -15,43 +16,37 @@ const GraficaInversionVista = () => {
         if (store.chartData.length > 0) {
             // Crear el gráfico
             const chart = createChart(chartContainerRef.current, {
-                height: 200,
+                height: 180, // Ajusta la altura según sea necesario
                 layout: {
                     background: {
-                        type: 'Solid', // También puedes usar 'VerticalGradient' o 'HorizontalGradient' para degradados
-                        color: 'rgba(0, 0, 0, 0)' // Aquí pones el color de fondo deseado, por ejemplo, gris claro
+                        type: 'solid', // Tipo de fondo sólido
+                        color: 'rgba(0, 0, 0, 0)' // Color de fondo blanco
                     },
-                    textColor: 'gray' // Opcional: el color del texto (ejes y etiquetas)
+                    textColor: 'gray' // Color del texto
                 },
                 timeScale: {
-                    // Configura un rango de tiempo visible al cargar el gráfico
-                    visible: true,
-                    timeVisible: true,
-                    minBarSpacing: 10,
-                    borderVisible: false,
-                    // Establecer un zoom inicial (puedes ajustar estos valores)
-                    zoomLevel: 2, // Ajusta el nivel de zoom inicial en el eje X
+                    timeVisible: true, // Hacer visible el eje del tiempo
+                    borderVisible: false, // Ocultar el borde del eje del tiempo
                 },
                 priceScale: {
-                    // Configura un rango de precios visible al cargar el gráfico
-                    visible: true,
-                    borderVisible: false,
-                    autoScale: true, // Esto asegura que el gráfico escale automáticamente para ajustarse a los datos
-                    scaleMargins: {
-                        top: 0.1,  // Margen superior
-                        bottom: 0.1 // Margen inferior
-                    }
-                }
-
+                    borderVisible: false, // Ocultar el borde del eje de precios
+                },
             });
 
 
-            // Agregar una serie de líneas y establecer los datos
-            const lineSeries = chart.addLineSeries({
-                color: 'gray', // Aquí defines el color de la línea (por ejemplo, rojo)
-                lineWidth: 3      // Opcional: grosor de la línea
+            // Agregar una serie de área y establecer los datos
+            const areaSeries = chart.addAreaSeries({
+                topColor: 'rgba(41, 98, 255, 0.56)', // Color superior del degradado
+                bottomColor: 'rgba(95, 138, 255, 0.04)', // Color inferior del degradado
+                lineColor: '#2962FF', // Color de la línea
+                lineWidth: 2, // Grosor de la línea
             });
-            lineSeries.setData(store.chartData);
+
+            // Establecer datos en la serie
+            areaSeries.setData(store.chartData);
+
+            // Ajustar el contenido al espacio visible
+            chart.timeScale().fitContent();
 
             // Limpiar el gráfico al desmontar el componente
             return () => chart.remove();
