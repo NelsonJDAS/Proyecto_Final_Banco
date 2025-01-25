@@ -2,12 +2,15 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Cliente, Cuenta
+import requests
+import os
+from api.models import db, User, Cliente, Cuenta, ConfiguracionUsuario, Transaccion, TipoTransaccion, Notificacion
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from api.mail_config import get_mail
+
 
 
 
@@ -104,6 +107,20 @@ def addUser():
         db.session.add(nueva_cuenta)
         print("Cuenta creada:", nueva_cuenta)
 
+        notificaciones_por_defecto = [
+            "Bienvenido a Geek-Bank!",
+            "Configura tu perfil para una mejor experiencia y desbloquear las funcionalidades al completo.",
+            "Revisa nuestras nuevas funcionalidades."
+        ]
+
+        for mensaje in notificaciones_por_defecto:
+            nueva_notificacion = Notificacion(
+                mensaje=mensaje,
+                cliente_id=nuevo_cliente.id
+            )
+            db.session.add(nueva_notificacion)
+            print(f"Notificación creada: {mensaje}")
+
         # Confirmar los cambios
         db.session.commit()
         print("Cambios confirmados")
@@ -117,6 +134,7 @@ def addUser():
                 "name": new_user.name,
                 "email": new_user.email
             },
+            "Notificacion": notificaciones_por_defecto,
             "token": access_token
         }), 201
 
@@ -277,6 +295,79 @@ def private():
     current_user = get_jwt_identity()
     return jsonify({"ok" : True, "current_user" : current_user}), 200
 
+@api.route('/notificaciones/<int:cliente_id>', methods=['GET'])
+@jwt_required()
+def get_notificaciones(cliente_id):
+    try:
+        # Buscar el cliente por ID
+        cliente = Cliente.query.get(cliente_id)
+        if not cliente:
+            return jsonify({"error": "Cliente no encontrado"}), 404
+
+        # Obtener las notificaciones del cliente
+        notificaciones = cliente.notificaciones
+
+        # Serializar las notificaciones
+        notificaciones_data = [notificacion.serialize() for notificacion in notificaciones]
+
+        return jsonify(notificaciones_data), 200
+
+    except Exception as e:
+        return jsonify({"error": "Ha ocurrido un error", "details": str(e)}), 500
+
+@api.route('/notificaciones/<int:cliente_id>/agregar', methods=['POST'])
+@jwt_required()
+def agregar_notificacion(cliente_id):
+    try:
+        # Buscar el cliente por ID
+        cliente = Cliente.query.get(cliente_id)
+        if not cliente:
+            return jsonify({"error": "Cliente no encontrado"}), 404
+
+        # Obtener el mensaje de la notificación desde el cuerpo de la solicitud
+        data = request.get_json()
+        mensaje = data.get("mensaje")
+
+        if not mensaje:
+            return jsonify({"error": "El mensaje es requerido"}), 400
+
+        # Crear la nueva notificación
+        nueva_notificacion = Notificacion(
+            mensaje=mensaje,
+            cliente_id=cliente_id
+        )
+
+        # Guardar la notificación en la base de datos
+        db.session.add(nueva_notificacion)
+        db.session.commit()
+
+        return jsonify({"mensaje": "Notificación agregada exitosamente", "notificacion": nueva_notificacion.serialize()}), 201
+
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": "Ha ocurrido un error", "details": str(e)}), 500
+
+@api.route('/notificaciones/<int:notificacion_id>/marcar-leida', methods=['PUT'])
+@jwt_required()
+def marcar_notificacion_leida(notificacion_id):
+    try:
+        # Buscar la notificación por ID
+        notificacion = Notificacion.query.get(notificacion_id)
+        if not notificacion:
+            return jsonify({"error": "Notificación no encontrada"}), 404
+
+        # Marcar la notificación como leída
+        notificacion.leida = True
+
+        # Guardar los cambios en la base de datos
+        db.session.commit()
+
+        return jsonify({"mensaje": "Notificación marcada como leída", "notificacion": notificacion.serialize()}), 200
+
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": "Ha ocurrido un error", "details": str(e)}), 500
+
 # Endpoint para codigo de seguridad
 @api.route('/send-code', methods=['POST'])
 def send_code():
@@ -380,3 +471,38 @@ def get_data():
     {"date": "2023-02-09", "price": 113}
 ]
     return jsonify(data)
+
+@api.route('/market-data', methods=['GET'])
+def get_market_data():
+    try:
+        # Parámetros desde el cliente
+        symbol = request.args.get('symbol', default='AAPL', type=str)
+        resolution = request.args.get('resolution', default='D', type=str)
+        from_date = request.args.get('from', type=int)
+        to_date = request.args.get('to', type=int)
+        
+        # Verifica si los parámetros necesarios están presentes
+        if not from_date or not to_date:
+            return jsonify({"error": "Faltan parámetros 'from' y 'to'"}), 400
+
+        # URL de la API de Finnhub
+        url = f"https://finnhub.io/api/v1/stock/candle"
+        params = {
+            "symbol": symbol,
+            "resolution": resolution,
+            "from": from_date,
+            "to": to_date,
+            "token": os.getenv("FINNHUB_API_KEY"),  # Tu clave de la API
+        }
+
+        # Solicitud a Finnhub
+        response = requests.get(url, params=params)
+
+        if response.status_code != 200:
+            return jsonify({"error": "Error al obtener datos de Finnhub", "details": response.json()}), response.status_code
+
+        # Devuelve los datos al frontend
+        return jsonify(response.json())
+
+    except Exception as e:
+        return jsonify({"error": "Ocurrió un error", "details": str(e)}), 500

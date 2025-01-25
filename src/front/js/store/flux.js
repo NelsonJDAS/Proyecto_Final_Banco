@@ -13,7 +13,9 @@ const getState = ({ getStore, getActions, setStore }) => {
       user: "",
       cliente: "",
       cuentas: "",
-      chartData: [],
+      notificaciones: [],
+      chartData: [], // Graficas
+      stockData: null, // Datos de mercado
     },
     actions: {
       CambiarIncognito: (estado) => {
@@ -79,7 +81,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             ...store,
             token: data.token,
             user: data.user, // Ajustar según lo que devuelva tu backend
-            
+
           });
           console.log("Login exitoso. Token guardado en localStorage.", store.user, store.usuario);
         } catch (error) {
@@ -91,18 +93,8 @@ const getState = ({ getStore, getActions, setStore }) => {
       registerUser: (name, email, password) => {
         const actions = getActions();
         console.log("desde flux", name, email, password);
-        
+
         return fetch(process.env.BACKEND_URL + "/api/User/Register", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            password: password,
-            email: email,
-            name: name,
-            is_active: true,
-          }),
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -130,31 +122,33 @@ const getState = ({ getStore, getActions, setStore }) => {
           .catch((error) => {
             console.error("Error al registrar usuario:", error);
           });
-          
       },
 
       fetchUserDetails: (id) => {
         const store = getStore();
         fetch(`${process.env.BACKEND_URL}/api/User/${id}`, {
-          method: "GET", // Método HTTP
+          method: "GET",
           headers: {
-            "Content-Type": "application/json", // Indicamos que esperamos JSON como respuesta
+            "Content-Type": "application/json",
           },
         })
           .then((response) => {
-            // Verificamos si la respuesta es exitosa
+
             if (!response.ok) {
               throw new Error(`Error: ${response.status} - ${response.statusText}`);
             }
             return response.json(); // Convertimos la respuesta a JSON
           })
+
           .then((data) => {
+
             // Guardamos los datos del usuario en el store bajo la propiedad "usuario"
-            setStore({ ...store, cliente: data.cliente});
-            setStore({ ...store, cuentas: data.cuentas});
-            setStore({ ...store, user: data.user});
-            console.log("Datos del usuario guardados en el store:","user", store.user, "cliente", store.cliente, "cuentas", store.cuentas);
-            
+            setStore({ ...store, cliente: data.cliente });
+            setStore({ ...store, cuentas: data.cuentas });
+            setStore({ ...store, user: data.user });
+            setStore({ ...store, notificaciones: data.notificaciones});
+            console.log("Datos del usuario guardados en el store:", "user", store.user, "cliente", store.cliente, "cuentas", store.cuentas, notificaciones, store.notificaciones);
+
           })
           .catch((error) => {
             // Manejamos cualquier error que ocurra durante el fetch
@@ -164,28 +158,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       updateClienteProfile: (id, perfil) => {
         const store = getStore();
-    
+
         fetch(`${process.env.BACKEND_URL}/api/User/${id}/Perfil`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(perfil)
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(perfil)
         })
-        .then(async (response) => {
+          .then(async (response) => {
             if (response.ok) {
-                const data = await response.json(); // Procesar la respuesta como JSON
-                setStore({ ...store, usuario: data.cliente});
-                console.log("Perfil actualizado:", data);
+              const data = await response.json(); // Procesar la respuesta como JSON
+              setStore({ ...store, usuario: data.cliente });
+              console.log("Perfil actualizado:", data);
             } else {
-                const errorData = await response.json(); // Procesar el error como JSON
-                console.error("Error al actualizar el perfil:", errorData);
+              const errorData = await response.json(); // Procesar el error como JSON
+              console.error("Error al actualizar el perfil:", errorData);
             }
-        })
-        .catch((error) => {
+          })
+          .catch((error) => {
             console.error("Error de red o del servidor:", error);
-        });
-    },
+          });
+      },
 
       sendCode: (email) => {
         const store = getStore();
@@ -228,28 +222,42 @@ const getState = ({ getStore, getActions, setStore }) => {
             }
           });
       },
+
       fetchGraficasData: async () => {
         try {
           const response = await fetch(process.env.BACKEND_URL + "/api/data");
           if (!response.ok) throw new Error('Error fetching data');
-    
+
           const data = await response.json();
-    
+
           // Formatear los datos
           const formattedData = data.map((item) => ({
             time: item.date,
             value: item.price,
           }));
-    
+
           // Guardar los datos en el store
           setStore({ chartData: formattedData });
         } catch (error) {
           console.error('Error al obtener datos del backend:', error);
         }
       },
+
+      fetchStockData: async (symbol) => {
+        try {
+          const response = await fetch(`${process.env.BACKEND_URL}/api/stock/${symbol}`);
+          if (!response.ok) throw new Error('Error fetching stock data');
+          const data = await response.json();
+
+          // Guardar datos en el store
+          setStore({ stockData: data });
+        } catch (error) {
+          console.error('Error al obtener datos de las acciones:', error);
+        }
+      },
     },
-    };
-    };
+  };
+};
 
 
 
