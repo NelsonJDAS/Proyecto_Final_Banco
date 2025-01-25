@@ -110,7 +110,8 @@ def addUser():
         notificaciones_por_defecto = [
             "Bienvenido a Geek-Bank!",
             "Configura tu perfil para una mejor experiencia y desbloquear las funcionalidades al completo.",
-            "Revisa nuestras nuevas funcionalidades."
+            "Revisa nuestras nuevas funcionalidades.",
+            "No te olvides de solicitar tu tarjeta de coordenadas"
         ]
 
         for mensaje in notificaciones_por_defecto:

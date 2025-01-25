@@ -16,6 +16,7 @@ import { Metodos } from "./pages/metodos.js";
 import { Transferencias } from "./pages/transferencias.js";
 import { Movimientos } from "./pages/movimientos.js";
 import { Perfil } from "./pages/perfil.js";
+import { Inversiones } from "./pages/inversiones.js";
 
 import { Not_found } from "./pages/not_found.js";
 
@@ -54,6 +55,7 @@ const Layout = () => {
               <Route element={<Transferencias />} path="/transferencias" />
               <Route element={<Movimientos />} path="/movimientos" />
               <Route element={<Not_found />} path="*" />
+              <Route element={<Inversiones />} path="/inversiones" />
             </Routes>
           </div>
           <Footer />
