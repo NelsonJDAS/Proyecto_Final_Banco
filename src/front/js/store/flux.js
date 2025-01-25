@@ -12,7 +12,8 @@ const getState = ({ getStore, getActions, setStore }) => {
       token: null,
       user: "",
       cliente: "",
-      cuentas: ""
+      cuentas: "",
+      chartData: [],
     },
     actions: {
       CambiarIncognito: (estado) => {
@@ -227,8 +228,29 @@ const getState = ({ getStore, getActions, setStore }) => {
             }
           });
       },
+      fetchGraficasData: async () => {
+        try {
+          const response = await fetch(process.env.BACKEND_URL + "/api/data");
+          if (!response.ok) throw new Error('Error fetching data');
+    
+          const data = await response.json();
+    
+          // Formatear los datos
+          const formattedData = data.map((item) => ({
+            time: item.date,
+            value: item.price,
+          }));
+    
+          // Guardar los datos en el store
+          setStore({ chartData: formattedData });
+        } catch (error) {
+          console.error('Error al obtener datos del backend:', error);
+        }
+      },
     },
-  };
-};
+    };
+    };
+
+
 
 export default getState;

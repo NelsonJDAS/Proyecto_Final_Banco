@@ -333,3 +333,50 @@ def verify_code():
     if user.reset_code != code:
         return jsonify({'error': 'Código incorrecto'}), 400
     return jsonify({'message': 'Código verificado correctamente'}), 200
+
+@api.route('/data', methods=['GET'])
+def get_data():
+    # Ejemplo de datos
+    data = [
+    {"date": "2023-01-01", "price": 100},
+    {"date": "2023-01-02", "price": 102},
+    {"date": "2023-01-03", "price": 101},
+    {"date": "2023-01-04", "price": 105},
+    {"date": "2023-01-05", "price": 98},
+    {"date": "2023-01-06", "price": 99},
+    {"date": "2023-01-07", "price": 103},
+    {"date": "2023-01-08", "price": 104},
+    {"date": "2023-01-09", "price": 98},
+    {"date": "2023-01-10", "price": 100},
+    {"date": "2023-01-11", "price": 107},
+    {"date": "2023-01-12", "price": 101},
+    {"date": "2023-01-13", "price": 102},
+    {"date": "2023-01-14", "price": 106},
+    {"date": "2023-01-15", "price": 103},
+    {"date": "2023-01-16", "price": 107},
+    {"date": "2023-01-17", "price": 108},
+    {"date": "2023-01-18", "price": 105},
+    {"date": "2023-01-19", "price": 106},
+    {"date": "2023-01-20", "price": 109},
+    {"date": "2023-01-21", "price": 104},
+    {"date": "2023-01-22", "price": 103},
+    {"date": "2023-01-23", "price": 108},
+    {"date": "2023-01-24", "price": 110},
+    {"date": "2023-01-25", "price": 111},
+    {"date": "2023-01-26", "price": 112},
+    {"date": "2023-01-27", "price": 109},
+    {"date": "2023-01-28", "price": 107},
+    {"date": "2023-01-29", "price": 106},
+    {"date": "2023-01-30", "price": 108},
+    {"date": "2023-01-31", "price": 111},
+    {"date": "2023-02-01", "price": 113},
+    {"date": "2023-02-02", "price": 115},
+    {"date": "2023-02-03", "price": 112},
+    {"date": "2023-02-04", "price": 111},
+    {"date": "2023-02-05", "price": 113},
+    {"date": "2023-02-06", "price": 116},
+    {"date": "2023-02-07", "price": 114},
+    {"date": "2023-02-08", "price": 115},
+    {"date": "2023-02-09", "price": 113}
+]
+    return jsonify(data)
