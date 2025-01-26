@@ -12,7 +12,8 @@ const Tarjetas = () => {
         if (!store.cuentas?.numero_tarjeta) return ["••••", "••••", "••••", "••••"];
 
         // const cleaned = store.cuentas.numero_tarjeta.replace(/[^0-9]/g, ''); // Eliminar letras/guiones
-        const grupos = store.cuentas.numero_tarjeta.match(/.{1,4}/g) || [];
+        let numeros = store.cuentas.numero_tarjeta.replace('GEEK-', '')
+        let grupos = numeros.match(/.{1,4}/g) || [];
         return grupos.slice(-4); // Tomar últimos 16 dígitos (4 grupos)
     };
 
@@ -32,14 +33,14 @@ const Tarjetas = () => {
                 {formatCardNumber().map((grupo, index) => (
                     <p
                         key={index}
-                        className={`fw-bold fs-4 ${store.hidden ? "desenfoque" : ""}`}
+                        className={`fw-bold fs-3 ${store.hidden ? "desenfoque" : ""}`}
                     >
                         {grupo}
                     </p>
                 ))}
             </div>
             <div className="row mt-2">
-                <div className="col-4 text-end"> <p className="mb-auto my-1 objeto-animado">Tarjetas</p></div>
+                <div className="col-4 text-end"> <p className="mb-auto my-1 objeto-animado">Tarjeta</p></div>
                 <div className="col-4 text-center">
                     <p className="d-flex justify-content-end">CVV:<p className={`mx-1 ${store.hidden ? "desenfoque" : ""}`}>{store.cuentas.cvv}</p></p>
                 </div>
