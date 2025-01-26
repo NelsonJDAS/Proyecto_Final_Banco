@@ -13,6 +13,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       user: "",
       cliente: "",
       cuentas: "",
+      tarjetaCoord: {},
       listaNotificaciones: [],
       chartData: [], // Graficas
       stockData: null, // Datos de mercado
@@ -150,8 +151,9 @@ const getState = ({ getStore, getActions, setStore }) => {
             setStore({ ...store, cliente: data.cliente });
             setStore({ ...store, cuentas: data.cuentas });
             setStore({ ...store, user: data.user });
-            setStore({ ...store, listaNotificaciones: data.notificaciones});
-            console.log("Datos del usuario guardados en el store:", "user", store.user, "cliente", store.cliente, "cuentas", store.cuentas, "listaNotificaciones", store.listaNotificaciones);
+            setStore({ ...store, notificaciones: data.notificaciones});
+            setStore({ ...store, tarjetaCoord: data.tarjeta_coordenadas});
+            // console.log("Datos del usuario guardados en el store:", "user", store.user, "cliente", store.cliente, "cuentas", store.cuentas, "listaNotificaciones", store.listaNotificaciones);
 
           })
           .catch((error) => {
@@ -173,7 +175,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then(async (response) => {
             if (response.ok) {
               const data = await response.json(); // Procesar la respuesta como JSON
-              setStore({ ...store, usuario: data.cliente });
+              setStore({ ...store, cliente: data.cliente });
               console.log("Perfil actualizado:", data);
             } else {
               const errorData = await response.json(); // Procesar el error como JSON

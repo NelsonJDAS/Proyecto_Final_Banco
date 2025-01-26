@@ -7,22 +7,43 @@ import { RiMastercardFill } from "react-icons/ri";
 const Tarjetas = () => {
     const { store, actions } = useContext(Context);
 
+    // Obtener el número de tarjeta formateado
+    const formatCardNumber = () => {
+        if (!store.cuentas?.numero_tarjeta) return ["••••", "••••", "••••", "••••"];
+        
+        // const cleaned = store.cuentas.numero_tarjeta.replace(/[^0-9]/g, ''); // Eliminar letras/guiones
+        const grupos = store.cuentas.numero_tarjeta.match(/.{1,4}/g) || [];
+        return grupos.slice(-4); // Tomar últimos 16 dígitos (4 grupos)
+    };
+
+    // Obtener fecha de caducidad
+    const caducidad = store.cuentas?.caducidad || "01/30";
+
     return (
         <div className={`bg-tarjetas animacion-contenedor hover contenedor-componente-interactivo my-2 text-center fw-bold ${store.borde} text-white d-flex flex-column`}>
-            <div className="d-flex justify-content-between"> <p className="text-start m-2">Geek Card</p> <p className="my-1 mx-2 objeto-animado"><FaCcMastercard /></p></div>
-            <div className="d-flex justify-content-between fs-1 mx-2 my-3"><RiMastercardFill /><LuNfc /></div>
+            <div className="d-flex justify-content-between"> 
+                <p className="text-start m-2">Geek Card</p> 
+                <p className="my-1 mx-2 objeto-animado"><FaCcMastercard /></p>
+            </div>
+            <div className="d-flex justify-content-between fs-1 mx-2 my-3">
+                <RiMastercardFill /><LuNfc />
+            </div>
             <div className="d-flex justify-content-evenly">
-                <p className={`fw-bold fs-4 ${store.hidden ? "desenfoque" : ""}`}>1234</p>
-                <p className={`fw-bold fs-4 ${store.hidden ? "desenfoque" : ""}`}>1234</p>
-                <p className={`fw-bold fs-4 ${store.hidden ? "desenfoque" : ""}`}>1234</p>
-                <p className={`fw-bold fs-4 ${store.hidden ? "desenfoque" : ""}`}>1234</p>
+                {formatCardNumber().map((grupo, index) => (
+                    <p 
+                        key={index} 
+                        className={`fw-bold fs-4 ${store.hidden ? "desenfoque" : ""}`}
+                    >
+                        {grupo}
+                    </p>
+                ))}
             </div>
             <div className="text-end d-flex justify-content-around">
                 <p className="mb-auto my-1 objeto-animado">Tarjetas</p>
-                <p className={store.hidden ? "desenfoque" : ""}>01/26</p>
+                <p className={store.hidden ? "desenfoque" : ""}>{caducidad}</p>
             </div>
-        </div >
-    )
+        </div>
+    );
 }
 
-export default Tarjetas
+export default Tarjetas;
