@@ -285,15 +285,11 @@
     }
 }
 
-.bg-cabecera-tarjeta {
+.bg-tarjeta {
     background-color: rgb(197, 197, 197);
     color: black;
 }
 
-.bg-valor-tarjeta {
-    background-color: rgba(201, 201, 201, 0.704);
-    color: black;
-}
 
 .contenedor-valores-tarjeta {
     border-radius: 20px;
@@ -301,4 +297,9 @@
 
 .titulo-tarjeta {
     font-size: 10px;
+}
+
+.enlace-tarjeta:hover {
+    cursor: default;
+    color: rgb(204, 204, 204);
 }
