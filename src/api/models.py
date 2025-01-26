@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
+from sqlalchemy import Enum
+from datetime import datetime, timezone
 
 db = SQLAlchemy()
 
@@ -33,7 +34,7 @@ class Cliente(db.Model):
     apellidos = db.Column(db.String(100))
     telefono = db.Column(db.String(30))
     direccion = db.Column(db.String(200))
-    fecha_creacion = db.Column(db.DateTime, default=datetime.utcnow)
+    fecha_creacion = db.Column(db.DateTime, default=datetime.now(timezone.utc))
     fecha_nacimiento = db.Column(db.Date)
     tipo_documento = db.Column(db.String(50))
     numero_documento = db.Column(db.String(50), unique=True)
@@ -146,13 +147,13 @@ class Transaccion(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     cuenta_id = db.Column(db.Integer, db.ForeignKey('cuenta.id'))
-    tipo = db.Column(db.String(50))
+    tipo = db.Column(Enum('depósito', 'retiro', 'transferencia', name='tipo_transaccion'), nullable=False)
     monto = db.Column(db.Float)
-    fecha = db.Column(db.DateTime, default=datetime.utcnow)
+    fecha = db.Column(db.DateTime, default=datetime.now(timezone.utc))
     descripcion = db.Column(db.String(200))
+    saldo_anterior = db.Column(db.Float)  # Saldo antes de la transacción
+    saldo_posterior = db.Column(db.Float)  # Saldo después de la transacción
     cuenta = db.relationship("Cuenta", back_populates="transacciones")
-    tipo_transaccion_id = db.Column(db.Integer, db.ForeignKey('tipo_transaccion.id'))
-    tipo_transaccion = db.relationship("TipoTransaccion", back_populates="transacciones")
 
     def __repr__(self):
         return f'<Transaccion {self.tipo}, Monto: {self.monto}, Fecha: {self.fecha}>'
@@ -165,27 +166,10 @@ class Transaccion(db.Model):
             "monto": self.monto,
             "fecha": self.fecha,
             "descripcion": self.descripcion,
-            "tipo_transaccion_id": self.tipo_transaccion_id,
+            "saldo_anterior": self.saldo_anterior,
+            "saldo_posterior": self.saldo_posterior,
         }
 
-
-class TipoTransaccion(db.Model):
-    __tablename__ = 'tipo_transaccion'
-
-    id = db.Column(db.Integer, primary_key=True)
-    nombre = db.Column(db.String(50))
-    descripcion = db.Column(db.String(200))
-    transacciones = db.relationship("Transaccion", back_populates="tipo_transaccion")
-
-    def __repr__(self):
-        return f'<TipoTransaccion {self.nombre}>'
-
-    def serialize(self):
-        return {
-            "id": self.id,
-            "nombre": self.nombre,
-            "descripcion": self.descripcion,
-        }
 
 class Notificacion(db.Model):
     __tablename__ = 'notificacion'
@@ -193,7 +177,7 @@ class Notificacion(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     mensaje = db.Column(db.String(255), nullable=False)
     leida = db.Column(db.Boolean, default=False)
-    fecha_creacion = db.Column(db.DateTime, default=datetime.utcnow)
+    fecha_creacion = db.Column(db.DateTime, default=datetime.now(timezone.utc))
     cliente_id = db.Column(db.Integer, db.ForeignKey('cliente.id'))
     cliente = db.relationship("Cliente", back_populates="notificaciones")
 

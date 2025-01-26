@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { Context } from "../../store/appContext";
 
 
-const TablaCol = ({ fecha, monto, cuerpo, importe, saldo }) => {
+const TablaCol = ({ fecha, monto, cuerpo, importe, saldo, tipo }) => {
     const { store, actions } = useContext(Context);
 
     const [userLoad, SetUserLoad] = useState("elemento-tabla");
@@ -42,14 +42,39 @@ const TablaCol = ({ fecha, monto, cuerpo, importe, saldo }) => {
         }
     }, [isVisible])
 
+       // Determinar el color del importe
+       const colorImporte = () => {
+        if (tipo === "depósito") {
+            return "text-success";
+        } else if (tipo === "retiro") {
+            return "text-danger";
+        } else if (tipo === "transferencia") {
+            // Las transferencias dependen del signo del importe
+            return importe < 0 ? "text-danger" : "text-success";
+        } else {
+            // Por defecto, usar verde (puedes cambiarlo si lo prefieres)
+            return "text-success";
+        }
+    };
+
     return (
         <div className={`row fw-bold border-top-0 border-end-0 border-start-0 ${store.borde} ${userLoad} py-2`} ref={sectionRef}>
-            <div className="col-3 text-center fw-bold align-content-center cabecera-movimientos"><p>{fecha}</p></div>
-            <div className="col-3 text-center fw-bold align-content-center  cabecera-movimientos"><p>{cuerpo}</p></div>
-            <div className={`col-3 text-center fw-bold align-content-center  cabecera-movimientos ${monto === undefined ? "text-danger" : "text-success"}`}><p className={store.hidden ? "desenfoque text-white" : ""}>{monto === undefined ? importe : monto}</p></div>
-            <div className={`col-3 text-center fw-bold align-content-center  cabecera-movimientos ${store.hidden ? "desenfoque" : ""}`}><p>{monto === undefined ? saldo - importe : monto + saldo}</p></div>
-        </div >
-    )
-}
+            <div className="col-3 text-center fw-bold align-content-center cabecera-movimientos">
+                <p>{new Date(fecha).toLocaleDateString()}</p> {/* Formatear fecha */}
+            </div>
+            <div className="col-3 text-center fw-bold align-content-center cabecera-movimientos">
+                <p>{cuerpo}</p>
+            </div>
+            <div className={`col-3 text-center fw-bold align-content-center cabecera-movimientos ${colorImporte()}`}>
+                <p className={store.hidden ? "desenfoque text-white" : ""}>
+                    {importe}
+                </p>
+            </div>
+            <div className={`col-3 text-center fw-bold align-content-center cabecera-movimientos ${store.hidden ? "desenfoque" : ""}`}>
+                <p>{saldo}</p>
+            </div>
+        </div>
+    );
+};
 
-export default TablaCol
+export default TablaCol;

@@ -11,9 +11,8 @@ const Tarjetas = () => {
     const formatCardNumber = () => {
         if (!store.cuentas?.numero_tarjeta) return ["••••", "••••", "••••", "••••"];
 
-        // const cleaned = store.cuentas.numero_tarjeta.replace(/[^0-9]/g, ''); // Eliminar letras/guiones
-        let numeros = store.cuentas.numero_tarjeta.replace('GEEK-', '')
-        let grupos = numeros.match(/.{1,4}/g) || [];
+        const cleaned = store.cuentas.numero_tarjeta.replace(/[^0-9]/g, ''); // Eliminar letras/guiones
+        const grupos = cleaned.match(/.{1,4}/g) || [];
         return grupos.slice(-4); // Tomar últimos 16 dígitos (4 grupos)
     };
 
@@ -40,12 +39,22 @@ const Tarjetas = () => {
                 ))}
             </div>
             <div className="row mt-2">
-                <div className="col-4 text-end"> <p className="mb-auto my-1 objeto-animado">Tarjeta</p></div>
-                <div className="col-4 text-center">
-                    <p className="d-flex justify-content-end">CVV:<p className={`mx-1 ${store.hidden ? "desenfoque" : ""}`}>{store.cuentas.cvv}</p></p>
+                <div className="col-4 text-end">
+                    <p className="mb-auto my-1 objeto-animado">Tarjeta</p>
                 </div>
-                <div className="col-4 text-center"><p className={`${store.hidden ? "desenfoque" : ""}`}>{caducidad}</p></div>
-
+                <div className="col-4 text-center">
+                    <div className="d-flex justify-content-end">
+                        CVV:
+                        <span className={`mx-1 ${store.hidden ? "desenfoque" : ""}`}>
+                            {store.cuentas.cvv}
+                        </span>
+                    </div>
+                </div>
+                <div className="col-4 text-center">
+                    <span className={`${store.hidden ? "desenfoque" : ""}`}>
+                        {caducidad}
+                    </span>
+                </div>
             </div>
         </div>
     );

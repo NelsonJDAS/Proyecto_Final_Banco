@@ -14,6 +14,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       cliente: "",
       cuentas: "",
       tarjetaCoord: {},
+      transacciones: [],
       listaNotificaciones: [],
       chartData: [], // Graficas
       stockData: null, // Datos de mercado
@@ -151,10 +152,11 @@ const getState = ({ getStore, getActions, setStore }) => {
             setStore({ ...store, cliente: data.cliente });
             setStore({ ...store, cuentas: data.cuentas });
             setStore({ ...store, user: data.user });
-            setStore({ ...store, notificaciones: data.notificaciones });
+            setStore({ ...store, listaNotificaciones: data.notificaciones });
             setStore({ ...store, tarjetaCoord: data.tarjeta_coordenadas });
-            // console.log("Datos del usuario guardados en el store:", "user", store.user, "cliente", store.cliente, "cuentas", store.cuentas, "listaNotificaciones", store.listaNotificaciones);
+            setStore({ ...store, transacciones: data.cuentas.transacciones });
 
+            console.log("user", store.user, "cliente", store.cliente, "cuentas", store.cuentas, "Notificaciones", store.listaNotificaciones , "transacciones", store.transacciones);
           })
           .catch((error) => {
             // Manejamos cualquier error que ocurra durante el fetch

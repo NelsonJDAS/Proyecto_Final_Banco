@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 304812865b0a
+Revision ID: d00bda40af54
 Revises: 
-Create Date: 2025-01-26 12:16:17.662558
+Create Date: 2025-01-26 20:57:37.876429
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '304812865b0a'
+revision = 'd00bda40af54'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -30,12 +30,6 @@ def upgrade():
     sa.Column('numero_documento', sa.String(length=50), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('numero_documento')
-    )
-    op.create_table('tipo_transaccion',
-    sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('nombre', sa.String(length=50), nullable=True),
-    sa.Column('descripcion', sa.String(length=200), nullable=True),
-    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('configuracion_usuario',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -96,13 +90,13 @@ def upgrade():
     op.create_table('transaccion',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('cuenta_id', sa.Integer(), nullable=True),
-    sa.Column('tipo', sa.String(length=50), nullable=True),
+    sa.Column('tipo', sa.Enum('depósito', 'retiro', 'transferencia', name='tipo_transaccion'), nullable=False),
     sa.Column('monto', sa.Float(), nullable=True),
     sa.Column('fecha', sa.DateTime(), nullable=True),
     sa.Column('descripcion', sa.String(length=200), nullable=True),
-    sa.Column('tipo_transaccion_id', sa.Integer(), nullable=True),
+    sa.Column('saldo_anterior', sa.Float(), nullable=True),
+    sa.Column('saldo_posterior', sa.Float(), nullable=True),
     sa.ForeignKeyConstraint(['cuenta_id'], ['cuenta.id'], ),
-    sa.ForeignKeyConstraint(['tipo_transaccion_id'], ['tipo_transaccion.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###
@@ -116,6 +110,5 @@ def downgrade():
     op.drop_table('notificacion')
     op.drop_table('cuenta')
     op.drop_table('configuracion_usuario')
-    op.drop_table('tipo_transaccion')
     op.drop_table('cliente')
     # ### end Alembic commands ###
