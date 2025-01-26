@@ -86,7 +86,7 @@
 
 
 .contenedor-componente-interactivo {
-    height: 200px;
+    height: 210px;
 }
 
 
@@ -283,4 +283,22 @@
     .cabecera-movimientos {
         font-size: 17px !important;
     }
+}
+
+.bg-cabecera-tarjeta {
+    background-color: rgb(197, 197, 197);
+    color: black;
+}
+
+.bg-valor-tarjeta {
+    background-color: rgba(201, 201, 201, 0.704);
+    color: black;
+}
+
+.contenedor-valores-tarjeta {
+    border-radius: 20px;
+}
+
+.titulo-tarjeta {
+    font-size: 10px;
 }
