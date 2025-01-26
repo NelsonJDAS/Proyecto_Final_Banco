@@ -4,7 +4,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 from flask import Flask, request, jsonify, url_for, Blueprint
 import requests
 import os
-from api.models import db, User, Cliente, Cuenta, ConfiguracionUsuario, Transaccion, TipoTransaccion, Notificacion, TarjetaCoordenadas
+from api.models import db, User, Cliente, Cuenta, ConfiguracionUsuario, Transaccion, Notificacion, TarjetaCoordenadas
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from flask_jwt_extended import create_access_token
@@ -45,6 +45,10 @@ def test():
 def getUsers():
     Users = User.query.all()
     return jsonify([user.serialize() for user in Users]), 201
+
+from datetime import datetime  # Asegúrate de importar datetime
+
+#                                               REGISTRO, LOGIN, IFORMACION DE USUARIO Y MODIFICACION DE USUARIO
 
 @api.route('/User/Register', methods=['POST'])
 def addUser():
@@ -94,7 +98,7 @@ def addUser():
         print("Creando cuenta...")
         nueva_cuenta = Cuenta(
             numero_cuenta=f"GEEK-ES24{random.randint(10000000, 99990000)}",
-            numero_tarjeta=f"GEEK-{random.randint(100000000000, 999999999999)}",
+            numero_tarjeta=f"{random.randint(1000000000000000, 9999999999999999)}",
             cvv=f"{random.randint(100, 999)}",
             caducidad="12/30",
             tipo_cuenta="Debito",
@@ -115,11 +119,11 @@ def addUser():
                 cuenta_id=nueva_cuenta.id,
                 posicion=pos,
                 valor=codigo,
-    )
+            )
             db.session.add(coordenada)
         print("Tarjeta de coordenadas generada")
 
-
+        # Notificaciones por defecto
         notificaciones_por_defecto = [
             "Bienvenido a Geek-Bank!",
             "Configura tu perfil para una mejor experiencia y desbloquear las funcionalidades al completo.",
@@ -135,6 +139,27 @@ def addUser():
             db.session.add(nueva_notificacion)
             print(f"Notificación creada: {mensaje}")
 
+        # Generar transacciones automáticas
+        print("Generando transacciones...")
+        tipos_transacciones = [
+            {"tipo": "depósito", "monto": 1000.00, "descripcion": "Depósito inicial"},
+            {"tipo": "retiro", "monto": 200.00, "descripcion": "Retiro en cajero"},
+            {"tipo": "transferencia", "monto": 300.00, "descripcion": "Transferencia a otro usuario"},
+            {"tipo": "depósito", "monto": 500.00, "descripcion": "Depósito de salario"},
+            {"tipo": "retiro", "monto": 100.00, "descripcion": "Compra en tienda"},
+        ]
+
+        for transaccion_data in tipos_transacciones:
+            nueva_transaccion = Transaccion(
+                cuenta_id=nueva_cuenta.id,
+                tipo=transaccion_data["tipo"],
+                monto=transaccion_data["monto"],
+                descripcion=transaccion_data["descripcion"],
+                fecha=datetime.utcnow(),  # Fecha y hora actual
+            )
+            db.session.add(nueva_transaccion)
+            print(f"Transacción creada: {nueva_transaccion}")
+
         # Confirmar los cambios
         db.session.commit()
         print("Cambios confirmados")
@@ -142,7 +167,7 @@ def addUser():
         # Generar un token para el usuario
         access_token = create_access_token(identity=new_user.id)
         return jsonify({
-            "mensaje": "Usuario, cliente y cuenta creados exitosamente",
+            "mensaje": "Usuario, cliente, cuenta y transacciones creados exitosamente",
             "user": {
                 "id": new_user.id,
                 "name": new_user.name,
@@ -219,12 +244,12 @@ def get_user_details(id):
         
         cuenta = cliente.cuentas[0]  # Tomamos la primera (y única) cuenta
 
-        # Obtener transacciones y tarjeta de coordenadas de la cuenta
+        # Obtener transacciones de la cuenta
         transacciones_data = [
             {
                 "id": transaccion.id,
                 "tipo": transaccion.tipo,
-                "monto": transaccion.monto,
+                "monto": float(transaccion.monto),  # Convertir a float para JSON
                 "fecha": transaccion.fecha.isoformat(),  # Formato ISO
                 "descripcion": transaccion.descripcion
             }
@@ -256,19 +281,19 @@ def get_user_details(id):
                 "Tipo_de_documento": cliente.tipo_documento,
                 "Numero_de_documento": cliente.numero_documento,
             },
-            "cuentas": {  # Objeto (no lista)
+            "cuentas": {
                 "id": cuenta.id,
                 "numero_cuenta": cuenta.numero_cuenta,
                 "numero_tarjeta": cuenta.numero_tarjeta,
                 "cvv": cuenta.cvv,
                 "caducidad": cuenta.caducidad,
                 "tipo_cuenta": cuenta.tipo_cuenta,
-                "saldo": cuenta.saldo,
-                "saldo_retenido": cuenta.saldo_retenido,
+                "saldo": float(cuenta.saldo), 
+                "saldo_retenido": float(cuenta.saldo_retenido),
                 "transacciones": transacciones_data,
             },
             "notificaciones": [notificacion.serialize() for notificacion in cliente.notificaciones],
-            "tarjeta_coordenadas": tarjeta_coordenadas_data  # ¡Aquí van!
+            "tarjeta_coordenadas": tarjeta_coordenadas_data
         }
         return jsonify(response), 200
     except Exception as e:
@@ -321,12 +346,16 @@ def update_cliente_profile(id):
     db.session.commit()
 
     return jsonify({"mensaje": "Perfil del cliente actualizado exitosamente", "cliente": cliente.serialize()}), 200
+
+#                                                                  PRIVADO PARA JWT
     
 @api.route('/private', methods=['POST'])
 @jwt_required()
 def private():
     current_user = get_jwt_identity()
     return jsonify({"ok" : True, "current_user" : current_user}), 200
+
+#                                                                   NOTIFICACIONES
 
 @api.route('/notificaciones/<int:cliente_id>', methods=['GET'])
 # @jwt_required()
@@ -400,6 +429,167 @@ def marcar_notificacion_leida(notificacion_id):
     except Exception as e:
         db.session.rollback()
         return jsonify({"error": "Ha ocurrido un error", "details": str(e)}), 500
+    
+#                                                       DEPOSITOS RETIROS Y TRANSFERENCIAS
+
+@api.route('/transaccion/deposito', methods=['POST'])
+def realizar_deposito():
+    data = request.get_json()
+
+    # Datos de la transacción
+    cuenta_id = data.get("cuenta_id")
+    monto = data.get("monto")
+    descripcion = data.get("descripcion", "Depósito")
+
+    # Validaciones básicas
+    if not cuenta_id or not monto:
+        return jsonify({"error": "Faltan datos obligatorios"}), 400
+
+    try:
+        # Obtener la cuenta
+        cuenta = Cuenta.query.get(cuenta_id)
+        if not cuenta:
+            return jsonify({"error": "Cuenta no encontrada"}), 404
+
+        # Crear la transacción de depósito
+        transaccion = Transaccion(
+            cuenta_id=cuenta_id,
+            tipo="depósito",
+            monto=monto,
+            descripcion=descripcion,
+            fecha=datetime.utcnow()
+        )
+        db.session.add(transaccion)
+
+        # Actualizar el saldo de la cuenta
+        cuenta.saldo += monto
+
+        # Guardar los cambios en la base de datos
+        db.session.commit()
+
+        return jsonify({
+            "mensaje": "Depósito realizado exitosamente",
+            "saldo_actual": cuenta.saldo,
+            "transaccion": transaccion.serialize()
+        }), 201
+
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 500
+    
+@api.route('/transaccion/retiro', methods=['POST'])
+def realizar_retiro():
+    data = request.get_json()
+
+    # Datos de la transacción
+    cuenta_id = data.get("cuenta_id")
+    monto = data.get("monto")
+    descripcion = data.get("descripcion", "Retiro")
+
+    # Validaciones básicas
+    if not cuenta_id or not monto:
+        return jsonify({"error": "Faltan datos obligatorios"}), 400
+
+    try:
+        # Obtener la cuenta
+        cuenta = Cuenta.query.get(cuenta_id)
+        if not cuenta:
+            return jsonify({"error": "Cuenta no encontrada"}), 404
+
+        # Verificar que haya saldo suficiente
+        if cuenta.saldo < monto:
+            return jsonify({"error": "Saldo insuficiente"}), 400
+
+        # Crear la transacción de retiro
+        transaccion = Transaccion(
+            cuenta_id=cuenta_id,
+            tipo="retiro",
+            monto=monto,
+            descripcion=descripcion,
+            fecha=datetime.utcnow()
+        )
+        db.session.add(transaccion)
+
+        # Actualizar el saldo de la cuenta
+        cuenta.saldo -= monto
+
+        # Guardar los cambios en la base de datos
+        db.session.commit()
+
+        return jsonify({
+            "mensaje": "Retiro realizado exitosamente",
+            "saldo_actual": cuenta.saldo,
+            "transaccion": transaccion.serialize()
+        }), 201
+
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 500
+
+@api.route('/transaccion/transferencia', methods=['POST'])
+def realizar_transferencia():
+    data = request.get_json()
+
+    # Datos de la transferencia
+    cuenta_origen_id = data.get("cuenta_origen_id")
+    cuenta_destino_id = data.get("cuenta_destino_id")
+    monto = data.get("monto")
+    descripcion = data.get("descripcion", "Transferencia entre cuentas")
+
+    # Validaciones básicas
+    if not cuenta_origen_id or not cuenta_destino_id or not monto:
+        return jsonify({"error": "Faltan datos obligatorios"}), 400
+
+    try:
+        # Obtener las cuentas
+        cuenta_origen = Cuenta.query.get(cuenta_origen_id)
+        cuenta_destino = Cuenta.query.get(cuenta_destino_id)
+
+        if not cuenta_origen or not cuenta_destino:
+            return jsonify({"error": "Cuenta no encontrada"}), 404
+
+        # Verificar que haya saldo suficiente en la cuenta origen
+        if cuenta_origen.saldo < monto:
+            return jsonify({"error": "Saldo insuficiente en la cuenta origen"}), 400
+
+        # Crear transacción de retiro en la cuenta origen
+        transaccion_origen = Transaccion(
+            cuenta_id=cuenta_origen_id,
+            tipo="transferencia",
+            monto=monto,
+            descripcion=f"Transferencia a cuenta {cuenta_destino.numero_cuenta}"
+        )
+        db.session.add(transaccion_origen)
+
+        # Crear transacción de depósito en la cuenta destino
+        transaccion_destino = Transaccion(
+            cuenta_id=cuenta_destino_id,
+            tipo="depósito",
+            monto=monto,
+            descripcion=f"Transferencia desde cuenta {cuenta_origen.numero_cuenta}"
+        )
+        db.session.add(transaccion_destino)
+
+        # Actualizar los saldos de las cuentas
+        cuenta_origen.saldo -= monto
+        cuenta_destino.saldo += monto
+
+        # Guardar los cambios en la base de datos
+        db.session.commit()
+
+        return jsonify({
+            "mensaje": "Transferencia realizada exitosamente",
+            "saldo_origen": cuenta_origen.saldo,
+            "saldo_destino": cuenta_destino.saldo,
+            "transaccion_origen": transaccion_origen.serialize(),
+            "transaccion_destino": transaccion_destino.serialize()
+        }), 201
+
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 500   
+
+#                                                   ENVIO DE CODIGO Y VERIFICACIONES POR EMAIL
 
 # Endpoint para codigo de seguridad
 @api.route('/send-code', methods=['POST'])
