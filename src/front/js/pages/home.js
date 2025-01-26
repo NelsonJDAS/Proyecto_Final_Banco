@@ -20,9 +20,6 @@ export const Home = () => {
 
   return (
     <div className={`${store.texto}`}>
-      <button onClick={() => {
-        console.log(store)
-      }}>ghgfghfghfhgf</button>
       <div className="row p-0 m-0">
         <div className={`col-xl-7 text-end mx-xl-3 col-12 ${store.notificacionesHidden ? "col-xl-12" : ""}`}>
           <SaldoUsuario />
