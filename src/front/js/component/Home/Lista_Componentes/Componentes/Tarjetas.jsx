@@ -10,9 +10,10 @@ const Tarjetas = () => {
     // Obtener el número de tarjeta formateado
     const formatCardNumber = () => {
         if (!store.cuentas?.numero_tarjeta) return ["••••", "••••", "••••", "••••"];
-        
+
         // const cleaned = store.cuentas.numero_tarjeta.replace(/[^0-9]/g, ''); // Eliminar letras/guiones
-        const grupos = store.cuentas.numero_tarjeta.match(/.{1,4}/g) || [];
+        let numeros = store.cuentas.numero_tarjeta.replace('GEEK-', '')
+        let grupos = numeros.match(/.{1,4}/g) || [];
         return grupos.slice(-4); // Tomar últimos 16 dígitos (4 grupos)
     };
 
@@ -21,8 +22,8 @@ const Tarjetas = () => {
 
     return (
         <div className={`bg-tarjetas animacion-contenedor hover contenedor-componente-interactivo my-2 text-center fw-bold ${store.borde} text-white d-flex flex-column`}>
-            <div className="d-flex justify-content-between"> 
-                <p className="text-start m-2">Geek Card</p> 
+            <div className="d-flex justify-content-between">
+                <p className="text-start m-2">Geek Card</p>
                 <p className="my-1 mx-2 objeto-animado"><FaCcMastercard /></p>
             </div>
             <div className="d-flex justify-content-between fs-1 mx-2 my-3">
@@ -30,17 +31,21 @@ const Tarjetas = () => {
             </div>
             <div className="d-flex justify-content-evenly">
                 {formatCardNumber().map((grupo, index) => (
-                    <p 
-                        key={index} 
-                        className={`fw-bold fs-4 ${store.hidden ? "desenfoque" : ""}`}
+                    <p
+                        key={index}
+                        className={`fw-bold fs-3 ${store.hidden ? "desenfoque" : ""}`}
                     >
                         {grupo}
                     </p>
                 ))}
             </div>
-            <div className="text-end d-flex justify-content-around">
-                <p className="mb-auto my-1 objeto-animado">Tarjetas</p>
-                <p className={store.hidden ? "desenfoque" : ""}>{caducidad}</p>
+            <div className="row mt-2">
+                <div className="col-4 text-end"> <p className="mb-auto my-1 objeto-animado">Tarjeta</p></div>
+                <div className="col-4 text-center">
+                    <p className="d-flex justify-content-end">CVV:<p className={`mx-1 ${store.hidden ? "desenfoque" : ""}`}>{store.cuentas.cvv}</p></p>
+                </div>
+                <div className="col-4 text-center"><p className={`${store.hidden ? "desenfoque" : ""}`}>{caducidad}</p></div>
+
             </div>
         </div>
     );

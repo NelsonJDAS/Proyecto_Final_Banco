@@ -23,7 +23,7 @@ const ContenedorNotificaciones = () => {
     };
 
     return (
-        <div className={store.notificaciones ? "d-none" : ""}>
+        <div className={store.notificacionesHidden ? "d-none" : ""}>
             <div className="row">
                 <div className="col-12 text-center fw-bold">
                     <h3 className="text-center">Notificaciones</h3>

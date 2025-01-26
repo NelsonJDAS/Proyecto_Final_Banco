@@ -17,14 +17,14 @@ const getState = ({ getStore, getActions, setStore }) => {
       listaNotificaciones: [],
       chartData: [], // Graficas
       stockData: null, // Datos de mercado
-      notificaciones: false,
+      notificacionesHidden: false,
     },
     actions: {
       CambiarIncognito: (estado) => {
         setStore({ ...getStore(), hidden: estado });
       },
       CambiarNotificaciones: () => {
-        setStore({ ...getStore(), notificaciones: !getStore().notificaciones });
+        setStore({ ...getStore(), notificacionesHidden: !getStore().notificacionesHidden });
       },
       Scroll: () => {
         const navbar = document.getElementById("navbar"); // Seleccionamos el elemento por ID
@@ -151,8 +151,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             setStore({ ...store, cliente: data.cliente });
             setStore({ ...store, cuentas: data.cuentas });
             setStore({ ...store, user: data.user });
-            setStore({ ...store, notificaciones: data.notificaciones});
-            setStore({ ...store, tarjetaCoord: data.tarjeta_coordenadas});
+            setStore({ ...store, notificaciones: data.notificaciones });
+            setStore({ ...store, tarjetaCoord: data.tarjeta_coordenadas });
             // console.log("Datos del usuario guardados en el store:", "user", store.user, "cliente", store.cliente, "cuentas", store.cuentas, "listaNotificaciones", store.listaNotificaciones);
 
           })
@@ -189,29 +189,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       marcarNotificacionComoLeida: async (notificacionId) => {
         try {
-            const response = await fetch(`${process.env.BACKEND_URL}/api/notificaciones/${notificacionId}/marcar-leida`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
-    
-            if (!response.ok) {
-                throw new Error("Error al marcar la notificación como leída");
-            }
-    
-            const data = await response.json();
-            return data; // Devuelve la notificación actualizada
-            
+          const response = await fetch(`${process.env.BACKEND_URL}/api/notificaciones/${notificacionId}/marcar-leida`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+
+          if (!response.ok) {
+            throw new Error("Error al marcar la notificación como leída");
+          }
+
+          const data = await response.json();
+          return data; // Devuelve la notificación actualizada
+
         } catch (error) {
-            console.error("Error:", error);
-            throw error;
+          console.error("Error:", error);
+          throw error;
         }
-    },
-    setNotificaciones:(listaNotificaciones) => {
-      const store = getStore();
-      setStore({ ...store, listaNotificaciones });
-  },
+      },
+      setNotificaciones: (listaNotificaciones) => {
+        const store = getStore();
+        setStore({ ...store, listaNotificaciones });
+      },
 
       sendCode: (email) => {
         const store = getStore();
