@@ -1,6 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Enum
-from datetime import datetime
+from datetime import datetime, timezone
 
 db = SQLAlchemy()
 
@@ -34,7 +34,7 @@ class Cliente(db.Model):
     apellidos = db.Column(db.String(100))
     telefono = db.Column(db.String(30))
     direccion = db.Column(db.String(200))
-    fecha_creacion = db.Column(db.DateTime, default=datetime.utcnow)
+    fecha_creacion = db.Column(db.DateTime, default=datetime.now(timezone.utc))
     fecha_nacimiento = db.Column(db.Date)
     tipo_documento = db.Column(db.String(50))
     numero_documento = db.Column(db.String(50), unique=True)
@@ -149,8 +149,10 @@ class Transaccion(db.Model):
     cuenta_id = db.Column(db.Integer, db.ForeignKey('cuenta.id'))
     tipo = db.Column(Enum('depósito', 'retiro', 'transferencia', name='tipo_transaccion'), nullable=False)
     monto = db.Column(db.Float)
-    fecha = db.Column(db.DateTime, default=datetime.utcnow)
+    fecha = db.Column(db.DateTime, default=datetime.now(timezone.utc))
     descripcion = db.Column(db.String(200))
+    saldo_anterior = db.Column(db.Float)  # Saldo antes de la transacción
+    saldo_posterior = db.Column(db.Float)  # Saldo después de la transacción
     cuenta = db.relationship("Cuenta", back_populates="transacciones")
 
     def __repr__(self):
@@ -164,6 +166,8 @@ class Transaccion(db.Model):
             "monto": self.monto,
             "fecha": self.fecha,
             "descripcion": self.descripcion,
+            "saldo_anterior": self.saldo_anterior,
+            "saldo_posterior": self.saldo_posterior,
         }
 
 
@@ -173,7 +177,7 @@ class Notificacion(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     mensaje = db.Column(db.String(255), nullable=False)
     leida = db.Column(db.Boolean, default=False)
-    fecha_creacion = db.Column(db.DateTime, default=datetime.utcnow)
+    fecha_creacion = db.Column(db.DateTime, default=datetime.now(timezone.utc))
     cliente_id = db.Column(db.Integer, db.ForeignKey('cliente.id'))
     cliente = db.relationship("Cliente", back_populates="notificaciones")
 

@@ -10,6 +10,7 @@ from flask_cors import CORS
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from api.mail_config import get_mail
+from datetime import datetime, timezone
 
 
 
@@ -48,7 +49,7 @@ def getUsers():
 
 from datetime import datetime  # Asegúrate de importar datetime
 
-#                                               REGISTRO, LOGIN, IFORMACION DE USUARIO Y MODIFICACION DE USUARIO
+#                                  REGISTRO, LOGIN, IFORMACION DE USUARIO Y MODIFICACION DE USUARIO
 
 @api.route('/User/Register', methods=['POST'])
 def addUser():
@@ -59,7 +60,7 @@ def addUser():
     name = data.get("name")
     email = data.get("email")
     password = data.get("password")
-    is_active = data.get("is_active", True)  # Default: activo
+    is_active = data.get("is_active", True)
 
     # Validaciones básicas
     if not email or not name or not password:
@@ -75,7 +76,7 @@ def addUser():
             is_active=is_active
         )
         db.session.add(new_user)
-        db.session.flush()  # Esto asegura que new_user.id esté disponible
+        db.session.flush()  
         print("Usuario creado:", new_user)
 
         # Crear cliente asociado al usuario
@@ -87,7 +88,7 @@ def addUser():
             direccion="Introduzca direccion",
         )
         db.session.add(nuevo_cliente)
-        db.session.flush()  # Esto asegura que nuevo_cliente.id esté disponible
+        db.session.flush() 
         print("Cliente creado:", nuevo_cliente)
 
         # Asociar el cliente al usuario
@@ -102,8 +103,8 @@ def addUser():
             cvv=f"{random.randint(100, 999)}",
             caducidad="12/30",
             tipo_cuenta="Debito",
-            saldo=1500,
-            saldo_retenido=50,
+            saldo=0,  # Saldo inicial en 0
+            saldo_retenido=0,
             cliente_id=nuevo_cliente.id,
             estado=1,
         )
@@ -143,21 +144,47 @@ def addUser():
         print("Generando transacciones...")
         tipos_transacciones = [
             {"tipo": "depósito", "monto": 1000.00, "descripcion": "Depósito inicial"},
-            {"tipo": "retiro", "monto": 200.00, "descripcion": "Retiro en cajero"},
-            {"tipo": "transferencia", "monto": 300.00, "descripcion": "Transferencia a otro usuario"},
+            {"tipo": "retiro", "monto": -200.00, "descripcion": "Retiro en cajero"},
+            {"tipo": "transferencia", "monto": -300.00, "descripcion": "Transferencia a otro usuario"},
             {"tipo": "depósito", "monto": 500.00, "descripcion": "Depósito de salario"},
-            {"tipo": "retiro", "monto": 100.00, "descripcion": "Compra en tienda"},
+            {"tipo": "retiro", "monto": -100.00, "descripcion": "Compra en tienda"},
         ]
 
         for transaccion_data in tipos_transacciones:
+            # Guardamos el saldo anterior
+            saldo_anterior = nueva_cuenta.saldo
+
+            # Actualizamos el saldo de la cuenta según el tipo de transacción
+            if transaccion_data["tipo"] == "depósito":
+                nueva_cuenta.saldo += transaccion_data["monto"]
+            elif transaccion_data["tipo"] == "retiro":
+                if nueva_cuenta.saldo >= abs(transaccion_data["monto"]):  # Verificar saldo suficiente
+                    nueva_cuenta.saldo += transaccion_data["monto"] 
+                else:
+                    raise ValueError("Saldo insuficiente para realizar el retiro")
+            elif transaccion_data["tipo"] == "transferencia":
+                if nueva_cuenta.saldo >= abs(transaccion_data["monto"]):  # Verificar saldo suficiente
+                    nueva_cuenta.saldo += transaccion_data["monto"]
+                else:
+                    raise ValueError("Saldo insuficiente para realizar la transferencia")
+            else:
+                raise ValueError("Tipo de transacción no válido")
+
+            # Guardar el saldo posterior
+            saldo_posterior = nueva_cuenta.saldo
+
+            # Crear la transacción
             nueva_transaccion = Transaccion(
                 cuenta_id=nueva_cuenta.id,
                 tipo=transaccion_data["tipo"],
                 monto=transaccion_data["monto"],
                 descripcion=transaccion_data["descripcion"],
-                fecha=datetime.utcnow(),  # Fecha y hora actual
+                fecha=datetime.now(timezone.utc),
+                saldo_anterior=saldo_anterior,
+                saldo_posterior=saldo_posterior
             )
             db.session.add(nueva_transaccion)
+
             print(f"Transacción creada: {nueva_transaccion}")
 
         # Confirmar los cambios
@@ -242,25 +269,26 @@ def get_user_details(id):
         if not cliente.cuentas:
             return jsonify({"error": "El cliente no tiene cuentas"}), 404
         
-        cuenta = cliente.cuentas[0]  # Tomamos la primera (y única) cuenta
+        cuenta = cliente.cuentas[0] 
 
         # Obtener transacciones de la cuenta
         transacciones_data = [
             {
                 "id": transaccion.id,
                 "tipo": transaccion.tipo,
-                "monto": float(transaccion.monto),  # Convertir a float para JSON
-                "fecha": transaccion.fecha.isoformat(),  # Formato ISO
-                "descripcion": transaccion.descripcion
+                "monto": float(transaccion.monto),
+                "fecha": transaccion.fecha.isoformat(),
+                "descripcion": transaccion.descripcion,
+                "saldo_anterior": float(transaccion.saldo_anterior),
+                "saldo_posterior": float(transaccion.saldo_posterior)
             }
             for transaccion in cuenta.transacciones
         ]
 
-        # Obtener coordenadas (¡expone datos sensibles!)
         tarjeta_coordenadas_data = [
             {
                 "posicion": coord.posicion,
-                "valor": coord.valor  # En producción, enmascara esto
+                "valor": coord.valor 
             }
             for coord in cuenta.tarjetas_coordenadas
         ]
@@ -438,7 +466,7 @@ def realizar_deposito():
 
     # Datos de la transacción
     cuenta_id = data.get("cuenta_id")
-    monto = data.get("monto")
+    monto = abs(data.get("monto"))  # Asegurarse de que el monto sea positivo
     descripcion = data.get("descripcion", "Depósito")
 
     # Validaciones básicas
@@ -451,18 +479,26 @@ def realizar_deposito():
         if not cuenta:
             return jsonify({"error": "Cuenta no encontrada"}), 404
 
+        # Guardar el saldo anterior
+        saldo_anterior = cuenta.saldo
+
+        # Actualizar el saldo de la cuenta
+        cuenta.saldo += monto
+
+        # Guardar el saldo posterior
+        saldo_posterior = cuenta.saldo
+
         # Crear la transacción de depósito
         transaccion = Transaccion(
             cuenta_id=cuenta_id,
             tipo="depósito",
-            monto=monto,
+            monto=monto,  # Monto positivo
             descripcion=descripcion,
-            fecha=datetime.utcnow()
+            fecha=datetime.now(timezone.utc),
+            saldo_anterior=saldo_anterior,  # Saldo antes de la transacción
+            saldo_posterior=saldo_posterior  # Saldo después de la transacción
         )
         db.session.add(transaccion)
-
-        # Actualizar el saldo de la cuenta
-        cuenta.saldo += monto
 
         # Guardar los cambios en la base de datos
         db.session.commit()
@@ -483,7 +519,7 @@ def realizar_retiro():
 
     # Datos de la transacción
     cuenta_id = data.get("cuenta_id")
-    monto = data.get("monto")
+    monto = -abs(data.get("monto"))  # Asegurarse de que el monto sea negativo
     descripcion = data.get("descripcion", "Retiro")
 
     # Validaciones básicas
@@ -497,21 +533,29 @@ def realizar_retiro():
             return jsonify({"error": "Cuenta no encontrada"}), 404
 
         # Verificar que haya saldo suficiente
-        if cuenta.saldo < monto:
+        if cuenta.saldo < abs(monto):
             return jsonify({"error": "Saldo insuficiente"}), 400
+
+        # Guardar el saldo anterior
+        saldo_anterior = cuenta.saldo
+
+        # Actualizar el saldo de la cuenta (sumar el monto negativo)
+        cuenta.saldo += monto  # Aquí se suma el monto negativo
+
+        # Guardar el saldo posterior
+        saldo_posterior = cuenta.saldo
 
         # Crear la transacción de retiro
         transaccion = Transaccion(
             cuenta_id=cuenta_id,
             tipo="retiro",
-            monto=monto,
+            monto=monto,  # Monto negativo
             descripcion=descripcion,
-            fecha=datetime.utcnow()
+            fecha=datetime.now(timezone.utc),
+            saldo_anterior=saldo_anterior,  # Saldo antes de la transacción
+            saldo_posterior=saldo_posterior  # Saldo después de la transacción
         )
         db.session.add(transaccion)
-
-        # Actualizar el saldo de la cuenta
-        cuenta.saldo -= monto
 
         # Guardar los cambios en la base de datos
         db.session.commit()
@@ -533,7 +577,7 @@ def realizar_transferencia():
     # Datos de la transferencia
     cuenta_origen_id = data.get("cuenta_origen_id")
     cuenta_destino_id = data.get("cuenta_destino_id")
-    monto = data.get("monto")
+    monto = abs(data.get("monto"))  # Asegurarse de que el monto sea positivo
     descripcion = data.get("descripcion", "Transferencia entre cuentas")
 
     # Validaciones básicas
@@ -552,27 +596,41 @@ def realizar_transferencia():
         if cuenta_origen.saldo < monto:
             return jsonify({"error": "Saldo insuficiente en la cuenta origen"}), 400
 
-        # Crear transacción de retiro en la cuenta origen
-        transaccion_origen = Transaccion(
-            cuenta_id=cuenta_origen_id,
-            tipo="transferencia",
-            monto=monto,
-            descripcion=f"Transferencia a cuenta {cuenta_destino.numero_cuenta}"
-        )
-        db.session.add(transaccion_origen)
-
-        # Crear transacción de depósito en la cuenta destino
-        transaccion_destino = Transaccion(
-            cuenta_id=cuenta_destino_id,
-            tipo="depósito",
-            monto=monto,
-            descripcion=f"Transferencia desde cuenta {cuenta_origen.numero_cuenta}"
-        )
-        db.session.add(transaccion_destino)
+        # Guardar los saldos anteriores
+        saldo_anterior_origen = cuenta_origen.saldo
+        saldo_anterior_destino = cuenta_destino.saldo
 
         # Actualizar los saldos de las cuentas
         cuenta_origen.saldo -= monto
         cuenta_destino.saldo += monto
+
+        # Guardar los saldos posteriores
+        saldo_posterior_origen = cuenta_origen.saldo
+        saldo_posterior_destino = cuenta_destino.saldo
+
+        # Crear transacción de retiro en la cuenta origen (monto negativo)
+        transaccion_origen = Transaccion(
+            cuenta_id=cuenta_origen_id,
+            tipo="transferencia",
+            monto=-monto,  # Monto negativo
+            descripcion=f"Transferencia a cuenta {cuenta_destino.numero_cuenta}",
+            fecha=datetime.now(timezone.utc),
+            saldo_anterior=saldo_anterior_origen,  # Saldo antes de la transacción
+            saldo_posterior=saldo_posterior_origen  # Saldo después de la transacción
+        )
+        db.session.add(transaccion_origen)
+
+        # Crear transacción de depósito en la cuenta destino (monto positivo)
+        transaccion_destino = Transaccion(
+            cuenta_id=cuenta_destino_id,
+            tipo="depósito",
+            monto=monto,  # Monto positivo
+            descripcion=f"Transferencia desde cuenta {cuenta_origen.numero_cuenta}",
+            fecha=datetime.now(timezone.utc),
+            saldo_anterior=saldo_anterior_destino,  # Saldo antes de la transacción
+            saldo_posterior=saldo_posterior_destino  # Saldo después de la transacción
+        )
+        db.session.add(transaccion_destino)
 
         # Guardar los cambios en la base de datos
         db.session.commit()
@@ -587,7 +645,7 @@ def realizar_transferencia():
 
     except Exception as e:
         db.session.rollback()
-        return jsonify({"error": str(e)}), 500   
+        return jsonify({"error": str(e)}), 500
 
 #                                                   ENVIO DE CODIGO Y VERIFICACIONES POR EMAIL
 
