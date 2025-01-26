@@ -29,7 +29,7 @@ const TarjetasCoordenadas = () => {
                     <p className="fs-1 objeto-animado"><FaRegIdCard /></p>
                     <p className="mb-auto">Tarjeta de Coordenadas</p>
                     <div className="container">
-                        <input type="text" className={`form-control rounded-pill text-dark text-center ${sendCode ? "d-none" : ""}`} value={store.user.email} disabled />
+                        <input type="text" className={`form-control rounded-pill text-dark text-center ${sendCode ? "d-none" : ""} ${store.hidden ? "desenfoque" : ""}`} value={store.user.email} disabled />
                         <input type="text" className={`form-control rounded-pill text-dark text-center ${sendCode ? "" : "d-none"}`} placeholder="codigo aqui!" />
                     </div>
                     <p className="enlace-tarjeta my-2" onClick={() => {

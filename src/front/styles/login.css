@@ -33,13 +33,16 @@
 }
 
 .btn-login {
-    font-weight: 600;
+    background: linear-gradient(135deg, #2563EB, #93C5FD);
+    color: white;
+    font-weight: 900;
     transform: scale(1);
     transition: transform 0.2s ease, background-color 0.5s ease, color 0.3s ease;
 }
 
 .btn-login:hover {
-    background-color: rgba(255, 255, 255, 0.648);
+    background: linear-gradient(135deg, #93C5FD, #2563EB);
+    color: white;
     transform: scale(1.01);
 }
 

@@ -12,6 +12,7 @@ export const Login = () => {
     const [email, SetEmail] = useState("");
     const [password, SetPassword] = useState("");
     const [CodeSend, SetCodeSend] = useState("")
+    const [newPassword, SetNewPassword] = useState(false)
     const navigate = useNavigate("");
 
     // ejecuta el contenedor si el usuario se ha olvidado el password de su cuenta
@@ -95,7 +96,7 @@ export const Login = () => {
     return (
         <div className="login">
             <div className={`d-flex flex-column align-content-center text-center formulario-login ${store.fondo}`}>
-                <h1 className="titulo-login">{t(userForgotPassword === false ? 'Login.login' : 'Login.recovery')}</h1>
+                <h1 className="titulo-login">{t(userForgotPassword === false ? 'Login.login' : newPassword ? "Confirmar Contraseña" : 'Login.recovery')}</h1>
                 {/* hace la transicion mas suave  */}
                 <div className={userForgotPassword ? "transicion-recuperar-password " : "transicion-Iniciar-Sesion "}>
                     {/*muestra dependiendo del estado userForgotPassword el contenedor de iniciar sesion o password olvidada*/}
@@ -121,48 +122,55 @@ export const Login = () => {
                         ) : (
                             <>
                                 {/* contenedor password olvidada */}
+                                {/*ocultamos las propiedades y las cambiamos si el estado newpassword nos indica que le usuario accedio correctamente al codigo y puede cambiar su password*/}
                                 <div className="text-center my-md-2">
-                                    <span className="fw-bold d-none d-md-block">{t('Login.forgot')}</span>
-                                    <p className="mx-3 text-center py-md-1 py-0 rounded-3 texto-login">{t('Forgot.recovery2')}</p>
+                                    <span className={`fw-bold d-none d-md-block ${newPassword ? "d-md-none" : ""}`}>{t('Login.forgot')}</span>
+                                    <p className={`mx-3 text-center py-md-1 py-0 rounded-3 texto-login ${newPassword ? "d-none" : ""}`}>{t('Forgot.recovery2')}</p>
                                 </div>
-                                <label className="my-md-1 fw-bold label-login">{t('Login.email')}</label>
-                                <input className="mx-md-3 mx-2 text-center py-0 py-md-1 rounded-pill input" placeholder="Email" type="email" onChange={HandleForgotMail} />
+                                <label className={`my-md-3 fw-bold label-login ${newPassword ? "" : "d-none"}`}>Contraseña nueva</label>
+                                <input className={`"mx-md-3 mx-2 text-center py-0 py-md-1 rounded-pill input ${newPassword ? "" : "d-none"}`} type="password" />
+                                <label className={`my-md-3 fw-bold label-login ${newPassword ? "" : "d-none"}`}>Confirmar Contraseña</label>
+                                <input className={`"mx-md-3 mx-2 text-center py-0 py-md-1 rounded-pill input ${newPassword ? "" : "d-none"}`} type="password" />
+                                <label className={`my-md-1 fw-bold label-login ${newPassword ? "d-none" : ""}`}>{t('Login.email')}</label>
+                                <input className={`mx-md-3 mx-2 text-center py-0 py-md-1 rounded-pill input ${newPassword ? "d-none" : ""}`} placeholder="Email" type="email" onChange={HandleForgotMail} />
                                 <div className="text-center row mx-1 my-2">
-                                    <div className="col-12 col-xl-6 col-md-6 my-md-3 my-1 text-start">
-                                        <button type="button" className="rounded-pill btn btn-primary w-100 fw-bold" ref={buttomCode} onClick={() => {
+                                    <div className={`col-12 col-xl-6 col-md-6 my-md-3 my-1 text-start ${newPassword ? "col-xl-12" : ""}`}>
+                                        <button type="button" className={`rounded-pill btn btn-primary w-100 fw-bold ${newPassword ? "" : "d-none"}`} ref={buttomCode} onClick={() => {
+                                            // tu funcion aqui
+                                        }}>Listo!</button>
+                                        <button type="button" className={`rounded-pill btn btn-primary w-100 fw-bold ${newPassword ? "d-none" : ""}`} ref={buttomCode} onClick={() => {
                                             SetCode(true)
                                             Count()
                                             actions.sendCode(forgotMail)
-
                                         }}>{code ?
                                             `( ${timeCode} ) s`
                                             : t('Forgot.sendCode')}</button>
                                     </div>
-                                    <div className="col-12 col-md-6 col-xl-3 my-md-3 text-center">
+                                    <div className={`col-12 col-md-6 col-xl-3 my-md-3 text-center ${newPassword ? "d-none" : ""}`}>
                                         <input className="text-center py-1 rounded-pill input w-100 fw-bold input-code" type="text" onChange={HandleCodeSeg} maxLength={6} ref={InputCode} placeholder="******" />
                                         <label className="fw-bold d-none d-md-block">{t('Forgot.code')}</label>
                                     </div>
-                                    <div className="col-12 col-xl-3">
+                                    <div className={`col-12 col-xl-3 ${newPassword ? "d-none" : ""}`}>
                                         <div className="col-12 text-center">
-                                            <button type="button" className={`btn mt-3 mt-xl-3 mt-md-0 mt-lg-0 w-100 rounded-pill ${store.borde} ${store.texto} `} onClick={() => {
+                                            <button type="button" className={`btn btn-primary text-white fw-bold mt-3 mt-xl-3 mt-md-0 mt-lg-0 w-100 rounded-pill`} onClick={() => {
                                                 console.log(timeCode)
                                                 actions.verifyCode(forgotMail, CodeSend)
                                                 console.log(forgotMail, CodeSend);
-
+                                                SetNewPassword(true);
                                                 ;
                                             }}>{t('Forgot.check')}</button>
                                         </div>
                                     </div>
                                 </div>
                                 <span className={`mx-3 ${store.borde_hover}`} onClick={() => {
-                                    SetuserForgotPassword(false);
+                                    newPassword ? SetNewPassword(false) : SetuserForgotPassword(false);
                                 }}>{t('Forgot.return')}</span>
                             </>
                         )}
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 };
 
