@@ -39,7 +39,7 @@ export const Register = () => {
             console.error("Error en el registro");
         }
         console.log("desde front", name, email, password);
-        
+
     };
 
     return (
@@ -56,8 +56,8 @@ export const Register = () => {
                 </div>
 
                 <div className="text-center">
-                <button className={`btn btn-light mt-3 w-50 rounded-pill btn-login ${store.borde}`} onClick={() => {handleRegister()}}>{t('Register.ready')}</button>
-                        
+                    <button className={`btn btn-light mt-3 w-50 rounded-pill btn-login ${store.borde}`} onClick={() => { handleRegister() }}>{t('Register.ready')}</button>
+
                 </div>
             </div>
         </div>

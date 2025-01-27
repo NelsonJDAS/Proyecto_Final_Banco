@@ -231,7 +231,7 @@
 
 .scroll-divisas {
     overflow: auto;
-    height: auto;
+    height: 190px;
 }
 
 .scroll-divisas::-webkit-scrollbar {

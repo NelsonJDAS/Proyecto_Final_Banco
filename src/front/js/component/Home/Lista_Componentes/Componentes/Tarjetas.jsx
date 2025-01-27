@@ -45,15 +45,15 @@ const Tarjetas = () => {
                 <div className="col-4 text-center">
                     <div className="d-flex justify-content-end">
                         CVV:
-                        <span className={`mx-1 ${store.hidden ? "desenfoque" : ""}`}>
+                        <p className={`mx-1 ${store.hidden ? "desenfoque" : ""}`}>
                             {store.cuentas.cvv}
-                        </span>
+                        </p>
                     </div>
                 </div>
                 <div className="col-4 text-center">
-                    <span className={`${store.hidden ? "desenfoque" : ""}`}>
+                    <p className={`${store.hidden ? "desenfoque" : ""}`}>
                         {caducidad}
-                    </span>
+                    </p>
                 </div>
             </div>
         </div>

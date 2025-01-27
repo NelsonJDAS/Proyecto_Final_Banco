@@ -23,7 +23,7 @@ export const Footer = () => {
 					<h6 className="subtitulo d-flex ">{t('Footer.Contact information')}</h6>
 					<span className={`d-flex link-footer ${store.borde_hover}`} onClick={() => {
 						actions.Scroll()
-						navigate("/example")
+						navigate("/contacto")
 					}}>{t('Footer.Contact')}</span>
 					<span className={`d-flex link-footer ${store.borde_hover}`} onClick={() => {
 						actions.Scroll()
