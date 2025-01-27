@@ -10,12 +10,10 @@ const ContenedorPrincipalMovimientos = () => {
 
     const HandleInput = (e) => {
         SetInput(e.target.value.toLowerCase())
-        console.log(input)
     }
 
     const HandleSelect = (e) => {
         SetSelect(e.target.value)
-        console.log(select)
     }
 
     useEffect(() => {
@@ -66,7 +64,7 @@ const ContenedorPrincipalMovimientos = () => {
                     {store.transacciones && store.transacciones.map((transaccion) => (
                         <div className={select === "fecha" ? transaccion.fecha.toLowerCase().slice(0, 10).includes(input) ? "" : "d-none" : ""}>
                             <div className={select === "concepto" ? transaccion.descripcion.toLowerCase().includes(input) ? "" : "d-none" : ""}>
-                                <div className={select === "monto" ? transaccion.monto.toString().includes(input.replace(/\//g, "-")) ? "" : "d-none" : ""} onClick={() => console.log(transaccion.fecha.toLowerCase().slice(0, 10))}>
+                                <div className={select === "monto" ? transaccion.monto.toString().includes(input) ? "" : "d-none" : ""} onClick={() => console.log(transaccion.fecha.toLowerCase().slice(0, 10))}>
                                     <TablaCol
                                         key={transaccion.id}
                                         fecha={transaccion.fecha}

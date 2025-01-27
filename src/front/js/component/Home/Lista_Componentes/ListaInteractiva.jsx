@@ -67,21 +67,21 @@ const ListaInteractiva = () => {
         <div className="container-fluid w-85 py-3" ref={sectionRef}>
             <div className="row">
                 <div className={`col-12 col-xl-3 ${firstCol}`}><HistorialTransacciones /></div>
-                <div className={`col-6 col-xl-3 ${thCol}`}><BloqueoDesbloqueoCuentas /></div>
-                <div className={`col-6 col-xl-3 ${FoCol}`}><Alertas /></div>
+                <div className={`col-12 col-xl-3 ${thCol}`}><BloqueoDesbloqueoCuentas /></div>
+                <div className={`col-12 col-xl-3 ${FoCol}`}><Alertas /></div>
                 <div className={`col-12 col-xl-3 ${secCol}`}><Tarjetas /></div>
             </div>
             <div className="row">
-                <div className={`col-6 col-xl-4 ${firstCol}`}><Tienda /></div>
-                <div className={`col-6 col-xl-2 ${thCol}`}><Productos /></div>
-                <div className={`col-6 col-xl-4 ${FoCol}`}><Inversiones /></div>
-                <div className={`col-6 col-xl-2 ${secCol}`}><AtencionCliente /></div>
+                <div className={`col-12 col-xl-4 ${firstCol}`}><Tienda /></div>
+                <div className={`col-12 col-xl-2 ${thCol}`}><Productos /></div>
+                <div className={`col-12 col-xl-4 ${FoCol}`}><Inversiones /></div>
+                <div className={`col-12 col-xl-2 ${secCol}`}><AtencionCliente /></div>
             </div>
             <div className="row">
-                <div className={`col-6 col-xl-4 ${firstCol}`}><Configuracion /></div>
-                <div className={`col-6 col-xl-3 ${thCol}`}><TarjetasCoordenadas /></div>
-                <div className={`col-6 col-xl-3 ${FoCol}`}><Divisas /></div>
-                <div className={`col-6 col-xl-2 ${secCol}`}><RedesSociales /></div>
+                <div className={`col-12 col-xl-4 ${firstCol}`}><Configuracion /></div>
+                <div className={`col-12 col-xl-3 ${thCol}`}><TarjetasCoordenadas /></div>
+                <div className={`col-12 col-xl-3 ${FoCol}`}><Divisas /></div>
+                <div className={`col-12 col-xl-2 ${secCol}`}><RedesSociales /></div>
             </div>
         </div>
     )
