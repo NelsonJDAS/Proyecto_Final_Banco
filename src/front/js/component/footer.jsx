@@ -27,7 +27,7 @@ export const Footer = () => {
 					}}>{t('Footer.Contact')}</span>
 					<span className={`d-flex link-footer ${store.borde_hover}`} onClick={() => {
 						actions.Scroll()
-						navigate("/example")
+						navigate("/chat")
 					}}>{t('Footer.Chat')}</span>
 				</div>
 				<div className="col-4 col-md-3 col-lg-2 px-0 px-md-3 flex-column animation">
@@ -66,10 +66,6 @@ export const Footer = () => {
 						// actions.Scroll()
 						// navigate("/metodos")
 					}}>{t('Footer.Security methods')}</span>
-					<span className={`d-flex opacity-50`} onClick={() => {
-						// actions.Scroll()
-						// navigate("/example")
-					}}>{t('Footer.Coordinate card')}</span>
 				</div>
 				<div className="col-4 col-md-3 col-lg-2 px-0 px-md-3 flex-column animation">
 					<h6 className="subtitulo d-flex ">{t('Footer.Products and services')}</h6>
@@ -77,14 +73,6 @@ export const Footer = () => {
 						// actions.Scroll()
 						// navigate("/example")
 					}}>{t('Footer.Shop')}</span>
-					<span className={`d-flex opacity-50`} onClick={() => {
-						// actions.Scroll()
-						// navigate("/example")
-					}}>{t('Footer.Insurance')}</span>
-					<span className={`d-flex opacity-50`} onClick={() => {
-						// actions.Scroll()
-						// navigate("/example")
-					}}>{t('Footer.Loans')}</span>
 				</div>
 				<div className="col-4 col-md-3 col-lg-2 px-0 px-md-3 flex-column animation">
 					<h6 className="subtitulo d-flex ">{t('Footer.Certifications')}</h6>

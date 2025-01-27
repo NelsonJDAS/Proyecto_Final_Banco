@@ -24,6 +24,7 @@ import injectContext, { Context } from "./store/appContext";
 import { Navbar } from "./component/navbar.jsx";
 import { Footer } from "./component/footer.jsx";
 import { Contacto } from "./pages/contacto.js";
+import { Chat } from "./pages/chat.js";
 
 //create your first component
 const Layout = () => {
@@ -58,6 +59,7 @@ const Layout = () => {
               <Route element={<Not_found />} path="*" />
               <Route element={<Inversiones />} path="/inversiones" />
               <Route element={<Contacto />} path="/contacto" />
+              <Route element={<Chat />} path="/chat" />
             </Routes>
           </div>
           <Footer />
