@@ -23,7 +23,7 @@ const ContenedorContacto = () => {
     return (
         <div className="container">
             <div className="espaciado-contacto">
-                <h1 className={`text-center titulo-politica ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>Contacto GeekBank</h1>
+                <h1 className={`text-center titulo-principal-politica ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>Contacto GeekBank</h1>
                 <p className={`fs-3 text-center ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`} >
                     En Geek Bank, nos importa ofrecerte el mejor servicio
                     y asegurarnos de que tengas una experiencia única. Si necesitas asistencia o tienes alguna pregunta,
@@ -56,13 +56,6 @@ const ContenedorContacto = () => {
     )
 }
 
-// logo, position, text, title, userLoad
-
-{/* <li>Proveer información veraz y actualizada.</li>
-<li>Proteger la confidencialidad de sus credenciales de acceso.</li>
-<li>
-    Notificar inmediatamente cualquier uso no autorizado de su cuenta.
-</li> */}
 
 export default ContenedorContacto
 

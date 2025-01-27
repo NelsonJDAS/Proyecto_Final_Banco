@@ -44,31 +44,31 @@
   "Login": {
     "login": "Iniciar sesión",
     "recovery": "Recuperar contraseña",
-    "name" : "Nombre",
-    "email" : "Dirección de correo electrónico",
-    "password" : "Contraseña",
+    "name": "Nombre",
+    "email": "Dirección de correo electrónico",
+    "password": "Contraseña",
     "forgot": "¿Ha olvidado su contraseña?"
   },
 
   "Forgot": {
-    "recovery2" : "No te preocupes, te ayudaremos a recuperar el acceso a tu cuenta. Introduzca la dirección de correo electrónico asociada a su cuenta. Te enviaremos un código de verificación que podrás utilizar para restablecer tu contraseña.",
-    "sendCode" : "Enviar código",
-    "code" : "Código",
-    "check" : "Comprobar",
+    "recovery2": "No te preocupes, te ayudaremos a recuperar el acceso a tu cuenta. Introduzca la dirección de correo electrónico asociada a su cuenta. Te enviaremos un código de verificación que podrás utilizar para restablecer tu contraseña.",
+    "sendCode": "Enviar código",
+    "code": "Código",
+    "check": "Comprobar",
     "return": "Volver Atrás"
   },
 
   "Register": {
     "welcome!": "",
-    "register" : "Regístrese aquí",
-    "cuenta?" : "¿Ya tienes una cuenta?",
+    "register": "Regístrese aquí",
+    "cuenta?": "¿Ya tienes una cuenta?",
     "loginfunc": "Inicia sesión para acceder a todas tus funcionalidades de la web",
-    "hello!" : "¡Hola!",
-    "sinCuenta" : "¿Aún no tiene cuenta?",
-    "sinCuenta2" : "Crear una es rapido y sencillo",
-    "sinCuenta3" : "Haz clic en el botón de abajo para comenzar.",
-    "create" : "Crear una cuenta",
-    "ready" : "¡Listo!"
+    "hello!": "¡Hola!",
+    "sinCuenta": "¿Aún no tiene cuenta?",
+    "sinCuenta2": "Crear una es rapido y sencillo",
+    "sinCuenta3": "Haz clic en el botón de abajo para comenzar.",
+    "create": "Crear una cuenta",
+    "ready": "¡Listo!"
   },
   "perfil": {
     "modify": "Modifica tus datos aqui!",
@@ -133,7 +133,7 @@
     "c7": "Consentimiento",
     "p10": "En todo momento, nos aseguramos de que cualquier compartición de datos se realice de manera responsable y transparente, priorizando siempre su seguridad y privacidad. Si tiene alguna pregunta sobre cómo compartimos sus datos, puede contactarnos en cualquier momento."
   },
-  "terminos" : {
+  "terminos": {
     "p1": "Términos y Condiciones - GeekBank",
     "p2": "Bienvenido a GeekBank. Al acceder y utilizar nuestros servicios, usted acepta cumplir con los siguientes términos y condiciones. Estos términos son un acuerdo legal entre usted y GeekBank, y su aceptación es necesaria para hacer uso de nuestros productos y servicios. Le recomendamos leer detenidamente toda la información contenida en este documento, ya que al utilizar nuestros servicios, está aceptando los términos aquí establecidos.",
     "p3": "Uso de Nuestros Servicios",
@@ -157,9 +157,9 @@
     "p2": "Este aviso legal tiene como propósito regular el acceso, el uso y la navegación dentro del sitio web, así como los servicios que son proporcionados por GeekBank. Al ingresar y utilizar este sitio web, usted acepta de manera expresa y sin reservas las condiciones y términos establecidos en el presente aviso. Es importante que el usuario lea detenidamente este documento, ya que en él se detallan las normas que rigen tanto la interacción con los contenidos y servicios ofrecidos por GeekBank, como las responsabilidades y derechos aplicables tanto al usuario como a los administradores del sitio. Al continuar utilizando el sitio web, se entiende que el usuario ha comprendido y aceptado plenamente todas las disposiciones aquí expuestas. Si no está de acuerdo con alguna de las condiciones especificadas, le recomendamos que se abstenga de hacer uso del sitio web o de cualquiera de los servicios relacionados. GeekBank se reserva el derecho de modificar, actualizar o eliminar en cualquier momento las condiciones de este aviso legal, por lo que es responsabilidad del usuario revisarlo periódicamente para asegurarse de estar al tanto de cualquier cambio. Estas modificaciones entrarán en vigor desde el momento de su publicación en el sitio web. El acceso al sitio web y su uso están condicionados al cumplimiento de las normativas aplicables, incluyendo pero no limitándose a las leyes de propiedad intelectual, protección de datos y comercio electrónico..",
     "p3": "Información Legal y de Contacto de GeekBank",
     "p4": "GeekBank es una entidad financiera que opera de manera completamente legítima, cumpliendo con todas las normativas legales y regulaciones establecidas por las autoridades competentes. Como institución responsable, nos comprometemos a garantizar la seguridad, la transparencia y la confianza de nuestros clientes en cada uno de los servicios que ofrecemos. Para más información o consultas, puede ponerse en contacto con nosotros a través de los siguientes medios:",
-    "c1": "Dirección  --   Calle Ficticia 123, Ciudad Geek.",
-    "c2": "Correo electrónico  --  legal@geekbank.com.",
-    "c3": "Teléfono  --  +1 (800) 123-4567.",
+    "c1": "Dirección  --   Calle del perdido, Ciudad Geek.",
+    "c2": "Correo electrónico  --  geeksacademybank@gmail.com",
+    "c3": "Teléfono  --  +34 600 18 16 22",
     "p5": "Propiedad Intelectual",
     "p6": "Todos los contenidos, marcas, logos, imágenes, textos y diseños presentes en este sitio web son propiedad exclusiva de GeekBank o de sus licenciantes, y están protegidos por las leyes de propiedad intelectual aplicables.",
     "p7": "Uso Permitido",
@@ -194,7 +194,7 @@
     "c2": "Reposición de tarjeta: 15 € por reemplazo en caso de pérdida o daño.",
     "c3": "Consulta de saldo en cajeros externos: 1 € por cada consulta realizada fuera de nuestra red."
   },
-  "educacion" : {
+  "educacion": {
     "p1": "Educación Financiera - GeekBank",
     "p2": "En GeekBank, creemos que la educación financiera es clave para ayudar a nuestros clientes a tomar decisiones informadas y gestionar su dinero de manera eficiente. Nos comprometemos a ser más que una institución financiera, ofreciendo recursos educativos diseñados para todos los niveles de conocimiento. Desde guías sobre presupuestos, ahorro e inversiones, hasta herramientas interactivas y consejos sobre planificación financiera, estamos aquí para brindarle el apoyo necesario en cada paso. Nuestro objetivo es asegurarnos de que pueda tomar decisiones con confianza, con acceso a la información más relevante y actualizada para mejorar su salud financiera y alcanzar sus metas.",
     "p3": "¿Por qué es importante la educación financiera?",
@@ -219,5 +219,4 @@
     "p1": "Consejos de Seguridad - GeekBank",
     "p2": "En GeekBank, la seguridad de nuestros clientes es nuestra máxima prioridad. A continuación, le proporcionamos una serie de consejos útiles para proteger su información y mantener sus transacciones seguras."
   }
-    
-  }
+}
