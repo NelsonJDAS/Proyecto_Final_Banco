@@ -42,8 +42,8 @@ const TablaCol = ({ fecha, monto, cuerpo, importe, saldo, tipo }) => {
         }
     }, [isVisible])
 
-       // Determinar el color del importe
-       const colorImporte = () => {
+    // Determinar el color del importe
+    const colorImporte = () => {
         if (tipo === "depósito") {
             return "text-success";
         } else if (tipo === "retiro") {
