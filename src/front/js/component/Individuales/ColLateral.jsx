@@ -16,3 +16,4 @@ const ColLateral = ({ width, position, text, userLoad }) => {
     )
 }
 export default ColLateral
+

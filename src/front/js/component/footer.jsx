@@ -76,13 +76,13 @@ export const Footer = () => {
 				</div>
 				<div className="col-4 col-md-3 col-lg-2 px-0 px-md-3 flex-column animation">
 					<h6 className="subtitulo d-flex ">{t('Footer.Certifications')}</h6>
-					<span className={`d-flex opacity-50`} onClick={() => {
-						// actions.Scroll()
-						// navigate("/example")
+					<span className={`d-flex link-footer ${store.borde_hover}`} onClick={() => {
+						actions.Scroll()
+						navigate("/certificaciones")
 					}}>{t('Footer.Certified titles')}</span>
-					<span className={`d-flex opacity-50`} onClick={() => {
-						// actions.Scroll()
-						// navigate("/example")
+					<span className={`d-flex link-footer ${store.borde_hover}`} onClick={() => {
+						actions.Scroll()
+						navigate("/titulos")
 					}}>{t('Footer.Security titles')}</span>
 				</div>
 			</div>

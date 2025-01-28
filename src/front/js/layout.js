@@ -17,14 +17,16 @@ import { Transferencias } from "./pages/transferencias.js";
 import { Movimientos } from "./pages/movimientos.js";
 import { Perfil } from "./pages/perfil.js";
 import { Inversiones } from "./pages/inversiones.js";
-
-import { Not_found } from "./pages/not_found.js";
-
-import injectContext, { Context } from "./store/appContext";
 import { Navbar } from "./component/navbar.jsx";
 import { Footer } from "./component/footer.jsx";
 import { Contacto } from "./pages/contacto.js";
 import { Chat } from "./pages/chat.js";
+import { Titulos } from "./pages/titulos.js";
+import { Certificaciones } from "./pages/certificaciones.js";
+
+import { Not_found } from "./pages/not_found.js";
+
+import injectContext, { Context } from "./store/appContext";
 
 //create your first component
 const Layout = () => {
@@ -60,6 +62,8 @@ const Layout = () => {
               <Route element={<Inversiones />} path="/inversiones" />
               <Route element={<Contacto />} path="/contacto" />
               <Route element={<Chat />} path="/chat" />
+              <Route element={<Titulos />} path="/titulos" />
+              <Route element={<Certificaciones />} path="/certificaciones" />
             </Routes>
           </div>
           <Footer />
