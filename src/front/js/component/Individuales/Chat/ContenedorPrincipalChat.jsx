@@ -91,7 +91,7 @@ const ContenedorPrincipalChat = () => {
 
 
     return (
-        <div className="container w-50 espaciado-chat">
+        <div className={`container w-50 espaciado-chat ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>
             <div className="row bg-secondary cabecera-chat">
                 <div className="col-6 align-content-center text-center">
                     <span className="nombre-chat">Chat Virtual</span>
