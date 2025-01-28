@@ -9,90 +9,78 @@ const ContenedorPrincipalChat = () => {
     const [pregunta, SetPregunta] = useState([]);
 
     const ElegirRespusta = (value) => {
-        switch (value) {
-            case 1:
-                return (
-                    <Mensaje
-                        textoBot="En Geek Bank, nuestras tarifas y comisiones varían según el tipo de cuenta. Puedes consultarlas en detalle a través de nuestra página web o aplicación móvil, o bien contactando a nuestro servicio al cliente."
-                        textoUser="¿Cuáles son las tarifas y comisiones asociadas a mis cuentas?"
-                    />
-                );
-
-            case 2:
-                return (
-                    <Mensaje
-                        textoBot="Puedes cambiar tu PIN o contraseña ingresando a la configuración de seguridad en nuestra aplicación móvil o banca en línea. También puedes solicitar asistencia llamando a nuestro servicio al cliente."
-                        textoUser="¿Cómo puedo cambiar mi PIN o contraseña de acceso?"
-                    />
-                );
-
-            case 3:
-                return (
-                    <Mensaje
-                        textoBot="En Geek Bank, contamos con una amplia red de sucursales y cajeros. Puedes usar nuestro localizador en la aplicación o el sitio web para encontrar el más cercano."
-                        textoUser="¿Dónde están ubicadas las sucursales y cajeros automáticos del banco?"
-                    />
-                );
-
-            case 4:
-                return (
-                    <Mensaje
-                        textoBot="Nuestros horarios de atención están disponibles en nuestra página web o aplicación móvil. Además, algunas de nuestras sucursales ofrecen horarios extendidos."
-                        textoUser="¿Cuáles son los horarios de atención del banco?"
-                    />
-                );
-
-            case 5:
-                return (
-                    <Mensaje
-                        textoBot="Para abrir una cuenta en Geek Bank, necesitarás tu identificación oficial, comprobante de domicilio reciente y, en algunos casos, un comprobante de ingresos."
-                        textoUser="¿Qué documentos necesito para abrir una cuenta?"
-                    />
-                );
-
-            case 6:
-                return (
-                    <Mensaje
-                        textoBot="Sí, tenemos una aplicación móvil que puedes descargar desde Google Play o App Store. Desde ahí podrás realizar todas tus operaciones bancarias fácilmente."
-                        textoUser="¿El banco tiene aplicación móvil? ¿Cómo la descargo?"
-                    />
-                );
-
-            case 7:
-                return (
-                    <Mensaje
-                        textoBot="Si detectas un cargo no reconocido en tu cuenta, por favor notifícalo de inmediato a través de nuestra aplicación móvil, sitio web o servicio al cliente. Nuestro equipo investigará el caso."
-                        textoUser="¿Qué debo hacer si detecto un cargo no reconocido en mi cuenta?"
-                    />
-                );
-
-            case 8:
-                return (
-                    <Mensaje
-                        textoBot="Puedes actualizar tus datos personales, como dirección, correo o teléfono, directamente desde nuestra aplicación móvil o visitando una sucursal con tu identificación oficial."
-                        textoUser="¿Cómo puedo actualizar mis datos personales (como dirección, correo o teléfono)?"
-                    />
-                );
-
-            case 9:
-                return (
-                    <Mensaje
-                        textoBot="Las transferencias bancarias nacionales suelen procesarse en cuestión de minutos, pero pueden tardar hasta 24 horas dependiendo del tipo de transferencia y horario."
-                        textoUser="¿Cuánto tiempo tarda en procesarse una transferencia bancaria?"
-                    />
-                );
-
-            case 10:
-                return (
-                    <Mensaje
-                        textoBot="Sí, puedes usar tu tarjeta en el extranjero. Asegúrate de activarla para uso internacional desde nuestra aplicación móvil antes de viajar."
-                        textoUser="¿Puedo usar mi tarjeta en el extranjero?"
-                    />
-                );
-
-            default:
-                break;
-
+        if (value == 1) {
+            return (
+                <Mensaje
+                    textoBot="En Geek Bank, nuestras tarifas y comisiones varían según el tipo de cuenta. Puedes consultarlas en detalle a través de nuestra página web , o bien contactando a nuestro servicio al cliente."
+                    textoUser="¿Cuáles son las tarifas y comisiones asociadas a mis cuentas?"
+                />
+            );
+        } else if (value == 2) {
+            return (
+                <Mensaje
+                    textoBot="Puedes cambiar tu PIN o contraseña ingresando al enlace de cambiar contraseña en la seccion inciciar sesion en banca en línea. También puedes solicitar asistencia llamando a nuestro servicio al cliente."
+                    textoUser="¿Cómo puedo cambiar mi PIN o contraseña de acceso?"
+                />
+            );
+        } else if (value == 3) {
+            return (
+                <Mensaje
+                    textoBot="En Geek Bank, contamos con una amplia red de sucursales y cajeros. Puedes usar nuestro localizador del sitio web para encontrar el más cercano."
+                    textoUser="¿Dónde están ubicadas las sucursales y cajeros automáticos del banco?"
+                />
+            );
+        } else if (value == 4) {
+            return (
+                <Mensaje
+                    textoBot="Nuestros horarios de atención están disponibles en nuestra página web . Además, algunas de nuestras sucursales ofrecen horarios extendidos."
+                    textoUser="¿Cuáles son los horarios de atención del banco?"
+                />
+            );
+        } else if (value == 5) {
+            return (
+                <Mensaje
+                    textoBot="Para abrir una cuenta en Geek Bank, necesitarás tu identificación oficial y, en algunos casos, un comprobante de ingresos."
+                    textoUser="¿Qué documentos necesito para abrir una cuenta?"
+                />
+            );
+        } else if (value == 6) {
+            return (
+                <Mensaje
+                    textoBot="Actualmente no contamos con una aplicación móvil disponible, pero nos encontramos trabajando en su desarrollo. Pronto podrás disfrutar de una herramienta innovadora para gestionar todas tus operaciones bancarias de manera fácil y segura. ¡Mantente atento a las novedades!"
+                    textoUser="¿El banco tiene aplicación móvil? ¿Cómo la descargo?"
+                />
+            );
+        } else if (value == 7) {
+            return (
+                <Mensaje
+                    textoBot="Si detectas un cargo no reconocido en tu cuenta, por favor notifícalo de inmediato a través de servicio al cliente. Nuestro equipo investigará el caso."
+                    textoUser="¿Qué debo hacer si detecto un cargo no reconocido en mi cuenta?"
+                />
+            );
+        } else if (value == 8) {
+            return (
+                <Mensaje
+                    textoBot="Puedes actualizar tus datos personales, como dirección, correo o teléfono, directamente desde nuestra web o visitando una sucursal con tu identificación oficial."
+                    textoUser="¿Cómo puedo actualizar mis datos personales (como dirección, correo o teléfono)?"
+                />
+            );
+        } else if (value == 9) {
+            return (
+                <Mensaje
+                    textoBot="Las transferencias bancarias nacionales suelen procesarse en cuestión de minutos, pero pueden tardar hasta 24 horas dependiendo del tipo de transferencia y horario."
+                    textoUser="¿Cuánto tiempo tarda en procesarse una transferencia bancaria?"
+                />
+            );
+        } else if (value == 10) {
+            return (
+                <Mensaje
+                    textoBot="Sí, puedes usar tu tarjeta en el extranjero. Asegúrate de activarla para uso internacional desde nuestra pagina web antes de viajar."
+                    textoUser="¿Puedo usar mi tarjeta en el extranjero?"
+                />
+            );
+        } else {
+            return null;
         }
     }
 
@@ -103,7 +91,7 @@ const ContenedorPrincipalChat = () => {
 
 
     return (
-        <div className="container w-50 espaciado-chat">
+        <div className={`container w-50 espaciado-chat ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>
             <div className="row bg-secondary cabecera-chat">
                 <div className="col-6 align-content-center text-center">
                     <span className="nombre-chat">Chat Virtual</span>
