@@ -16,11 +16,16 @@ const getState = ({ getStore, getActions, setStore }) => {
       tarjetaCoord: {},
       transacciones: [],
       listaNotificaciones: [],
+      grafica: [],
       chartData: [], // Graficas
       stockData: null, // Datos de mercado
       notificacionesHidden: false,
     },
     actions: {
+      ActualizarGrafica: (datos) => {
+        setStore({ ...getStore(), grafica: datos });
+      },
+
       CambiarIncognito: (estado) => {
         setStore({ ...getStore(), hidden: estado });
       },
@@ -156,7 +161,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             setStore({ ...store, tarjetaCoord: data.tarjeta_coordenadas });
             setStore({ ...store, transacciones: data.cuentas.transacciones });
 
-            console.log("user", store.user, "cliente", store.cliente, "cuentas", store.cuentas, "Notificaciones", store.listaNotificaciones , "transacciones", store.transacciones);
+            console.log("user", store.user, "cliente", store.cliente, "cuentas", store.cuentas, "Notificaciones", store.listaNotificaciones, "transacciones", store.transacciones);
           })
           .catch((error) => {
             // Manejamos cualquier error que ocurra durante el fetch
@@ -279,7 +284,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       fetchStockData: async (symbol) => {
         try {
-          const response = await fetch(`${process.env.BACKEND_URL}/api/stock/${symbol}`);
+          const response = await fetch(`${process.env.s}/api/stock/${symbol}`);
           if (!response.ok) throw new Error('Error fetching stock data');
           const data = await response.json();
 

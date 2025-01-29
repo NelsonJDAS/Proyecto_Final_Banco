@@ -13,10 +13,10 @@ const GraficaInversionVista = () => {
     }, []);
 
     useEffect(() => {
-        if (store.chartData.length > 0) {
+        if (store.grafica.length > 0) {
             // Crear el gráfico
             const chart = createChart(chartContainerRef.current, {
-                height: 180, // Ajusta la altura según sea necesario
+                height: 580, // Ajusta la altura según sea necesario
                 layout: {
                     background: {
                         type: 'solid', // Tipo de fondo sólido
@@ -31,19 +31,29 @@ const GraficaInversionVista = () => {
                 priceScale: {
                     borderVisible: false, // Ocultar el borde del eje de precios
                 },
+                grid: {
+                    vertLines: {
+                        color: 'rgba(0, 0, 0, 0)', // Oculta las líneas verticales
+                        visible: false
+                    },
+                    horzLines: {
+                        color: 'rgba(0, 0, 0, 0)', // Oculta las líneas horizontales
+                        visible: false
+                    }
+                }
             });
 
 
             // Agregar una serie de área y establecer los datos
             const areaSeries = chart.addAreaSeries({
-                topColor: 'rgba(41, 98, 255, 0.56)', // Color superior del degradado
-                bottomColor: 'rgba(95, 138, 255, 0.04)', // Color inferior del degradado
-                lineColor: '#2962FF', // Color de la línea
+                topColor: 'rgba(195, 0, 255, 0.56)', // Color superior del degradado
+                bottomColor: 'rgba(238, 0, 255, 0.04)', // Color inferior del degradado
+                lineColor: 'purple', // Color de la línea
                 lineWidth: 2, // Grosor de la línea
             });
 
             // Establecer datos en la serie
-            areaSeries.setData(store.chartData);
+            areaSeries.setData(store.grafica);
 
             // Ajustar el contenido al espacio visible
             chart.timeScale().fitContent();
@@ -51,7 +61,7 @@ const GraficaInversionVista = () => {
             // Limpiar el gráfico al desmontar el componente
             return () => chart.remove();
         }
-    }, [store.chartData]); // Escuchar cambios en los datos del gráfico
+    }, [store.grafica]); // Escuchar cambios en los datos del gráfico
 
     return <div className='contenedor-componente-interactivo' ref={chartContainerRef} />;
 };
