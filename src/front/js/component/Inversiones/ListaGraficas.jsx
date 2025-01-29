@@ -10,46 +10,17 @@ const ListaGraficas = () => {
     const [pagination, SetPagination] = useState([0, 9])
     const flechaDer = useRef("");
     const flechaIzq = useRef("");
-    const [simbolos, SetSimbolos] = useState([]);
     const [listaFiltrada, SetListaFiltrada] = useState([]);
     const inputRef = useRef("");
+    const [userLoad, SetUserLoad] = useState(false);
 
 
     const HandleInput = (e) => {
 
-        const listaFiltrada = simbolos.filter((elem) => {
+        const listaFiltrada = store.simbolos.filter((elem) => {
             return elem.nombre.toLowerCase().includes(e.target.value.toLowerCase())
         })
         SetListaFiltrada(listaFiltrada)
-    }
-
-    const [userLoad, SetUserLoad] = useState(false);
-
-
-
-
-
-    const Simbolos = async () => {
-
-        try {
-            const response = await fetch(`https://finnhub.io/api/v1/stock/symbol?exchange=US&token=${process.env.FINNHUB_API_KEY}`);
-            if (!response.ok) throw new Error('Error fetching data');
-
-            const data = await response.json();
-
-            const resultado = await data.map((item) => {
-                return {
-                    simbolo: item.symbol,   // Agregamos el símbolo
-                    nombre: item.description  // Agregamos la descripción
-                };
-            });
-
-            SetSimbolos(resultado)
-            inputRef.current.disabled = false
-        } catch (error) {
-            console.error('Error al obtener datos del backend:', error);
-        }
-
     }
 
 
@@ -67,7 +38,8 @@ const ListaGraficas = () => {
     }, [pagination])
 
     useEffect(() => {
-        Simbolos();
+        store.simbolos.length == 0 ? actions.ObtenerSimbolos() : "";
+        inputRef.current.disabled = false
         SetUserLoad(true)
     }, [])
 
@@ -94,7 +66,7 @@ const ListaGraficas = () => {
             </div>
             <div className="row contenedor-elementos-seleccionables">
                 {
-                    [...(listaFiltrada.length === 0 ? simbolos : listaFiltrada)].slice(pagination[0], pagination[1]).map((item) => {
+                    [...(listaFiltrada.length === 0 ? store.simbolos : listaFiltrada)].slice(pagination[0], pagination[1]).map((item) => {
                         return <ElementoSeleccionable nombre={item.nombre} simbolo={item.simbolo} />
                     })
                 }
