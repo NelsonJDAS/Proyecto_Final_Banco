@@ -17,21 +17,22 @@ const ContenedorGraficas = () => {
 
     const ObtenerDatos = async () => {
         try {
-            const response = await fetch(`https://finnhub.io/api/v1/quote?symbol=${simbolo}&token=${process.env.FINNHUB_API_KEY}`);
+            const response = await fetch(`https://api.twelvedata.com/time_series?symbol=${simbolo}&interval=1day&outputsize=360&apikey=37fe70b9c32245e793edb22641fa8805`);
             if (!response.ok) throw new Error('Error fetching data');
 
             const data = await response.json();
 
+            console.log(data.values)
 
-            let datos = [
-                data.pc == null || data.pc == "undefined" || data.pc == 0 ? "" : { "time": data.t == 0 ? 170000000 - 4 : data.t - 4, "value": data.pc },
-                data.o == null || data.o == "undefined" || data.o == 0 ? "" : { "time": data.t == 0 ? 170000000 - 3 : data.t - 3, "value": data.o },
-                data.d == null || data.d == "undefined" || data.d == 0 ? "" : { "time": data.t == 0 ? 170000000 - 2 : data.t - 2, "value": data.d },
-                data.c == null || data.c == "undefined" || data.c == 0 ? "" : { "time": data.t == 0 ? 170000000 - 1 : data.t - 1, "value": data.c }
-            ]
+            let valores = [];
+            Object.entries(data.values).map((item) => {
+                let datos = { "time": item[1].datetime, "value": parseInt(item[1].close) }
+                valores.unshift(datos)
+            })
+
+            actions.ActualizarGrafica(valores)
 
 
-            datos.pc == 0 || data.o == 0 || data.c == 0 || data.d == 0 || data.t == 0 ? actions.ActualizarGrafica([]) : actions.ActualizarGrafica(datos)
 
         } catch (error) {
             console.error('Error al obtener datos del backend:', error);

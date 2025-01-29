@@ -33,11 +33,11 @@ const GraficaInversionVista = () => {
                 },
                 grid: {
                     vertLines: {
-                        color: 'rgba(0, 0, 0, 0)', // Oculta las líneas verticales
-                        visible: false
+                        color: 'rgba(195, 0, 255, 0.56)', // Oculta las líneas verticales
+                        visible: true
                     },
                     horzLines: {
-                        color: 'rgba(0, 0, 0, 0)', // Oculta las líneas horizontales
+                        color: 'rgba(195, 0, 255, 0.56)', // Oculta las líneas horizontales
                         visible: false
                     }
                 }
