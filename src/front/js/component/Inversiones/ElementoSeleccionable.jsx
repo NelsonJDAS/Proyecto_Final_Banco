@@ -49,13 +49,16 @@ const ElementoSeleccionable = ({ input, nombre, simbolo }) => {
 
 
     return (
-        <div className={` separacion-filas hover py-3 col-4 ${nombre.toLowerCase().includes(input) ? "" : "d-none"} ${userLoad ? "animacion-inversiones visible" : "animacion-inversiones"}`} ref={sectionRef} onClick={() => navigate(`/grafica/${nombre}/${simbolo}`)}>
+        <div className={` separacion-filas hover py-3 col-4  ${userLoad ? "animacion-inversiones visible" : "animacion-inversiones"}`} ref={sectionRef} onClick={() => {
+            navigate(`/grafica/${nombre}/${simbolo}`)
+            actions.Scroll()
+        }}>
             <div className={`container contenedor-elemento ${store.fondo === "fondo-modo-claro" ? "bg-modo-claro" : "bg-modo-oscuro"}`}>
                 <div className="row">
-                    <div className="col-12 fw-bold fs-2 text-center mt-3"><p>{nombre}</p></div>
-                    <div className="col-12 text-center"><i className="simbolo-grafica"><SlGraph /></i></div>
-                    <div className="col-12 text-center"><div><p className="fs-5 enlace-grafica">Ver Acciones</p></div></div>
-                    <div className="col-12 fw-bold text-end"><p>GeekInvest</p></div>
+                    <div className="col-12 fw-bold fs-4 text-center mt-3"><p>{nombre}</p></div>
+                    <div className="col-12 text-center"><i className="simbolo-grafica color-inversion "><SlGraph /></i></div>
+                    <div className="col-12 text-center"><div><p className="fs-5 enlace-grafica color-inversion ">Ver Acciones</p></div></div>
+                    <div className="col-12 fw-bold text-end"><p className="enlace-grafica color-inversion ">GeekInvest</p></div>
                 </div>
             </div>
         </div >

@@ -40,7 +40,7 @@
 }
 
 .contenedor-elemento:hover .simbolo-grafica {
-    font-size: 80px;
+    font-size: 75px;
 }
 
 .contenedor-elemento:hover .enlace-grafica {
@@ -85,5 +85,13 @@
 }
 
 .contenedor-elementos-seleccionables {
-    height: 1000px;
+    min-height: 1000px;
+}
+
+.flecha:hover {
+    color: rgba(255, 0, 255, 0.738);
+}
+
+.color-inversion {
+    color: rgba(255, 0, 255, 0.738);
 }
