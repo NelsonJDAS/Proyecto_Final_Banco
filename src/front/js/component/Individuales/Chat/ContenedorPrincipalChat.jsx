@@ -7,6 +7,15 @@ const ContenedorPrincipalChat = () => {
     const [userLoad, SetUserLoad] = useState(false)
     const navigate = useNavigate("")
     const [pregunta, SetPregunta] = useState([]);
+    const scrollref = useRef();
+
+    const Scroll = () => {
+        scrollref.current.scrollTo({
+            top: scrollref.current.scrollHeight,
+            behavior: "smooth", // Esto hace que el desplazamiento sea suave
+        });
+
+    };
 
     const ElegirRespusta = (value) => {
         if (value == 1) {
@@ -89,6 +98,10 @@ const ContenedorPrincipalChat = () => {
         SetUserLoad(true)
     }, [])
 
+    useEffect(() => {
+        Scroll();
+    }, [pregunta])
+
 
     return (
         <div className={`container w-50 espaciado-chat ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>
@@ -101,7 +114,7 @@ const ContenedorPrincipalChat = () => {
                 </div>
             </div>
             <div className="row bg-secondary  contenedor-chat p-2">
-                <div className="container bg-white rounded-3 contenedor-mensajes">
+                <div className="container bg-white rounded-3 contenedor-mensajes" ref={scrollref}>
                     {
                         Object.entries(pregunta).map((index, elem) => {
                             return ElegirRespusta(index[1])

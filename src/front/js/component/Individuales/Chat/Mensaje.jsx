@@ -62,7 +62,7 @@ const Mensaje = ({ textoBot, textoUser }) => {
                 <div className="col-8">
                     <div className={`mensaje-chat ${userLoad ? "mensaje-chat-animacion visible" : ""}`}>
                         <div className="row">
-                            <div className="col-12"><p className="mx-2"> Alejandro <i><FaUserCircle /></i> </p></div>
+                            <div className="col-12"><p className="mx-2"> IA-lejandro <i><FaUserCircle /></i> </p></div>
                         </div>
                         <div className="row">
                             <div className="col-12 text-center">
