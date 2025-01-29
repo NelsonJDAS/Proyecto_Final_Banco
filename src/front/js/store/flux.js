@@ -16,12 +16,33 @@ const getState = ({ getStore, getActions, setStore }) => {
       tarjetaCoord: {},
       transacciones: [],
       listaNotificaciones: [],
+      simbolos: [],
       grafica: [],
       chartData: [], // Graficas
       stockData: null, // Datos de mercado
       notificacionesHidden: false,
     },
     actions: {
+      ObtenerSimbolos: async () => {
+
+        try {
+          const response = await fetch(`https://finnhub.io/api/v1/stock/symbol?exchange=US&token=${process.env.FINNHUB_API_KEY}`);
+          if (!response.ok) throw new Error('Error fetching data');
+
+          const data = await response.json();
+
+          const resultado = await data.map((item) => {
+            return {
+              simbolo: item.symbol,   // Agregamos el símbolo
+              nombre: item.description  // Agregamos la descripción
+            };
+          });
+
+          setStore({ ...getStore(), simbolos: resultado });
+        } catch (error) {
+          console.error('Error al obtener datos del backend:', error);
+        }
+      },
       ActualizarGrafica: (datos) => {
         setStore({ ...getStore(), grafica: datos });
       },
