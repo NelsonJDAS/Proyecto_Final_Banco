@@ -21,12 +21,12 @@
 .contenedor-elemento {
     transition: transform 0.3s ease, box-shadow 0.5s ease;
     border-radius: 10px;
-    height: 260px;
+    height: 300px;
 }
 
 .contenedor-elemento:hover {
     cursor: pointer;
-    height: 290px;
+    padding-bottom: 100px;
     transform: translateY(-5px);
     box-shadow: 0 20px 20px rgba(0, 0, 0, 0.3);
 }
