@@ -2,8 +2,9 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { Context } from "../../store/appContext.js";
 import { SlGraph } from "react-icons/sl";
 import { useNavigate } from "react-router-dom";
+import { GrMoney } from "react-icons/gr";
 
-const ElementoSeleccionable = ({ input, nombre, simbolo }) => {
+const ElementoSeleccionable = ({ nombre, simbolo, moneda }) => {
     const { store, actions } = useContext(Context);
     const [userLoad, SetUserLoad] = useState(false)
 
@@ -41,6 +42,7 @@ const ElementoSeleccionable = ({ input, nombre, simbolo }) => {
 
     useEffect(() => {
         if (isVisible) {
+            console.log(moneda)
             SetUserLoad(true)
         } else {
             SetUserLoad(false)
@@ -49,7 +51,7 @@ const ElementoSeleccionable = ({ input, nombre, simbolo }) => {
 
 
     return (
-        <div className={` separacion-filas hover py-3 col-4  ${userLoad ? "animacion-inversiones visible" : "animacion-inversiones"}`} ref={sectionRef} onClick={() => {
+        <div className={` separacion-filas hover py-3 col-4 ${userLoad ? "animacion-inversiones visible" : "animacion-inversiones"}`} ref={sectionRef} onClick={() => {
             navigate(`/grafica/${nombre}/${simbolo}`)
             actions.Scroll()
         }}>
@@ -57,8 +59,9 @@ const ElementoSeleccionable = ({ input, nombre, simbolo }) => {
                 <div className="row">
                     <div className="col-12 fw-bold fs-4 text-center mt-3"><p>{nombre}</p></div>
                     <div className="col-12 text-center"><i className="simbolo-grafica color-inversion "><SlGraph /></i></div>
+                    <div className="col-12 text-center"><i className="color-inversion enlace-grafica"><GrMoney /></i></div>
+                    <div className="col-12 text-center"><div><p className="fs-5 enlace-grafica color-inversion ">{moneda}</p></div></div>
                     <div className="col-12 text-center"><div><p className="fs-5 enlace-grafica color-inversion ">Ver Acciones</p></div></div>
-                    <div className="col-12 fw-bold text-end"><p className="enlace-grafica color-inversion ">GeekInvest</p></div>
                 </div>
             </div>
         </div >

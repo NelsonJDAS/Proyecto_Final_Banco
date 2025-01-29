@@ -11,7 +11,7 @@ const CabeceraInversiones = () => {
     }, [])
 
     return (
-        <div className={`container contenedor-cabecera ${store.fondo === "fondo-modo-claro" ? "bg-modo-claro" : "bg-modo-oscuro"} ${userLoad ? "animacion-arriba visible" : "animacion-arriba"}`}>
+        <div className={`container contenedor-cabecera  borde-morado ${store.fondo === "fondo-modo-claro" ? "bg-modo-claro" : "bg-modo-oscuro"} ${userLoad ? "animacion-arriba visible" : "animacion-arriba"}`}>
             <div className="row">
                 <div className="col-12 text-center titulo-inversiones color-inversion fw-bold"><h1>Geek Invest</h1></div>
                 <div className="col-12 text-center mt-3 fs-5">

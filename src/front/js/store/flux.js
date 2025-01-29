@@ -33,6 +33,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
           const resultado = await data.map((item) => {
             return {
+              moneda: item.currency,
               simbolo: item.symbol,   // Agregamos el símbolo
               nombre: item.description  // Agregamos la descripción
             };

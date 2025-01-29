@@ -27,10 +27,10 @@ const GraficaComponenteInversiones = () => {
                     // Configura un rango de tiempo visible al cargar el gráfico
                     visible: true,
                     timeVisible: true,
-                    minBarSpacing: 10,
+                    minBarSpacing: 5,
                     borderVisible: false,
                     // Establecer un zoom inicial (puedes ajustar estos valores)
-                    zoomLevel: 2, // Ajusta el nivel de zoom inicial en el eje X
+                    zoomLevel: 1, // Ajusta el nivel de zoom inicial en el eje X
                 },
                 priceScale: {
                     // Configura un rango de precios visible al cargar el gráfico
