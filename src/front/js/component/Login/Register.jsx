@@ -104,7 +104,7 @@ export const Register = () => {
 
                 {/* agregarle el disabled para usar las condiciones */}
                 <div className="text-center">
-                    <button className={`btn btn-light mt-3 w-50 rounded-pill btn-login ${store.borde} ${store.texto}`} onClick={() => { handleRegister() }} ref={btnRef}>{t('Register.ready')}</button>
+                    <button className={`btn btn-light mt-3 w-50 rounded-pill btn-login ${store.borde} text-white`} onClick={() => { handleRegister() }} ref={btnRef}>{t('Register.ready')}</button>
                 </div>
             </div>
         </div>

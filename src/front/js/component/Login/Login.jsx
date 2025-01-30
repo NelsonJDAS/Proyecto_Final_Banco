@@ -13,6 +13,9 @@ export const Login = () => {
     const [password, SetPassword] = useState("");
     const [CodeSend, SetCodeSend] = useState("")
     const [newPassword, SetNewPassword] = useState(false)
+
+
+
     const navigate = useNavigate("");
 
     // ejecuta el contenedor si el usuario se ha olvidado el password de su cuenta
@@ -23,12 +26,22 @@ export const Login = () => {
 
     // estado que guarda el valor del email para recuperar la password
     const [forgotMail, SetForgotMail] = useState("");
+    const [mensajeForgotMail, SetMensajeForgotMail] = useState("")
 
     // tiempo que tiene que pasar para solicitar de nuevo el codigo
     const [timeCode, SetTimeCode] = useState(300);
 
     const HandleForgotMail = (e) => {
-        SetForgotMail(e.target.value.toLowerCase())
+        SetForgotMail("");
+        if (!e.target.value.includes("@")) {
+            SetMensajeForgotMail("Debes incluir el '@' en tu correo.");
+        } else if (e.target.value.includes(" ")) {
+            SetMensajeForgotMail("El correo no puede contener espacios.");
+        } else {
+            SetForgotMail(e.target.value.toLowerCase());
+            SetMensajeForgotMail("");
+            buttomCode.current.classList.remove("boton-cancelado")
+        }
     }
     const HandleCodeSeg = (e) => {
         SetCodeSend(e.target.value)
@@ -37,6 +50,7 @@ export const Login = () => {
     const CountRef = useRef(null)
     const buttomCode = useRef(null)
     const InputCode = useRef(null)
+    const btnComprobarRef = useRef(null)
 
     const Count = () => {
         //creamos el intervalo del contador
@@ -51,6 +65,8 @@ export const Login = () => {
     useEffect(() => {
         if (timeCode === 0) {
             clearInterval(CountRef.current)
+            btnComprobarRef.current.classList.add("boton-cancelado")
+            InputCode.current.classList.add("boton-cancelado")
             SetTimeCode(600)
             SetCode(false)
             buttomCode.current.disabled = false;
@@ -105,12 +121,12 @@ export const Login = () => {
                             <>
                                 {/* cotenedor inciar sesion */}
                                 <label className="my-1 fw-bold label-login">{t('Login.name')}</label>
-                                <input className=" mx-2 mx-md-3 text-center py-1 rounded-pill input" type="text" onChange={HandleName} maxLength="40" ref={inputName} />
+                                <input className=" mx-2 mx-md-3 text-center py-1 rounded-pill mb-3 input" type="text" onChange={HandleName} maxLength="40" ref={inputName} />
                                 <label className="my-1 fw-bold label-login">{t('Login.email')}</label>
-                                <input className=" mx-2 mx-md-3 text-center py-1 rounded-pill input" type="email" onChange={HandleEmail} ref={inputMail} />
+                                <input className=" mx-2 mx-md-3 text-center py-1 rounded-pill mb-3 input" type="email" onChange={HandleEmail} ref={inputMail} />
                                 <label className="my-1 fw-bold label-login">{t('Login.password')}</label>
                                 <input className=" mx-2 mx-md-3 text-center py-1 rounded-pill input" type="password" onChange={HandlePassword} ref={inputPassword} />
-                                <span className={`text-end mx-md-3 label-login ${store.borde_hover}`} onClick={() => { SetuserForgotPassword(true) }}>{t('Login.forgot')}</span>
+                                <span className={`text-end mx-md-3 label-login  mb-3  ${store.borde_hover}`} onClick={() => { SetuserForgotPassword(true) }}>{t('Login.forgot')}</span>
                                 <div className="text-center">
                                     <button type="button" className={`btn btn-light mt-3 w-50 rounded-pill btn-login ${store.borde}`} onClick={() => {
                                         HandleLogin()
@@ -133,30 +149,33 @@ export const Login = () => {
                                 <input className={`"mx-md-3 mx-2 text-center py-0 py-md-1 rounded-pill input ${newPassword ? "" : "d-none"}`} type="password" />
                                 <label className={`my-md-1 fw-bold label-login ${newPassword ? "d-none" : ""}`}>{t('Login.email')}</label>
                                 <input className={`mx-md-3 mx-2 text-center py-0 py-md-1 rounded-pill input ${newPassword ? "d-none" : ""}`} placeholder="Email" type="email" onChange={HandleForgotMail} />
+                                <p className={`mx-3 text-center text-danger mensaje-condicion ${mensajeForgotMail == "" ? "opacity-0" : "opacity-100"}`}>{mensajeForgotMail}</p>
                                 <div className="text-center row mx-1 my-2">
                                     <div className={`col-12 col-xl-6 col-md-6 my-md-3 my-1 text-start ${newPassword ? "col-xl-12" : ""}`}>
                                         <button type="button" className={`rounded-pill btn btn-primary w-100 fw-bold ${newPassword ? "" : "d-none"}`} ref={buttomCode} onClick={() => {
                                             // tu funcion aqui
                                         }}>Listo!</button>
-                                        <button type="button" className={`rounded-pill btn btn-primary w-100 fw-bold ${newPassword ? "d-none" : ""}`} ref={buttomCode} onClick={() => {
+                                        <button type="button" className={`rounded-pill btn btn-primary w-100 fw-bold boton-cancelado ${newPassword ? "d-none" : ""}`} ref={buttomCode} onClick={() => {
                                             SetCode(true)
                                             Count()
+                                            btnComprobarRef.current.classList.remove("boton-cancelado")
+                                            InputCode.current.classList.remove("boton-cancelado")
                                             actions.sendCode(forgotMail)
                                         }}>{code ?
                                             `( ${timeCode} ) s`
                                             : t('Forgot.sendCode')}</button>
                                     </div>
                                     <div className={`col-12 col-md-6 col-xl-3 my-md-3 text-center ${newPassword ? "d-none" : ""}`}>
-                                        <input className="text-center py-1 rounded-pill input w-100 fw-bold input-code" type="text" onChange={HandleCodeSeg} maxLength={6} ref={InputCode} placeholder="******" />
+                                        <input className="text-center py-1 rounded-pill input w-100 fw-bold input-code boton-cancelado" type="text" onChange={HandleCodeSeg} maxLength={6} ref={InputCode} placeholder="******" />
                                         <label className="fw-bold d-none d-md-block">{t('Forgot.code')}</label>
                                     </div>
                                     <div className={`col-12 col-xl-3 ${newPassword ? "d-none" : ""}`}>
                                         <div className="col-12 text-center">
-                                            <button type="button" className={`btn btn-primary text-white fw-bold mt-3 mt-xl-3 mt-md-0 mt-lg-0 w-100 rounded-pill`} onClick={() => {
+                                            <button type="button" className={`btn btn-primary text-white fw-bold mt-3 mt-xl-3 mt-md-0 mt-lg-0 w-100 rounded-pill boton-cancelado`} ref={btnComprobarRef} onClick={() => {
+                                                SetNewPassword(true);
                                                 console.log(timeCode)
                                                 actions.verifyCode(forgotMail, CodeSend)
                                                 console.log(forgotMail, CodeSend);
-                                                SetNewPassword(true);
                                                 ;
                                             }}>{t('Forgot.check')}</button>
                                         </div>
