@@ -22,34 +22,48 @@ const ContenedorPrincipalTransferencias = () => {
     }, []);
 
     const handleTransferencia = async () => {
-
         // Dividir nombre completo en nombre y apellidos
         const [nombre, ...apellidos] = estadoDestinatario.split(' ');
-
+    
         // Validar campos obligatorios
         if (!monto || !cuentaDestino || !estadoDestinatario) {
             setError("Por favor complete todos los campos obligatorios");
             return;
         }
-
+    
+        // Validar que el monto sea un número positivo
+        const montoNumerico = parseFloat(monto);
+        if (isNaN(montoNumerico) || montoNumerico <= 0) {
+            setError("El monto debe ser un número positivo");
+            return;
+        }
+    
         // Obtener ID de cuenta origen
         const cuentaOrigenId = store.cuentas?.id;
         if (!cuentaOrigenId) {
             throw new Error("No se encontró la cuenta origen");
         }
-
+    
+        // Obtener saldo de la cuenta origen
+        const saldoCuentaOrigen = store.cuentas?.saldo || 0;
+    
+        // Validar si hay suficiente saldo para la transferencia
+        if (saldoCuentaOrigen < montoNumerico) {
+            setError("Saldo insuficiente para realizar la transferencia");
+            return;
+        }
+    
         // Realizar la transferencia
         const resultado = await actions.realizarTransferencia(
             cuentaOrigenId,
             cuentaDestino,
             nombre,
             apellidos.join(' '), // Unir los apellidos
-            parseFloat(monto),
+            montoNumerico,
             concepto
-
         );
-        console.log(resultado)
-
+        console.log(resultado);
+    
         // Limpiar formulario
         setCuentaDestino('');
         setEstadoDestinatario('');
@@ -57,8 +71,6 @@ const ContenedorPrincipalTransferencias = () => {
         setConcepto('');
         setError('');
         alert("Transferencia realizada con éxito!");
-
-
     };
 
     return (
@@ -77,7 +89,7 @@ const ContenedorPrincipalTransferencias = () => {
                             type="text"
                         />
                         <label className="my-1 fw-bold text-end label-t mx-3">
-                            Saldo: {store.cuentas[0]?.saldo?.toFixed(2) || '0.00'} €
+                            Saldo: {store.cuentas?.saldo?.toFixed(2) || '0.00'} €
                         </label>
                     </div>
 
