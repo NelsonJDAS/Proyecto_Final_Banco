@@ -2,11 +2,23 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Mensaje from "./Mensaje.jsx";
+import { Context } from "../../../store/appContext.js";
 
 const ContenedorPrincipalChat = () => {
     const [userLoad, SetUserLoad] = useState(false)
     const navigate = useNavigate("")
     const [pregunta, SetPregunta] = useState([]);
+    const scrollref = useRef();
+
+    const { store, actions } = useContext(Context);
+
+    const Scroll = () => {
+        scrollref.current.scrollTo({
+            top: scrollref.current.scrollHeight,
+            behavior: "smooth", // Esto hace que el desplazamiento sea suave
+        });
+
+    };
 
     const ElegirRespusta = (value) => {
         if (value == 1) {
@@ -89,9 +101,13 @@ const ContenedorPrincipalChat = () => {
         SetUserLoad(true)
     }, [])
 
+    useEffect(() => {
+        Scroll();
+    }, [pregunta])
+
 
     return (
-        <div className={`container w-50 espaciado-chat ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>
+        <div className={`container w-50 espaciado-chat ${store.fondo === "fondo-modo-claro" ? "text-info" : "text-dark "} ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>
             <div className="row bg-secondary cabecera-chat">
                 <div className="col-6 align-content-center text-center">
                     <span className="nombre-chat">Chat Virtual</span>
@@ -101,7 +117,7 @@ const ContenedorPrincipalChat = () => {
                 </div>
             </div>
             <div className="row bg-secondary  contenedor-chat p-2">
-                <div className="container bg-white rounded-3 contenedor-mensajes">
+                <div className="container bg-white rounded-3 contenedor-mensajes" ref={scrollref}>
                     {
                         Object.entries(pregunta).map((index, elem) => {
                             return ElegirRespusta(index[1])
@@ -111,21 +127,21 @@ const ContenedorPrincipalChat = () => {
             </div>
             <div className="row bg-secondary  footer-chat">
                 <div className="col-12 px-0">
-                    <select class="form-select text-dark text-center fw-bold footer-chat" aria-label="Default select example" onChange={(e) => {
+                    <select class={`form-select text-center fw-bold footer-chat ${store.fondo === "fondo-modo-claro" ? "bg-secondary text-info" : "text-dark "}`} aria-label="Default select example" onChange={(e) => {
                         const dato = e.target.value
                         SetPregunta((prevArray) => [...prevArray, dato]);
                     }}>
-                        <option className="fw-bold text-dark" value="hola" selected disabled>Pregunta aqui!</option>
-                        <option className="fw-bold text-dark" value="1">¿Cuáles son las tarifas y comisiones asociadas a mis cuentas?</option>
-                        <option className="fw-bold text-dark" value="2">¿Cómo puedo cambiar mi PIN o contraseña de acceso?</option>
-                        <option className="fw-bold text-dark" value="3"> ¿Dónde están ubicadas las sucursales y cajeros automáticos del banco?</option>
-                        <option className="fw-bold text-dark" value="4"> ¿Cuáles son los horarios de atención del banco?</option>
-                        <option className="fw-bold text-dark" value="5">¿Qué documentos necesito para abrir una cuenta?</option>
-                        <option className="fw-bold text-dark" value="6"> ¿El banco tiene aplicación móvil? ¿Cómo la descargo?</option>
-                        <option className="fw-bold text-dark" value="7"> ¿Qué debo hacer si detecto un cargo no reconocido en mi cuenta?</option>
-                        <option className="fw-bold text-dark" value="8">  ¿Cómo puedo actualizar mis datos personales (como dirección, correo o teléfono)?</option>
-                        <option className="fw-bold text-dark" value="9">  ¿Cuánto tiempo tarda en procesarse una transferencia bancaria?</option>
-                        <option className="fw-bold text-dark" value="10">  ¿Puedo usar mi tarjeta en el extranjero?</option>
+                        <option className={`fw-bold ${store.fondo === "fondo-modo-claro" ? "text-info" : "text-dark"}`} value="hola" selected disabled>Pregunta aqui!</option>
+                        <option className={`fw-bold ${store.fondo === "fondo-modo-claro" ? "text-info" : "text-dark"}`} value="1">¿Cuáles son las tarifas y comisiones asociadas a mis cuentas?</option>
+                        <option className={`fw-bold ${store.fondo === "fondo-modo-claro" ? "text-info" : "text-dark"}`} value="2">¿Cómo puedo cambiar mi PIN o contraseña de acceso?</option>
+                        <option className={`fw-bold ${store.fondo === "fondo-modo-claro" ? "text-info" : "text-dark"}`} value="3"> ¿Dónde están ubicadas las sucursales y cajeros automáticos del banco?</option>
+                        <option className={`fw-bold ${store.fondo === "fondo-modo-claro" ? "text-info" : "text-dark"}`} value="4"> ¿Cuáles son los horarios de atención del banco?</option>
+                        <option className={`fw-bold ${store.fondo === "fondo-modo-claro" ? "text-info" : "text-dark"}`} value="5">¿Qué documentos necesito para abrir una cuenta?</option>
+                        <option className={`fw-bold ${store.fondo === "fondo-modo-claro" ? "text-info" : "text-dark"}`} value="6"> ¿El banco tiene aplicación móvil? ¿Cómo la descargo?</option>
+                        <option className={`fw-bold ${store.fondo === "fondo-modo-claro" ? "text-info" : "text-dark"}`} value="7"> ¿Qué debo hacer si detecto un cargo no reconocido en mi cuenta?</option>
+                        <option className={`fw-bold ${store.fondo === "fondo-modo-claro" ? "text-info" : "text-dark"}`} value="8">  ¿Cómo puedo actualizar mis datos personales (como dirección, correo o teléfono)?</option>
+                        <option className={`fw-bold ${store.fondo === "fondo-modo-claro" ? "text-info" : "text-dark"}`} value="9">  ¿Cuánto tiempo tarda en procesarse una transferencia bancaria?</option>
+                        <option className={`fw-bold ${store.fondo === "fondo-modo-claro" ? "text-info" : "text-dark"}`} value="10">  ¿Puedo usar mi tarjeta en el extranjero?</option>
                     </select>
                 </div>
             </div>

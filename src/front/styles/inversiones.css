@@ -18,9 +18,37 @@
     border: 1px solid rgb(0, 0, 0);
 }
 
-.contenedor-grafica {
+.contenedor-elemento {
+    transition: transform 0.3s ease, box-shadow 0.5s ease;
     border-radius: 10px;
+    border: 2px solid rgba(161, 5, 161, 0.738);
+    height: 300px;
 }
+
+.contenedor-elemento:hover {
+    cursor: pointer;
+    padding-bottom: 100px;
+    transform: translateY(-5px);
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.3);
+}
+
+.simbolo-grafica {
+    font-size: 55px;
+}
+
+.enlace-grafica {
+    opacity: 0;
+}
+
+
+.contenedor-elemento:hover .simbolo-grafica {
+    font-size: 60px;
+}
+
+.contenedor-elemento:hover .enlace-grafica {
+    opacity: 1;
+}
+
 
 .separacion-filas {
     margin: 20px 0px;
@@ -40,10 +68,56 @@
 
 .animacion-inversiones {
     opacity: 0.2;
-    transition: opacity 2.5s ease, color 0.6s ease;
+    transition: opacity 1s ease, color 0.6s ease;
 }
 
 .animacion-inversiones.visible {
     opacity: 1;
-    transition: opacity 2.5s ease, color 0.6s ease;
+    transition: opacity 1s ease, color 0.6s ease;
+}
+
+.contenedor-grafica {
+    height: 600px;
+    width: 85% !important;
+}
+
+.titulo-individual-inversiones {
+    color: rgba(255, 1, 255, 0.443);
+    font-size: 70px !important;
+}
+
+.contenedor-elementos-seleccionables {
+    min-height: 1000px;
+}
+
+.flecha {
+    transition: color 0.5s ease;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.flecha:hover {
+    color: rgba(255, 0, 255, 0.738) !important;
+}
+
+.color-inversion {
+    color: rgba(255, 0, 255, 0.738);
+}
+
+.borde-morado {
+    border: 2px solid rgba(161, 5, 161, 0.738) !important;
+}
+
+.nombre-empresa {
+    height: 60px;
+}
+
+.flecha-cancelada {
+    color: gray;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.simbolo-empresa {
+    font-size: 100px;
 }

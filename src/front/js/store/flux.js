@@ -16,11 +16,38 @@ const getState = ({ getStore, getActions, setStore }) => {
       tarjetaCoord: {},
       transacciones: [],
       listaNotificaciones: [],
+      simbolos: [],
+      grafica: [],
       chartData: [], // Graficas
       stockData: null, // Datos de mercado
       notificacionesHidden: false,
     },
     actions: {
+      ObtenerSimbolos: async () => {
+
+        try {
+          const response = await fetch(`https://finnhub.io/api/v1/stock/symbol?exchange=US&token=${process.env.FINNHUB_API_KEY}`);
+          if (!response.ok) throw new Error('Error fetching data');
+
+          const data = await response.json();
+
+          const resultado = await data.map((item) => {
+            return {
+              moneda: item.currency,
+              simbolo: item.symbol,   // Agregamos el símbolo
+              nombre: item.description  // Agregamos la descripción
+            };
+          });
+
+          setStore({ ...getStore(), simbolos: resultado });
+        } catch (error) {
+          console.error('Error al obtener datos del backend:', error);
+        }
+      },
+      ActualizarGrafica: (datos) => {
+        setStore({ ...getStore(), grafica: datos });
+      },
+
       CambiarIncognito: (estado) => {
         setStore({ ...getStore(), hidden: estado });
       },
@@ -156,7 +183,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             setStore({ ...store, tarjetaCoord: data.tarjeta_coordenadas });
             setStore({ ...store, transacciones: data.cuentas.transacciones });
 
-            console.log("user", store.user, "cliente", store.cliente, "cuentas", store.cuentas, "Notificaciones", store.listaNotificaciones , "transacciones", store.transacciones);
+            console.log("user", store.user, "cliente", store.cliente, "cuentas", store.cuentas, "Notificaciones", store.listaNotificaciones, "transacciones", store.transacciones);
           })
           .catch((error) => {
             // Manejamos cualquier error que ocurra durante el fetch
@@ -328,7 +355,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       fetchStockData: async (symbol) => {
         try {
-          const response = await fetch(`${process.env.BACKEND_URL}/api/stock/${symbol}`);
+          const response = await fetch(`${process.env.s}/api/stock/${symbol}`);
           if (!response.ok) throw new Error('Error fetching stock data');
           const data = await response.json();
 

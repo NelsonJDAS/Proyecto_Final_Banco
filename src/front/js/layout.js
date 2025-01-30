@@ -27,6 +27,7 @@ import { Certificaciones } from "./pages/certificaciones.js";
 import { Not_found } from "./pages/not_found.js";
 
 import injectContext, { Context } from "./store/appContext";
+import { GraficaIndividual } from "./pages/graficaindividual.js";
 
 //create your first component
 const Layout = () => {
@@ -64,6 +65,7 @@ const Layout = () => {
               <Route element={<Chat />} path="/chat" />
               <Route element={<Titulos />} path="/titulos" />
               <Route element={<Certificaciones />} path="/certificaciones" />
+              <Route element={<GraficaIndividual />} path="/grafica/:nombre/:simbolo" />
             </Routes>
           </div>
           <Footer />

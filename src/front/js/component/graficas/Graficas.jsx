@@ -28,8 +28,8 @@ const Graficas = () => {
                     },
                     horzLines: {
                         color: '#e0e0e0' // Opcional: Color de las líneas horizontales (puedes personalizarlo o hacerlo transparente también)
-                    }
-                }
+                    },
+                },
             });
 
 

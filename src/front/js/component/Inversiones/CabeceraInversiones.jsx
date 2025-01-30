@@ -11,13 +11,13 @@ const CabeceraInversiones = () => {
     }, [])
 
     return (
-        <div className={`container contenedor-cabecera ${store.fondo === "fondo-modo-claro" ? "bg-modo-claro" : "bg-modo-oscuro"} ${userLoad ? "animacion-arriba visible" : "animacion-arriba"}`}>
+        <div className={`container contenedor-cabecera  borde-morado ${store.fondo === "fondo-modo-claro" ? "bg-modo-claro" : "bg-modo-oscuro"} ${userLoad ? "animacion-arriba visible" : "animacion-arriba"}`}>
             <div className="row">
-                <div className="col-12 text-center titulo-inversiones "><h1>Geek Invest</h1></div>
+                <div className="col-12 text-center titulo-inversiones color-inversion fw-bold"><h1>Geek Invest</h1></div>
                 <div className="col-12 text-center mt-3 fs-5">
-                    <p>En GeekBank, las gráficas de criptomonedas permiten ver el rendimiento del mercado de manera sencilla
-                        y en tiempo real. Con datos actualizados al instante, es fácil seguir las fluctuaciones de las criptos
-                        y tomar decisiones informadas. Una herramienta pensada para quienes quieren estar al tanto del mundo cripto de
+                    <p>En GeekBank, las gráficas te permiten ver el rendimiento de mas de 20.000 empresas del mercado de manera sencilla
+                        y en tiempo real. Con datos actualizados al instante, es fácil seguir las fluctuaciones de las acciones
+                        y tomar decisiones informadas. Una herramienta pensada para quienes quieren estar al tanto del mundo de la bolsa de valores de
                         forma clara y accesible.</p>
                 </div>
             </div>

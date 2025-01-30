@@ -303,3 +303,7 @@
     cursor: default;
     color: rgb(204, 204, 204);
 }
+
+.input-divisa {
+    border: none !important;
+}
