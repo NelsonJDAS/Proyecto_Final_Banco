@@ -91,14 +91,14 @@ export const Navbar = () => {
 					<div className="col-3 col-md-2 text-end d-flex justify-content-end">
 						<div className={location.pathname === "/perfil" ? "d-none" : ""}>
 							<img src={logo_negro} className={`img-fluid hover img ${store.fondo == "fondo-modo-oscuro" ? "d-block" : "d-none"}`} onClick={() => {
-								localStorage.getItem('token') === null ? navigate("/") : navigate("/home")
+								localStorage.getItem('token') === null ? navigate("/") : location.pathname === "/inversiones" || location.pathname.split("/")[1] === "grafica" ? navigate("/inversiones") : navigate("/home")
 							}} /><img src={logo_blanco} className={`img-fluid img ${store.fondo == "fondo-modo-oscuro" ? "d-none" : "d-block"}`} />
 						</div>
 					</div>
 
 					<div className="col-2 col-md-2 text-start fs-3 titulo-nav fw-bold  px-0 align-content-center hover" onClick={() => {
-						localStorage.getItem('token') === null ? navigate("/") : navigate("/home")
-					}}><span>{location.pathname === "/inversiones" ? "GeekInvest" : "GeekBank"}</span></div>
+						localStorage.getItem('token') === null ? navigate("/") : location.pathname === "/inversiones" || location.pathname.split("/")[1] === "grafica" ? navigate("/inversiones") : navigate("/home")
+					}}><span>{location.pathname === "/inversiones" || location.pathname.split("/")[1] === "grafica" ? "GeekInvest" : "GeekBank"}</span></div>
 					{localStorage.getItem('token') === null ? (<div className="col-3 col-md-5 col-lg-6 align-content-center  fw-bold text-center">
 						<span className={store.borde_hover} onClick={() => {
 							navigate("/example")

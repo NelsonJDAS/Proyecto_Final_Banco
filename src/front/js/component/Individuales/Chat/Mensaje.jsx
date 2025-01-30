@@ -1,9 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
+import { Context } from "../../../store/appContext";
 
 const Mensaje = ({ textoBot, textoUser }) => {
     const [userLoad, SetUserLoad] = useState(false)
 
+    const { store, actions } = useContext(Context);
 
     // logica para mostrar el conteindo si el usuario esta en la seccion del componente
     const [isVisible, setIsVisible] = useState(false);
@@ -52,7 +54,7 @@ const Mensaje = ({ textoBot, textoUser }) => {
                         </div>
                         <div className="row">
                             <div className="col-12 text-center">
-                                <p className={`fw-bold ${userLoad ? "animacion-mensaje visible" : "animacion-mensaje"}`}>{textoUser}</p>
+                                <p className={`fw-bold ${store.fondo === "fondo-modo-claro" ? "text-info" : " "} ${userLoad ? "animacion-mensaje visible" : "animacion-mensaje"}`}>{textoUser}</p>
                             </div>
                         </div>
                     </div>
@@ -66,7 +68,7 @@ const Mensaje = ({ textoBot, textoUser }) => {
                         </div>
                         <div className="row">
                             <div className="col-12 text-center">
-                                <p className={`fw-bold ${userLoad ? "animacion-mensaje visible" : "animacion-mensaje"}`}>{textoBot}</p>
+                                <p className={`fw-bold ${store.fondo === "fondo-modo-claro" ? "text-info" : " "} ${userLoad ? "animacion-mensaje visible" : "animacion-mensaje"}`}>{textoBot}</p>
                             </div>
                         </div>
                     </div>

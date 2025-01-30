@@ -10,12 +10,16 @@ import { FaSquareInstagram } from "react-icons/fa6";
 import { FaLinkedin } from "react-icons/fa";
 import { IoLogoYoutube } from "react-icons/io5";
 import { FaSquareWhatsapp } from "react-icons/fa6";
+import { Context } from "../../../store/appContext.js";
 
 const ContenedorContacto = () => {
     const [userLoad, SetUserLoad] = useState(false)
+    const { store, actions } = useContext(Context);
+
     const navigate = useNavigate("")
 
     useEffect(() => {
+        actions.Scroll();
         SetUserLoad(true)
     }, [])
 
@@ -38,16 +42,16 @@ const ContenedorContacto = () => {
                 <div className="col-12 col-md-12 col-lg-4 my-2 my-lg-3"><ContenedorCuadrado position="right" text={
                     <div className="d-flex flex-column">
                         <div className="d-flex justify-content-evenly">
-                            <a href="https://facebook.com/" target="_blank" className="fs-1  text-dark"><FaFacebookSquare /></a>
-                            <a href="https://twitter.com/" target="_blank" className="fs-1  text-dark"><FaSquareXTwitter /></a>
+                            <a href="https://facebook.com/" target="_blank" className="fs-1 text-info"><FaFacebookSquare /></a>
+                            <a href="https://twitter.com/" target="_blank" className="fs-1 text-info"><FaSquareXTwitter /></a>
                         </div>
                         <div className="d-flex justify-content-evenly">
-                            <a href="https://instagram.com/" target="_blank" className="fs-1  text-dark"><FaSquareInstagram /></a>
-                            <a href="https://linkedin.com/" target="_blank" className="fs-1  text-dark"><FaLinkedin /></a>
+                            <a href="https://instagram.com/" target="_blank" className="fs-1 text-info"><FaSquareInstagram /></a>
+                            <a href="https://linkedin.com/" target="_blank" className="fs-1 text-info"><FaLinkedin /></a>
                         </div>
                         <div className="d-flex justify-content-evenly">
-                            <a href="https://youtube.com/" target="_blank" className="fs-1  text-dark"><IoLogoYoutube /></a>
-                            <a href="https://whatsapp.com/" target="_blank" className="fs-1  text-dark"><FaSquareWhatsapp /></a>
+                            <a href="https://youtube.com/" target="_blank" className="fs-1 text-info"><IoLogoYoutube /></a>
+                            <a href="https://whatsapp.com/" target="_blank" className="fs-1 text-info"><FaSquareWhatsapp /></a>
                         </div>
                     </div>} title={"Redes sociales"} /></div>
                 <div className="col-12 col-md-6 col-lg-4 my-3"></div>

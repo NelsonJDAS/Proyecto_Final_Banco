@@ -20,7 +20,7 @@ const ContenedorPrincipalSeguridad = () => {
                     datos y entornos laborales, garantizando la seguridad tanto de las personas como de la información.
                 </p>
             </div>
-            <div className="container">
+            <div className="container espaciado-fondo-titulos">
                 <div className="row">
                     <ColTitulo
                         logo={<MdOutlineSecurity />}

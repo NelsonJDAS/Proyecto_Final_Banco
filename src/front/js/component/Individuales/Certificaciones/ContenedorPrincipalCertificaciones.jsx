@@ -20,7 +20,7 @@ const ContenedorPrincipalCertificaciones = () => {
                     reflejo de la formación, el rendimiento y el compromiso demostrado en los respectivos programas
                 </p>
             </div>
-            <div className="container">
+            <div className="container espaciado-fondo-titulos">
                 <div className="row">
                     <ColTitulo
                         logo={<TbCertificate />}
