@@ -30,7 +30,7 @@ class Cliente(db.Model):
     __tablename__ = 'cliente'
 
     id = db.Column(db.Integer, primary_key=True)
-    nombre_completo = db.Column(db.String(50))
+    nombre = db.Column(db.String(50))
     apellidos = db.Column(db.String(100))
     telefono = db.Column(db.String(30))
     direccion = db.Column(db.String(200))
@@ -50,7 +50,7 @@ class Cliente(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "nombre_completo": self.nombre_completo,
+            "nombre": self.nombre,
             "apellidos": self.apellidos,
             "telefono": self.telefono,
             "direccion": self.direccion,

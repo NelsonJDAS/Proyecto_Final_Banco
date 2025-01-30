@@ -82,7 +82,7 @@ def addUser():
         # Crear cliente asociado al usuario
         print("Creando cliente...")
         nuevo_cliente = Cliente(
-            nombre_completo=name,
+            nombre=name,
             apellidos="Introduzca apellido",
             telefono="Introduzca numero",
             direccion="Introduzca direccion",
@@ -302,7 +302,7 @@ def get_user_details(id):
             },
             "cliente": {
                 "id": cliente.id,
-                "nombre": cliente.nombre_completo,
+                "nombre": cliente.nombre,
                 "apellidos": cliente.apellidos,
                 "telefono": cliente.telefono,
                 "direccion": cliente.direccion,
@@ -343,7 +343,7 @@ def update_cliente_profile(id):
         return jsonify({"error": "El usuario no tiene un cliente asociado"}), 404
 
     # Obtener los datos enviados en la solicitud
-    nombre_completo = perfil.get("nombre_completo")
+    nombre = perfil.get("nombre")
     apellidos = perfil.get("apellidos")
     direccion = perfil.get("direccion")
     telefono = perfil.get("telefono")
@@ -357,8 +357,8 @@ def update_cliente_profile(id):
             return jsonify({"error": "El número de documento ya está en uso por otro cliente"}), 400
 
     # Actualizar solo los campos enviados
-    if nombre_completo:
-        cliente.nombre_completo = nombre_completo
+    if nombre:
+        cliente.nombre = nombre
     if apellidos:
         cliente.apellidos = apellidos
     if telefono:
@@ -569,83 +569,164 @@ def realizar_retiro():
     except Exception as e:
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
-
+    
 @api.route('/transaccion/transferencia', methods=['POST'])
 def realizar_transferencia():
     data = request.get_json()
 
     # Datos de la transferencia
     cuenta_origen_id = data.get("cuenta_origen_id")
-    cuenta_destino_id = data.get("cuenta_destino_id")
-    monto = abs(data.get("monto"))  # Asegurarse de que el monto sea positivo
+    numero_cuenta_destino = data.get("numero_cuenta_destino")
+    monto = abs(data.get("monto"))
     descripcion = data.get("descripcion", "Transferencia entre cuentas")
 
-    # Validaciones básicas
-    if not cuenta_origen_id or not cuenta_destino_id or not monto:
-        return jsonify({"error": "Faltan datos obligatorios"}), 400
-
     try:
-        # Obtener las cuentas
+        # Obtener cuentas
         cuenta_origen = Cuenta.query.get(cuenta_origen_id)
-        cuenta_destino = Cuenta.query.get(cuenta_destino_id)
+        cuenta_destino = Cuenta.query.filter_by(numero_cuenta=numero_cuenta_destino).first()
 
+        # Validaciones
         if not cuenta_origen or not cuenta_destino:
             return jsonify({"error": "Cuenta no encontrada"}), 404
 
-        # Verificar que haya saldo suficiente en la cuenta origen
         if cuenta_origen.saldo < monto:
-            return jsonify({"error": "Saldo insuficiente en la cuenta origen"}), 400
+            return jsonify({"error": "Saldo insuficiente"}), 400
 
-        # Guardar los saldos anteriores
-        saldo_anterior_origen = cuenta_origen.saldo
-        saldo_anterior_destino = cuenta_destino.saldo
-
-        # Actualizar los saldos de las cuentas
+        # Realizar transferencia
         cuenta_origen.saldo -= monto
         cuenta_destino.saldo += monto
 
-        # Guardar los saldos posteriores
-        saldo_posterior_origen = cuenta_origen.saldo
-        saldo_posterior_destino = cuenta_destino.saldo
-
-        # Crear transacción de retiro en la cuenta origen (monto negativo)
+        # Crear transacciones
         transaccion_origen = Transaccion(
-            cuenta_id=cuenta_origen_id,
+            cuenta_id=cuenta_origen.id,
             tipo="transferencia",
-            monto=-monto,  # Monto negativo
+            monto=-monto,
             descripcion=f"Transferencia a cuenta {cuenta_destino.numero_cuenta}",
-            fecha=datetime.now(timezone.utc),
-            saldo_anterior=saldo_anterior_origen,  # Saldo antes de la transacción
-            saldo_posterior=saldo_posterior_origen  # Saldo después de la transacción
+            saldo_anterior=cuenta_origen.saldo + monto,
+            saldo_posterior=cuenta_origen.saldo
         )
-        db.session.add(transaccion_origen)
 
-        # Crear transacción de depósito en la cuenta destino (monto positivo)
         transaccion_destino = Transaccion(
-            cuenta_id=cuenta_destino_id,
+            cuenta_id=cuenta_destino.id,
             tipo="depósito",
-            monto=monto,  # Monto positivo
+            monto=monto,
             descripcion=f"Transferencia desde cuenta {cuenta_origen.numero_cuenta}",
-            fecha=datetime.now(timezone.utc),
-            saldo_anterior=saldo_anterior_destino,  # Saldo antes de la transacción
-            saldo_posterior=saldo_posterior_destino  # Saldo después de la transacción
+            saldo_anterior=cuenta_destino.saldo - monto,
+            saldo_posterior=cuenta_destino.saldo
         )
-        db.session.add(transaccion_destino)
 
-        # Guardar los cambios en la base de datos
+        # Crear notificaciones
+        notificacion_remitente = Notificacion(
+            mensaje=f"Transferencia enviada de {monto}€ a cuenta {cuenta_destino.numero_cuenta}",
+            cliente_id=cuenta_origen.cliente_id
+        )
+
+        notificacion_destinatario = Notificacion(
+            mensaje=f"Transferencia recibida de {monto}€ desde cuenta {cuenta_origen.numero_cuenta}",
+            cliente_id=cuenta_destino.cliente_id
+        )
+
+        # Guardar todo en la base de datos
+        db.session.add_all([
+            transaccion_origen,
+            transaccion_destino,
+            notificacion_remitente,
+            notificacion_destinatario
+        ])
+        
         db.session.commit()
 
         return jsonify({
-            "mensaje": "Transferencia realizada exitosamente",
+            "mensaje": "Transferencia exitosa",
             "saldo_origen": cuenta_origen.saldo,
             "saldo_destino": cuenta_destino.saldo,
-            "transaccion_origen": transaccion_origen.serialize(),
-            "transaccion_destino": transaccion_destino.serialize()
+            "notificaciones": {
+                "remitente": notificacion_remitente.serialize(),
+                "destinatario": notificacion_destinatario.serialize()
+            }
         }), 201
 
     except Exception as e:
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
+
+# @api.route('/transaccion/transferencia', methods=['POST'])
+# def realizar_transferencia():
+#     data = request.get_json()
+
+#     # Datos de la transferencia
+#     cuenta_origen_id = data.get("cuenta_origen_id")
+#     cuenta_destino_id = data.get("cuenta_destino_id")
+#     monto = abs(data.get("monto"))  # Asegurarse de que el monto sea positivo
+#     descripcion = data.get("descripcion", "Transferencia entre cuentas")
+
+#     # Validaciones básicas
+#     if not cuenta_origen_id or not cuenta_destino_id or not monto:
+#         return jsonify({"error": "Faltan datos obligatorios"}), 400
+
+#     try:
+#         # Obtener las cuentas
+#         cuenta_origen = Cuenta.query.get(cuenta_origen_id)
+#         cuenta_destino = Cuenta.query.get(cuenta_destino_id)
+
+#         if not cuenta_origen or not cuenta_destino:
+#             return jsonify({"error": "Cuenta no encontrada"}), 404
+
+#         # Verificar que haya saldo suficiente en la cuenta origen
+#         if cuenta_origen.saldo < monto:
+#             return jsonify({"error": "Saldo insuficiente en la cuenta origen"}), 400
+
+#         # Guardar los saldos anteriores
+#         saldo_anterior_origen = cuenta_origen.saldo
+#         saldo_anterior_destino = cuenta_destino.saldo
+
+#         # Actualizar los saldos de las cuentas
+#         cuenta_origen.saldo -= monto
+#         cuenta_destino.saldo += monto
+
+#         # Guardar los saldos posteriores
+#         saldo_posterior_origen = cuenta_origen.saldo
+#         saldo_posterior_destino = cuenta_destino.saldo
+
+#         # Crear transacción de retiro en la cuenta origen (monto negativo)
+#         transaccion_origen = Transaccion(
+#             cuenta_id=cuenta_origen_id,
+#             tipo="transferencia",
+#             monto=-monto,  # Monto negativo
+#             descripcion=f"Transferencia a cuenta {cuenta_destino.numero_cuenta}",
+#             fecha=datetime.now(timezone.utc),
+#             saldo_anterior=saldo_anterior_origen,  # Saldo antes de la transacción
+#             saldo_posterior=saldo_posterior_origen  # Saldo después de la transacción
+            
+#         )
+#         db.session.add(transaccion_origen)
+
+#         # Crear transacción de depósito en la cuenta destino (monto positivo)
+#         transaccion_destino = Transaccion(
+#             cuenta_id=cuenta_destino_id,
+#             tipo="depósito",
+#             monto=monto,  # Monto positivo
+#             descripcion=f"Transferencia desde cuenta {cuenta_origen.numero_cuenta}",
+#             fecha=datetime.now(timezone.utc),
+#             saldo_anterior=saldo_anterior_destino,  # Saldo antes de la transacción
+#             saldo_posterior=saldo_posterior_destino  # Saldo después de la transacción
+#         )
+#         db.session.add(transaccion_destino)
+
+#         # Guardar los cambios en la base de datos
+#         db.session.commit()
+
+#         return jsonify({
+#             "mensaje": "Transferencia realizada exitosamente",
+#             "saldo_origen": cuenta_origen.saldo,
+#             "saldo_destino": cuenta_destino.saldo,
+#             "transaccion_origen": transaccion_origen.serialize(),
+#             "transaccion_destino": transaccion_destino.serialize()
+#         }), 201
+
+#     except Exception as e:
+#         db.session.rollback()
+#         return jsonify({"error": str(e)}), 500
 
 #                                                   ENVIO DE CODIGO Y VERIFICACIONES POR EMAIL
 

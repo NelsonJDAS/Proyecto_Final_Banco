@@ -189,6 +189,55 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
       },
 
+      realizarTransferencia: async (cuenta_origen_id, numero_cuenta_destino, nombre_destino, apellidos_destino, monto, descripcion) => {
+
+        try {
+            const response = await fetch(`${process.env.BACKEND_URL}/api/transaccion/transferencia`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    // Authorization: `Bearer ${localStorage.getItem("token")}`, // Si usas autenticación
+                },
+                body: JSON.stringify({
+                    cuenta_origen_id,
+                    numero_cuenta_destino, // Número de cuenta destino
+                    nombre_destino,       // Nombre del cliente destino
+                    apellidos_destino,    // Apellidos del cliente destino
+                    monto,
+                    descripcion,
+                }),
+            });
+    
+            const data = await response.json();
+            console.log(data)
+            if (!response.ok) {
+                throw new Error(data.error || "Error al realizar la transferencia");
+            }
+    
+            // Actualizar el store con los nuevos saldos
+            // const store = getStore();
+            // const updatedCuentas = store.cuentas.map((cuenta) => {
+            //     if (cuenta.id === cuenta_origen_id) {
+            //         return { ...cuenta, saldo: data.saldo_origen };
+            //     }
+            //     if (cuenta.numero_cuenta === numero_cuenta_destino) {
+            //         return { ...cuenta, saldo: data.saldo_destino };
+            //     }
+            //     return cuenta;
+            // });
+    
+            // setStore({
+            //     ...store,
+            //     cuentas: updatedCuentas,
+            // });
+    
+            return data; // Devuelve los datos de la transferencia
+        } catch (error) {
+            console.error("Error al realizar la transferencia:", error);
+            throw error; // Lanza el error para manejarlo en el componente
+        }
+    },
+
       marcarNotificacionComoLeida: async (notificacionId) => {
         try {
           const response = await fetch(`${process.env.BACKEND_URL}/api/notificaciones/${notificacionId}/marcar-leida`, {
