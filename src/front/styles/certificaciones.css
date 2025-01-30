@@ -1,10 +1,16 @@
 .contenedor-titulo {
     transition: height 2s ease;
     height: 200px;
+    border-radius: 30px;
 }
 
 .contenedor-titulo-expandido {
     height: 350px;
+    border-radius: 30px;
+}
+
+.espaciado-fondo-titulos {
+    margin-bottom: 90px;
 }
 
 .icono-titulo {
@@ -44,38 +50,3 @@
     transition: opacity 2s ease, transform 1.5s ease, color 0.6s ease;
     transform: translateX(0);
 }
-
-/* 
-.animation {
-    transition: justify-content 0.5s ease;
-    transition: transform 0.5s ease;
-}
-
-.animation h6 {
-    position: relative;
-    display: inline-block;
-    transition: transform 0.5s ease;
-}
-
-.animation h6::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -5px;
-    width: 0;
-    height: 2.5px;
-    background-color: rgb(110, 110, 110);
-    transition: width 0.5s ease;
-}
-
-.animation:hover h6 {
-    justify-content: center;
-}
-
-.animation:hover span {
-    transform: translateX(5%);
-}
-
-.animation:hover h6::after {
-    width: 100%;
-} */

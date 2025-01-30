@@ -71,13 +71,13 @@ const Divisas = () => {
                     <p className="text-center m-1">Elige la cantidad que cambiaras</p>
                     <div className="d-flex my-2">
                         <div className="container w-90">
-                            <input type="number" className="form-control rounded-pill text-dark text-center" ref={inputRef} onChange={HandleInputCalculadora} placeholder="€" />
+                            <input type="number" className="form-control rounded-pill text-warning text-center bg-transparent" ref={inputRef} onChange={HandleInputCalculadora} placeholder="€" />
                         </div>
                         <div className="text-center my-1">
                             <i><TfiReload /></i>
                         </div>
                         <div className="container w-90">
-                            <select class="form-select text-dark text-center fw-bold" aria-label="Default select example" ref={selectRef} onChange={HandleSelect}>
+                            <select class="form-select text-warning text-center fw-bold bg-transparent" aria-label="Default select example" ref={selectRef} onChange={HandleSelect}>
                                 {
                                     Object.entries(divisas).map(([currency, rate]) => {
                                         return <option className="fw-bold text-dark" value={rate} selected>{currency}</option>
@@ -89,7 +89,7 @@ const Divisas = () => {
                     <div className="row my-3">
                         <div className="col-12">
                             <div className="container ">
-                                <input type="text" className="form-control rounded-pill text-dark text-center" disabled ref={inputResultadoRef} />
+                                <input type="text" className="form-control rounded-pill text-warning text-center bg-transparent fw-bold" disabled ref={inputResultadoRef} />
                             </div>
                         </div>
                     </div>

@@ -3,6 +3,7 @@ import GraficaInversionVista from "../graficas/GraficaInversionVista.jsx";
 import { Context } from "../../store/appContext.js";
 import { useNavigate, useParams } from "react-router-dom";
 import { RiArrowGoBackFill } from "react-icons/ri";
+import { BiSolidBusiness } from "react-icons/bi";
 
 const ContenedorGraficas = () => {
     const { store, actions } = useContext(Context);
@@ -22,15 +23,16 @@ const ContenedorGraficas = () => {
 
             const data = await response.json();
 
-            console.log(data.values)
 
             let valores = [];
             Object.entries(data.values).map((item) => {
                 let datos = { "time": item[1].datetime, "value": parseInt(item[1].close) }
+                console.log(datos);
                 valores.unshift(datos)
             })
 
-            actions.ActualizarGrafica(valores)
+
+            data.values == undefined ? "" : actions.ActualizarGrafica(valores)
 
 
 
@@ -52,6 +54,7 @@ const ContenedorGraficas = () => {
             {store.grafica.length == 0 ?
                 <div className="row">
                     <div className="col-12 fw-bold fs-2 text-center my-3"><span className="titulo-individual-inversiones">Sin datos sobre la empresa</span></div>
+                    <div className="col-12 text-center"><i className="color-inversion simbolo-empresa"><BiSolidBusiness /></i></div>
                     <div className="col-12 text-center"><span className="hover fs-1 color-inversion" onClick={() => navigate("/inversiones")}>Volver Atras</span></div>
                 </div>
                 :

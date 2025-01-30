@@ -28,12 +28,12 @@ const ListaGraficas = () => {
 
     useEffect(() => {
         if (pagination[0] - 9 < 0) {
-            flechaIzq.current.disabled = true
+            flechaIzq.current.classList.add("flecha-cancelada");
         } else if (pagination[1] + 9 > 27499) {
-            flechaDer.current.disabled = true
+            flechaDer.current.classList.add("flecha-cancelada");
         } else {
-            flechaIzq.current.disabled = false
-            flechaDer.current.disabled = false
+            flechaIzq.current.classList.remove("flecha-cancelada");
+            flechaDer.current.classList.remove("flecha-cancelada");
         }
     }, [pagination])
 
@@ -52,13 +52,16 @@ const ListaGraficas = () => {
                     <input type="text" placeholder="Buscar" className="mx-3 text-center w-25 py-2 rounded-pill" onChange={HandleInput} disabled ref={inputRef} />
                 </div>
             </div>
-            <div className="row d-flex my-3">
-                <div className="col-6 text-center">
+            <div className="row my-3">
+                <div className="col-4 text-center">
                     <button className={`hover fs-2 mx-2 flecha bg-transparent btn ${store.texto}`} onClick={() => { SetPagination([pagination[0] - 9, pagination[1] - 9]) }} ref={flechaIzq}>
                         <FaArrowLeft />
                     </button>
                 </div>
-                <div className="col-6 text-center">
+                <div className="col-4 text-center align-content-center">
+                    <p className="fs-3 mt-3 fw-bold">{pagination[1] / 9} / {Math.ceil(store.simbolos.length / 9)}</p>
+                </div>
+                <div className="col-4 text-center">
                     <button className={`hover fs-2 mx-2 flecha bg-transparent btn ${store.texto}`} onClick={() => { SetPagination([pagination[0] + 9, pagination[1] + 9]) }} ref={flechaDer}>
                         <FaArrowRight />
                     </button>

@@ -42,7 +42,6 @@ const ElementoSeleccionable = ({ nombre, simbolo, moneda }) => {
 
     useEffect(() => {
         if (isVisible) {
-            console.log(moneda)
             SetUserLoad(true)
         } else {
             SetUserLoad(false)
@@ -57,7 +56,7 @@ const ElementoSeleccionable = ({ nombre, simbolo, moneda }) => {
         }}>
             <div className={`container contenedor-elemento ${store.fondo === "fondo-modo-claro" ? "bg-modo-claro" : "bg-modo-oscuro"}`}>
                 <div className="row">
-                    <div className="col-12 fw-bold fs-4 text-center mt-3"><p>{nombre}</p></div>
+                    <div className="col-12 fw-bold fs-4 text-center mt-3 nombre-empresa"><p>{nombre}</p></div>
                     <div className="col-12 text-center"><i className="simbolo-grafica color-inversion "><SlGraph /></i></div>
                     <div className="col-12 text-center"><i className="color-inversion enlace-grafica"><GrMoney /></i></div>
                     <div className="col-12 text-center"><div><p className="fs-5 enlace-grafica color-inversion ">{moneda}</p></div></div>

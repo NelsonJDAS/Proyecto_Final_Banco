@@ -107,3 +107,17 @@
 .borde-morado {
     border: 2px solid rgba(161, 5, 161, 0.738) !important;
 }
+
+.nombre-empresa {
+    height: 60px;
+}
+
+.flecha-cancelada {
+    color: gray;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.simbolo-empresa {
+    font-size: 100px;
+}
