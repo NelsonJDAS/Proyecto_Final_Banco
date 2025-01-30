@@ -50,7 +50,7 @@ const ColTitulo = ({ title, position, descripcion, logo }) => {
         console.log(texto)
     }, [texto])
     return (
-        <div className={`col-12 p-3 align-content-center text-center border-top hover border-bottom  d-flex flex-column ${store.fondo === "fondo-modo-claro" ? "text-info bg-dark border-info" : "text-dark bg-white border-dark"} ${userLoad ? `${positionCol} visible` : positionCol}  ${texto ? "contenedor-titulo-expandido" : "contenedor-titulo"} `} ref={sectionRef} onClick={() => SetTexto(!texto)}>
+        <div className={`col-12 p-3 my-2 rounded-3 align-content-center text-center border-top hover border-bottom  d-flex flex-column ${store.fondo === "fondo-modo-claro" ? "text-info bg-dark border-info" : "text-dark bg-white border-dark"} ${userLoad ? `${positionCol} visible` : positionCol}  ${texto ? "contenedor-titulo-expandido" : "contenedor-titulo"} `} ref={sectionRef} onClick={() => SetTexto(!texto)}>
             <i className="icono-titulo">{logo}</i>
             <span className="fs-2 fw-bold">{title}</span>
             <div className={`container d-flex flex-column ${texto ? "texto-titulo visible" : "texto-titulo"}`}>
