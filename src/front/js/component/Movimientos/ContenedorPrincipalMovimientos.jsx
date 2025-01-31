@@ -62,7 +62,7 @@ const ContenedorPrincipalMovimientos = () => {
                     <TablaCol fecha="01/03/2024" cuerpo="Nomina" monto={1000} saldo={400} />
                     <TablaCol fecha="01/03/2024" cuerpo="Mc Donalds / Sevilla" importe={12.9} saldo={400} /> */}
                     {store.transacciones && store.transacciones.map((transaccion) => (
-                        <div className={select === "fecha" ? transaccion.fecha.toLowerCase().slice(0, 10).includes(input) ? "" : "d-none" : ""}>
+                        <div key={transaccion.id} className={select === "fecha" ? transaccion.fecha.toLowerCase().slice(0, 10).includes(input) ? "" : "d-none" : ""}>
                             <div className={select === "concepto" ? transaccion.descripcion.toLowerCase().includes(input) ? "" : "d-none" : ""}>
                                 <div className={select === "monto" ? transaccion.monto.toString().includes(input) ? "" : "d-none" : ""} onClick={() => console.log(transaccion.fecha.toLowerCase().slice(0, 10))}>
                                     <TablaCol
