@@ -326,17 +326,17 @@ const getState = ({ getStore, getActions, setStore }) => {
       sendCode: (email) => {
         const store = getStore();
         const actions = getActions();
-        setStore({ email }); // Almacena el email ingresado por el usuario
+        setStore({ email }); 
 
         fetch(process.env.BACKEND_URL + "/api/send-code", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: store.email }), // Usa el email recibido desde Login.jsx
+          body: JSON.stringify({ email: store.email }), 
         })
           .then((response) => response.json())
           .then((response) => console.log(response))
           .then((data) => {
-            if (response.ok) {
+            if (response.ok) { 
               setStore(console.log(Enviado));
             } else {
               alert(data.error);
@@ -397,37 +397,33 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       // Acción para verificar el código de la tarjeta de coordenadas
+
       verifyCoordinatesCode: (email, code) => {
         const store = getStore();
-        console.log("desde flux", email, code);
-        
-
-        fetch(`${process.env.BACKEND_URL}/api/verify-coordinates-code`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: email,
-            code: code,
-          }),
+    
+        return fetch(`${process.env.BACKEND_URL}/api/verify-coordinates-code`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email: email, code: code }),
         })
-          .then((response) => {
+        .then((response) => {
             if (!response.ok) {
-              throw new Error("Código inválido o expirado");
+                throw new Error("Código inválido o expirado");
             }
             return response.json();
-          })
-          .then((data) => {
-            console.log(data)
-            // Actualiza los datos de la tarjeta en el store
-            setStore({
-              ...store, tarjetaCoord: data.tarjeta_coordenadas,
-            });
-          })
-          .catch((error) => { console.error("Error:", error);
-          });
-      },
+        })
+        .then((data) => {
+            setStore({ ...store, tarjetaCoord: data.tarjeta_coordenadas });
+            return data; // 🔹 Devolvemos los datos
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+            return null; // 🔹 Devolvemos null en caso de error
+        });
+    },
+    
 
       fetchGraficasData: async () => {
         try {

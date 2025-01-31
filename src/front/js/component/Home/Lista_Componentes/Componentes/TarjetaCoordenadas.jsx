@@ -100,26 +100,26 @@ const TarjetasCoordenadas = () => {
     const [sendCode, setSendCode] = useState(false);
     const [error, setError] = useState(null);
 
+    useEffect(() => {
+    }, [setDatos]);
+
     // Manejar la verificación del código
     const handleVerifyCode = async () => {
         try {
-            const response = await actions.verifyCoordinatesCode(store.user.email, inputCode);
+            const data = await actions.verifyCoordinatesCode(store.user.email, inputCode);
             
-            // Si la verificación es exitosa, obtener la tarjeta
-            if (response && response.tarjeta_coordenadas) {
-                const formattedData = Object.values(response.tarjeta_coordenadas).map(coord => ({
-                    valor: coord.valor,
-                    posicion: coord.posicion
-                }));
-                setDatos(formattedData); // Actualiza los datos de la tarjeta
-                setSendCode(false); // Oculta el input del código
-                console.log(store.tarjeta_coordenadas)
-                setError(null); // Limpia cualquier error previo
+            if (data && data.tarjeta_coordenadas) {
+                setDatos(data.tarjeta_coordenadas); // 🔹 Usamos directamente la respuesta
+                setSendCode(false);
+                setError(null);
+            } else {
+                setError("Código inválido o expirado");
+                setDatos([]);
             }
         } catch (error) {
             console.error("Error al verificar el código:", error);
-            setError("Código inválido o expirado"); // Muestra un mensaje de error
-            setDatos([]); // Asegúrate de que no se muestre la tarjeta si hay un error
+            setError("Código inválido o expirado");
+            setDatos([]);
         }
     };
 
