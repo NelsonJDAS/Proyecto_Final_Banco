@@ -423,8 +423,28 @@ const getState = ({ getStore, getActions, setStore }) => {
             return null; // 🔹 Devolvemos null en caso de error
         });
     },
-    
 
+    sendCoordinatesCard: async (user_id) => {
+      try {
+          const response = await fetch(`${process.env.BACKEND_URL}/api/send-coordinates-card/${user_id}`, {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/json"
+              }
+          });
+  
+          const data = await response.json();
+          if (!response.ok) {
+              throw new Error(data.error || "Error al enviar la tarjeta de coordenadas");
+          }
+  
+          return data;
+      } catch (error) {
+          console.error("Error enviando la tarjeta de coordenadas:", error);
+          return null;
+      }
+  },
+  
       fetchGraficasData: async () => {
         try {
           const response = await fetch(process.env.BACKEND_URL + "/api/data");

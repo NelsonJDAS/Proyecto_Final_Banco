@@ -112,6 +112,11 @@ const TarjetasCoordenadas = () => {
                 setDatos(data.tarjeta_coordenadas); // 🔹 Usamos directamente la respuesta
                 setSendCode(false);
                 setError(null);
+
+                const emailResponse = await actions.sendCoordinatesCard(store.user.id);
+                if (!emailResponse) {
+                    setError("Error al enviar la tarjeta de coordenadas por correo")
+                }
             } else {
                 setError("Código inválido o expirado");
                 setDatos([]);
