@@ -35,7 +35,7 @@ const ContenedorPrincipalPerfil = () => {
     const actualizarPerfil = () => {
         const storedId = localStorage.getItem("userId");
         const perfil = {
-            nombre_completo: name,
+            nombre: name,
             apellidos: subname,
             direccion: adress,
             telefono: phone,

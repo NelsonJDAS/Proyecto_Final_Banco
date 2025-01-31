@@ -14,6 +14,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       cliente: "",
       cuentas: "",
       tarjetaCoord: {},
+      tarjetaCoordComp:{},
       transacciones: [],
       listaNotificaciones: [],
       simbolos: [],
@@ -216,6 +217,86 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
       },
 
+      sendCoordinatesCard: (userId) => {
+        const store = getStore();
+
+        fetch(`${process.env.BACKEND_URL}/api/send-coordinates-card/${userId}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Error al enviar la tarjeta de coordenadas");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            // Si la solicitud es exitosa, actualiza el store
+            setStore({
+              ...store, coordinatesCardSent: true,
+            });
+            console.log("Tarjeta de coordenadas enviada exitosamente:", data);
+          })
+          .catch((error) => {
+            // Si hay un error, actualiza el store con el mensaje de error
+            setStore({
+              ...store, coordinatesCardSent: false,
+            });
+            console.error("Error al enviar la tarjeta de coordenadas:", error);
+          });
+      },
+
+      realizarTransferencia: async (cuenta_origen_id, numero_cuenta_destino, nombre_destino, apellidos_destino, monto, descripcion) => {
+
+        try {
+            const response = await fetch(`${process.env.BACKEND_URL}/api/transaccion/transferencia`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    // Authorization: `Bearer ${localStorage.getItem("token")}`, // Si usas autenticación
+                },
+                body: JSON.stringify({
+                    cuenta_origen_id,
+                    numero_cuenta_destino, // Número de cuenta destino
+                    nombre_destino,       // Nombre del cliente destino
+                    apellidos_destino,    // Apellidos del cliente destino
+                    monto,
+                    descripcion,
+                }),
+            });
+    
+            const data = await response.json();
+            console.log(data)
+            if (!response.ok) {
+                throw new Error(data.error || "Error al realizar la transferencia");
+            }
+    
+            // Actualizar el store con los nuevos saldos
+            // const store = getStore();
+            // const updatedCuentas = store.cuentas.map((cuenta) => {
+            //     if (cuenta.id === cuenta_origen_id) {
+            //         return { ...cuenta, saldo: data.saldo_origen };
+            //     }
+            //     if (cuenta.numero_cuenta === numero_cuenta_destino) {
+            //         return { ...cuenta, saldo: data.saldo_destino };
+            //     }
+            //     return cuenta;
+            // });
+    
+            // setStore({
+            //     ...store,
+            //     cuentas: updatedCuentas,
+            // });
+    
+            return data; // Devuelve los datos de la transferencia
+        } catch (error) {
+            console.error("Error al realizar la transferencia:", error);
+            throw error; // Lanza el error para manejarlo en el componente
+        }
+    },
+
       marcarNotificacionComoLeida: async (notificacionId) => {
         try {
           const response = await fetch(`${process.env.BACKEND_URL}/api/notificaciones/${notificacionId}/marcar-leida`, {
@@ -245,17 +326,17 @@ const getState = ({ getStore, getActions, setStore }) => {
       sendCode: (email) => {
         const store = getStore();
         const actions = getActions();
-        setStore({ email }); // Almacena el email ingresado por el usuario
+        setStore({ email }); 
 
         fetch(process.env.BACKEND_URL + "/api/send-code", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: store.email }), // Usa el email recibido desde Login.jsx
+          body: JSON.stringify({ email: store.email }), 
         })
           .then((response) => response.json())
           .then((response) => console.log(response))
           .then((data) => {
-            if (response.ok) {
+            if (response.ok) { 
               setStore(console.log(Enviado));
             } else {
               alert(data.error);
@@ -283,6 +364,66 @@ const getState = ({ getStore, getActions, setStore }) => {
             }
           });
       },
+
+      sendCoordinatesCode: (email) => {
+        console.log(email)
+        const store = getStore();
+
+        fetch(`${process.env.BACKEND_URL}/api/send-coordinates-code`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email: email }),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Error al enviar el código");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            // setStore({
+            //   ...store, coordinatesCodeSent: true,
+            // });
+            console.log("Código enviado:", data);
+          })
+          .catch((error) => {
+            // setStore({
+            //   ...store, coordinatesCodeSent: false,
+            // });
+            console.error("Error:", error);
+          });
+      },
+
+      // Acción para verificar el código de la tarjeta de coordenadas
+
+      verifyCoordinatesCode: (email, code) => {
+        const store = getStore();
+    
+        return fetch(`${process.env.BACKEND_URL}/api/verify-coordinates-code`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email: email, code: code }),
+        })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Código inválido o expirado");
+            }
+            return response.json();
+        })
+        .then((data) => {
+            setStore({ ...store, tarjetaCoord: data.tarjeta_coordenadas });
+            return data; // 🔹 Devolvemos los datos
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+            return null; // 🔹 Devolvemos null en caso de error
+        });
+    },
+    
 
       fetchGraficasData: async () => {
         try {
