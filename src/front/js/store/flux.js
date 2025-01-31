@@ -14,6 +14,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       cliente: "",
       cuentas: "",
       tarjetaCoord: {},
+      tarjetaCoordComp:{},
       transacciones: [],
       listaNotificaciones: [],
       simbolos: [],
@@ -216,6 +217,37 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
       },
 
+      sendCoordinatesCard: (userId) => {
+        const store = getStore();
+
+        fetch(`${process.env.BACKEND_URL}/api/send-coordinates-card/${userId}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Error al enviar la tarjeta de coordenadas");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            // Si la solicitud es exitosa, actualiza el store
+            setStore({
+              ...store, coordinatesCardSent: true,
+            });
+            console.log("Tarjeta de coordenadas enviada exitosamente:", data);
+          })
+          .catch((error) => {
+            // Si hay un error, actualiza el store con el mensaje de error
+            setStore({
+              ...store, coordinatesCardSent: false,
+            });
+            console.error("Error al enviar la tarjeta de coordenadas:", error);
+          });
+      },
+
       realizarTransferencia: async (cuenta_origen_id, numero_cuenta_destino, nombre_destino, apellidos_destino, monto, descripcion) => {
 
         try {
@@ -330,6 +362,70 @@ const getState = ({ getStore, getActions, setStore }) => {
             } else {
               alert(data.error);
             }
+          });
+      },
+
+      sendCoordinatesCode: (email) => {
+        console.log(email)
+        const store = getStore();
+
+        fetch(`${process.env.BACKEND_URL}/api/send-coordinates-code`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email: email }),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Error al enviar el código");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            // setStore({
+            //   ...store, coordinatesCodeSent: true,
+            // });
+            console.log("Código enviado:", data);
+          })
+          .catch((error) => {
+            // setStore({
+            //   ...store, coordinatesCodeSent: false,
+            // });
+            console.error("Error:", error);
+          });
+      },
+
+      // Acción para verificar el código de la tarjeta de coordenadas
+      verifyCoordinatesCode: (email, code) => {
+        const store = getStore();
+        console.log("desde flux", email, code);
+        
+
+        fetch(`${process.env.BACKEND_URL}/api/verify-coordinates-code`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: email,
+            code: code,
+          }),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Código inválido o expirado");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            console.log(data)
+            // Actualiza los datos de la tarjeta en el store
+            setStore({
+              ...store, tarjetaCoord: data.tarjeta_coordenadas,
+            });
+          })
+          .catch((error) => { console.error("Error:", error);
           });
       },
 

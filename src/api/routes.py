@@ -10,7 +10,7 @@ from flask_cors import CORS
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from api.mail_config import get_mail
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 
 
 
@@ -382,6 +382,33 @@ def update_cliente_profile(id):
 def private():
     current_user = get_jwt_identity()
     return jsonify({"ok" : True, "current_user" : current_user}), 200
+
+#                                                             CONFIGURACION DEL USUARIO
+
+@api.route('/update_config', methods=['POST'])
+def update_config():
+    data = request.get_json()
+    user_id = data.get('user_id')  # ID del User
+    modo_oscuro = data.get('modo_oscuro')
+    ocultar_saldo = data.get('ocultar_saldo')
+
+    config = ConfiguracionUsuario.query.filter_by(id_usuario=user_id).first()
+    if config:
+        config.modo_oscuro = modo_oscuro
+        config.ocultar_saldo = ocultar_saldo
+        db.session.commit()
+        return jsonify({"message": "Configuración actualizada correctamente"}), 200
+    else:
+        return jsonify({"error": "Configuración no encontrada"}), 404
+    
+@api.route('/api/get_config', methods=['GET'])
+def get_config():
+    user_id = request.args.get('user_id')  # ID del User
+    config = ConfiguracionUsuario.query.filter_by(id_usuario=user_id).first()
+    if config:
+        return jsonify(config.serialize()), 200
+    else:
+        return jsonify({"error": "Configuración no encontrada"}), 404
 
 #                                                                   NOTIFICACIONES
 
@@ -769,6 +796,138 @@ def send_code():
 
     get_mail().send(msg)
     return jsonify({'message': 'Código enviado exitosamente', 'code': code}), 200
+
+    #                                                             CODIGO PARA TARJETAS DE COORDENADAS
+
+@api.route('/send-coordinates-code', methods=['POST'])
+def send_coordinates_code():
+    data = request.json
+    email = data.get('email')
+
+    if not email:
+        return jsonify({'error': 'Email es requerido'}), 400
+
+    # Buscar el usuario por email
+    user = User.query.filter_by(email=email).first()
+    if not user:
+        return jsonify({'error': 'Usuario no encontrado'}), 404
+
+    # Generar un código de seguridad
+    code = f"{random.randint(100000, 999999)}"
+    user.coordinates_code = code  # Asignar el código al usuario
+    user.code_expires = datetime.now(timezone.utc) + timedelta(minutes=10)  # Código válido por 10 minutos
+
+    # Guardar cambios en la base de datos
+    db.session.commit()
+
+    # Enviar correo electrónico con el código
+    msg = Message('Código para obtener tu tarjeta de coordenadas en Geek-Bank',
+                  recipients=[email])
+    msg.body = (
+        f"Hola {user.name},\n\n"
+        f"Hemos recibido una solicitud para obtener tu tarjeta de coordenadas en Geek-Bank.\n\n"
+        f"Tu código de seguridad es:\n\n"
+        f"🔑 **{code}** 🔑\n\n"
+        f"Por favor, introduce este código en nuestra página web para acceder a tu tarjeta de coordenadas.\n\n"
+        f"Este código es válido por 10 minutos.\n\n"
+        f"⚠️ *Nota importante:* Si no solicitaste este código, es posible que alguien haya intentado acceder a tu cuenta. "
+        f"Te recomendamos ignorar este mensaje y, si tienes alguna duda, contacta con nuestro equipo de soporte a la brevedad.\n\n"
+        f"¡Gracias por confiar en Geek-Bank!\n\n"
+        f"Atentamente,\n"
+        f"El equipo de Geek-Bank")
+
+    get_mail().send(msg)
+
+    return jsonify({'message': 'Código enviado exitosamente', 'code': code}), 200
+
+@api.route('/verify-coordinates-code', methods=['POST'])
+def verify_coordinates_code():
+    data = request.json
+    email = data.get('email')
+    code = data.get('code')
+
+    if not email or not code:
+        return jsonify({'error': 'Email y código son requeridos'}), 400
+
+    user = User.query.filter_by(email=email).first()
+    if not user:
+        return jsonify({'error': 'Usuario no encontrado'}), 404
+
+    # Asegúrate de que user.code_expires sea offset-aware
+    if user.code_expires.tzinfo is None:
+        user.code_expires = user.code_expires.replace(tzinfo=timezone.utc)
+
+    # Compara con un datetime offset-aware
+    current_time = datetime.now(timezone.utc)
+
+    if user.coordinates_code != code or user.code_expires < current_time:
+        return jsonify({'error': 'Código inválido o expirado'}), 400
+
+    # Acceder a la cuenta a través del cliente
+    if not user.cliente or not user.cliente.cuentas:
+        return jsonify({'error': 'El usuario no tiene una cuenta asociada'}), 404
+
+    # Suponiendo que un cliente tiene solo una cuenta
+    cuenta = user.cliente.cuentas[0]
+
+    # Obtener las tarjetas de coordenadas de la cuenta
+    tarjeta_coordenadas = [
+        {"posicion": coord.posicion, "valor": coord.valor}
+        for coord in cuenta.tarjetas_coordenadas
+    ]
+
+    return jsonify({
+        'message': 'Código verificado exitosamente',
+        'tarjeta_coordenadas': tarjeta_coordenadas
+    }), 200
+
+@api.route('/send-coordinates-card/<int:user_id>', methods=['POST'])
+def send_coordinates_card(user_id):
+    try:
+        # Buscar el usuario por ID
+        user = User.query.get(user_id)
+        if not user:
+            return jsonify({"error": "Usuario no encontrado"}), 404
+
+        # Obtener el cliente asociado al usuario
+        cliente = user.cliente
+        if not cliente:
+            return jsonify({"error": "El usuario no tiene un cliente asociado"}), 404
+
+        # Obtener la única cuenta del cliente
+        if not cliente.cuentas:
+            return jsonify({"error": "El cliente no tiene cuentas"}), 404
+        
+        cuenta = cliente.cuentas[0]
+
+        # Obtener la tarjeta de coordenadas
+        tarjeta_coordenadas_data = [
+            {
+                "posicion": coord.posicion,
+                "valor": coord.valor 
+            }
+            for coord in cuenta.tarjetas_coordenadas
+        ]
+
+        # Formatear la tarjeta de coordenadas para el correo electrónico
+        coordenadas_formateadas = "\n".join([f"Posición {coord['posicion']}: {coord['valor']}" for coord in tarjeta_coordenadas_data])
+
+        # Enviar correo electrónico con la tarjeta de coordenadas
+        msg = Message('Tu tarjeta de coordenadas en Geek-Bank',
+                      recipients=[user.email])
+        msg.body = (
+            f"Hola {user.name},\n\n"
+            f"A continuación encontrarás tu tarjeta de coordenadas para tu cuenta en Geek-Bank:\n\n"
+            f"{coordenadas_formateadas}\n\n"
+            f"Guarda esta información en un lugar seguro y no la compartas con nadie.\n\n"
+            f"Atentamente,\n"
+            f"El equipo de Geek-Bank")
+
+        get_mail().send(msg)
+        return jsonify({'message': 'Tarjeta de coordenadas enviada exitosamente'}), 200
+
+    except Exception as e:
+        return jsonify({"error": "Ha ocurrido un error", "details": str(e)}), 500
     
 @api.route('/verify-code', methods=['POST'])
 def verify_code():
