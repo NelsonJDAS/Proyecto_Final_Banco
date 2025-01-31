@@ -269,3 +269,12 @@
 .prueba {
     background: linear-gradient(135deg, #b71c1c, #e53935, #ff8a80);
 }
+
+.mensaje-condicion {
+    height: 5px;
+}
+
+.boton-cancelado {
+    pointer-events: none;
+    opacity: 0.5;
+}
