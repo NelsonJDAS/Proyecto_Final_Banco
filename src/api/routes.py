@@ -375,6 +375,20 @@ def update_cliente_profile(id):
 
     return jsonify({"mensaje": "Perfil del cliente actualizado exitosamente", "cliente": cliente.serialize()}), 200
 
+@api.route('/User/<int:id>/Password', methods=['PUT'])
+def update_password(id):
+    data = request.get_json()
+    new_password = data.get("new_password")
+
+    if not new_password:
+        return jsonify({"error": "Se requiere una nueva contraseña"}), 400
+    
+    user = User.query.get(id)
+    if not user:
+        return jsonify({"error": "Usuario no encontrado"}), 404
+    
+    user.password = new_password
+
 #                                                                  PRIVADO PARA JWT
     
 @api.route('/private', methods=['POST'])
