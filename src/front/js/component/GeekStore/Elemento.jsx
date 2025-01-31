@@ -1,7 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { FaArrowRightLong } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 
 const Elemento = () => {
+
+    const navigate = useNavigate(null);
+
     const [userLoad, SetUserLoad] = useState(false);
     // logica para mostrar el conteindo si el usuario esta en la seccion del componente
     const [isVisible, setIsVisible] = useState(false);
@@ -63,7 +67,7 @@ const Elemento = () => {
                             </div>
                         </div>
                         <div className="col-6 text-end px-0 mx-0">
-                            <button className="btn btn-ver fw-bold w-75 text-white rounded-0">Ver Mas</button>
+                            <button className="btn btn-ver fw-bold w-75 text-white rounded-0" onClick={() => navigate("/tienda/1")}>Ver Mas</button>
                         </div>
                     </div>
                 </div>

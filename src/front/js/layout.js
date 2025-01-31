@@ -29,6 +29,7 @@ import { Not_found } from "./pages/not_found.js";
 import injectContext, { Context } from "./store/appContext";
 import { GraficaIndividual } from "./pages/graficaindividual.js";
 import { Store } from "./pages/store.js";
+import { Individualstore } from "./pages/individualstore.js";
 
 //create your first component
 const Layout = () => {
@@ -68,6 +69,7 @@ const Layout = () => {
               <Route element={<Certificaciones />} path="/certificaciones" />
               <Route element={<GraficaIndividual />} path="/grafica/:nombre/:simbolo" />
               <Route element={<Store />} path="/tienda" />
+              <Route element={<Individualstore />} path="/tienda/:id" />
             </Routes>
           </div>
           <Footer />
