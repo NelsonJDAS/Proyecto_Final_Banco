@@ -70,7 +70,7 @@ const ListaGraficas = () => {
             <div className="row contenedor-elementos-seleccionables">
                 {
                     [...(listaFiltrada.length === 0 ? store.simbolos : listaFiltrada)].slice(pagination[0], pagination[1]).map((item) => {
-                        return <ElementoSeleccionable nombre={item.nombre} simbolo={item.simbolo} moneda={item.moneda} />
+                        return <ElementoSeleccionable key={item.nombre} nombre={item.nombre} simbolo={item.simbolo} moneda={item.moneda} />
                     })
                 }
             </div>

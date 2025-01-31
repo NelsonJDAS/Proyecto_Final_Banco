@@ -37,7 +37,7 @@ const ContenedorElementosStore = () => {
                 <div className={`row my-3 ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>
                     <div className="align-content-center col-5 text-start">
                         <select className={`py-2 text-center fw-bold text-dark hover w-75 rounded-pill `} aria-label="Small select example">
-                            <option className="fw-bold text-dark" value="0" selected>Categoria</option>
+                            <option className="fw-bold text-dark" value="0" disabled>Categoria</option>
                             <option className="fw-bold text-dark" value="1">1</option>
                             <option className="fw-bold text-dark" value="2">2</option>
                             <option className="fw-bold text-dark" value="3">3</option>
