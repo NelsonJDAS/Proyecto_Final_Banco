@@ -64,7 +64,7 @@ const Divisas = () => {
 
     return (
         <div className={`bg-divisas animacion-contenedor hover contenedor-componente-interactivo my-2 text-center text-white fw-bold ${store.borde} d-flex flex-column`}>
-            <p className="align-content-start mb-auto my-1 fw-bold d-flex justify-content-evenly"><p className={calculadora ? "opacity-50 mx-2" : "mx-2"} onClick={() => { SetCalculadora(false) }}>Cambio </p> / <p className={calculadora ? "mx-2" : "opacity-50 mx-2"} onClick={() => { SetCalculadora(true) }}> Calculadora </p></p>
+            <div className="align-content-start mb-auto my-1 fw-bold d-flex justify-content-evenly"><p className={calculadora ? "opacity-50 mx-2" : "mx-2"} onClick={() => { SetCalculadora(false) }}>Cambio </p> / <p className={calculadora ? "mx-2" : "opacity-50 mx-2"} onClick={() => { SetCalculadora(true) }}> Calculadora </p></div>
 
             {calculadora ?
                 <>

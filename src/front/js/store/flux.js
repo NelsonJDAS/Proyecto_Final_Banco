@@ -217,6 +217,31 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
       },
 
+      updateUserPassword: (id, newPassword) => {
+        const store = getStore();
+    
+        fetch(`${process.env.BACKEND_URL}/api/User/${id}/Password`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ new_password: newPassword })
+        })
+          .then(async (response) => {
+            if (response.ok) {
+              const data = await response.json(); // Procesar la respuesta como JSON
+              console.log("Contraseña actualizada:", data);
+            } else {
+              const errorData = await response.json(); // Procesar el error como JSON
+              console.error("Error al actualizar la contraseña:", errorData);
+            }
+          })
+          .catch((error) => {
+            console.error("Error de red o del servidor:", error);
+          });
+      },
+    
+
       sendCoordinatesCard: (userId) => {
         const store = getStore();
 

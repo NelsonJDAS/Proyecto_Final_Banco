@@ -27,7 +27,6 @@ const ContenedorGraficas = () => {
             let valores = [];
             Object.entries(data.values).map((item) => {
                 let datos = { "time": item[1].datetime, "value": parseInt(item[1].close) }
-                console.log(datos);
                 valores.unshift(datos)
             })
 

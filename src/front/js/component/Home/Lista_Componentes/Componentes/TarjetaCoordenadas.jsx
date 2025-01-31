@@ -11,7 +11,7 @@
 //     const HandleMailSend = (e) => {
 //         SetMail(e.target.value.toLowerCase())
 //     }
-    
+
 
 //     const ConseguirTarjeta = () => {
 //         Object.entries(store.tarjetaCoord).map((objeto, index) => {
@@ -40,7 +40,7 @@
 //                     </div>
 //                     <p className="enlace-tarjeta my-2" onClick={() => {
 //                         sendCode ? ConseguirTarjeta() : SetSendCode(true), actions.sendCoordinatesCode(store.user.email);
-                        
+
 //                     }}>{sendCode ? "Confirmar Codigo" : "Conseguir Codigo"}</p>
 //                 </div > :
 //                 <div className={`bg-tarjeta animacion-contenedor align-content-center hover contenedor-componente-interactivo my-2 text-center fw-bold my-1 py-1 ${store.borde} text-dark d-flex flex-column`}>
@@ -107,7 +107,7 @@ const TarjetasCoordenadas = () => {
     const handleVerifyCode = async () => {
         try {
             const data = await actions.verifyCoordinatesCode(store.user.email, inputCode);
-            
+
             if (data && data.tarjeta_coordenadas) {
                 setDatos(data.tarjeta_coordenadas); // 🔹 Usamos directamente la respuesta
                 setSendCode(false);
@@ -135,15 +135,15 @@ const TarjetasCoordenadas = () => {
                     <p className="fs-1 objeto-animado"><FaRegIdCard /></p>
                     <p className="mb-auto">Tarjeta de Coordenadas</p>
                     <div className="container">
-                        <input 
-                            type="text" 
-                            className={`form-control rounded-pill text-dark text-center ${sendCode ? "d-none" : ""} ${store.hidden ? "desenfoque" : ""}`} 
-                            value={store.user.email} 
-                            disabled 
+                        <input
+                            type="text"
+                            className={`form-control rounded-pill text-dark text-center ${sendCode ? "d-none" : ""} ${store.hidden ? "desenfoque" : ""}`}
+                            value={store.user.email === undefined ? "" : store.user.email}
+                            disabled
                         />
-                        <input 
-                            type="text" 
-                            className={`form-control rounded-pill text-dark text-center ${sendCode ? "" : "d-none"}`} 
+                        <input
+                            type="text"
+                            className={`form-control rounded-pill text-dark text-center ${sendCode ? "" : "d-none"}`}
                             placeholder="Código aquí!"
                             value={inputCode}
                             onChange={(e) => setInputCode(e.target.value)}
@@ -152,8 +152,8 @@ const TarjetasCoordenadas = () => {
                     {error && (
                         <div className="text-danger small mt-2">{error}</div>
                     )}
-                    <p 
-                        className="enlace-tarjeta my-2" 
+                    <p
+                        className="enlace-tarjeta my-2"
                         onClick={() => {
                             if (sendCode) {
                                 handleVerifyCode();

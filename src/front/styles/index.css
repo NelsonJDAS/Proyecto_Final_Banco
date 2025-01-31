@@ -58,48 +58,56 @@ body {
 /* animaciones generales para animacion de izq a derecha , derecha a izquierda, arriba a abajo, abajo a arriba*/
 
 .animacion-izq {
+  pointer-events: none;
   opacity: 0;
   transition: opacity 2s ease, transform 2s ease, color 0.6s ease;
   transform: translateX(-100px);
 }
 
 .animacion-izq.visible {
+  pointer-events: all;
   opacity: 1;
   transition: opacity 2s ease, transform 2s ease, color 0.6s ease;
   transform: translateX(0);
 }
 
 .animacion-der {
+  pointer-events: none;
   opacity: 0;
   transition: opacity 2s ease, transform 2s ease, color 0.6s ease;
   transform: translateX(100px);
 }
 
 .animacion-der.visible {
+  pointer-events: all;
   opacity: 1;
   transition: opacity 2s ease, transform 2s ease, color 0.6s ease;
   transform: translateX(0);
 }
 
 .animacion-arriba {
+  pointer-events: none;
   opacity: 0;
   transition: opacity 2s ease, transform 2s ease, color 0.6s ease;
   transform: translateY(-100px);
 }
 
 .animacion-arriba.visible {
+  pointer-events: all;
   opacity: 1;
   transition: opacity 2s ease, transform 2s ease, color 0.6s ease;
   transform: translateX(0);
 }
 
 .animacion-abajo {
+  pointer-events: none;
   opacity: 0;
   transition: opacity 2s ease, transform 2s ease, color 0.6s ease;
   transform: translateY(100px);
 }
 
 .animacion-abajo.visible {
+  pointer-events: all;
   opacity: 1;
   transition: opacity 2s ease, transform 2s ease, color 0.6s ease;
   transform: translateY(0);
