@@ -38,23 +38,6 @@ const ContenedorContacto = () => {
                 <div className="col-12 col-lg-4 my-2 mb-lg-3" onClick={() => navigate("/chat")}><ContenedorCuadrado position="left" text={""} title={"Soporte en línea 24/7"} logo={<FaRegUser />} /></div>
                 <div className="col-12 col-md-6 col-lg-4 my-2 mb-lg-3"><ContenedorCuadrado position="bottom" text={"geeksacademybank@gmail.com"} title={"Correo electrónico"} logo={<IoMdMail />} /></div>
                 <div className="col-12 col-md-6 col-lg-4 my-2 mb-lg-3"><ContenedorCuadrado position="right" text={"+34 600 18 16 22"} title={"Teléfono"} logo={<FaPhone />} /></div>
-                <div className="col-12 col-md-6 col-lg-4 my-2 my-lg-3"></div>
-                <div className="col-12 col-md-12 col-lg-4 my-2 my-lg-3"><ContenedorCuadrado position="right" text={
-                    <div className="d-flex flex-column">
-                        <div className="d-flex justify-content-evenly">
-                            <a href="https://facebook.com/" target="_blank" className="fs-1 text-info"><FaFacebookSquare /></a>
-                            <a href="https://twitter.com/" target="_blank" className="fs-1 text-info"><FaSquareXTwitter /></a>
-                        </div>
-                        <div className="d-flex justify-content-evenly">
-                            <a href="https://instagram.com/" target="_blank" className="fs-1 text-info"><FaSquareInstagram /></a>
-                            <a href="https://linkedin.com/" target="_blank" className="fs-1 text-info"><FaLinkedin /></a>
-                        </div>
-                        <div className="d-flex justify-content-evenly">
-                            <a href="https://youtube.com/" target="_blank" className="fs-1 text-info"><IoLogoYoutube /></a>
-                            <a href="https://whatsapp.com/" target="_blank" className="fs-1 text-info"><FaSquareWhatsapp /></a>
-                        </div>
-                    </div>} title={"Redes sociales"} /></div>
-                <div className="col-12 col-md-6 col-lg-4 my-3"></div>
             </div>
         </div>
     )

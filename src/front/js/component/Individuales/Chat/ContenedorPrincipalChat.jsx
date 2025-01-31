@@ -127,11 +127,11 @@ const ContenedorPrincipalChat = () => {
             </div>
             <div className="row bg-secondary  footer-chat">
                 <div className="col-12 px-0">
-                    <select class={`form-select text-center fw-bold footer-chat ${store.fondo === "fondo-modo-claro" ? "bg-secondary text-info" : "text-dark "}`} aria-label="Default select example" onChange={(e) => {
+                    <select className={`form-select text-center fw-bold footer-chat ${store.fondo === "fondo-modo-claro" ? "bg-secondary text-info" : "text-dark "}`} aria-label="Default select example" onChange={(e) => {
                         const dato = e.target.value
                         SetPregunta((prevArray) => [...prevArray, dato]);
                     }}>
-                        <option className={`fw-bold ${store.fondo === "fondo-modo-claro" ? "text-info" : "text-dark"}`} value="hola" selected disabled>Pregunta aqui!</option>
+                        <option className={`fw-bold ${store.fondo === "fondo-modo-claro" ? "text-info" : "text-dark"}`} value="hola" disabled>Pregunta aqui!</option>
                         <option className={`fw-bold ${store.fondo === "fondo-modo-claro" ? "text-info" : "text-dark"}`} value="1">¿Cuáles son las tarifas y comisiones asociadas a mis cuentas?</option>
                         <option className={`fw-bold ${store.fondo === "fondo-modo-claro" ? "text-info" : "text-dark"}`} value="2">¿Cómo puedo cambiar mi PIN o contraseña de acceso?</option>
                         <option className={`fw-bold ${store.fondo === "fondo-modo-claro" ? "text-info" : "text-dark"}`} value="3"> ¿Dónde están ubicadas las sucursales y cajeros automáticos del banco?</option>
