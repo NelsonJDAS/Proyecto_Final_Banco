@@ -2,3 +2,115 @@
     font-size: 150px;
     font-weight: 900;
 }
+
+.precio {
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    color: green;
+    font-weight: 800;
+    opacity: 0.8;
+    display: inline-block;
+    position: relative;
+}
+
+.precio-rebaja {
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    color: green;
+    font-weight: 800;
+    opacity: 0.3;
+    display: inline-block;
+    position: relative;
+}
+
+.precio::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    /* Grosor de la línea */
+    background-color: green;
+    /* Color de la línea */
+    transform: rotate(0deg);
+    /* Inclinación de la línea */
+}
+
+.contenedor-elementos-store {
+    padding-bottom: 100px;
+}
+
+.elemento-store {
+    margin-top: 60px;
+    border-radius: 30px;
+    transition: transform 0.5s ease;
+}
+
+
+.elemento-store:hover {
+    cursor: pointer;
+    transform: translateY(-5px);
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.3);
+}
+
+.elemento-store:hover .precio {
+    opacity: 0.4;
+    transform: scale(1.1);
+}
+
+.elemento-store:hover .precio-rebaja {
+    transform: scale(1.1);
+    opacity: 1;
+}
+
+
+.elemento-store:hover .nombre-producto {
+    transform: translateY(-55px);
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.img-elemento {
+    transition: transform 0.5s ease;
+    margin: 10px 0px;
+}
+
+.elemento-store:hover .img-elemento {
+    transform: scale(1.05);
+}
+
+
+
+.nombre-producto {
+    padding: 4px 10px;
+    transition: transform 0.5s ease;
+    font-weight: 700;
+    font-size: 20px;
+    display: inline-block;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+.img-elemento {
+    border-radius: 30px;
+}
+
+.btn-ver {
+    transition: opacity 0.5s ease;
+    border-end-end-radius: 30px !important;
+    background: linear-gradient(135deg, #FFD700, #FFC300, #B8860B);
+}
+
+.btn-ver:hover {
+    opacity: 0.6;
+}
+
+.flecha-store {
+    transition: color 0.5s ease, transform 0.5s ease;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.flecha-store:hover {
+    transform: scale(1.1);
+    transition: color 0.5s ease;
+    color: rgba(91, 91, 91, 0.574) !important;
+}

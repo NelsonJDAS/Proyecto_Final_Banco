@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import "../../styles/store.css";
 import { Context } from "../store/appContext";
 import TituloStore from "../component/GeekStore/TituloStore.jsx";
+import ContenedorElementosStore from "../component/GeekStore/ContenedorElementosStore.jsx";
 
 
 export const Store = () => {
@@ -9,5 +10,6 @@ export const Store = () => {
 
     return <div>
         <TituloStore />
+        <ContenedorElementosStore />
     </div>
 };
