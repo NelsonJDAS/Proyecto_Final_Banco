@@ -11,6 +11,7 @@ class User(db.Model):
     password = db.Column(db.String(80), nullable=False)
     is_active = db.Column(db.Boolean(), nullable=False)
     reset_code = db.Column(db.String(6), nullable=True)
+    coordinates_code = db.Column(db.String(6), nullable=True)
     code_expires = db.Column(db.DateTime, nullable=True)
     cliente_id = db.Column(db.Integer, db.ForeignKey('cliente.id'))
     cliente = db.relationship("Cliente", back_populates="usuarios")
@@ -25,12 +26,11 @@ class User(db.Model):
             "email": self.email,
         }
 
-
 class Cliente(db.Model):
     __tablename__ = 'cliente'
 
     id = db.Column(db.Integer, primary_key=True)
-    nombre_completo = db.Column(db.String(50))
+    nombre = db.Column(db.String(50))
     apellidos = db.Column(db.String(100))
     telefono = db.Column(db.String(30))
     direccion = db.Column(db.String(200))
@@ -40,7 +40,7 @@ class Cliente(db.Model):
     numero_documento = db.Column(db.String(50), unique=True)
     # Eliminamos nombre y email de aquí, ya que ahora están en User
     cuentas = db.relationship("Cuenta", back_populates="cliente")
-    configuracion = db.relationship("ConfiguracionUsuario", back_populates="cliente", uselist=False)
+    # configuracion = db.relationship("ConfiguracionUsuario", back_populates="cliente", uselist=False)
     usuarios = db.relationship("User", back_populates="cliente")
     notificaciones = db.relationship("Notificacion", back_populates="cliente")
 
@@ -50,7 +50,7 @@ class Cliente(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "nombre_completo": self.nombre_completo,
+            "nombre": self.nombre,
             "apellidos": self.apellidos,
             "telefono": self.telefono,
             "direccion": self.direccion,
@@ -65,22 +65,24 @@ class ConfiguracionUsuario(db.Model):
     __tablename__ = 'configuracion_usuario'
 
     id = db.Column(db.Integer, primary_key=True)
-    id_usuario = db.Column(db.Integer, db.ForeignKey('cliente.id'))
+    id_usuario = db.Column(db.Integer, db.ForeignKey('user.id'))  # Referencia a User.id
     modo_oscuro = db.Column(db.Boolean, default=False)
+    ocultar_saldo = db.Column(db.Boolean, default=False)  # Nuevo campo
     idioma = db.Column(db.String(5))
     componentesSave = db.Column(db.String(50))
 
-    # Relación con Cliente
-    cliente = db.relationship("Cliente", back_populates="configuracion")
+    # Relación con User
+    usuario = db.relationship("User", backref="configuracion")
 
     def __repr__(self):
-        return f'<ConfiguracionUsuario Cliente ID: {self.id_usuario}>'
+        return f'<ConfiguracionUsuario User ID: {self.id_usuario}>'
 
     def serialize(self):
         return {
             "id": self.id,
             "id_usuario": self.id_usuario,
             "modo_oscuro": self.modo_oscuro,
+            "ocultar_saldo": self.ocultar_saldo,
             "idioma": self.idioma,
             "componentesSave": self.componentesSave,
         }
