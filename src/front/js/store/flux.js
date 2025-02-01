@@ -173,6 +173,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((response) => {
 
             if (!response.ok) {
+              notyf.error("Error al actualizar datos del usuario:");
               throw new Error(`Error: ${response.status} - ${response.statusText}`);
             }
             return response.json(); // Convertimos la respuesta a JSON
