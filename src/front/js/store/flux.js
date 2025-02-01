@@ -54,9 +54,15 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       CambiarIncognito: (estado) => {
+        estado == true
+          ? notyf.open({ type: 'custom', message: "Modo incógnito activado", className: 'notyf-custom' })
+          : notyf.open({ type: 'custom', message: "Modo incógnito desactivado", className: 'notyf-custom' });
         setStore({ ...getStore(), hidden: estado });
       },
       CambiarNotificaciones: () => {
+        !getStore().notificacionesHidden == true
+          ? notyf.open({ type: 'custom', message: "Notificaciones desactivadas", className: 'notyf-custom' })
+          : notyf.open({ type: 'custom', message: "Notificaciones Activadas", className: 'notyf-custom' });
         setStore({ ...getStore(), notificacionesHidden: !getStore().notificacionesHidden });
       },
       Scroll: () => {
@@ -70,6 +76,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       CambiarModo: (estado) => {
         if (estado === true) {
+          notyf.open({ type: 'custom', message: "Modo claro activado", className: 'notyf-custom' })
           setStore({
             texto: "text-dark",
             fondo: "fondo-modo-claro",
@@ -79,6 +86,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           document.body.classList.remove("fondo-modo-oscuro");
           document.body.classList.add("fondo-modo-claro");
         } else {
+          notyf.open({ type: 'custom', message: "Modo oscuro activado", className: 'notyf-custom' });
           setStore({
             texto: "text-white",
             fondo: "fondo-modo-oscuro",
@@ -209,12 +217,12 @@ const getState = ({ getStore, getActions, setStore }) => {
         })
           .then(async (response) => {
             if (response.ok) {
+              notyf.success("Perfil Actualizado")
               const data = await response.json(); // Procesar la respuesta como JSON
               setStore({ ...store, cliente: data.cliente });
-              console.log("Perfil actualizado:", data);
             } else {
+              notyf.error("Error al actualizar el usuario")
               const errorData = await response.json(); // Procesar el error como JSON
-              console.error("Error al actualizar el perfil:", errorData);
             }
           })
           .catch((error) => {

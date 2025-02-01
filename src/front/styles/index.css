@@ -228,3 +228,13 @@ footer {
 .notyf__toast--error {
   border-radius: 10px !important;
 }
+
+.notyf-custom {
+  font-weight: bold !important;
+  border-radius: 20px !important;
+  background-color: #1E3A8A !important;
+  width: 400px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}

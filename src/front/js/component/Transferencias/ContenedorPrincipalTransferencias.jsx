@@ -1,8 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { MdOutlineEuroSymbol } from "react-icons/md";
 import { Context } from "../../store/appContext";
+import { Notyf } from 'notyf';
+import 'notyf/notyf.min.css';
 
 const ContenedorPrincipalTransferencias = () => {
+    const notyf = new Notyf();
+
     const { store, actions } = useContext(Context);
     const [userLoad, SetUserLoad] = useState(false);
     const [name, setName] = useState('');
@@ -24,53 +28,57 @@ const ContenedorPrincipalTransferencias = () => {
     const handleTransferencia = async () => {
         // Dividir nombre completo en nombre y apellidos
         const [nombre, ...apellidos] = estadoDestinatario.split(' ');
-    
+
         // Validar campos obligatorios
         if (!monto || !cuentaDestino || !estadoDestinatario) {
-            setError("Por favor complete todos los campos obligatorios");
+            notyf.error("Por favor complete todos los campos obligatorios")
             return;
         }
-    
+
         // Validar que el monto sea un número positivo
         const montoNumerico = parseFloat(monto);
         if (isNaN(montoNumerico) || montoNumerico <= 0) {
-            setError("El monto debe ser un número positivo");
+            notyf.error("El monto debe ser un número positivo")
             return;
         }
-    
+
         // Obtener ID de cuenta origen
         const cuentaOrigenId = store.cuentas?.id;
         if (!cuentaOrigenId) {
-            throw new Error("No se encontró la cuenta origen");
+            notyf.error("Verifique la cuenta de origen")
         }
-    
+
         // Obtener saldo de la cuenta origen
         const saldoCuentaOrigen = store.cuentas?.saldo || 0;
-    
+
         // Validar si hay suficiente saldo para la transferencia
         if (saldoCuentaOrigen < montoNumerico) {
-            setError("Saldo insuficiente para realizar la transferencia");
+            notyf.error("Saldo insuficiente para realizar la transferencia")
             return;
         }
-    
+
         // Realizar la transferencia
-        const resultado = await actions.realizarTransferencia(
-            cuentaOrigenId,
-            cuentaDestino,
-            nombre,
-            apellidos.join(' '), // Unir los apellidos
-            montoNumerico,
-            concepto
-        );
-        console.log(resultado);
-    
-        // Limpiar formulario
-        setCuentaDestino('');
-        setEstadoDestinatario('');
-        setMonto('');
-        setConcepto('');
-        setError('');
-        alert("Transferencia realizada con éxito!");
+        try {
+            const resultado = await actions.realizarTransferencia(
+                cuentaOrigenId,
+                cuentaDestino,
+                nombre,
+                apellidos.join(' '), // Unir los apellidos
+                montoNumerico,
+                concepto
+            );
+            console.log(resultado);
+
+            // Limpiar formulario
+            setCuentaDestino('');
+            setEstadoDestinatario('');
+            setMonto('');
+            setConcepto('');
+            setError('');
+            notyf.success("transferencia exitosa")
+        } catch (error) {
+            notyf.error("error al realizar la transferencia")
+        }
     };
 
     return (
