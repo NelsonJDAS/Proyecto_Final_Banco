@@ -1,9 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { MdOutlineEuroSymbol } from "react-icons/md";
 import { Context } from "../../store/appContext";
 import { Notyf } from 'notyf';
 import 'notyf/notyf.min.css';
 import Swal from 'sweetalert2';
+import { IoClose } from "react-icons/io5";
+
 
 const ContenedorPrincipalTransferencias = () => {
     const notyf = new Notyf();
@@ -17,19 +19,34 @@ const ContenedorPrincipalTransferencias = () => {
     const [monto, setMonto] = useState('');
     const [concepto, setConcepto] = useState('');
     const [error, setError] = useState('');
-    const [codigo1, setCodigo1] = useState("")
-    const [codigo2, setCodigo2] = useState("")
+    const [codigo1, setCodigo1] = useState()
+    const [codigo2, setCodigo2] = useState()
+
+
+    const codigo1Ref = useRef(null)
+    const codigo2Ref = useRef(null)
+    const modalRef = useRef(null)
 
     const [tarjeta, setTarjeta] = useState('');
 
+    const generarCodigos = () => {
+        setCodigo1(store.tarjetaCoord[Math.floor(Math.random() * 15) + 1]);
+        setCodigo2(store.tarjetaCoord[Math.floor(Math.random() * 15) + 1]);
+    }
+
     useEffect(() => {
-        setCodigo1(Math.floor(Math.random() * 16) + 1)
-        setCodigo2(Math.floor(Math.random() * 16) + 1)
-        console.log(store.tarjetaCoord)
         setTarjeta(store.tarjetaCoord);
     }, [store.tarjetaCoord])
 
     useEffect(() => {
+        generarCodigos();
+    }, [store.tarjetaCoord])
+
+
+    useEffect(() => {
+        const storedId = localStorage.getItem("userId")
+        actions.fetchUserDetails(storedId)
+        console.log("Tarjeta de coordenadas", store.tarjetaCoord)
         SetUserLoad(true);
         if (store.cliente) {
             setName(store.cliente.nombre || '');
@@ -37,10 +54,7 @@ const ContenedorPrincipalTransferencias = () => {
         }
     }, []);
 
-    const handleTransferencia = async () => {
-        // Dividir nombre completo en nombre y apellidos
-        const [nombre, ...apellidos] = estadoDestinatario.split(' ');
-
+    const handleCondiciones = () => {
         // Validar campos obligatorios
         if (!monto || !cuentaDestino || !estadoDestinatario) {
             notyf.error("Por favor complete todos los campos obligatorios")
@@ -69,77 +83,116 @@ const ContenedorPrincipalTransferencias = () => {
             return;
         }
 
-        // Realizar la transferencia
-        try {
-            const resultado = await actions.realizarTransferencia(
-                cuentaOrigenId,
-                cuentaDestino,
-                nombre,
-                apellidos.join(' '), // Unir los apellidos
-                montoNumerico,
-                concepto
-            );
-            console.log(resultado);
-
-            // Limpiar formulario
-            // setCuentaDestino('');
-            // setEstadoDestinatario('');
-            // setMonto('');
-            // setConcepto('');
-            // setError('');
-            // Swal.fire({
-            //     title: '¡Éxito!',
-            //     text: 'La operación fue exitosa.',
-            //     icon: 'success',
-            //     confirmButtonText: 'Aceptar'
-            // });
-            Swal.fire({
-                title: 'Confima Las Coordenadas',
-                html: `
-                  <div>
-                    <p>Este es un ejemplo de alerta personalizada con <b>HTML</b>.</p>
-                    <p><i class="fas fa-check-circle"></i> ¡Todo está listo!</p>
-                    <img src="https://example.com/imagen.jpg" alt="Imagen personalizada" width="100" />
-                  </div>
-                `,
-                icon: 'warning',
-                showConfirmButton: true,
-                confirmButtonText: 'Aceptar',
-                confirmButtonColor: '#3085d6',
-            });
-        } catch (error) {
-            Swal.fire({
-                title: '¡Error!',
-                text: 'Algo salió mal, intenta nuevamente.',
-                icon: 'error',
-                confirmButtonText: 'Aceptar'
-            });
+        if (modalRef.current) {
+            const modal = new bootstrap.Modal(modalRef.current);
+            modal.show();
         }
+
+    }
+
+    const handleTransferencia = async () => {
+        console.log(tarjeta)
+        // Dividir nombre completo en nombre y apellidos
+        const [nombre, ...apellidos] = estadoDestinatario.split(' ');
+        const cuentaOrigenId = store.cuentas?.id;
+        const saldoCuentaOrigen = store.cuentas?.saldo || 0;
+        const montoNumerico = parseFloat(monto);
+
+
+        // Realizar la transferencia
+
+        if (codigo1Ref.current.value == codigo1.valor && codigo2Ref.current.value == codigo2.valor) {
+            try {
+                const resultado = await actions.realizarTransferencia(
+                    cuentaOrigenId,
+                    cuentaDestino,
+                    nombre,
+                    apellidos.join(' '), // Unir los apellidos
+                    montoNumerico,
+                    concepto
+                );
+                console.log(resultado);
+
+                // Limpiar formulario
+                setCuentaDestino('');
+                setEstadoDestinatario('');
+                setMonto('');
+                setConcepto('');
+                setError('');
+                Swal.fire({
+                    title: '¡Transferencia Exitosa!',
+                    text: `La transferencia destinada a la cuenta ${cuentaDestino} con monto de ${monto} €  se ha realizado correctamente.`,
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar',
+                    confirmButtonColor: '#28a745', // Color verde para éxito
+                    showConfirmButton: true
+                });
+                if (modalRef.current) {
+                    const modal = bootstrap.Modal.getInstance(modalRef.current);
+                    modal.hide();
+                }
+                generarCodigos();
+            } catch (error) {
+                Swal.fire({
+                    title: '¡Error!',
+                    text: 'Error al hacer la transferencia, Confirma los datos solicitados',
+                    icon: 'error',
+                    confirmButtonText: 'Aceptar'
+                });
+                if (modalRef.current) {
+                    const modal = bootstrap.Modal.getInstance(modalRef.current);
+                    modal.hide();
+                }
+            }
+        } else {
+            notyf.error("Codigos erroneos")
+        }
+
+
     };
 
     return (
         <>
-            <button onClick={() => {
-                console.log(tarjeta)
-                Swal.fire({
-                    title: 'Confima Las Coordenadas',
-                    html: `
-                      <div className="container">
-                        <div className="row">
-                            <div className="col-12 d-flex">${codigo1}   <input type="text" placeholder="Coordenada 1" className="input-coordenadas" /></div>
-                            <div className="col-12 d-flex">${codigo2}   <input type="text" placeholder="Coordenada 2" className="input-coordenadas" /></div>
+            <div className="modal fade" id="tarjetacord" tabIndex="-1" aria-labelledby="label" aria-hidden="true" ref={modalRef}>
+                {/* Modal selector de idiomas */}
+                <div className="modal-dialog modal-dialog-centered">
+                    <div className={`modal-content contenedor-modal-transferencias rounded-3 ${store.fondo} borde-brillante `}>
+                        <div className="modal-header row border-0">
+                            <h1 className="modal-title fs-3 text-center col-10" id="label">Tarjeta de coordenadas</h1>
+                            <div className="hover fs-3 col-2 text-center" data-bs-dismiss="modal"><IoClose /></div>
                         </div>
+                        <div className="modal-body">
+                            {/* Selector de lenguaje */}
+                            <div className="container">
+                                <p className="text-center">
+                                    Por favor, ingrese los dos valores de su tarjeta de coordenadas
+                                    para completar la transacción de forma segura. Estos códigos son necesarios
+                                    para verificar su identidad y garantizar la protección de su cuenta. Asegúrese de
+                                    introducirlos correctamente antes de continuar.
+                                </p>
+                            </div>
+                            <div className="row my-3">
+                                <div className="col-3 mx-2 px-0 text-end"><p className="mt-2">{codigo1 == undefined ? "" : codigo1.posicion}</p></div>
+                                <div className="col-8 mx-2 px-0"><input type="text" placeholder="****" className="mx-3 text-center w-50 py-2 rounded-pill" maxLength="4" ref={codigo1Ref} /></div>
+                            </div>
+                            <div className="row my-3">
+                                <div className="col-3 mx-2 px-0 text-end"><p className="mt-2">{codigo2 == undefined ? "" : codigo2.posicion}</p></div>
+                                <div className="col-8 mx-2 px-0"><input type="text" placeholder="****" className="mx-3 text-center w-50 py-2 rounded-pill" maxLength="4" ref={codigo2Ref} /></div>
+                            </div>
+                            <div className="row my-3">
+                                <div className="col-12  text-center">
+                                    <button className="btn btn-outline-info rounded-3" onClick={handleTransferencia}>
+                                        Comprobar Codigos
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
-                    `,
-                    icon: 'warning',
-                    showConfirmButton: true,
-                    confirmButtonText: 'Aceptar',
-                    confirmButtonColor: '#3085d6',
-                });
-            }}>ad,koasdk</button>
+                </div>
+            </div>
             <h1 className={`text-center titulo-transferencia ${userLoad ? "animacion-arriba visible" : "animacion-arriba"}`}>Transferencias</h1>
             <div className={`container contenedor-principal-transferencias text-dark ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>
-                {error && <div className="alert alert-danger text-center">{error}</div>}
 
                 <div className="row">
                     <div className={`my-2 col-lg-6 d-flex flex-column text-center ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>
@@ -206,7 +259,7 @@ const ContenedorPrincipalTransferencias = () => {
                     <div className={`col-12 mt-3 d-flex flex-column text-center ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>
                         <button
                             className="btn btn-transferencias"
-                            onClick={handleTransferencia}
+                            onClick={handleCondiciones}
                         >
                             Enviar Transferencia
                         </button>

@@ -23,6 +23,10 @@
     color: rgb(105, 105, 105);
 }
 
+.contenedor-modal-transferencias {
+    border-radius: 40px !important;
+}
+
 
 @media (max-width: 580px) {
     .contenedor-principal-transferencias {
