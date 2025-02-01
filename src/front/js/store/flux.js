@@ -1,4 +1,8 @@
+import { Notyf } from 'notyf';
+import 'notyf/notyf.min.css';
+
 const getState = ({ getStore, getActions, setStore }) => {
+  const notyf = new Notyf();
   return {
     store: {
       texto: "text-white",
@@ -14,7 +18,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       cliente: "",
       cuentas: "",
       tarjetaCoord: {},
-      tarjetaCoordComp:{},
+      tarjetaCoordComp: {},
       transacciones: [],
       listaNotificaciones: [],
       simbolos: [],
@@ -219,7 +223,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       updateUserPassword: (id, newPassword) => {
         const store = getStore();
-    
+
         fetch(`${process.env.BACKEND_URL}/api/User/${id}/Password`, {
           method: "PUT",
           headers: {
@@ -230,17 +234,17 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then(async (response) => {
             if (response.ok) {
               const data = await response.json(); // Procesar la respuesta como JSON
-              console.log("Contraseña actualizada:", data);
+              notyf.success("Contraseña actualizada")
             } else {
               const errorData = await response.json(); // Procesar el error como JSON
-              console.error("Error al actualizar la contraseña:", errorData);
+              notyf.success("Error al actualizar la contraseña:", errorData);
             }
           })
           .catch((error) => {
-            console.error("Error de red o del servidor:", error);
+            notyf.success("Error de red o del servidor:", error);
           });
       },
-    
+
 
       sendCoordinatesCard: (userId) => {
         const store = getStore();
@@ -276,51 +280,51 @@ const getState = ({ getStore, getActions, setStore }) => {
       realizarTransferencia: async (cuenta_origen_id, numero_cuenta_destino, nombre_destino, apellidos_destino, monto, descripcion) => {
 
         try {
-            const response = await fetch(`${process.env.BACKEND_URL}/api/transaccion/transferencia`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    // Authorization: `Bearer ${localStorage.getItem("token")}`, // Si usas autenticación
-                },
-                body: JSON.stringify({
-                    cuenta_origen_id,
-                    numero_cuenta_destino, // Número de cuenta destino
-                    nombre_destino,       // Nombre del cliente destino
-                    apellidos_destino,    // Apellidos del cliente destino
-                    monto,
-                    descripcion,
-                }),
-            });
-    
-            const data = await response.json();
-            console.log(data)
-            if (!response.ok) {
-                throw new Error(data.error || "Error al realizar la transferencia");
-            }
-    
-            // Actualizar el store con los nuevos saldos
-            // const store = getStore();
-            // const updatedCuentas = store.cuentas.map((cuenta) => {
-            //     if (cuenta.id === cuenta_origen_id) {
-            //         return { ...cuenta, saldo: data.saldo_origen };
-            //     }
-            //     if (cuenta.numero_cuenta === numero_cuenta_destino) {
-            //         return { ...cuenta, saldo: data.saldo_destino };
-            //     }
-            //     return cuenta;
-            // });
-    
-            // setStore({
-            //     ...store,
-            //     cuentas: updatedCuentas,
-            // });
-    
-            return data; // Devuelve los datos de la transferencia
+          const response = await fetch(`${process.env.BACKEND_URL}/api/transaccion/transferencia`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              // Authorization: `Bearer ${localStorage.getItem("token")}`, // Si usas autenticación
+            },
+            body: JSON.stringify({
+              cuenta_origen_id,
+              numero_cuenta_destino, // Número de cuenta destino
+              nombre_destino,       // Nombre del cliente destino
+              apellidos_destino,    // Apellidos del cliente destino
+              monto,
+              descripcion,
+            }),
+          });
+
+          const data = await response.json();
+          console.log(data)
+          if (!response.ok) {
+            throw new Error(data.error || "Error al realizar la transferencia");
+          }
+
+          // Actualizar el store con los nuevos saldos
+          // const store = getStore();
+          // const updatedCuentas = store.cuentas.map((cuenta) => {
+          //     if (cuenta.id === cuenta_origen_id) {
+          //         return { ...cuenta, saldo: data.saldo_origen };
+          //     }
+          //     if (cuenta.numero_cuenta === numero_cuenta_destino) {
+          //         return { ...cuenta, saldo: data.saldo_destino };
+          //     }
+          //     return cuenta;
+          // });
+
+          // setStore({
+          //     ...store,
+          //     cuentas: updatedCuentas,
+          // });
+
+          return data; // Devuelve los datos de la transferencia
         } catch (error) {
-            console.error("Error al realizar la transferencia:", error);
-            throw error; // Lanza el error para manejarlo en el componente
+          console.error("Error al realizar la transferencia:", error);
+          throw error; // Lanza el error para manejarlo en el componente
         }
-    },
+      },
 
       marcarNotificacionComoLeida: async (notificacionId) => {
         try {
@@ -351,22 +355,14 @@ const getState = ({ getStore, getActions, setStore }) => {
       sendCode: (email) => {
         const store = getStore();
         const actions = getActions();
-        setStore({ email }); 
+        setStore({ email });
 
         fetch(process.env.BACKEND_URL + "/api/send-code", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: store.email }), 
+          body: JSON.stringify({ email: store.email }),
         })
-          .then((response) => response.json())
-          .then((response) => console.log(response))
-          .then((data) => {
-            if (response.ok) { 
-              setStore(console.log(Enviado));
-            } else {
-              alert(data.error);
-            }
-          });
+          .then((response) => response.ok ? notyf.success("codigo enviado") : notyf.error("Error al enviar el codigo"))
       },
 
       verifyCode: (email, code) => {
@@ -379,15 +375,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email: store.email, code: store.code }),
         })
-          .then((response) => response.json())
-          .then((response) => console.log(response))
-          .then((data) => {
-            if (response.ok) {
-              alert("Código verificado. Ahora puedes cambiar tu contraseña.");
-            } else {
-              alert(data.error);
-            }
-          });
+          .then((response) => response.ok ? notyf.error("Codigo Incorrecto") : notyf.success("Codigo Verificado"))
       },
 
       sendCoordinatesCode: (email) => {
@@ -425,51 +413,51 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       verifyCoordinatesCode: (email, code) => {
         const store = getStore();
-    
+
         return fetch(`${process.env.BACKEND_URL}/api/verify-coordinates-code`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ email: email, code: code }),
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email: email, code: code }),
         })
-        .then((response) => {
+          .then((response) => {
             if (!response.ok) {
-                throw new Error("Código inválido o expirado");
+              throw new Error("Código inválido o expirado");
             }
             return response.json();
-        })
-        .then((data) => {
+          })
+          .then((data) => {
             setStore({ ...store, tarjetaCoord: data.tarjeta_coordenadas });
             return data; // 🔹 Devolvemos los datos
-        })
-        .catch((error) => {
+          })
+          .catch((error) => {
             console.error("Error:", error);
             return null; // 🔹 Devolvemos null en caso de error
-        });
-    },
-
-    sendCoordinatesCard: async (user_id) => {
-      try {
-          const response = await fetch(`${process.env.BACKEND_URL}/api/send-coordinates-card/${user_id}`, {
-              method: "POST",
-              headers: {
-                  "Content-Type": "application/json"
-              }
           });
-  
+      },
+
+      sendCoordinatesCard: async (user_id) => {
+        try {
+          const response = await fetch(`${process.env.BACKEND_URL}/api/send-coordinates-card/${user_id}`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            }
+          });
+
           const data = await response.json();
           if (!response.ok) {
-              throw new Error(data.error || "Error al enviar la tarjeta de coordenadas");
+            throw new Error(data.error || "Error al enviar la tarjeta de coordenadas");
           }
-  
+
           return data;
-      } catch (error) {
+        } catch (error) {
           console.error("Error enviando la tarjeta de coordenadas:", error);
           return null;
-      }
-  },
-  
+        }
+      },
+
       fetchGraficasData: async () => {
         try {
           const response = await fetch(process.env.BACKEND_URL + "/api/data");

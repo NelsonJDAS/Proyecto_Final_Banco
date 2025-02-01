@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { Context } from "../../store/appContext.js";
 import { useTranslation } from "react-i18next";// importacion de traducción
 import { useNavigate } from "react-router-dom";
+import { Notyf } from 'notyf';
+import 'notyf/notyf.min.css';
 
 export const Login = () => {
     const { t } = useTranslation();
@@ -23,6 +25,7 @@ export const Login = () => {
 
 
     const navigate = useNavigate("");
+    const notyf = new Notyf();
 
     // ejecuta el contenedor si el usuario se ha olvidado el password de su cuenta
     const [userForgotPassword, SetuserForgotPassword] = useState(false)
@@ -60,6 +63,7 @@ export const Login = () => {
     // handle para aplicar condiciones al correo que se le solicita al usuario para enviarle el codigo
     const HandleForgotMail = (e) => {
         SetForgotMail("");
+        buttomCode.current.classList.add("boton-cancelado")
         if (!e.target.value.includes("@")) {
             SetMensajeForgotMail("Debes incluir el '@' en tu correo.");
         } else if (e.target.value.includes(" ")) {
@@ -132,13 +136,14 @@ export const Login = () => {
             const userId = localStorage.getItem("userId");  // Recuperar el id del usuario
 
             if (token && userId) {
+                notyf.success("inicio correcto")
                 navigate("/home");
             } else {
                 console.error("Token o userId no encontrados");
             }
         } catch (error) {
             console.error("Error en HandleLogin:", error);
-            alert("Error en el inicio de sesión. Por favor, verifica tus credenciales.");
+            notyf.error('Error en el inicio de sesión. Por favor, verifica tus credenciales.');
         }
     };
 
@@ -161,7 +166,7 @@ export const Login = () => {
                                 <input className=" mx-2 mx-md-3 text-center py-1 rounded-pill input" type="password" onChange={HandlePassword} />
                                 <span className={`text-end mx-md-3 label-login  mb-3  ${store.borde_hover}`} onClick={() => { SetuserForgotPassword(true) }}>{t('Login.forgot')}</span>
                                 <div className="text-center">
-                                    <button type="button" className={`btn btn-light mt-3 w-50 rounded-pill btn-login ${store.borde}`} onClick={() => {
+                                    <button type="button" className={`btn btn-light mt-3 w-50 rounded-pill btn-login text-white ${store.borde}`} onClick={() => {
                                         HandleLogin()
                                         // localStorage.setItem("token", "amfoidoiafoijdoiajsfiojadsioj")
                                         // navigate("/home")
@@ -191,7 +196,7 @@ export const Login = () => {
                                     <div className={`col-12 col-xl-6 col-md-6 my-md-3 my-1 text-start ${newPassword ? "col-xl-12" : ""}`}>
                                         <button type="button" className={`rounded-pill btn btn-primary w-100 fw-bold ${newPassword ? "" : "d-none"} boton-cancelado`} ref={btnNewPassword} onClick={() => {
                                             // tu funcion aqui
-                                            actions.updateUserPassword(userId newPassword)
+                                            actions.updateUserPassword(userId, newPassword)
                                         }}>Listo!</button>
                                         {/* Ocultamos el boton con el estado de newpassword */}
                                         <button type="button" className={`rounded-pill btn btn-primary w-100 fw-bold boton-cancelado ${newPassword ? "d-none" : ""}`} ref={buttomCode} onClick={() => {
