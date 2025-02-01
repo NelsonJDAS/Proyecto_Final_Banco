@@ -191,7 +191,7 @@ export const Login = () => {
                                     <div className={`col-12 col-xl-6 col-md-6 my-md-3 my-1 text-start ${newPassword ? "col-xl-12" : ""}`}>
                                         <button type="button" className={`rounded-pill btn btn-primary w-100 fw-bold ${newPassword ? "" : "d-none"} boton-cancelado`} ref={btnNewPassword} onClick={() => {
                                             // tu funcion aqui
-                                            actions.updateUserPassword(userId newPassword)
+                                            actions.updateUserPassword(userId, newPassword)
                                         }}>Listo!</button>
                                         {/* Ocultamos el boton con el estado de newpassword */}
                                         <button type="button" className={`rounded-pill btn btn-primary w-100 fw-bold boton-cancelado ${newPassword ? "d-none" : ""}`} ref={buttomCode} onClick={() => {
