@@ -3,6 +3,7 @@ import { MdOutlineEuroSymbol } from "react-icons/md";
 import { Context } from "../../store/appContext";
 import { Notyf } from 'notyf';
 import 'notyf/notyf.min.css';
+import Swal from 'sweetalert2';
 
 const ContenedorPrincipalTransferencias = () => {
     const notyf = new Notyf();
@@ -16,6 +17,17 @@ const ContenedorPrincipalTransferencias = () => {
     const [monto, setMonto] = useState('');
     const [concepto, setConcepto] = useState('');
     const [error, setError] = useState('');
+    const [codigo1, setCodigo1] = useState("")
+    const [codigo2, setCodigo2] = useState("")
+
+    const [tarjeta, setTarjeta] = useState('');
+
+    useEffect(() => {
+        setCodigo1(Math.floor(Math.random() * 16) + 1)
+        setCodigo2(Math.floor(Math.random() * 16) + 1)
+        console.log(store.tarjetaCoord)
+        setTarjeta(store.tarjetaCoord);
+    }, [store.tarjetaCoord])
 
     useEffect(() => {
         SetUserLoad(true);
@@ -70,19 +82,61 @@ const ContenedorPrincipalTransferencias = () => {
             console.log(resultado);
 
             // Limpiar formulario
-            setCuentaDestino('');
-            setEstadoDestinatario('');
-            setMonto('');
-            setConcepto('');
-            setError('');
-            notyf.success("transferencia exitosa")
+            // setCuentaDestino('');
+            // setEstadoDestinatario('');
+            // setMonto('');
+            // setConcepto('');
+            // setError('');
+            // Swal.fire({
+            //     title: '¡Éxito!',
+            //     text: 'La operación fue exitosa.',
+            //     icon: 'success',
+            //     confirmButtonText: 'Aceptar'
+            // });
+            Swal.fire({
+                title: 'Confima Las Coordenadas',
+                html: `
+                  <div>
+                    <p>Este es un ejemplo de alerta personalizada con <b>HTML</b>.</p>
+                    <p><i class="fas fa-check-circle"></i> ¡Todo está listo!</p>
+                    <img src="https://example.com/imagen.jpg" alt="Imagen personalizada" width="100" />
+                  </div>
+                `,
+                icon: 'warning',
+                showConfirmButton: true,
+                confirmButtonText: 'Aceptar',
+                confirmButtonColor: '#3085d6',
+            });
         } catch (error) {
-            notyf.error("error al realizar la transferencia")
+            Swal.fire({
+                title: '¡Error!',
+                text: 'Algo salió mal, intenta nuevamente.',
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+            });
         }
     };
 
     return (
         <>
+            <button onClick={() => {
+                console.log(tarjeta)
+                Swal.fire({
+                    title: 'Confima Las Coordenadas',
+                    html: `
+                      <div className="container">
+                        <div className="row">
+                            <div className="col-12 d-flex">${codigo1}   <input type="text" placeholder="Coordenada 1" className="input-coordenadas" /></div>
+                            <div className="col-12 d-flex">${codigo2}   <input type="text" placeholder="Coordenada 2" className="input-coordenadas" /></div>
+                        </div>
+                    </div>
+                    `,
+                    icon: 'warning',
+                    showConfirmButton: true,
+                    confirmButtonText: 'Aceptar',
+                    confirmButtonColor: '#3085d6',
+                });
+            }}>ad,koasdk</button>
             <h1 className={`text-center titulo-transferencia ${userLoad ? "animacion-arriba visible" : "animacion-arriba"}`}>Transferencias</h1>
             <div className={`container contenedor-principal-transferencias text-dark ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>
                 {error && <div className="alert alert-danger text-center">{error}</div>}
