@@ -129,8 +129,12 @@ const ContenedorPrincipalTransferencias = () => {
                     confirmButtonText: 'Aceptar',
                     confirmButtonColor: '#28a745', // Color verde para éxito
                     showConfirmButton: true,
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    allowEnterKey: false,
                     customClass: {
-                        popup: `bg-alerta-transferencia`
+                        popup: `alerta-transferencia ${store.fondo === "fondo-modo-claro" ? "" : "bg-alerta-transferencia"}`,
+                        confirmButton: 'btn-alerta'
                     }
                 });
                 if (modalRef.current) {
@@ -270,12 +274,14 @@ const ContenedorPrincipalTransferencias = () => {
                     </div>
 
                     <div className={`col-12 mt-3 d-flex flex-column text-center ${userLoad ? "animacion-abajo visible" : "animacion-abajo"} `}>
-                        <button
-                            className={`btn btn-transferencias ${store.fondo === "fondo-modo-claro" ? "text-dark" : "text-white"}`}
-                            onClick={handleCondiciones}
-                        >
-                            Enviar Transferencia
-                        </button>
+                        <div className="container">
+                            <button
+                                className={`btn btn-transferencias w-25 ${store.fondo === "fondo-modo-claro" ? "text-dark" : "text-white"}`}
+                                onClick={handleCondiciones}
+                            >
+                                Enviar Transferencia
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
