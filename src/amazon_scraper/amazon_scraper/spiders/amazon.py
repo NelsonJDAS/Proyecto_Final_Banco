@@ -1,71 +1,101 @@
+import re
 import scrapy
 from amazon_scraper.items import AmazonScraperItem
 
 class AmazonSpider(scrapy.Spider):
     name = "amazon"
-    allowed_domains = ["movistar.es"]
-    start_urls = [
-        "https://www.movistar.es/moviles/?sort=relevance&pageSize=39&category=smartphone&pageIndex=0"  # Modifica la búsqueda según lo que necesites
-    ]
+    allowed_domains = ["amazon.es"]
 
-    # Configuración personalizada (cambia el User-Agent para simular un navegador)
     custom_settings = {
         'USER_AGENT': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
                       'AppleWebKit/537.36 (KHTML, like Gecko) '
-                      'Chrome/110.0.0.0 Safari/537.36'
+                      'Chrome/110.0.0.0 Safari/537.36',
+        'DOWNLOAD_DELAY': 2 
     }
 
+    def start_requests(self):
+        urls = [
+            ("https://www.amazon.es/s?k=smartphones", "móviles"),
+            ("https://www.amazon.es/gp/bestsellers/electronics/934359031?ref_=Oct_d_obs_S&pd_rd_w=Lsq7V&content-id=amzn1.sym.89a799ca-b7d7-4e0d-8ede-6c5bb6ace584&pf_rd_p=89a799ca-b7d7-4e0d-8ede-6c5bb6ace584&pf_rd_r=SAPX2XTK3VQQ53PWMHJ9&pd_rd_wg=8wr9M&pd_rd_r=d04c10c5-f4ac-4282-bec4-a1dca8b051f2", "tv"),
+            ("https://www.amazon.es/s?k=peque%C3%B1o+electrodomesticos", "pequeño electrodomestico")
+        ]
+        for url, category in urls:
+            yield scrapy.Request(url=url, callback=self.parse, meta={'category': category})
+
     def parse(self, response):
-        # Iteramos sobre cada producto en la página de resultados
-        for product in response.css("div.device-card--container"):
-            item = AmazonScraperItem()
-            item['title'] = product.css("h3.device-card--container--name--text::text").get()
-            # item['price'] = product.css("span.a-price > span.a-offscreen::text").get()
-            # item['image_url'] = product.css("img.s-image::attr(src)").get()
-            # item['rating'] = product.css("span.a-icon-alt::text").get()
-            # item['review_count'] = product.css("span.a-size-base::text").get()
-            yield item
+        category = response.meta.get('category')
+        
+        if category == "móviles":
+            for product in response.css("div.s-result-item"):
+                asin = product.attrib.get("data-asin")
+                if not asin:
+                    continue
+                item = AmazonScraperItem()
+                item['category'] = category
+                # item['asin'] = asin
+                item['title'] = product.css("h2.a-size-base-plus.a-spacing-none.a-color-base.a-text-normal span::text").get()
+                item['price'] = product.css("span.a-price > span.a-offscreen::text").get()
+                item['image_url'] = product.css("img.s-image::attr(src)").get()
+                item['rating'] = product.css("span.a-icon-alt::text").get()
+                item['review_count'] = product.css("span.a-size-base::text").get()
+                yield item
 
-        # Manejo de paginación
-        next_page = response.css("li.a-last a::attr(href)").get()
-        if next_page:
-            yield response.follow(next_page, callback=self.parse)
+            next_page = response.css("li.a-last a::attr(href)").get()
+            if next_page:
+                yield response.follow(next_page, callback=self.parse, meta={'category': category})
+                
+        elif category == "tv":
+            for product in response.css("div[data-asin]"):
+                asin = product.attrib.get("data-asin")
+                if not asin:
+                    continue
+                item = AmazonScraperItem()
+                item['category'] = category
+                # item['asin'] = asin
+                item['title'] = product.css("div._cDEzb_p13n-sc-css-line-clamp-2_EWgCb::text").get()
+                item['price'] = product.css("span._cDEzb_p13n-sc-price_3mJ9Z::text").get()
+                item['image_url'] = product.css("img.a-dynamic-image::attr(src)").get()
+                item['rating'] = product.css("span.a-icon-alt::text").get()
+                item['review_count'] = product.css("div.a-icon-row a.a-link-normal span.a-size-small::text").get()
+                yield item
 
-# import scrapy
-# from amazon_scraper.items import AmazonScraperItem
+            next_page = response.css("li.a-last a::attr(href)").get()
+            if next_page:
+                yield response.follow(next_page, callback=self.parse, meta={'category': category})
+                
+        elif category == "pequeño electrodomestico":
+            # Seleccionamos cada contenedor de producto que tenga role="listitem" y data-asin definido
+            for product in response.css('div[role="listitem"][data-asin]'):
+                asin = product.attrib.get("data-asin")
+                if not asin:
+                    continue
+                
+                item = AmazonScraperItem()
+                item['category'] = category
+                # item['asin'] = asin
+                # Extraemos el título del <h2> que contiene el nombre del producto
+                item['title'] = product.css('h2.a-size-base-plus.a-spacing-none.a-color-base.a-text-normal span::text').get()
+                # Extraemos el precio del span que contiene la representación textual del precio
+                item['price'] = product.css('span.a-offscreen::text').get()
+                # La imagen la obtenemos del atributo src de la etiqueta <img> con clase s-image
+                item['image_url'] = product.css('img.s-image::attr(src)').get()
+                # Extraemos el rating (por ejemplo, "4,4 de 5 estrellas")
+                item['rating'] = product.css('span.a-icon-alt::text').get()
+                # Y el número de reseñas, usando como selector el enlace con clases de subrayado
+                item['review_count'] = product.css('a.a-link-normal.s-underline-text span::text').get()
+                
+                yield item
 
-# class AmazonSpider(scrapy.Spider):
-#     name = "amazon"
-#     allowed_domains = ["amazon.es"]
-#     start_urls = [
-#         "https://www.amazon.es/s?k=smartphones"  # Modifica la búsqueda según lo que necesites
-#     ]
+            next_page = response.css("li.a-last a::attr(href)").get()
+            if next_page:
+                yield response.follow(next_page, callback=self.parse, meta={'category': category})
 
-#     # Configuración personalizada (cambia el User-Agent para simular un navegador)
-#     custom_settings = {
-#         'USER_AGENT': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
-#                       'AppleWebKit/537.36 (KHTML, like Gecko) '
-#                       'Chrome/110.0.0.0 Safari/537.36'
-#     }
 
-#     def parse(self, response):
-#         # Iteramos sobre cada producto en la página de resultados
-#         for product in response.css("div.s-result-item"):
-#             asin = product.attrib.get("data-asin")
-#             if not asin:
-#                 continue  # Saltamos elementos que no tengan ASIN (pueden ser anuncios u otros bloques)
-#             item = AmazonScraperItem()
-#             item['title'] = product.css("h2.a-size-base-plus.a-spacing-none.a-color-base.a-text-normal span::text").get()
-#             item['price'] = product.css("span.a-price > span.a-offscreen::text").get()
-#             item['image_url'] = product.css("img.s-image::attr(src)").get()
-#             item['rating'] = product.css("span.a-icon-alt::text").get()
-#             item['review_count'] = product.css("span.a-size-base::text").get()
-#             yield item
 
-#         # Manejo de paginación
-#         next_page = response.css("li.a-last a::attr(href)").get()
-#         if next_page:
-#             yield response.follow(next_page, callback=self.parse)
+# "pipenv install scrapy" instalar
+# "scrapy startproject amazon_scraper" crear proyecto de scrap
+# "scrapy crawl amazon -o productos.json" crear el json
+
 
 # import scrapy
 # from amazon_scraper.items import AmazonScraperItem
