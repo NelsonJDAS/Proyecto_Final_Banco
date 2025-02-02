@@ -4,12 +4,9 @@
     margin-bottom: 40px;
     background-color: #E0E0E0;
     border: 4px double #A0A0A0;
-}
-
-.contenedor-principal-transferencias:hover {
-    cursor: pointer;
     box-shadow: 0 20px 20px rgba(0, 0, 0, 0.3) !important;
 }
+
 
 
 

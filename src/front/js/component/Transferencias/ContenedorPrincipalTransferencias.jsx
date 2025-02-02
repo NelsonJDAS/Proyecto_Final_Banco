@@ -30,6 +30,8 @@ const ContenedorPrincipalTransferencias = () => {
     const [tarjeta, setTarjeta] = useState('');
 
     const generarCodigos = () => {
+        codigo1Ref.current.value = ""
+        codigo2Ref.current.value = ""
         setCodigo1(store.tarjetaCoord[Math.floor(Math.random() * 15) + 1]);
         setCodigo2(store.tarjetaCoord[Math.floor(Math.random() * 15) + 1]);
     }
@@ -117,11 +119,10 @@ const ContenedorPrincipalTransferencias = () => {
                 console.log(resultado);
 
                 // Limpiar formulario
-                setCuentaDestino('');
-                setEstadoDestinatario('');
-                setMonto('');
-                setConcepto('');
-                setError('');
+                // setCuentaDestino('');
+                // setEstadoDestinatario('');
+                // setMonto('');
+                // setConcepto('');
                 Swal.fire({
                     title: '¡Transferencia Exitosa!',
                     text: `La transferencia destinada a la cuenta ${cuentaDestino} con monto de ${monto} €  se ha realizado correctamente.`,
@@ -141,7 +142,7 @@ const ContenedorPrincipalTransferencias = () => {
                     const modal = bootstrap.Modal.getInstance(modalRef.current);
                     modal.hide();
                 }
-                generarCodigos();
+                // generarCodigos();
             } catch (error) {
                 Swal.fire({
                     title: '¡Error!',
@@ -209,7 +210,7 @@ const ContenedorPrincipalTransferencias = () => {
                 </div>
             </div>
             <h1 className={`text-center titulo-transferencia ${userLoad ? "animacion-arriba visible" : "animacion-arriba"}`}>Transferencias</h1>
-            <div className={`container w-90 contenedor-principal-transferencias hover ${userLoad ? "animacion-abajo visible" : "animacion-abajo"} ${store.fondo === "fondo-modo-claro" ? "bg-white" : "bg-dark text-white"}`}>
+            <div className={`container w-90 contenedor-principal-transferencias ${userLoad ? "animacion-abajo visible" : "animacion-abajo"} ${store.fondo === "fondo-modo-claro" ? "bg-white" : "bg-dark text-white"}`}>
 
                 <div className="row">
                     <div className={`my-2 col-lg-6 d-flex flex-column text-center ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>

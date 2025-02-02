@@ -21,6 +21,18 @@ const getState = ({ getStore, getActions, setStore }) => {
       tarjetaCoordComp: {},
       transacciones: [],
       listaNotificaciones: [],
+      graficaHome: [
+        { time: "2023-01-01", value: 100 },
+        { time: "2023-01-02", value: 102 },
+        { time: "2023-01-03", value: 101 },
+        { time: "2023-01-04", value: 105 },
+        { time: "2023-01-05", value: 98 },
+        { time: "2023-01-06", value: 99 },
+        { time: "2023-01-07", value: 103 },
+        { time: "2023-01-08", value: 104 },
+        { time: "2023-01-09", value: 98 },
+        { time: "2023-01-10", value: 100 }
+      ],
       simbolos: [],
       grafica: [],
       chartData: [], // Graficas
