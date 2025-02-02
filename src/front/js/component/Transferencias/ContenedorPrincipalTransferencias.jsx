@@ -119,10 +119,10 @@ const ContenedorPrincipalTransferencias = () => {
                 console.log(resultado);
 
                 // Limpiar formulario
-                // setCuentaDestino('');
-                // setEstadoDestinatario('');
-                // setMonto('');
-                // setConcepto('');
+                setCuentaDestino('');
+                setEstadoDestinatario('');
+                setMonto('');
+                setConcepto('');
                 Swal.fire({
                     title: '¡Transferencia Exitosa!',
                     text: `La transferencia destinada a la cuenta ${cuentaDestino} con monto de ${monto} €  se ha realizado correctamente.`,
@@ -142,7 +142,7 @@ const ContenedorPrincipalTransferencias = () => {
                     const modal = bootstrap.Modal.getInstance(modalRef.current);
                     modal.hide();
                 }
-                // generarCodigos();
+                generarCodigos();
             } catch (error) {
                 Swal.fire({
                     title: '¡Error!',
