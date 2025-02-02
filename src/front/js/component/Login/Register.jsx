@@ -2,8 +2,12 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { Context } from "../../store/appContext.js";
 import { useTranslation } from "react-i18next";// importacion de traducción
 import { useNavigate } from "react-router-dom";
+import { Notyf } from 'notyf';
+import 'notyf/notyf.min.css';
 
 export const Register = () => {
+    const notyf = new Notyf();
+
     const { t } = useTranslation();
     //estados para controlar los valores puestos por el usuario
     const [name, SetName] = useState("");
@@ -72,9 +76,9 @@ export const Register = () => {
         const result = await actions.registerUser(name, email, password);
         if (result === "success") {
             navigate("/home");
-            console.log("Usuario registrado exitosamente");
+            notyf.success("Cuenta creada exitosamente")
         } else {
-            console.error("Error en el registro");
+            notyf.error("Error al hacer el registro")
         }
         console.log("desde front", name, email, password);
 

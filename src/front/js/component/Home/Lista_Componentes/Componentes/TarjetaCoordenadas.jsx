@@ -92,8 +92,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../../../../store/appContext";
 import { FaRegIdCard } from "react-icons/fa6";
+import { Notyf } from 'notyf';
+import 'notyf/notyf.min.css';
 
 const TarjetasCoordenadas = () => {
+    const notyf = new Notyf();
+
     const { store, actions } = useContext(Context);
     const [datos, setDatos] = useState([]);
     const [inputCode, setInputCode] = useState("");
@@ -111,19 +115,18 @@ const TarjetasCoordenadas = () => {
             if (data && data.tarjeta_coordenadas) {
                 setDatos(data.tarjeta_coordenadas); // 🔹 Usamos directamente la respuesta
                 setSendCode(false);
-                setError(null);
+                notyf.success("Codigo correcto")
 
                 const emailResponse = await actions.sendCoordinatesCard(store.user.id);
                 if (!emailResponse) {
-                    setError("Error al enviar la tarjeta de coordenadas por correo")
+                    notyf.error("Error al enviar la tarjeta de coordenadas por correo")
                 }
             } else {
-                setError("Código inválido o expirado");
+                notyf.error("Código inválido o expirado")
                 setDatos([]);
             }
         } catch (error) {
-            console.error("Error al verificar el código:", error);
-            setError("Código inválido o expirado");
+            notyf.error("Error al verificar el codigo")
             setDatos([]);
         }
     };
@@ -149,17 +152,19 @@ const TarjetasCoordenadas = () => {
                             onChange={(e) => setInputCode(e.target.value)}
                         />
                     </div>
-                    {error && (
-                        <div className="text-danger small mt-2">{error}</div>
-                    )}
                     <p
                         className="enlace-tarjeta my-2"
                         onClick={() => {
                             if (sendCode) {
                                 handleVerifyCode();
                             } else {
-                                actions.sendCoordinatesCode(store.user.email);
-                                setSendCode(true);
+                                try {
+                                    actions.sendCoordinatesCode(store.user.email);
+                                    setSendCode(true);
+                                    notyf.success("Codigo Enviado")
+                                } catch (error) {
+                                    notyf.error("Error al enviar el codigo")
+                                }
                             }
                         }}
                     >

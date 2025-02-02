@@ -36,7 +36,7 @@ const TablaMovimientoUsuario = () => {
                 </div>
             </div>
             <div>
-                {store.transacciones && store.transacciones.slice(-5).map((transaccion) => (
+                {store.transacciones && store.transacciones.slice(-6).map((transaccion) => (
                     <TablaCol
                         key={transaccion.id}
                         fecha={transaccion.fecha}
