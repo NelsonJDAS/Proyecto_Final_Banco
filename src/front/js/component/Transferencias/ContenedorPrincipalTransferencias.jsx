@@ -48,11 +48,14 @@ const ContenedorPrincipalTransferencias = () => {
         actions.fetchUserDetails(storedId)
         console.log("Tarjeta de coordenadas", store.tarjetaCoord)
         SetUserLoad(true);
-        if (store.cliente) {
-            setName(store.cliente.nombre || '');
-            setSubname(store.cliente.apellidos || '');
-        }
+        console.log(store.cliente)
+
     }, []);
+
+    useEffect(() => {
+        setName(store.cliente.nombre == "Introduzca apellido" || store.cliente.nombre == undefined ? "" : store.cliente.nombre);
+        setSubname(store.cliente.apellidos == "Introduzca apellido" || store.cliente.apellidos == undefined ? "" : store.cliente.apellidos);
+    }, [store.cliente])
 
     const handleCondiciones = () => {
         // Validar campos obligatorios
@@ -125,7 +128,10 @@ const ContenedorPrincipalTransferencias = () => {
                     icon: 'success',
                     confirmButtonText: 'Aceptar',
                     confirmButtonColor: '#28a745', // Color verde para éxito
-                    showConfirmButton: true
+                    showConfirmButton: true,
+                    customClass: {
+                        popup: `bg-alerta-transferencia`
+                    }
                 });
                 if (modalRef.current) {
                     const modal = bootstrap.Modal.getInstance(modalRef.current);
@@ -137,7 +143,14 @@ const ContenedorPrincipalTransferencias = () => {
                     title: '¡Error!',
                     text: 'Error al hacer la transferencia, Confirma los datos solicitados',
                     icon: 'error',
-                    confirmButtonText: 'Aceptar'
+                    confirmButtonText: 'Aceptar',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    allowEnterKey: false,
+                    customClass: {
+                        popup: `alerta-transferencia ${store.fondo === "fondo-modo-claro" ? "" : "bg-alerta-transferencia"}`,
+                        confirmButton: 'btn-alerta'
+                    }
                 });
                 if (modalRef.current) {
                     const modal = bootstrap.Modal.getInstance(modalRef.current);
@@ -163,7 +176,7 @@ const ContenedorPrincipalTransferencias = () => {
                         </div>
                         <div className="modal-body">
                             {/* Selector de lenguaje */}
-                            <div className="container">
+                            <div className="container mb-3">
                                 <p className="text-center">
                                     Por favor, ingrese los dos valores de su tarjeta de coordenadas
                                     para completar la transacción de forma segura. Estos códigos son necesarios
@@ -172,16 +185,16 @@ const ContenedorPrincipalTransferencias = () => {
                                 </p>
                             </div>
                             <div className="row my-3">
-                                <div className="col-3 mx-2 px-0 text-end"><p className="mt-2">{codigo1 == undefined ? "" : codigo1.posicion}</p></div>
-                                <div className="col-8 mx-2 px-0"><input type="text" placeholder="****" className="mx-3 text-center w-50 py-2 rounded-pill" maxLength="4" ref={codigo1Ref} /></div>
+                                <div className="col-3 mx-2 px-0 text-end"><p className="mt-2 fs-bold">{codigo1 == undefined ? "" : codigo1.posicion}</p></div>
+                                <div className="col-8 mx-2 px-0"><input type="text" placeholder="* * * *" className="mx-3 text-center w-50 py-2 rounded-pill" maxLength="4" ref={codigo1Ref} /></div>
                             </div>
                             <div className="row my-3">
-                                <div className="col-3 mx-2 px-0 text-end"><p className="mt-2">{codigo2 == undefined ? "" : codigo2.posicion}</p></div>
-                                <div className="col-8 mx-2 px-0"><input type="text" placeholder="****" className="mx-3 text-center w-50 py-2 rounded-pill" maxLength="4" ref={codigo2Ref} /></div>
+                                <div className="col-3 mx-2 px-0 text-end"><p className="mt-2 fs-bold">{codigo2 == undefined ? "" : codigo2.posicion}</p></div>
+                                <div className="col-8 mx-2 px-0"><input type="text" placeholder="* * * *" className="mx-3 text-center w-50 py-2 rounded-pill" maxLength="4" ref={codigo2Ref} /></div>
                             </div>
                             <div className="row my-3">
                                 <div className="col-12  text-center">
-                                    <button className="btn btn-outline-info rounded-3" onClick={handleTransferencia}>
+                                    <button className="btn btn-outline-success rounded-pill w-50" onClick={handleTransferencia}>
                                         Comprobar Codigos
                                     </button>
                                 </div>
@@ -192,13 +205,13 @@ const ContenedorPrincipalTransferencias = () => {
                 </div>
             </div>
             <h1 className={`text-center titulo-transferencia ${userLoad ? "animacion-arriba visible" : "animacion-arriba"}`}>Transferencias</h1>
-            <div className={`container contenedor-principal-transferencias text-dark ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>
+            <div className={`container w-90 contenedor-principal-transferencias hover ${userLoad ? "animacion-abajo visible" : "animacion-abajo"} ${store.fondo === "fondo-modo-claro" ? "bg-white" : "bg-dark text-white"}`}>
 
                 <div className="row">
                     <div className={`my-2 col-lg-6 d-flex flex-column text-center ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>
                         <label className="my-1 fw-bold fs-4 label-t">Cuenta Remitente</label>
                         <input
-                            className="mx-md-3 text-center py-1 rounded-3 bg-white border-1 border-white text-dark bg-opacity-50 fs-4 fw-bold input-transferencias"
+                            className={`mx-md-3 text-center py-1 rounded-3 border fs-4 fw-bold input-transferencias ${store.fondo === "fondo-modo-claro" ? "bg-secondary border-black  bg-opacity-25 text-dark" : "bg-white text-dark border-white"}`}
                             value={`${name} ${subname}`}
                             disabled
                             type="text"
@@ -214,7 +227,7 @@ const ContenedorPrincipalTransferencias = () => {
                             <span className="input-group-text py-2"><MdOutlineEuroSymbol /></span>
                             <input
                                 type="number"
-                                className="form-control text-center bg-white text-dark bg-opacity-50 fs-4 fw-bold input-transferencias"
+                                className={`form-control text-center fs-4 fw-bold input-transferencias contorno-input ${store.fondo === "fondo-modo-claro" ? "bg-secondary border-black  bg-opacity-25 text-dark" : "bg-white text-dark border-white"}`}
                                 aria-label="Amount"
                                 value={monto}
                                 onChange={(e) => setMonto(e.target.value)}
@@ -227,7 +240,7 @@ const ContenedorPrincipalTransferencias = () => {
                     <div className={`my-2 col-lg-6 d-flex flex-column text-center ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>
                         <label className="fw-bold fs-3 label-t">Nombre Completo Destinatario</label>
                         <input
-                            className="mx-md-3 text-center py-1 rounded-1 bg-white border-1 border-white text-dark bg-opacity-50 fs-4 fw-bold input-transferencias"
+                            className={`mx-md-3 text-center py-1 rounded-3 border fs-4 fw-bold input-transferencias  ${store.fondo === "fondo-modo-claro" ? "bg-secondary border-black  bg-opacity-25 text-dark" : "bg-white text-dark border-white"}`}
                             type="text"
                             value={estadoDestinatario}
                             onChange={(e) => setEstadoDestinatario(e.target.value)}
@@ -238,7 +251,7 @@ const ContenedorPrincipalTransferencias = () => {
                     <div className={`my-2 col-lg-6 d-flex flex-column text-center ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>
                         <label className="my-1 fw-bold fs-4 label-t">Cuenta Destinatario</label>
                         <input
-                            className="mx-md-3 text-center py-1 rounded-3 bg-white border-1 border-white text-dark bg-opacity-50 fs-4 fw-bold input-transferencias"
+                            className={`mx-md-3 text-center py-1 rounded-3 border fs-4 fw-bold input-transferencias ${store.fondo === "fondo-modo-claro" ? "bg-secondary border-black  bg-opacity-25 text-dark" : "bg-white text-dark border-white"}`}
                             type="text"
                             value={cuentaDestino}
                             onChange={(e) => setCuentaDestino(e.target.value)}
@@ -249,16 +262,16 @@ const ContenedorPrincipalTransferencias = () => {
                     <div className={`my-1 col-12 d-flex flex-column text-center ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>
                         <label className="my-1 fw-bold fs-4 label-t">Concepto (opcional)</label>
                         <textarea
-                            className="mx-md-3 concepto-transferencias rounded-1 bg-white border-1 border-white text-dark bg-opacity-50 fs-4 fw-bold input-transferencias"
+                            className={`mx-md-3 concepto-transferencias rounded-1 border  fs-4 fw-bold input-transferencias ${store.fondo === "fondo-modo-claro" ? "bg-secondary border-black  bg-opacity-25 text-dark" : "bg-white text-dark border-white"}`}
                             type="text"
                             value={concepto}
                             onChange={(e) => setConcepto(e.target.value)}
                         />
                     </div>
 
-                    <div className={`col-12 mt-3 d-flex flex-column text-center ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>
+                    <div className={`col-12 mt-3 d-flex flex-column text-center ${userLoad ? "animacion-abajo visible" : "animacion-abajo"} `}>
                         <button
-                            className="btn btn-transferencias"
+                            className={`btn btn-transferencias ${store.fondo === "fondo-modo-claro" ? "text-dark" : "text-white"}`}
                             onClick={handleCondiciones}
                         >
                             Enviar Transferencia
