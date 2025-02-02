@@ -22,16 +22,16 @@ const getState = ({ getStore, getActions, setStore }) => {
       transacciones: [],
       listaNotificaciones: [],
       graficaHome: [
-        { time: "2023-01-01", value: 100 },
-        { time: "2023-01-02", value: 102 },
-        { time: "2023-01-03", value: 101 },
-        { time: "2023-01-04", value: 105 },
-        { time: "2023-01-05", value: 98 },
-        { time: "2023-01-06", value: 99 },
-        { time: "2023-01-07", value: 103 },
-        { time: "2023-01-08", value: 104 },
-        { time: "2023-01-09", value: 98 },
-        { time: "2023-01-10", value: 100 }
+        { time: "2023-01-01", value: 0 },
+        { time: "2023-01-02", value: 0 },
+        { time: "2023-01-03", value: 0 },
+        { time: "2023-01-04", value: 0 },
+        { time: "2023-01-05", value: 0 },
+        { time: "2023-01-06", value: 0 },
+        { time: "2023-01-07", value: 0 },
+        { time: "2023-01-08", value: 0 },
+        { time: "2023-01-09", value: 0 },
+        { time: "2023-01-10", value: 0 }
       ],
       simbolos: [],
       grafica: [],
@@ -63,6 +63,9 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       ActualizarGrafica: (datos) => {
         setStore({ ...getStore(), grafica: datos });
+      },
+      ActualizarGraficaHome: (datos) => {
+        setStore({ ...getStore(), graficaHome: datos });
       },
 
       CambiarIncognito: (estado) => {
@@ -208,6 +211,24 @@ const getState = ({ getStore, getActions, setStore }) => {
             setStore({ ...store, listaNotificaciones: data.notificaciones });
             setStore({ ...store, tarjetaCoord: data.tarjeta_coordenadas });
             setStore({ ...store, transacciones: data.cuentas.transacciones });
+
+            console.log("TRANSACCCCCCCCCCCCCCCCCCCCIONES", data.cuentas.transacciones)
+
+
+            let valores = [];
+            Object.entries(data.cuentas.transacciones).map((item) => {
+              console.log(item[0])
+              let datos = { "time": Math.floor(new Date(item[1].fecha).getTime() / 1000) - item[0], "value": parseInt(item[1].monto) }
+              valores.push(datos)
+            })
+            console.log(valores)
+
+            valores.sort((a, b) => a.time - b.time);
+            getActions().ActualizarGraficaHome(valores);
+
+
+            data.values == undefined ? "" : actions.ActualizarGrafica(valores)
+
 
             console.log("user", store.user, "cliente", store.cliente, "cuentas", store.cuentas, "Notificaciones", store.listaNotificaciones, "transacciones", store.transacciones);
           })
