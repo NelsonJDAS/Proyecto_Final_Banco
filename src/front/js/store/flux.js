@@ -402,7 +402,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           const actions = getActions();
           setStore({ email });
 
-          fetch(process.env.BACKEND_URL + "/api/send-code", {
+          fetch(process.env.BACKEND_URL + "api/send-code", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -551,7 +551,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             "Content-Type": "application/json"
           },
         })
-          .then((response) => {           
+          .then((response) => {
             if (!response.ok) {
               throw new Error(`Error: ${response.status} - ${response.statusText}`);
             }
@@ -588,7 +588,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           notyf.open({ type: "warning", message: "Producto ya se encuentra en el carrito" });
         }
       },
-      
+
       // Acción para eliminar un producto específico del carrito y actualizar localStorage
       removeFromCart: (productId) => {
         const store = getStore();
@@ -597,7 +597,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         localStorage.setItem("cart", JSON.stringify(updatedCart));
         notyf.success("Producto eliminado del carrito");
       },
-      
+
       // Acción para vaciar completamente el carrito y actualizar localStorage
       clearCart: () => {
         const store = getStore();
@@ -605,7 +605,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         localStorage.setItem("cart", JSON.stringify([]));
         notyf.success("Carrito vaciado");
       },
-      
+
     },
   };
 };

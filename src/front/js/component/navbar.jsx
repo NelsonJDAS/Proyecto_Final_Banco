@@ -7,6 +7,7 @@ import { MdWbSunny } from "react-icons/md";
 import { GiWorld } from "react-icons/gi";
 import { IoClose } from "react-icons/io5";
 import { IoIosArrowDown } from "react-icons/io";
+import { IoCartOutline } from "react-icons/io5";
 
 // Importacion de la traduccion
 import { useTranslation } from "react-i18next";
@@ -190,8 +191,15 @@ export const Navbar = () => {
 						</>)}
 
 					{/*------------------------------ eleccion de idiomas ------------ */}
-					<div className="col-1 text-end align-content-center">
-						<div type="div" className="rounded-circle enlace" data-bs-toggle="modal" data-bs-target="#lenguajes"> {/* Ejecuta el modal */}
+					<div className="col-1 text-end align-content-center d-flex justify-content-between">
+						{location.pathname === "/tienda" ? <div className="align-content-center fs-4 mt-3">
+							<div className="d-flex hover" onClick={() => { navigate("/tienda/checkout") }}>
+								<IoCartOutline />
+								<p className="num-compras">{store.cart.length == 0 ? "0" : store.cart.length}</p>
+
+							</div>
+						</div> : ""}
+						<div type="div" className="rounded-circle enlace align-content-center" data-bs-toggle="modal" data-bs-target="#lenguajes"> {/* Ejecuta el modal */}
 							<GiWorld className="simbolo-idioma hover" />
 						</div>
 					</div>

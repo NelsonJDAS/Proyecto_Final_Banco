@@ -21,6 +21,10 @@
     position: relative;
 }
 
+.contenedor-principal-store {
+    min-height: 500px;
+}
+
 .precio::after {
     content: "";
     position: absolute;
@@ -35,12 +39,13 @@
     /* Inclinación de la línea */
 }
 
-.contenedor-elementos-store {
+.contenedor-elemento-store {
     padding-bottom: 100px;
 }
 
 .elemento-store {
     margin-top: 60px;
+    height: auto;
     border-radius: 30px;
     transition: transform 0.5s ease;
 }
@@ -95,7 +100,7 @@
 
 .btn-ver {
     transition: opacity 0.5s ease;
-    border-end-end-radius: 30px !important;
+    border-radius: 7px !important;
     background: linear-gradient(135deg, #FFD700, #FFC300, #B8860B);
 }
 
@@ -176,4 +181,32 @@
 
 .volver-atras-btn:hover {
     text-shadow: 0 0 10px red, 0 0 20px red, 0 0 30px red;
+}
+
+.imagen-contenedor {
+    height: 350px;
+}
+
+.contenedor-compras {
+    height: 200px;
+}
+
+.animacion-compras {
+    transition: transform 0.3s ease, box-shadow 0.5s ease;
+    border-radius: 10px;
+}
+
+.animacion-compras:hover {
+    cursor: pointer;
+    transform: translateY(-5px);
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.3);
+}
+
+.contenedor-elementos {
+    height: 675px;
+    overflow: auto;
+}
+
+.separacion-fondo {
+    padding-bottom: 50px;
 }

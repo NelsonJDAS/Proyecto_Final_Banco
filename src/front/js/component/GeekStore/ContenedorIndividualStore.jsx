@@ -13,6 +13,8 @@ const ContenedorIndividualStore = () => {
     const [productData, setProductData] = useState(null);
     const [loading, setLoading] = useState(true);
 
+    
+
     useEffect(() => {
         actions.Scroll();
         setUserLoad(true);

@@ -29,7 +29,6 @@ export const Register = () => {
 
     const HandleName = (e) => {
         // SetName("");
-        // // btnRef.current.classList.add("boton-cancelado");
         // inputName.current.classList.add("border-danger")
         // if (/[^a-zA-Z\s]/.test(e.target.value)) {
         //     SetMensajeName("Solo se permiten letras.");
@@ -42,7 +41,6 @@ export const Register = () => {
     }
     const HandleEmail = (e) => {
         // SetEmail("");
-        // // btnRef.current.classList.add("boton-cancelado");
         // inputMail.current.classList.add("border-danger")
         // if (!e.target.value.includes("@")) {
         //     SetMensajeMail("Debes incluir el '@' en tu correo.");
@@ -56,7 +54,6 @@ export const Register = () => {
         SetEmail(e.target.value.toLowerCase());
     }
     const HandlePassword = (e) => {
-        // // btnRef.current.classList.add("boton-cancelado");
         // inputPassword.current.classList.add("border-danger")
         // SetPassword("");
         // if (e.target.value.length < 8) {
@@ -87,13 +84,11 @@ export const Register = () => {
 
     };
 
-    useEffect(() => {
-        if (name != "" && password != "" && email != "") {
-            // btnRef.current.classList.remove("boton-cancelado");
-        } else {
-            btnRef.current.classList.remove("boton-cancelado");
-        }
-    }, [name, email, password])
+    // useEffect(() => {
+    //     if (name != "" && password != "" && email != "") {
+    //         btnRef.current.disabled = false
+    //     }
+    // }, [name, email, password])
 
     return (
         <div className="register">
@@ -111,6 +106,7 @@ export const Register = () => {
                     <p className={`mx-3 text-end text-danger mensaje-condicion ${mensajePassword == "" ? "opacity-0" : "opacity-100"}`}>{mensajePassword}</p>
                 </div>
 
+                {/* agregarle el disabled para usar las condiciones */}
                 <div className="text-center">
                     <button className={`btn btn-light mt-3 w-50 rounded-pill btn-login ${store.borde} text-white`} onClick={() => { handleRegister() }} ref={btnRef}>{t('Register.ready')}</button>
                 </div>

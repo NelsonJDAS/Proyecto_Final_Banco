@@ -1,23 +1,24 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { AiOutlineClose } from "react-icons/ai";
+import { Context } from "../../store/appContext";
+import { IoClose } from "react-icons/io5";
 
 const PurchaseModal = ({ show, onClose, userDetails, totalPrice, onAcceptOrder }) => {
   if (!show) return null;
+
+  const { store, actions } = useContext(Context);
 
   useEffect(() => {
   }, [userDetails]);
 
   return (
-    <div
-      className="modal fade show d-block"
-      style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
-      tabIndex="-1"
-    >
-      <div className="modal-dialog modal-dialog-centered text-dark">
-        <div className="modal-content">
-          <div className="modal-header">
-            <h5 className="modal-title">Confirmar Pedido</h5>
-            <button type="button" className="btn-close" onClick={onClose}></button>
+    <div className="modal fade" id="compra" tabIndex="-1" aria-labelledby="label" aria-hidden="true">
+      {/* Modal selector de idiomas */}
+      <div className="modal-dialog modal-dialog-centered">
+        <div className={`modal-content contenedor-modal-transferencias rounded-3 ${store.fondo} borde-brillante `}>
+          <div className="modal-header row border-0">
+            <h1 className="modal-title fs-3 text-center col-10" id="label">Confirmar Pedido</h1>
+            <div className="hover fs-3 col-2 text-center" data-bs-dismiss="modal"><IoClose /></div>
           </div>
           <div className="modal-body">
             <p>
@@ -44,9 +45,11 @@ const PurchaseModal = ({ show, onClose, userDetails, totalPrice, onAcceptOrder }
               Aceptar pedido
             </button>
           </div>
+
         </div>
       </div>
     </div>
+
   );
 };
 
