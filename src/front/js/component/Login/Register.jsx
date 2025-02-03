@@ -28,46 +28,49 @@ export const Register = () => {
     //handles para cambiar los valores puestos por el usuario
 
     const HandleName = (e) => {
-        SetName("");
-        // btnRef.current.classList.add("boton-cancelado");
-        inputName.current.classList.add("border-danger")
-        if (/[^a-zA-Z\s]/.test(e.target.value)) {
-            SetMensajeName("Solo se permiten letras.");
-        } else {
-            inputName.current.classList.remove("border-danger");
-            SetName(e.target.value);
-            SetMensajeName("");
-        }
+        // SetName("");
+        // // btnRef.current.classList.add("boton-cancelado");
+        // inputName.current.classList.add("border-danger")
+        // if (/[^a-zA-Z\s]/.test(e.target.value)) {
+        //     SetMensajeName("Solo se permiten letras.");
+        // } else {
+        //     inputName.current.classList.remove("border-danger");
+        //     SetName(e.target.value);
+        //     SetMensajeName("");
+        // }
+        SetName(e.target.value);
     }
     const HandleEmail = (e) => {
-        SetEmail("");
-        // btnRef.current.classList.add("boton-cancelado");
-        inputMail.current.classList.add("border-danger")
-        if (!e.target.value.includes("@")) {
-            SetMensajeMail("Debes incluir el '@' en tu correo.");
-        } else if (/\s/.test(e.target.value)) {
-            SetMensajeMail("El correo no puede contener espacios.");
-        } else {
-            inputMail.current.classList.remove("border-danger");
-            SetEmail(e.target.value.toLowerCase());
-            SetMensajeMail("");
-        }
+        // SetEmail("");
+        // // btnRef.current.classList.add("boton-cancelado");
+        // inputMail.current.classList.add("border-danger")
+        // if (!e.target.value.includes("@")) {
+        //     SetMensajeMail("Debes incluir el '@' en tu correo.");
+        // } else if (/\s/.test(e.target.value)) {
+        //     SetMensajeMail("El correo no puede contener espacios.");
+        // } else {
+        //     inputMail.current.classList.remove("border-danger");
+        //     SetEmail(e.target.value.toLowerCase());
+        //     SetMensajeMail("");
+        // }
+        SetEmail(e.target.value.toLowerCase());
     }
     const HandlePassword = (e) => {
-        // btnRef.current.classList.add("boton-cancelado");
-        inputPassword.current.classList.add("border-danger")
-        SetPassword("");
-        if (e.target.value.length < 8) {
-            SetMensajePassword("La contraseña debe tener al menos 8 caracteres.");
-        } else if (!/[^a-zA-Z\s]/.test(e.target.value)) {
-            SetMensajePassword("Añade al menos un número o símbolo.");
-        } else if (!/[A-Z]/.test(e.target.value)) {
-            SetMensajePassword("Incluye una letra mayúscula.");
-        } else {
-            inputPassword.current.classList.remove("border-danger");
-            SetPassword(e.target.value);
-            SetMensajePassword("");
-        }
+        // // btnRef.current.classList.add("boton-cancelado");
+        // inputPassword.current.classList.add("border-danger")
+        // SetPassword("");
+        // if (e.target.value.length < 8) {
+        //     SetMensajePassword("La contraseña debe tener al menos 8 caracteres.");
+        // } else if (!/[^a-zA-Z\s]/.test(e.target.value)) {
+        //     SetMensajePassword("Añade al menos un número o símbolo.");
+        // } else if (!/[A-Z]/.test(e.target.value)) {
+        //     SetMensajePassword("Incluye una letra mayúscula.");
+        // } else {
+        //     inputPassword.current.classList.remove("border-danger");
+        //     SetPassword(e.target.value);
+        //     SetMensajePassword("");
+        // }
+        SetPassword(e.target.value);
     }
 
 

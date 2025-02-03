@@ -91,14 +91,14 @@ export const Navbar = () => {
 					<div className="col-3 col-md-2 text-end d-flex justify-content-end">
 						<div className={location.pathname === "/perfil" ? "d-none" : ""}>
 							<img src={logo_negro} className={`img-fluid hover img ${store.fondo == "fondo-modo-oscuro" ? "d-block" : "d-none"}`} onClick={() => {
-								localStorage.getItem('token') === null ? navigate("/") : location.pathname === "/inversiones" || location.pathname.split("/")[1] === "grafica" ? navigate("/inversiones") : navigate("/home")
+								localStorage.getItem('token') === null ? navigate("/") : location.pathname.split("/")[1] === "tienda" ? navigate("/tienda") : location.pathname === "/inversiones" || location.pathname.split("/")[1] === "grafica" ? navigate("/inversiones") : navigate("/home")
 							}} /><img src={logo_blanco} className={`img-fluid img ${store.fondo == "fondo-modo-oscuro" ? "d-none" : "d-block"}`} />
 						</div>
 					</div>
 
 					<div className="col-2 col-md-2 text-start fs-3 titulo-nav fw-bold  px-0 align-content-center hover" onClick={() => {
-						localStorage.getItem('token') === null ? navigate("/") : location.pathname === "/inversiones" || location.pathname.split("/")[1] === "grafica" ? navigate("/inversiones") : navigate("/home")
-					}}><span>{location.pathname === "/inversiones" || location.pathname.split("/")[1] === "grafica" ? "GeekInvest" : "GeekBank"}</span></div>
+						localStorage.getItem('token') === null ? navigate("/") : location.pathname.split("/")[1] === "tienda" ? navigate("/tienda") : location.pathname === "/inversiones" || location.pathname.split("/")[1] === "grafica" ? navigate("/inversiones") : navigate("/home")
+					}}><span>{location.pathname.split("/")[1] === "tienda" ? "GeekStore" : location.pathname === "/inversiones" || location.pathname.split("/")[1] === "grafica" ? "GeekInvest" : "GeekBank"}</span></div>
 					{localStorage.getItem('token') === null ? (<div className="col-3 col-md-5 col-lg-6 align-content-center  fw-bold text-center">
 						<span className={store.borde_hover} onClick={() => {
 							navigate("/example")
@@ -135,15 +135,15 @@ export const Navbar = () => {
 										<li>
 											<div className={`dropdown-item text-center hover ${store.fondo === "fondo-modo-claro" ? "text-white" : "text-dark"}`}>
 												<span className={store.borde_hover} onClick={() => {
-													navigate("/example")
-												}}>{t('Navbar.Exch/Currency')}</span>
+													location.pathname === "/tienda" ? navigate("/home") : navigate("/tienda")
+												}}>{location.pathname === "/tienda" ? "Home" : "Tienda"}</span>
 											</div>
 										</li>
 										<li>
 											<div className={`dropdown-item text-center hover ${store.fondo === "fondo-modo-claro" ? "text-white" : "text-dark"}`}>
 												<span className={store.borde_hover} onClick={() => {
-													navigate("/example")
-												}}>{t('Navbar.Investments')}</span>
+													location.pathname === "/inversiones" ? navigate("/home") : navigate("/inversiones")
+												}}>{location.pathname === "/inversiones" ? "Home" : t('Navbar.Investments')}</span>
 											</div>
 										</li>
 										<li className="d-md-none"><hr className="dropdown-divider" /></li>
@@ -175,13 +175,13 @@ export const Navbar = () => {
 							</div>
 							<div className="col-1 align-content-center link  fw-bold text-center d-none d-lg-block">
 								<span className={store.borde_hover} onClick={() => {
-									navigate("/example")
-								}}>{t('Navbar.Exch/Currency')}</span> {/* Seccion divisas */}
+									location.pathname === "/tienda" ? navigate("/home") : navigate("/tienda")
+								}}>{location.pathname === "/tienda" ? "Home" : "Tienda"}</span>
 							</div>
 							<div className="col-1 align-content-center link  fw-bold text-center d-none d-lg-block">
 								<span className={store.borde_hover} onClick={() => {
-									navigate("/example")
-								}}>{t('Navbar.Investments')}</span> {/* Seccion divisas */}
+									location.pathname === "/inversiones" ? navigate("/home") : navigate("/inversiones")
+								}}>{location.pathname === "/inversiones" ? "Home" : t('Navbar.Investments')}</span>
 							</div>
 							<div className="col-2 col-md-1 align-content-center text-center fs-3 fw-bold d-none d-md-block"><span className="hover text-danger" onClick={() => {
 								localStorage.clear()

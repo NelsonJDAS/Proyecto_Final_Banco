@@ -5,7 +5,7 @@ import ContenedorLoginYRegistro from "../component/Login/ContenedorLogin.jsx";
 
 export const Login = () => {
   useEffect(() => {
-    localStorage.clear();
+    // localStorage.clear();
   }, []);
   return (
     <div className="text-center my-md-5 contenedor-main h-100">
