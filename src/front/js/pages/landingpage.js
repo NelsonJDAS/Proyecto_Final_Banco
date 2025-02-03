@@ -10,7 +10,7 @@ import Testimonios from "../component/Landingpage/Testimonios.jsx";
 
 export const Landingpage = () => {
   useEffect(() => {
-    localStorage.clear();
+    // localStorage.clear();
   }, []);
   return (
     <div>
