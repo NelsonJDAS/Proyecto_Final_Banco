@@ -4,7 +4,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 from flask import Flask, request, jsonify, url_for, Blueprint
 import requests
 import os
-from api.models import db, User, Cliente, Cuenta, ConfiguracionUsuario, Transaccion, Notificacion, TarjetaCoordenadas
+from api.models import db, User, Cliente, Cuenta, ConfiguracionUsuario, Transaccion, Notificacion, TarjetaCoordenadas, Producto, Categoria
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from flask_jwt_extended import create_access_token
@@ -1041,3 +1041,56 @@ def get_market_data():
 
     except Exception as e:
         return jsonify({"error": "Ocurrió un error", "details": str(e)}), 500
+    
+@api.route('/products/load', methods=['GET'])
+def load_products_from_file():
+    """
+    Lee el archivo productos.json y lo inserta en la tabla producto.
+    """
+    import json
+    import os
+
+    json_path = os.path.join("src", "amazon_scraper", "productos.json")
+
+    try:
+        with open(json_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+
+        for item in data:
+            # Usamos 'category' ya que ese es el campo que se creó en el spider
+            cat_nombre = item.get('category')
+            category = None
+            if cat_nombre:
+                category = Categoria.query.filter_by(nombre=cat_nombre).first()
+                if not category:
+                    category = Categoria(nombre=cat_nombre)
+                    db.session.add(category)
+                    db.session.flush()  # Asigna un ID a la categoría
+
+            product = Producto(
+                title=item.get('title', ''),
+                price=item.get('price', 'Agotado'),
+                image_url=item.get('image_url', ''),
+                rating=item.get('rating', ''),
+                review_count=item.get('review_count', ''),
+                categoria=category  # Asocia la categoría al producto
+            )
+            db.session.add(product)
+
+        db.session.commit()
+        return jsonify({"msg": "Productos cargados exitosamente"}), 200
+
+    except FileNotFoundError:
+        return jsonify({"error": f"Archivo {json_path} no encontrado"}), 404
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 500
+
+@api.route('/products', methods=['GET'])
+def get_all_products():
+    try:
+        productos = Producto.query.all()
+        data = [producto.serialize() for producto in productos]
+        return jsonify({"productos": data}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500

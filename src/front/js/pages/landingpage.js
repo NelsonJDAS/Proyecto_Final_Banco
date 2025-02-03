@@ -9,9 +9,12 @@ import ContenedorBeneficios from "../component/Landingpage/ContenedorBeneficios.
 import Testimonios from "../component/Landingpage/Testimonios.jsx";
 
 export const Landingpage = () => {
+  const { store, actions } = useContext(Context);
   useEffect(() => {
     // localStorage.clear();
+    actions.fetchProducts()
   }, []);
+  
   return (
     <div>
       <ContenedorPresentacion />

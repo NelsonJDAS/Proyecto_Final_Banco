@@ -38,6 +38,8 @@ const getState = ({ getStore, getActions, setStore }) => {
       chartData: [], // Graficas
       stockData: null, // Datos de mercado
       notificacionesHidden: false,
+      producto: [],
+      cart: JSON.parse(localStorage.getItem("cart") || "[]")
     },
     actions: {
       ObtenerSimbolos: async () => {
@@ -531,7 +533,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       fetchStockData: async (symbol) => {
         try {
           const response = await fetch(`${process.env.s}/api/stock/${symbol}`);
-          if (!response.ok) throw new Error('Error fetching stock data');
+          if (!response) throw new Error('Error fetching stock data');
           const data = await response.json();
 
           // Guardar datos en el store
@@ -540,6 +542,70 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.error('Error al obtener datos de las acciones:', error);
         }
       },
+
+      fetchProducts: () => {
+        const store = getStore();
+        fetch(process.env.BACKEND_URL + '/api/products', {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json"
+          },
+        })
+          .then((response) => {           
+            if (!response.ok) {
+              throw new Error(`Error: ${response.status} - ${response.statusText}`);
+            }
+            return response.json(); // Convertimos la respuesta a JSON
+          })
+          .then((data) => {
+            const productos = data.productos;
+            const productosPorCategoria = productos.reduce((acc, producto) => {
+              const categoria = producto.categoria || 'Sin Categoria';
+              if (!acc[categoria]) {
+                acc[categoria] = [];
+              }
+              acc[categoria].push(producto);
+              return acc;
+            }, {});
+            // Actualizamos el store con los productos agrupados
+            setStore({ ...store, productos: productosPorCategoria });
+            console.log("Productos agrupados:", productosPorCategoria);
+          })
+          .catch((error) => {
+            console.error("Error al obtener productos:", error);
+          });
+      },
+
+      addToCart: (product) => {
+        const store = getStore();
+        const existe = store.cart.find((item) => item.id === product.id);
+        if (!existe) {
+          const updatedCart = [...store.cart, product];
+          setStore({ ...store, cart: updatedCart });
+          localStorage.setItem("cart", JSON.stringify(updatedCart));
+          notyf.success("Producto agregado al carrito");
+        } else {
+          notyf.open({ type: "warning", message: "Producto ya se encuentra en el carrito" });
+        }
+      },
+      
+      // Acción para eliminar un producto específico del carrito y actualizar localStorage
+      removeFromCart: (productId) => {
+        const store = getStore();
+        const updatedCart = store.cart.filter((item) => item.id !== productId);
+        setStore({ ...store, cart: updatedCart });
+        localStorage.setItem("cart", JSON.stringify(updatedCart));
+        notyf.success("Producto eliminado del carrito");
+      },
+      
+      // Acción para vaciar completamente el carrito y actualizar localStorage
+      clearCart: () => {
+        const store = getStore();
+        setStore({ ...store, cart: [] });
+        localStorage.setItem("cart", JSON.stringify([]));
+        notyf.success("Carrito vaciado");
+      },
+      
     },
   };
 };

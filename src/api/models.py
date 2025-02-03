@@ -195,3 +195,53 @@ class Notificacion(db.Model):
             "cliente_id": self.cliente_id
         }
     
+class Categoria(db.Model):
+    __tablename__ = 'categoria'
+
+    id = db.Column(db.Integer, primary_key=True)
+    nombre = db.Column(db.String(100), unique=True, nullable=False)
+
+    # Relación inversa (opcional) para poder acceder a todos los productos de esta categoría
+    productos = db.relationship("Producto", back_populates="categoria")
+
+    def __repr__(self):
+        return f"<Categoria {self.nombre}>"
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "nombre": self.nombre
+        }
+
+
+class Producto(db.Model):
+    __tablename__ = 'producto'
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(255), nullable=False)
+    price = db.Column(db.String(50), nullable=True)
+    image_url = db.Column(db.String(255), nullable=True)
+    rating = db.Column(db.String(50), nullable=True)
+    review_count = db.Column(db.String(50), nullable=True)
+    fecha_creacion = db.Column(db.DateTime, default=datetime.now(timezone.utc))
+
+    # Foreign Key a la tabla categoria
+    categoria_id = db.Column(db.Integer, db.ForeignKey('categoria.id'), nullable=True)
+
+    # Relación con la tabla Categoria
+    categoria = db.relationship("Categoria", back_populates="productos")
+
+    def __repr__(self):
+        return f"<Producto {self.title} - CategoriaID: {self.categoria_id}>"
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "price": self.price,
+            "image_url": self.image_url,
+            "rating": self.rating,
+            "review_count": self.review_count,
+            "fecha_creacion": self.fecha_creacion.isoformat() if self.fecha_creacion else None,
+            "categoria": self.categoria.nombre if self.categoria else None
+        }

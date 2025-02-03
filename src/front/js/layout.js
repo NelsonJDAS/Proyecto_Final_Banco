@@ -30,6 +30,7 @@ import injectContext, { Context } from "./store/appContext";
 import { GraficaIndividual } from "./pages/graficaindividual.js";
 import { Store } from "./pages/store.js";
 import { Individualstore } from "./pages/individualstore.js";
+import { StorePedido } from "./pages/storePedido.js";
 
 //create your first component
 const Layout = () => {
@@ -69,7 +70,8 @@ const Layout = () => {
               <Route element={<Certificaciones />} path="/certificaciones" />
               <Route element={<GraficaIndividual />} path="/grafica/:nombre/:simbolo" />
               <Route element={<Store />} path="/tienda" />
-              <Route element={<Individualstore />} path="/tienda/:id" />
+              <Route element={<Individualstore />} path="/tienda/:categoria/:productId" />
+              <Route element={<StorePedido />} path="/tienda/checkout" />
             </Routes>
           </div>
           <Footer />
