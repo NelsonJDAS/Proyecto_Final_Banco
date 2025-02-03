@@ -77,7 +77,13 @@ export const Login = () => {
 
     // handle para aplicar el codigo
     const HandleCodeSeg = (e) => {
-        SetCodeSend(e.target.value)
+        btnComprobarRef.current.classList.add("boton-cancelado")
+        if (e.target.value.length === 6) {
+            btnComprobarRef.current.classList.remove("boton-cancelado")
+            SetCodeSend(e.target.value)
+        } else {
+            btnComprobarRef.current.classList.add("boton-cancelado")
+        }
     }
 
     // codidicion para que la password este igual en ambos inputs
@@ -116,7 +122,6 @@ export const Login = () => {
     useEffect(() => {
         if (timeCode === 0) {
             clearInterval(CountRef.current)
-            btnComprobarRef.current.classList.add("boton-cancelado")
             InputCode.current.classList.add("boton-cancelado")
             SetTimeCode(600)
             SetCode(false)
@@ -188,6 +193,8 @@ export const Login = () => {
                                 <label className={`my-md-3 fw-bold label-login ${newPassword ? "" : "d-none"}`}>Confirmar Contraseña</label>
                                 <input className={`"mx-md-3 mx-2 text-center py-0 py-md-1 rounded-pill input ${newPassword ? "" : "d-none"}`} type="password" ref={NewPasswordCondition} onChange={HandleNewPassword} />
                                 <label className={`my-md-1 fw-bold label-login ${newPassword ? "d-none" : ""}`}>{t('Login.email')}</label>
+
+
                                 <input className={`mx-md-3 mx-2 text-center py-0 py-md-1 rounded-pill input ${newPassword ? "d-none" : ""}`} placeholder="Email" type="email" onChange={HandleForgotMail} />
                                 {/* contenedor manejo del codigo al correo */}
                                 <p className={`mx-3 text-center text-danger mensaje-condicion ${mensajeForgotMail == "" ? "opacity-0" : "opacity-100"}`}>{mensajeForgotMail}</p>
@@ -202,7 +209,6 @@ export const Login = () => {
                                         <button type="button" className={`rounded-pill btn btn-primary w-100 fw-bold boton-cancelado ${newPassword ? "d-none" : ""}`} ref={buttomCode} onClick={() => {
                                             SetCode(true)
                                             Count()
-                                            btnComprobarRef.current.classList.remove("boton-cancelado")
                                             InputCode.current.classList.remove("boton-cancelado")
                                             actions.sendCode(forgotMail)
                                         }}>{code ?

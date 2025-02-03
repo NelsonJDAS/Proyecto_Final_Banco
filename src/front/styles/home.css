@@ -10,6 +10,18 @@
     transform: translateY(0);
 }
 
+
+/* contenedor de saldo */
+.contenedor-saldo {
+    transform: translateY(0px);
+    transition: transform 0.3s ease, box-shadow 0.5s ease;
+}
+
+.contenedor-saldo:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.3);
+}
+
 /* Animacion para suavizar la transicion de la tabla de movimientos*/
 .elemento-tabla {
     opacity: 0.1;
@@ -25,7 +37,7 @@
 .elemento-segundario {
     opacity: 0.1;
     transform: translateY(20px);
-    transition: opacity 2s ease, transform 2s ease;
+    transition: opacity 2s ease, transform 2s ease, box-shadow 0.5s ease;
 }
 
 .elemento-segundario.visible {
@@ -300,7 +312,7 @@
 }
 
 .contenedor-noti-movimientos {
-    height: 700px;
+    min-height: 700px;
 }
 
 .contenedor-grafica-home {
