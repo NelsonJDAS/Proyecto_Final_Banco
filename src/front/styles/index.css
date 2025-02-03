@@ -217,3 +217,24 @@ footer {
   filter: blur(4px);
   user-select: none;
 }
+
+/*biblioteca alerta */
+/* Cambiar el color de notificaciones de éxito */
+.notyf__toast--success {
+  border-radius: 10px !important;
+}
+
+/* Cambiar el color de notificaciones de error */
+.notyf__toast--error {
+  border-radius: 10px !important;
+}
+
+.notyf-custom {
+  font-weight: bold !important;
+  border-radius: 20px !important;
+  background-color: #1E3A8A !important;
+  width: 400px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}

@@ -1,4 +1,8 @@
+import { Notyf } from 'notyf';
+import 'notyf/notyf.min.css';
+
 const getState = ({ getStore, getActions, setStore }) => {
+  const notyf = new Notyf();
   return {
     store: {
       texto: "text-white",
@@ -17,12 +21,25 @@ const getState = ({ getStore, getActions, setStore }) => {
       tarjetaCoordComp: {},
       transacciones: [],
       listaNotificaciones: [],
+      graficaHome: [
+        { time: "2023-01-01", value: 100 },
+        { time: "2023-01-02", value: 102 },
+        { time: "2023-01-03", value: 101 },
+        { time: "2023-01-04", value: 105 },
+        { time: "2023-01-05", value: 98 },
+        { time: "2023-01-06", value: 99 },
+        { time: "2023-01-07", value: 103 },
+        { time: "2023-01-08", value: 104 },
+        { time: "2023-01-09", value: 98 },
+        { time: "2023-01-10", value: 100 }
+      ],
       simbolos: [],
       grafica: [],
       chartData: [], // Graficas
       stockData: null, // Datos de mercado
       notificacionesHidden: false,
-      producto: []
+      producto: [],
+      cart: JSON.parse(localStorage.getItem("cart") || "[]")
     },
     actions: {
       ObtenerSimbolos: async () => {
@@ -51,9 +68,15 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       CambiarIncognito: (estado) => {
+        estado == true
+          ? notyf.open({ type: 'custom', message: "Modo incógnito activado", className: 'notyf-custom' })
+          : notyf.open({ type: 'custom', message: "Modo incógnito desactivado", className: 'notyf-custom' });
         setStore({ ...getStore(), hidden: estado });
       },
       CambiarNotificaciones: () => {
+        !getStore().notificacionesHidden == true
+          ? notyf.open({ type: 'custom', message: "Notificaciones desactivadas", className: 'notyf-custom' })
+          : notyf.open({ type: 'custom', message: "Notificaciones Activadas", className: 'notyf-custom' });
         setStore({ ...getStore(), notificacionesHidden: !getStore().notificacionesHidden });
       },
       Scroll: () => {
@@ -67,6 +90,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       CambiarModo: (estado) => {
         if (estado === true) {
+          notyf.open({ type: 'custom', message: "Modo claro activado", className: 'notyf-custom' })
           setStore({
             texto: "text-dark",
             fondo: "fondo-modo-claro",
@@ -76,6 +100,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           document.body.classList.remove("fondo-modo-oscuro");
           document.body.classList.add("fondo-modo-claro");
         } else {
+          notyf.open({ type: 'custom', message: "Modo oscuro activado", className: 'notyf-custom' });
           setStore({
             texto: "text-white",
             fondo: "fondo-modo-oscuro",
@@ -170,6 +195,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((response) => {
 
             if (!response.ok) {
+              notyf.error("Error al actualizar datos del usuario:");
               throw new Error(`Error: ${response.status} - ${response.statusText}`);
             }
             return response.json(); // Convertimos la respuesta a JSON
@@ -205,12 +231,12 @@ const getState = ({ getStore, getActions, setStore }) => {
         })
           .then(async (response) => {
             if (response.ok) {
+              notyf.success("Perfil Actualizado")
               const data = await response.json(); // Procesar la respuesta como JSON
               setStore({ ...store, cliente: data.cliente });
-              console.log("Perfil actualizado:", data);
             } else {
+              notyf.error("Error al actualizar el usuario")
               const errorData = await response.json(); // Procesar el error como JSON
-              console.error("Error al actualizar el perfil:", errorData);
             }
           })
           .catch((error) => {
@@ -231,14 +257,14 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then(async (response) => {
             if (response.ok) {
               const data = await response.json(); // Procesar la respuesta como JSON
-              console.log("Contraseña actualizada:", data);
+              notyf.success("Contraseña actualizada")
             } else {
               const errorData = await response.json(); // Procesar el error como JSON
-              console.error("Error al actualizar la contraseña:", errorData);
+              notyf.success("Error al actualizar la contraseña:", errorData);
             }
           })
           .catch((error) => {
-            console.error("Error de red o del servidor:", error);
+            notyf.success("Error de red o del servidor:", error);
           });
       },
 
@@ -359,15 +385,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email: store.email }),
         })
-          .then((response) => response.json())
-          .then((response) => console.log(response))
-          .then((data) => {
-            if (response.ok) {
-              setStore(console.log(Enviado));
-            } else {
-              alert(data.error);
-            }
-          });
+          .then((response) => response.ok ? notyf.success("codigo enviado") : notyf.error("Error al enviar el codigo"))
       },
 
       verifyCode: (email, code) => {
@@ -380,15 +398,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email: store.email, code: store.code }),
         })
-          .then((response) => response.json())
-          .then((response) => console.log(response))
-          .then((data) => {
-            if (response.ok) {
-              alert("Código verificado. Ahora puedes cambiar tu contraseña.");
-            } else {
-              alert(data.error);
-            }
-          });
+          .then((response) => response.ok ? notyf.error("Codigo Incorrecto") : notyf.success("Codigo Verificado"))
       },
 
       sendCoordinatesCode: (email) => {
@@ -512,9 +522,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             "Content-Type": "application/json"
           },
         })
-          .then((response) => {
-            console.log(response);
-            
+          .then((response) => {           
             if (!response.ok) {
               throw new Error(`Error: ${response.status} - ${response.statusText}`);
             }
@@ -537,6 +545,36 @@ const getState = ({ getStore, getActions, setStore }) => {
           .catch((error) => {
             console.error("Error al obtener productos:", error);
           });
+      },
+
+      addToCart: (product) => {
+        const store = getStore();
+        const existe = store.cart.find((item) => item.id === product.id);
+        if (!existe) {
+          const updatedCart = [...store.cart, product];
+          setStore({ ...store, cart: updatedCart });
+          localStorage.setItem("cart", JSON.stringify(updatedCart));
+          notyf.success("Producto agregado al carrito");
+        } else {
+          notyf.open({ type: "warning", message: "Producto ya se encuentra en el carrito" });
+        }
+      },
+      
+      // Acción para eliminar un producto específico del carrito y actualizar localStorage
+      removeFromCart: (productId) => {
+        const store = getStore();
+        const updatedCart = store.cart.filter((item) => item.id !== productId);
+        setStore({ ...store, cart: updatedCart });
+        localStorage.setItem("cart", JSON.stringify(updatedCart));
+        notyf.success("Producto eliminado del carrito");
+      },
+      
+      // Acción para vaciar completamente el carrito y actualizar localStorage
+      clearCart: () => {
+        const store = getStore();
+        setStore({ ...store, cart: [] });
+        localStorage.setItem("cart", JSON.stringify([]));
+        notyf.success("Carrito vaciado");
       },
       
     },

@@ -1,13 +1,18 @@
 .contenedor-principal-transferencias {
-    height: 550px;
-    border-radius: 40px;
+    height: 600px;
+    border-radius: 10px;
     margin-bottom: 40px;
     background-color: #E0E0E0;
     border: 4px double #A0A0A0;
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.3) !important;
 }
 
-.titulo-transferencias {
-    font-size: 60px;
+
+
+
+.titulo-transferencia {
+    font-size: 70px;
+    font-weight: 700;
 }
 
 .concepto-transferencias {
@@ -15,12 +20,20 @@
 }
 
 .btn-transferencias {
+    transition: color 1s ease;
     font-size: 20px;
     font-weight: 900;
+    margin-top: 30px;
+    border: none !important;
+    box-shadow: none !important;
 }
 
 .btn-transferencias:hover {
-    color: rgb(105, 105, 105);
+    color: rgb(154, 154, 154) !important;
+}
+
+.contenedor-modal-transferencias {
+    border-radius: 40px !important;
 }
 
 
@@ -42,4 +55,18 @@
         background-color: #E0E0E0;
         border: 4px double #A0A0A0;
     }
+}
+
+.alerta-transferencia {
+    border-radius: 50px !important;
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+.btn-alerta {
+    border-radius: 20px !important;
+}
+
+.bg-alerta-transferencia {
+    background-color: black !important;
+    color: white !important;
 }

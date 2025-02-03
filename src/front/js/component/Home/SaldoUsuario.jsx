@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../../store/appContext";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
-import Graficas from "../graficas/Graficas.jsx";
+import GraficaHome from "../graficas/GraficaHome.jsx";
 
 const SaldoUsuario = () => {
     const { store, actions } = useContext(Context);
@@ -18,10 +18,10 @@ const SaldoUsuario = () => {
         <div className="row">
             <div className="col-12">
                 <div className="row">
-                    <div className="col-xl-4 col-8 d-flex flex-column text-center">
+                    <div className="col-xl-8 col-8 d-flex flex-column text-center">
                         <p className="fs-1 fw-light">Hola, <span className="fw-bold">{store.cliente.nombre}</span></p>
                     </div>
-                    <div className="col-4 col-xl-8 text-end"><span className="hover fs-3" onClick={() => {
+                    <div className="col-4 col-xl-4 text-end"><span className="hover fs-3" onClick={() => {
                         actions.CambiarIncognito(!store.hidden)
                     }}>{store.hidden ? <FaEyeSlash /> : <FaEye />}</span></div>
                 </div>
@@ -38,9 +38,9 @@ const SaldoUsuario = () => {
                     <div className={`col-6  px-1 text-start ${store.hidden ? "desenfoque" : ""}`}><span className="fs-3 fw-bold num-saldo">{store.cuentas.saldo_retenido}</span></div>
                 </div>
             </div>
-            <div className="col-8">
-                <div className="container">
-                    <Graficas />
+            <div className="col-12">
+                <div className={`container contenedor-grafica-home  ${store.hidden ? "desenfoque" : ""}`}>
+                    <GraficaHome />
                 </div>
             </div>
         </div>
