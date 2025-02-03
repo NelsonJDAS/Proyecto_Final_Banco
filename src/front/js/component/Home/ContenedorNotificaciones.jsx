@@ -7,7 +7,7 @@ import { IoIosArrowForward } from "react-icons/io";
 const ContenedorNotificaciones = () => {
     const { store, actions } = useContext(Context);
 
-    const [pagination, SetPagination] = useState([0, 5])
+    const [pagination, SetPagination] = useState("")
     const flechaDer = useRef("");
     const flechaIzq = useRef("");
     const [notificaciones, setNotificaciones] = useState("");
@@ -19,24 +19,29 @@ const ContenedorNotificaciones = () => {
 
     useEffect(() => {
         setNotificaciones(store.listaNotificaciones);
+        SetPagination([0, 5])
     }, [store.listaNotificaciones]);
 
 
 
     useEffect(() => {
         console.log(pagination)
-        console.log(notificaciones.length)
-        if (pagination[0] - 5 < 0) {
-            flechaDer.current.classList.remove("flecha-cancelada");
-            flechaIzq.current.classList.add("flecha-cancelada");
-        } else if (pagination[0] + 5 >= Math.ceil(store.listaNotificaciones.length / 5)) {
+        if (pagination[0] == 0) {
+            if (pagination[1] > notificaciones.length) {
+                flechaDer.current.classList.add("flecha-cancelada");
+                flechaIzq.current.classList.add("flecha-cancelada");
+            } else {
+                flechaIzq.current.classList.add("flecha-cancelada");
+                flechaDer.current.classList.remove("flecha-cancelada");
+            }
+        } else if (pagination[1] >= notificaciones.length) {
             flechaIzq.current.classList.remove("flecha-cancelada");
             flechaDer.current.classList.add("flecha-cancelada");
         } else {
             flechaIzq.current.classList.remove("flecha-cancelada");
             flechaDer.current.classList.remove("flecha-cancelada");
         }
-    }, [])
+    }, [pagination])
 
     // Función para marcar una notificación como leída
     const onMarcarComoLeida = async (notificacionId) => {

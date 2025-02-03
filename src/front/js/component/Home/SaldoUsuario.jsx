@@ -14,7 +14,7 @@ const SaldoUsuario = () => {
 
     }, [actions.fetchUserDetails])
 
-    return (<div className={`container my-3 p-3 color-principal w-100 rounded-3 ${store.borde} ${userLoad} text-white`}>
+    return (<div className={`container my-3 p-3 color-principal w-100 rounded-3 hover contenedor-saldo ${store.borde} ${userLoad} text-white`}>
         <div className="row">
             <div className="col-12">
                 <div className="row">
