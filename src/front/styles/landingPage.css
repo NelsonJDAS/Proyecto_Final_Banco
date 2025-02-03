@@ -10,6 +10,7 @@
 
 /*Clases para ventajas y beneficios*/
 .contenedor-ventajas {
+    padding: 0px 10px;
     width: 100%;
     height: 350px;
     border-radius: 20px;
@@ -61,7 +62,7 @@
 }
 
 .contenedor-ventajas:hover p {
-    transform: scale(1.1);
+    transform: scale(1.02);
 }
 
 .contenedor-ventajas:hover .logo-ventajas {

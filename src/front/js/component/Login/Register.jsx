@@ -28,46 +28,46 @@ export const Register = () => {
     //handles para cambiar los valores puestos por el usuario
 
     const HandleName = (e) => {
-        // SetName("");
-        // inputName.current.classList.add("border-danger")
-        // if (/[^a-zA-Z\s]/.test(e.target.value)) {
-        //     SetMensajeName("Solo se permiten letras.");
-        // } else {
-        //     inputName.current.classList.remove("border-danger");
-        //     SetName(e.target.value);
-        //     SetMensajeName("");
-        // }
-        SetName(e.target.value);
+        SetName("");
+        btnRef.current.classList.add("boton-cancelado");
+        inputName.current.classList.add("border-danger")
+        if (/[^a-zA-Z\s]/.test(e.target.value)) {
+            SetMensajeName("Solo se permiten letras.");
+        } else {
+            inputName.current.classList.remove("border-danger");
+            SetName(e.target.value);
+            SetMensajeName("");
+        }
     }
     const HandleEmail = (e) => {
-        // SetEmail("");
-        // inputMail.current.classList.add("border-danger")
-        // if (!e.target.value.includes("@")) {
-        //     SetMensajeMail("Debes incluir el '@' en tu correo.");
-        // } else if (/\s/.test(e.target.value)) {
-        //     SetMensajeMail("El correo no puede contener espacios.");
-        // } else {
-        //     inputMail.current.classList.remove("border-danger");
-        //     SetEmail(e.target.value.toLowerCase());
-        //     SetMensajeMail("");
-        // }
-        SetEmail(e.target.value.toLowerCase());
+        SetEmail("");
+        btnRef.current.classList.add("boton-cancelado");
+        inputMail.current.classList.add("border-danger")
+        if (!e.target.value.includes("@")) {
+            SetMensajeMail("Debes incluir el '@' en tu correo.");
+        } else if (/\s/.test(e.target.value)) {
+            SetMensajeMail("El correo no puede contener espacios.");
+        } else {
+            inputMail.current.classList.remove("border-danger");
+            SetEmail(e.target.value.toLowerCase());
+            SetMensajeMail("");
+        }
     }
     const HandlePassword = (e) => {
-        // inputPassword.current.classList.add("border-danger")
-        // SetPassword("");
-        // if (e.target.value.length < 8) {
-        //     SetMensajePassword("La contraseña debe tener al menos 8 caracteres.");
-        // } else if (!/[^a-zA-Z\s]/.test(e.target.value)) {
-        //     SetMensajePassword("Añade al menos un número o símbolo.");
-        // } else if (!/[A-Z]/.test(e.target.value)) {
-        //     SetMensajePassword("Incluye una letra mayúscula.");
-        // } else {
-        //     inputPassword.current.classList.remove("border-danger");
-        //     SetPassword(e.target.value);
-        //     SetMensajePassword("");
-        // }
-        SetPassword(e.target.value);
+        btnRef.current.classList.add("boton-cancelado");
+        inputPassword.current.classList.add("border-danger")
+        SetPassword("");
+        if (e.target.value.length < 8) {
+            SetMensajePassword("La contraseña debe tener al menos 8 caracteres.");
+        } else if (!/[^a-zA-Z\s]/.test(e.target.value)) {
+            SetMensajePassword("Añade al menos un número o símbolo.");
+        } else if (!/[A-Z]/.test(e.target.value)) {
+            SetMensajePassword("Incluye una letra mayúscula.");
+        } else {
+            inputPassword.current.classList.remove("border-danger");
+            SetPassword(e.target.value);
+            SetMensajePassword("");
+        }
     }
 
 
@@ -84,11 +84,11 @@ export const Register = () => {
 
     };
 
-    // useEffect(() => {
-    //     if (name != "" && password != "" && email != "") {
-    //         btnRef.current.disabled = false
-    //     }
-    // }, [name, email, password])
+    useEffect(() => {
+        if (name != "" && password != "" && email != "") {
+            btnRef.current.classList.remove("boton-cancelado");
+        }
+    }, [name, email, password])
 
     return (
         <div className="register">
@@ -106,9 +106,8 @@ export const Register = () => {
                     <p className={`mx-3 text-end text-danger mensaje-condicion ${mensajePassword == "" ? "opacity-0" : "opacity-100"}`}>{mensajePassword}</p>
                 </div>
 
-                {/* agregarle el disabled para usar las condiciones */}
                 <div className="text-center">
-                    <button className={`btn btn-light mt-3 w-50 rounded-pill btn-login ${store.borde} text-white`} onClick={() => { handleRegister() }} ref={btnRef}>{t('Register.ready')}</button>
+                    <button className={`btn btn-light mt-3 w-50 rounded-pill btn-login boton-cancelado ${store.borde} text-white`} onClick={() => { handleRegister() }} ref={btnRef}>{t('Register.ready')}</button>
                 </div>
             </div>
         </div>
