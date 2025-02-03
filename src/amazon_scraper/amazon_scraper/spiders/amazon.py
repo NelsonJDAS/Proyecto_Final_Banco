@@ -64,7 +64,6 @@ class AmazonSpider(scrapy.Spider):
                 yield response.follow(next_page, callback=self.parse, meta={'category': category})
                 
         elif category == "pequeño electrodomestico":
-            # Seleccionamos cada contenedor de producto que tenga role="listitem" y data-asin definido
             for product in response.css('div[role="listitem"][data-asin]'):
                 asin = product.attrib.get("data-asin")
                 if not asin:
@@ -73,15 +72,10 @@ class AmazonSpider(scrapy.Spider):
                 item = AmazonScraperItem()
                 item['category'] = category
                 # item['asin'] = asin
-                # Extraemos el título del <h2> que contiene el nombre del producto
                 item['title'] = product.css('h2.a-size-base-plus.a-spacing-none.a-color-base.a-text-normal span::text').get()
-                # Extraemos el precio del span que contiene la representación textual del precio
                 item['price'] = product.css('span.a-offscreen::text').get()
-                # La imagen la obtenemos del atributo src de la etiqueta <img> con clase s-image
                 item['image_url'] = product.css('img.s-image::attr(src)').get()
-                # Extraemos el rating (por ejemplo, "4,4 de 5 estrellas")
                 item['rating'] = product.css('span.a-icon-alt::text').get()
-                # Y el número de reseñas, usando como selector el enlace con clases de subrayado
                 item['review_count'] = product.css('a.a-link-normal.s-underline-text span::text').get()
                 
                 yield item
