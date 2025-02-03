@@ -238,3 +238,9 @@ footer {
   justify-content: center !important;
   align-items: center !important;
 }
+
+.flecha-cancelada {
+  color: gray;
+  pointer-events: none;
+  opacity: 0.5;
+}

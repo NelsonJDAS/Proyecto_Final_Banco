@@ -112,11 +112,6 @@
     height: 60px;
 }
 
-.flecha-cancelada {
-    color: gray;
-    pointer-events: none;
-    opacity: 0.5;
-}
 
 .simbolo-empresa {
     font-size: 100px;
