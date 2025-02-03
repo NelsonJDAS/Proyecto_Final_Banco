@@ -29,7 +29,7 @@ export const Register = () => {
 
     const HandleName = (e) => {
         SetName("");
-        btnRef.current.classList.add("boton-cancelado");
+        // btnRef.current.classList.add("boton-cancelado");
         inputName.current.classList.add("border-danger")
         if (/[^a-zA-Z\s]/.test(e.target.value)) {
             SetMensajeName("Solo se permiten letras.");
@@ -41,7 +41,7 @@ export const Register = () => {
     }
     const HandleEmail = (e) => {
         SetEmail("");
-        btnRef.current.classList.add("boton-cancelado");
+        // btnRef.current.classList.add("boton-cancelado");
         inputMail.current.classList.add("border-danger")
         if (!e.target.value.includes("@")) {
             SetMensajeMail("Debes incluir el '@' en tu correo.");
@@ -54,7 +54,7 @@ export const Register = () => {
         }
     }
     const HandlePassword = (e) => {
-        btnRef.current.classList.add("boton-cancelado");
+        // btnRef.current.classList.add("boton-cancelado");
         inputPassword.current.classList.add("border-danger")
         SetPassword("");
         if (e.target.value.length < 8) {
@@ -86,6 +86,8 @@ export const Register = () => {
 
     useEffect(() => {
         if (name != "" && password != "" && email != "") {
+            // btnRef.current.classList.remove("boton-cancelado");
+        } else {
             btnRef.current.classList.remove("boton-cancelado");
         }
     }, [name, email, password])
@@ -107,7 +109,7 @@ export const Register = () => {
                 </div>
 
                 <div className="text-center">
-                    <button className={`btn btn-light mt-3 w-50 rounded-pill btn-login boton-cancelado ${store.borde} text-white`} onClick={() => { handleRegister() }} ref={btnRef}>{t('Register.ready')}</button>
+                    <button className={`btn btn-light mt-3 w-50 rounded-pill btn-login ${store.borde} text-white`} onClick={() => { handleRegister() }} ref={btnRef}>{t('Register.ready')}</button>
                 </div>
             </div>
         </div>

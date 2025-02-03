@@ -395,16 +395,24 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       sendCode: (email) => {
-        const store = getStore();
-        const actions = getActions();
-        setStore({ email });
+        try {
+          const store = getStore();
+          const actions = getActions();
+          setStore({ email });
 
-        fetch(process.env.BACKEND_URL + "/api/send-code", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: store.email }),
-        })
-          .then((response) => response.ok ? notyf.success("codigo enviado") : notyf.error("Error al enviar el codigo"))
+          fetch(process.env.BACKEND_URL + "/api/send-code", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json",
+            },
+            body: JSON.stringify({ email: store.email }),
+          })
+            .then((response) => response.json())
+            .then((data) => console.log(data))
+        } catch (error) {
+          return notyf.error("Error al enviar el codigo")
+        }
       },
 
       verifyCode: (email, code) => {
