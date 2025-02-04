@@ -71,7 +71,7 @@ const TablaCol = ({ fecha, monto, cuerpo, importe, saldo, tipo }) => {
                 </p>
             </div>
             <div className={`col-3 text-center fw-bold align-content-center cabecera-movimientos ${store.hidden ? "desenfoque" : ""}`}>
-                <p>{saldo}</p>
+                <p>{saldo.toFixed(2)}</p>
             </div>
         </div>
     );

@@ -27,7 +27,6 @@ const ContenedorPrincipalTransferencias = () => {
     const codigo2Ref = useRef(null)
     const modalRef = useRef(null)
 
-    const [tarjeta, setTarjeta] = useState('');
 
     const generarCodigos = () => {
         codigo1Ref.current.value = ""
@@ -37,8 +36,8 @@ const ContenedorPrincipalTransferencias = () => {
     }
 
     useEffect(() => {
-        setTarjeta(store.tarjetaCoord);
-    }, [store.tarjetaCoord])
+        codigo1 == codigo2 ? generarCodigos() : ""
+    }, [codigo1, codigo2])
 
     useEffect(() => {
         generarCodigos();
@@ -96,7 +95,6 @@ const ContenedorPrincipalTransferencias = () => {
     }
 
     const handleTransferencia = async () => {
-        console.log(tarjeta)
         // Dividir nombre completo en nombre y apellidos
         const [nombre, ...apellidos] = estadoDestinatario.split(' ');
         const cuentaOrigenId = store.cuentas?.id;

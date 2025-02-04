@@ -31,11 +31,11 @@ const SaldoUsuario = () => {
             <div className="col-6 col-xl-4 d-flex flex-column">
                 <div className="row">
                     <div className="col-6 px-1 text-end"><p className="fw-light my-2 saldo-disponible">Saldo Disponible:</p></div>
-                    <div className={`col-6  px-1 text-start ${store.hidden ? "desenfoque" : ""}`}><span className="fs-3 fw-bold num-saldo">{store.cuentas.saldo}</span></div>
+                    <div className={`col-6  px-1 text-start ${store.hidden ? "desenfoque" : ""}`}><span className="fs-3 fw-bold num-saldo">{parseInt(store.cuentas.saldo).toFixed(0)}</span></div>
                 </div>
                 <div className="row">
                     <div className="col-6 px-1 text-end"><p className="fw-light my-2 saldo-disponible">Saldo Retenido: </p></div>
-                    <div className={`col-6  px-1 text-start ${store.hidden ? "desenfoque" : ""}`}><span className="fs-3 fw-bold num-saldo">{store.cuentas.saldo_retenido}</span></div>
+                    <div className={`col-6  px-1 text-start ${store.hidden ? "desenfoque" : ""}`}><span className="fs-3 fw-bold num-saldo">{parseInt(store.cuentas.saldo_retenido).toFixed(0)}</span></div>
                 </div>
             </div>
             <div className="col-12">

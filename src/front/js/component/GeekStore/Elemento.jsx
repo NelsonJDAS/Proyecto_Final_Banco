@@ -40,9 +40,9 @@ const Elemento = ({ id, Nombre, Precio, Imagen, categoria, onViewMore }) => {
     return (
         <div className={`col-6 text-center contenedor-elemento-store ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`} ref={sectionRef}>
             <div className="bg-white elemento-store h-100 text-dark">
-                <div className="row pt-3">
+                <div className="row pt-3 contenedor-titulo">
                     <div className="col-12 text-center">
-                        <span className="nombre-producto bg-white">{Nombre.includes(",") ? Nombre.split(",")[1] : Nombre}</span>
+                        <span className="nombre-producto bg-white">{Nombre.includes(",") ? Nombre.split(",")[0] : Nombre.includes("/") ? Nombre.split("/")[0] : Nombre}</span>
                     </div>
                 </div>
                 <div className="row my-3 imagen-contenedor">
