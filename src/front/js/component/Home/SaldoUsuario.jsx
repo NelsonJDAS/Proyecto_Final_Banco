@@ -18,8 +18,11 @@ const SaldoUsuario = () => {
         <div className="row">
             <div className="col-12">
                 <div className="row">
-                    <div className="col-xl-8 col-8 d-flex flex-column text-center">
-                        <p className="fs-1 fw-light">Hola, <span className="fw-bold">{store.cliente.nombre}</span></p>
+                    <div className="col-xl-8 col-8 d-flex justify-content-center">
+                        <div className="d-flex flex-column">
+                            <p className="fs-1 fw-light">Hola, <span className="fw-bold">{store.cliente.nombre == undefined ? ". . . . . . " : store.cliente.nombre}</span></p>
+                        </div>
+                        <span className="admin-class mx-2">admin</span>
                     </div>
                     <div className="col-4 col-xl-4 text-end"><span className="hover fs-3" onClick={() => {
                         actions.CambiarIncognito(!store.hidden)
@@ -31,11 +34,11 @@ const SaldoUsuario = () => {
             <div className="col-6 col-xl-4 d-flex flex-column">
                 <div className="row">
                     <div className="col-6 px-1 text-end"><p className="fw-light my-2 saldo-disponible">Saldo Disponible:</p></div>
-                    <div className={`col-6  px-1 text-start ${store.hidden ? "desenfoque" : ""}`}><span className="fs-3 fw-bold num-saldo">{parseInt(store.cuentas.saldo).toFixed(0)}</span></div>
+                    <div className={`col-6  px-1 text-start ${store.hidden ? "desenfoque" : ""}`}><span className="fs-3 fw-bold num-saldo">{store.cuentas.saldo == undefined ? "* * *" : parseInt(store.cuentas.saldo).toFixed(0)}</span></div>
                 </div>
                 <div className="row">
                     <div className="col-6 px-1 text-end"><p className="fw-light my-2 saldo-disponible">Saldo Retenido: </p></div>
-                    <div className={`col-6  px-1 text-start ${store.hidden ? "desenfoque" : ""}`}><span className="fs-3 fw-bold num-saldo">{parseInt(store.cuentas.saldo_retenido).toFixed(0)}</span></div>
+                    <div className={`col-6  px-1 text-start ${store.hidden ? "desenfoque" : ""}`}><span className="fs-3 fw-bold num-saldo">{store.cuentas.saldo == undefined ? "* * *" : parseInt(store.cuentas.saldo_retenido).toFixed(0)}</span></div>
                 </div>
             </div>
             <div className="col-12">
