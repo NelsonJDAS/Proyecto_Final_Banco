@@ -27,7 +27,6 @@ const ContenedorPrincipalTransferencias = () => {
     const codigo2Ref = useRef(null)
     const modalRef = useRef(null)
 
-    const [tarjeta, setTarjeta] = useState('');
 
     const generarCodigos = () => {
         codigo1Ref.current.value = ""
@@ -37,8 +36,8 @@ const ContenedorPrincipalTransferencias = () => {
     }
 
     useEffect(() => {
-        setTarjeta(store.tarjetaCoord);
-    }, [store.tarjetaCoord])
+        codigo1 == codigo2 ? generarCodigos() : ""
+    }, [codigo1, codigo2])
 
     useEffect(() => {
         generarCodigos();
@@ -48,9 +47,7 @@ const ContenedorPrincipalTransferencias = () => {
     useEffect(() => {
         const storedId = localStorage.getItem("userId")
         actions.fetchUserDetails(storedId)
-        console.log("Tarjeta de coordenadas", store.tarjetaCoord)
         SetUserLoad(true);
-        console.log(store.cliente)
 
     }, []);
 
@@ -96,7 +93,6 @@ const ContenedorPrincipalTransferencias = () => {
     }
 
     const handleTransferencia = async () => {
-        console.log(tarjeta)
         // Dividir nombre completo en nombre y apellidos
         const [nombre, ...apellidos] = estadoDestinatario.split(' ');
         const cuentaOrigenId = store.cuentas?.id;
@@ -116,7 +112,6 @@ const ContenedorPrincipalTransferencias = () => {
                     montoNumerico,
                     concepto
                 );
-                console.log(resultado);
 
                 // Limpiar formulario
                 setCuentaDestino('');
@@ -146,7 +141,7 @@ const ContenedorPrincipalTransferencias = () => {
             } catch (error) {
                 Swal.fire({
                     title: '¡Error!',
-                    text: 'Error al hacer la transferencia, Confirma los datos solicitados',
+                    text: `${error}`,
                     icon: 'error',
                     confirmButtonText: 'Aceptar',
                     allowOutsideClick: false,
@@ -210,7 +205,7 @@ const ContenedorPrincipalTransferencias = () => {
                 </div>
             </div>
             <h1 className={`text-center titulo-transferencia ${userLoad ? "animacion-arriba visible" : "animacion-arriba"}`}>Transferencias</h1>
-            <div className={`container w-90 contenedor-principal-transferencias ${userLoad ? "animacion-abajo visible" : "animacion-abajo"} ${store.fondo === "fondo-modo-claro" ? "bg-white" : "bg-dark text-white"}`}>
+            <div className={`container w-90 contenedor-principal-transferencias ${userLoad ? "animacion-abajo visible" : "animacion-abajo"} ${store.fondo === "fondo-modo-claro" ? "bg-white" : "bg-transferencia-modo-negro text-white"}`}>
 
                 <div className="row">
                     <div className={`my-2 col-lg-6 d-flex flex-column text-center ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>

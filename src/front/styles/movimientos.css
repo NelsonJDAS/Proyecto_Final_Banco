@@ -11,5 +11,6 @@
 }
 
 .contenedor-movimientos {
-    min-height: 400px;
+    min-height: 600px;
+    padding-bottom: 60px;
 }

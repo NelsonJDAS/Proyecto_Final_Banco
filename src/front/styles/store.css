@@ -23,6 +23,7 @@
 
 .contenedor-principal-store {
     min-height: 500px;
+    padding-bottom: 70px;
 }
 
 .precio::after {
@@ -47,11 +48,13 @@
     margin-top: 60px;
     height: auto;
     border-radius: 30px;
-    transition: transform 0.5s ease;
+    transition: transform 0.5s ease, border-radius 0.5s ease;
 }
 
 
 .elemento-store:hover {
+    border-start-end-radius: 5px;
+    border-start-start-radius: 5px;
     cursor: pointer;
     transform: translateY(-5px);
     box-shadow: 0 20px 20px rgba(0, 0, 0, 0.3);
@@ -101,7 +104,8 @@
 .btn-ver {
     transition: opacity 0.5s ease;
     border-radius: 7px !important;
-    background: linear-gradient(135deg, #FFD700, #FFC300, #B8860B);
+    background: linear-gradient(135deg, #00BFFF, #1E90FF, #00008B);
+
 }
 
 .btn-ver:hover {
@@ -187,6 +191,10 @@
     height: 350px;
 }
 
+.contenedor-titulo-store{
+    height: 75px;
+}
+
 .contenedor-compras {
     height: 200px;
 }
@@ -203,10 +211,25 @@
 }
 
 .contenedor-elementos {
-    height: 675px;
-    overflow: auto;
+    min-height: 300px;
+    max-height: 675px;
+    overflow-y: auto;
 }
 
 .separacion-fondo {
     padding-bottom: 50px;
+}
+
+.animacion-individual-store {
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 2.5s ease, transform 3s ease, color 0.6s ease;
+    transform: translateY(20px);
+}
+
+.animacion-individual-store.visible {
+    pointer-events: all;
+    opacity: 1;
+    transition: opacity 2.5s ease, transform 3s ease, color 0.6s ease;
+    transform: translateX(0);
 }

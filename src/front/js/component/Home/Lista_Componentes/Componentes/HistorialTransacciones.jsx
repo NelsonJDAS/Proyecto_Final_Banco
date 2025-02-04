@@ -13,7 +13,7 @@ const HistorialTransacciones = () => {
             <p className="fs-1 objeto-animado"><BiTransfer /></p>
             <p>Movimientos</p>
             <p>con cada transferencia</p>
-            <span className="align-content-start mb-auto my-2">Historial De Transacciones</span>
+            <p className="align-content-start mb-auto my-2 objeto-animado">Historial De Transacciones</p>
         </div >
     )
 }

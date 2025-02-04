@@ -143,35 +143,6 @@
     box-shadow: 0 20px 20px rgba(0, 0, 0, 0.3);
 }
 
-.animacion-contenedor span {
-    position: relative;
-    display: inline-block;
-    transition: transform 0.3s ease;
-}
-
-.animacion-contenedor span::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    bottom: -5px;
-    width: 0;
-    height: 2.5px;
-    background-color: rgb(110, 110, 110);
-    transition: width 0.3s ease, left 0.3s ease;
-    transform: translateX(-50%);
-}
-
-.animacion-contenedor:hover span::after {
-    width: 60%;
-}
-
-.animacion-contenedor:hover span {
-    justify-content: center;
-}
-
-.animacion-contenedor:hover span {
-    transform: scale(0.9);
-}
 
 .animacion-contenedor:hover .objeto-animado {
     transform: translateY(10px);
@@ -185,7 +156,7 @@
 }
 
 .bg-transferencias {
-    background: linear-gradient(90deg, #AEEEEE, white);
+    background: linear-gradient(90deg, #AEEEEE, #B3E0E5, #80C9C5);
 }
 
 .bg-tarjetas {
@@ -317,4 +288,8 @@
 
 .contenedor-grafica-home {
     margin-top: -35px;
+}
+
+.admin-class {
+    font-size: 11px;
 }

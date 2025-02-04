@@ -10,7 +10,7 @@ const Alertas = () => {
             actions.CambiarNotificaciones(false)
         }}>
             <p className="fs-1 objeto-animado"><IoAlertCircleSharp /></p>
-            <span className="mb-auto my-2">Alertas</span>
+            <p className="mb-auto my-2 objeto-animado">Alertas</p>
             <p className="enlace-claro">Haz clic en el componente</p>
             <p className="enlace-claro">para modificar tus Notificaciones.</p>
         </div >

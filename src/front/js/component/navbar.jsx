@@ -190,15 +190,15 @@ export const Navbar = () => {
 							}}><IoIosLogOut /></span></div>
 						</>)}
 
-					{/*------------------------------ eleccion de idiomas ------------ */}
 					<div className="col-1 text-end align-content-center d-flex justify-content-between">
 						{location.pathname === "/tienda" ? <div className="align-content-center fs-4 mt-3">
-							<div className="d-flex hover" onClick={() => { navigate("/tienda/checkout") }}>
+							<div className={`d-flex hover ${store.cart.length == 0 ? "boton-cancelado" : ""}`} onClick={() => { navigate("/tienda/checkout") }}>
 								<IoCartOutline />
 								<p className="num-compras">{store.cart.length == 0 ? "0" : store.cart.length}</p>
 
 							</div>
 						</div> : ""}
+						{/*------------------------------ eleccion de idiomas ------------ */}
 						<div type="div" className="rounded-circle enlace align-content-center" data-bs-toggle="modal" data-bs-target="#lenguajes"> {/* Ejecuta el modal */}
 							<GiWorld className="simbolo-idioma hover" />
 						</div>

@@ -17,6 +17,7 @@ const ContenedorElementosStore = () => {
     // Estado que guarda la categoría seleccionada; por defecto "móviles"
     const [selectedCategory, setSelectedCategory] = useState("móviles");
 
+
     useEffect(() => {
         actions.Scroll();
         setUserLoad(true);
@@ -42,14 +43,12 @@ const ContenedorElementosStore = () => {
     const HandleInput = (e) => {
 
         const listaFiltrada = filteredProducts.filter((elem) => {
-            console.log(elem)
             return elem.title.toLowerCase().includes(e.target.value.toLowerCase())
         })
         setListaFiltrada(listaFiltrada)
     }
 
     useEffect(() => {
-        console.log(pagination)
         if (pagination[0] - 6 < 0) {
             flechaIzq.current.classList.add("flecha-cancelada");
             flechaDer.current.classList.remove("flecha-cancelada");
@@ -112,6 +111,7 @@ const ContenedorElementosStore = () => {
                 {
                     [...(listaFiltrada.length === 0 ? filteredProducts : listaFiltrada)].slice(pagination[0], pagination[1]).map(product => (
                         <Elemento
+                            calificacion={Math.round(parseInt(product.rating))}
                             key={product.id}
                             id={product.id}
                             Nombre={product.title}

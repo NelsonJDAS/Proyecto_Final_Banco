@@ -273,8 +273,3 @@
 .mensaje-condicion {
     height: 5px;
 }
-
-.boton-cancelado {
-    pointer-events: none;
-    opacity: 0.5;
-}

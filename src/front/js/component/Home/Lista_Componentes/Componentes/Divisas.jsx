@@ -37,7 +37,6 @@ const Divisas = () => {
     }
 
     const HandleInputCalculadora = (e) => {
-        console.log(inputRef.current.value.length);
         inputRef.current.value == "0" ? inputResultadoRef.current.value == "" : ""
         if (inputRef.current.value.length == 8) {
             inputRef.current.value = inputRef.current.value.slice(0, -1)
@@ -49,7 +48,6 @@ const Divisas = () => {
     }
 
     const HandleSelect = (e) => {
-        console.log(inputRef.current.value)
         const cambio = ((divisas.USD / divisas.EUR) * e.target.value) * inputRef.current.value
         inputRef.current.value == "" ?
             inputResultadoRef.current.placeholder = "Coloca una cantidad"
