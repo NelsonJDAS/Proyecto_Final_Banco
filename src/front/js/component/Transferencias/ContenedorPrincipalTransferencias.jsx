@@ -205,7 +205,7 @@ const ContenedorPrincipalTransferencias = () => {
                 </div>
             </div>
             <h1 className={`text-center titulo-transferencia ${userLoad ? "animacion-arriba visible" : "animacion-arriba"}`}>Transferencias</h1>
-            <div className={`container w-90 contenedor-principal-transferencias ${userLoad ? "animacion-abajo visible" : "animacion-abajo"} ${store.fondo === "fondo-modo-claro" ? "bg-white" : "bg-dark text-white"}`}>
+            <div className={`container w-90 contenedor-principal-transferencias ${userLoad ? "animacion-abajo visible" : "animacion-abajo"} ${store.fondo === "fondo-modo-claro" ? "bg-white" : "bg-transferencia-modo-negro text-white"}`}>
 
                 <div className="row">
                     <div className={`my-2 col-lg-6 d-flex flex-column text-center ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>
