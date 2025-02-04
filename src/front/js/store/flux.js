@@ -82,6 +82,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           : notyf.open({ type: 'custom', message: "Notificaciones Activadas", className: 'notyf-custom' });
         setStore({ ...getStore(), notificacionesHidden: !getStore().notificacionesHidden });
       },
+      
       Scroll: () => {
         const navbar = document.getElementById("navbar"); // Seleccionamos el elemento por ID
         if (navbar) {
@@ -112,6 +113,24 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           document.body.classList.remove("fondo-modo-claro");
           document.body.classList.add("fondo-modo-oscuro");
+        }
+      },
+
+      updateUserLanguage: async (user_id, idioma) => {
+        try {
+          const response = await fetch(process.env.BACKEND_URL + "/api/update_config", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ user_id, idioma })
+          });
+          console.log( user_id, idioma);
+          
+          if (!response.ok) throw new Error("Error al actualizar el idioma");
+          const data = await response.json();
+          notyf.success(data.message);
+        } catch (error) {
+          notyf.error("Error al actualizar el idioma");
+          console.error(error);
         }
       },
 
@@ -219,7 +238,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
             let valores = [];
             Object.entries(data.cuentas.transacciones).map((item) => {
-              console.log(item[0])
+              // console.log(item[0])
               let datos = { "time": Math.floor(new Date(item[1].fecha).getTime() / 1000) - item[0], "value": parseInt(item[1].monto) }
               valores.push(datos)
             })
@@ -264,31 +283,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.error("Error de red o del servidor:", error);
           });
       },
-
-      updateUserPassword: (id, newPassword) => {
-        const store = getStore();
-
-        fetch(`${process.env.BACKEND_URL}/api/User/${id}/Password`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ new_password: newPassword })
-        })
-          .then(async (response) => {
-            if (response.ok) {
-              const data = await response.json(); // Procesar la respuesta como JSON
-              notyf.success("Contraseña actualizada")
-            } else {
-              const errorData = await response.json(); // Procesar el error como JSON
-              notyf.success("Error al actualizar la contraseña:", errorData);
-            }
-          })
-          .catch((error) => {
-            notyf.success("Error de red o del servidor:", error);
-          });
-      },
-
 
       sendCoordinatesCard: (userId) => {
         const store = getStore();
@@ -427,8 +421,61 @@ const getState = ({ getStore, getActions, setStore }) => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email: store.email, code: store.code }),
         })
-          .then((response) => response.ok ? notyf.error("Codigo Incorrecto") : notyf.success("Codigo Verificado"))
+        .then((response) => {
+          if (!response.ok) { notyf.error("Código Incorrecto");}
+          return response.json();
+        })
+        .then((data) => {
+          notyf.success("Codigo Verificado");
+          // Guardamos el user_id en el store
+          setStore({ user: data.user_id });
+          console.log(store.user)
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
       },
+
+      updateUserPassword: (id, newPassword) => {
+        fetch(`${process.env.BACKEND_URL}/api/User/${id}/Password`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ new_password: newPassword })
+        })
+          .then(async (response) => {
+            if (response.ok) {
+              const data = await response.json();
+              notyf.success("Contraseña actualizada correctamente");
+            } else {
+              const errorData = await response.json();
+              // Mostrar mensaje de error del servidor o un mensaje genérico
+              notyf.error(errorData.error || "Error al actualizar la contraseña");
+            }
+          })
+          .catch((error) => {
+            notyf.error("Error de red o del servidor");
+            console.error("Error en updateUserPassword:", error);
+          });
+      },
+
+      // updateUserPassword: async (userId, newPassword) => {
+      //   try {
+      //     const response = await fetch(process.env.BACKEND_URL + `/api/User/${userId}/Password`, {
+      //       method: "PUT",
+      //       headers: {
+      //         "Content-Type": "application/json"
+      //       },
+      //       body: JSON.stringify({ newPassword })
+      //     });
+      //     return response; // Luego, en el componente, puedes revisar response.ok para mostrar mensajes
+      //   } catch (error) {
+      //     console.error("Error al actualizar la contraseña:", error);
+      //     throw error;
+      //   }
+      // },
+      
 
       sendCoordinatesCode: (email) => {
         console.log(email)

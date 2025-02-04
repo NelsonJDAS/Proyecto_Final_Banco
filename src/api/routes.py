@@ -11,6 +11,7 @@ from flask_jwt_extended import create_access_token
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from api.mail_config import get_mail
 from datetime import datetime, timezone, timedelta
+from faker import Faker
 
 
 
@@ -47,7 +48,7 @@ def getUsers():
     Users = User.query.all()
     return jsonify([user.serialize() for user in Users]), 201
 
-from datetime import datetime  # Asegúrate de importar datetime
+from datetime import datetime
 
 #                                  REGISTRO, LOGIN, IFORMACION DE USUARIO Y MODIFICACION DE USUARIO
 
@@ -140,54 +141,98 @@ def addUser():
             db.session.add(nueva_notificacion)
             print(f"Notificación creada: {mensaje}")
 
-        # Generar transacciones automáticas
-        print("Generando transacciones...")
-        tipos_transacciones = [
-            {"tipo": "depósito", "monto": 1000.00, "descripcion": "Depósito inicial"},
-            {"tipo": "retiro", "monto": -200.00, "descripcion": "Retiro en cajero"},
-            {"tipo": "transferencia", "monto": -300.00, "descripcion": "Transferencia a otro usuario"},
-            {"tipo": "depósito", "monto": 500.00, "descripcion": "Depósito de salario"},
-            {"tipo": "retiro", "monto": -100.00, "descripcion": "Compra en tienda"},
+            print("Generando transacciones aleatorias...")
+
+        fake = Faker()
+
+        # Generamos 60 fechas aleatorias entre hace 1 año y ahora y las ordenamos cronológicamente
+        fechas_transacciones = sorted([
+            fake.date_time_between(start_date='-1y', end_date='now', tzinfo=timezone.utc)
+            for _ in range(60)
+        ])
+
+        descripciones_deposito = [
+            "Depósito de nómina",
+            "Ingreso por devolución de impuestos",
+            "Transferencia de ahorro",
+            "Ingreso por bono",
+            "Depósito de cheques"
         ]
 
-        for transaccion_data in tipos_transacciones:
+        descripciones_retiro = [
+            "Retiro en cajero automático",
+            "Pago de factura de servicios",
+            "Compra en supermercado",
+            "Extracción para gastos personales",
+            "Retiro en ventanilla bancaria"
+        ]
+
+        descripciones_transferencia = [
+            "Transferencia a cuenta de amigo",
+            "Pago de préstamo personal",
+            "Envío de dinero a familiar",
+            "Transferencia para inversión",
+            "Transferencia de fondos entre cuentas"
+        ]
+
+        # Procesamos las 60 transacciones en orden cronológico
+        for fecha in fechas_transacciones:
             # Guardamos el saldo anterior
-            saldo_anterior = nueva_cuenta.saldo
+            saldo_anterior = round(nueva_cuenta.saldo, 2)
 
-            # Actualizamos el saldo de la cuenta según el tipo de transacción
-            if transaccion_data["tipo"] == "depósito":
-                nueva_cuenta.saldo += transaccion_data["monto"]
-            elif transaccion_data["tipo"] == "retiro":
-                if nueva_cuenta.saldo >= abs(transaccion_data["monto"]):  # Verificar saldo suficiente
-                    nueva_cuenta.saldo += transaccion_data["monto"] 
-                else:
-                    raise ValueError("Saldo insuficiente para realizar el retiro")
-            elif transaccion_data["tipo"] == "transferencia":
-                if nueva_cuenta.saldo >= abs(transaccion_data["monto"]):  # Verificar saldo suficiente
-                    nueva_cuenta.saldo += transaccion_data["monto"]
-                else:
-                    raise ValueError("Saldo insuficiente para realizar la transferencia")
+            # Elegimos aleatoriamente el tipo de transacción
+            tipo = random.choice(["depósito", "retiro", "transferencia"])
+
+            if tipo == "depósito":
+                # Generamos un monto aleatorio para depósito entre 100 y 2000
+                monto = round(random.uniform(100, 2000), 2)
+                nueva_cuenta.saldo = round(saldo_anterior + monto, 2)
+                descripcion = random.choice(descripciones_deposito)
             else:
-                raise ValueError("Tipo de transacción no válido")
+                # Para retiros o transferencias, generamos un monto aleatorio entre 50 y 1000
+                monto_temp = round(random.uniform(50, 1000), 2)
+                # Verificamos si hay saldo suficiente
+                if saldo_anterior >= monto_temp:
+                    # Para retiros y transferencias el monto se resta (valor negativo)
+                    monto = -monto_temp
+                    nueva_cuenta.saldo = round(saldo_anterior + monto, 2)
+                    if tipo == "retiro":
+                        descripcion = random.choice(descripciones_retiro)
+                    else:
+                        descripcion = random.choice(descripciones_transferencia)
+                else:
+                    # Si no hay saldo suficiente, tratamos la transacción como depósito
+                    tipo = "depósito"
+                    monto = round(random.uniform(100, 2000), 2)
+                    nueva_cuenta.saldo = round(saldo_anterior + monto, 2)
+                    descripcion = random.choice(descripciones_deposito)
 
-            # Guardar el saldo posterior
-            saldo_posterior = nueva_cuenta.saldo
+            saldo_posterior = round(nueva_cuenta.saldo, 2)
 
             # Crear la transacción
             nueva_transaccion = Transaccion(
                 cuenta_id=nueva_cuenta.id,
-                tipo=transaccion_data["tipo"],
-                monto=transaccion_data["monto"],
-                descripcion=transaccion_data["descripcion"],
-                fecha=datetime.now(timezone.utc),
+                tipo=tipo,
+                monto=monto,
+                descripcion=descripcion,
+                fecha=fecha,
                 saldo_anterior=saldo_anterior,
                 saldo_posterior=saldo_posterior
             )
             db.session.add(nueva_transaccion)
-
             print(f"Transacción creada: {nueva_transaccion}")
+            
+            # Crear la notificación asociada a la transacción,
+            # usando la misma descripción y fecha de la transacción
 
-        # Confirmar los cambios
+            notif_transaccion = Notificacion(
+                mensaje=descripcion,
+                fecha_creacion=fecha,
+                cliente_id=nuevo_cliente.id)
+            
+            db.session.add(notif_transaccion)
+
+        # Confirmamos los cambios (más adelante en el código)
         db.session.commit()
         print("Cambios confirmados")
 
@@ -208,6 +253,164 @@ def addUser():
         db.session.rollback()  # Revertir cambios si hay un error
         print("Error:", str(e))
         return jsonify({"error": str(e)}), 400
+
+# @api.route('/User/Register', methods=['POST'])
+# def addUser():
+#     data = request.get_json()
+#     print('desde routes', data)
+
+#     # Datos del usuario
+#     name = data.get("name")
+#     email = data.get("email")
+#     password = data.get("password")
+#     is_active = data.get("is_active", True)
+
+#     # Validaciones básicas
+#     if not email or not name or not password:
+#         return jsonify({"mensaje": "Faltan datos obligatorios del usuario"}), 400
+
+#     try:
+#         # Crear usuario
+#         print("Creando usuario...")
+#         new_user = User(
+#             name=name,
+#             email=email,
+#             password=password,
+#             is_active=is_active
+#         )
+#         db.session.add(new_user)
+#         db.session.flush()  
+#         print("Usuario creado:", new_user)
+
+#         # Crear cliente asociado al usuario
+#         print("Creando cliente...")
+#         nuevo_cliente = Cliente(
+#             nombre=name,
+#             apellidos="Introduzca apellido",
+#             telefono="Introduzca numero",
+#             direccion="Introduzca direccion",
+#         )
+#         db.session.add(nuevo_cliente)
+#         db.session.flush() 
+#         print("Cliente creado:", nuevo_cliente)
+
+#         # Asociar el cliente al usuario
+#         new_user.cliente_id = nuevo_cliente.id
+#         db.session.add(new_user)  # Actualizar el usuario con el cliente asociado
+
+#         # Crear cuenta asociada al cliente
+#         print("Creando cuenta...")
+#         nueva_cuenta = Cuenta(
+#             numero_cuenta=f"GEEK-ES24{random.randint(10000000, 99990000)}",
+#             numero_tarjeta=f"{random.randint(1000000000000000, 9999999999999999)}",
+#             cvv=f"{random.randint(100, 999)}",
+#             caducidad="12/30",
+#             tipo_cuenta="Debito",
+#             saldo=0,  # Saldo inicial en 0
+#             saldo_retenido=0,
+#             cliente_id=nuevo_cliente.id,
+#             estado=1,
+#         )
+#         db.session.add(nueva_cuenta)
+#         db.session.flush()
+#         print("Cuenta creada:", nueva_cuenta)
+
+#         print("Generando tarjeta de coordenadas...")
+#         posiciones = [f"{fila}{columna}" for fila in "ABCD" for columna in range(1, 5)]  # de A1 a D4
+#         for pos in posiciones:
+#             codigo = f"{random.randint(0, 9999):04d}"  # 4 dígitos
+#             coordenada = TarjetaCoordenadas(
+#                 cuenta_id=nueva_cuenta.id,
+#                 posicion=pos,
+#                 valor=codigo,
+#             )
+#             db.session.add(coordenada)
+#         print("Tarjeta de coordenadas generada")
+
+#         # Notificaciones por defecto
+#         notificaciones_por_defecto = [
+#             "Bienvenido a Geek-Bank!",
+#             "Configura tu perfil para una mejor experiencia y desbloquear las funcionalidades al completo.",
+#             "Revisa nuestras nuevas funcionalidades.",
+#             "No te olvides de solicitar tu tarjeta de coordenadas"
+#         ]
+
+#         for mensaje in notificaciones_por_defecto:
+#             nueva_notificacion = Notificacion(
+#                 mensaje=mensaje,
+#                 cliente_id=nuevo_cliente.id
+#             )
+#             db.session.add(nueva_notificacion)
+#             print(f"Notificación creada: {mensaje}")
+
+#         # Generar transacciones automáticas
+#         print("Generando transacciones...")
+#         tipos_transacciones = [
+#             {"tipo": "depósito", "monto": 1000.00, "descripcion": "Depósito inicial"},
+#             {"tipo": "retiro", "monto": -200.00, "descripcion": "Retiro en cajero"},
+#             {"tipo": "transferencia", "monto": -300.00, "descripcion": "Transferencia a otro usuario"},
+#             {"tipo": "depósito", "monto": 500.00, "descripcion": "Depósito de salario"},
+#             {"tipo": "retiro", "monto": -100.00, "descripcion": "Compra en tienda"},
+#         ]
+
+#         for transaccion_data in tipos_transacciones:
+#             # Guardamos el saldo anterior
+#             saldo_anterior = nueva_cuenta.saldo
+
+#             # Actualizamos el saldo de la cuenta según el tipo de transacción
+#             if transaccion_data["tipo"] == "depósito":
+#                 nueva_cuenta.saldo += transaccion_data["monto"]
+#             elif transaccion_data["tipo"] == "retiro":
+#                 if nueva_cuenta.saldo >= abs(transaccion_data["monto"]):  # Verificar saldo suficiente
+#                     nueva_cuenta.saldo += transaccion_data["monto"] 
+#                 else:
+#                     raise ValueError("Saldo insuficiente para realizar el retiro")
+#             elif transaccion_data["tipo"] == "transferencia":
+#                 if nueva_cuenta.saldo >= abs(transaccion_data["monto"]):  # Verificar saldo suficiente
+#                     nueva_cuenta.saldo += transaccion_data["monto"]
+#                 else:
+#                     raise ValueError("Saldo insuficiente para realizar la transferencia")
+#             else:
+#                 raise ValueError("Tipo de transacción no válido")
+
+#             # Guardar el saldo posterior
+#             saldo_posterior = nueva_cuenta.saldo
+
+#             # Crear la transacción
+#             nueva_transaccion = Transaccion(
+#                 cuenta_id=nueva_cuenta.id,
+#                 tipo=transaccion_data["tipo"],
+#                 monto=transaccion_data["monto"],
+#                 descripcion=transaccion_data["descripcion"],
+#                 fecha=datetime.now(timezone.utc),
+#                 saldo_anterior=saldo_anterior,
+#                 saldo_posterior=saldo_posterior
+#             )
+#             db.session.add(nueva_transaccion)
+
+#             print(f"Transacción creada: {nueva_transaccion}")
+
+#         # Confirmar los cambios
+#         db.session.commit()
+#         print("Cambios confirmados")
+
+#         # Generar un token para el usuario
+#         access_token = create_access_token(identity=new_user.id)
+#         return jsonify({
+#             "mensaje": "Usuario, cliente, cuenta y transacciones creados exitosamente",
+#             "user": {
+#                 "id": new_user.id,
+#                 "name": new_user.name,
+#                 "email": new_user.email
+#             },
+#             "Notificacion": notificaciones_por_defecto,
+#             "token": access_token
+#         }), 201
+
+#     except Exception as e:
+#         db.session.rollback()  # Revertir cambios si hay un error
+#         print("Error:", str(e))
+#         return jsonify({"error": str(e)}), 400
        
 @api.route('/User/Login', methods=['POST'])
 # @jwt_required()
@@ -388,6 +591,14 @@ def update_password(id):
         return jsonify({"error": "Usuario no encontrado"}), 404
     
     user.password = new_password
+    try:
+        db.session.commit()
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": "Error al actualizar la contraseña", "details": str(e)}), 500
+
+    return jsonify({"message": "Contraseña actualizada correctamente"}), 200
+
 
 #                                                                  PRIVADO PARA JWT
     
@@ -402,18 +613,37 @@ def private():
 @api.route('/update_config', methods=['POST'])
 def update_config():
     data = request.get_json()
-    user_id = data.get('user_id')  # ID del User
+    user_id = data.get('user_id')
     modo_oscuro = data.get('modo_oscuro')
     ocultar_saldo = data.get('ocultar_saldo')
+    idioma = data.get('idioma')
 
     config = ConfiguracionUsuario.query.filter_by(id_usuario=user_id).first()
-    if config:
-        config.modo_oscuro = modo_oscuro
-        config.ocultar_saldo = ocultar_saldo
+    if not config:
+        # Crear una configuración por defecto si no existe
+        config = ConfiguracionUsuario(
+            id_usuario=user_id,
+            modo_oscuro=modo_oscuro if modo_oscuro is not None else True,
+            ocultar_saldo=ocultar_saldo if ocultar_saldo is not None else False,
+            idioma=idioma if idioma else "es",
+            componentesSave=""
+        )
+        db.session.add(config)
+    else:
+        # Actualizar solo los campos recibidos
+        if modo_oscuro is not None:
+            config.modo_oscuro = modo_oscuro
+        if ocultar_saldo is not None:
+            config.ocultar_saldo = ocultar_saldo
+        if idioma:
+            config.idioma = idioma
+    try:
         db.session.commit()
         return jsonify({"message": "Configuración actualizada correctamente"}), 200
-    else:
-        return jsonify({"error": "Configuración no encontrada"}), 404
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 500
+
     
 @api.route('/api/get_config', methods=['GET'])
 def get_config():
@@ -691,83 +921,6 @@ def realizar_transferencia():
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
 
-# @api.route('/transaccion/transferencia', methods=['POST'])
-# def realizar_transferencia():
-#     data = request.get_json()
-
-#     # Datos de la transferencia
-#     cuenta_origen_id = data.get("cuenta_origen_id")
-#     cuenta_destino_id = data.get("cuenta_destino_id")
-#     monto = abs(data.get("monto"))  # Asegurarse de que el monto sea positivo
-#     descripcion = data.get("descripcion", "Transferencia entre cuentas")
-
-#     # Validaciones básicas
-#     if not cuenta_origen_id or not cuenta_destino_id or not monto:
-#         return jsonify({"error": "Faltan datos obligatorios"}), 400
-
-#     try:
-#         # Obtener las cuentas
-#         cuenta_origen = Cuenta.query.get(cuenta_origen_id)
-#         cuenta_destino = Cuenta.query.get(cuenta_destino_id)
-
-#         if not cuenta_origen or not cuenta_destino:
-#             return jsonify({"error": "Cuenta no encontrada"}), 404
-
-#         # Verificar que haya saldo suficiente en la cuenta origen
-#         if cuenta_origen.saldo < monto:
-#             return jsonify({"error": "Saldo insuficiente en la cuenta origen"}), 400
-
-#         # Guardar los saldos anteriores
-#         saldo_anterior_origen = cuenta_origen.saldo
-#         saldo_anterior_destino = cuenta_destino.saldo
-
-#         # Actualizar los saldos de las cuentas
-#         cuenta_origen.saldo -= monto
-#         cuenta_destino.saldo += monto
-
-#         # Guardar los saldos posteriores
-#         saldo_posterior_origen = cuenta_origen.saldo
-#         saldo_posterior_destino = cuenta_destino.saldo
-
-#         # Crear transacción de retiro en la cuenta origen (monto negativo)
-#         transaccion_origen = Transaccion(
-#             cuenta_id=cuenta_origen_id,
-#             tipo="transferencia",
-#             monto=-monto,  # Monto negativo
-#             descripcion=f"Transferencia a cuenta {cuenta_destino.numero_cuenta}",
-#             fecha=datetime.now(timezone.utc),
-#             saldo_anterior=saldo_anterior_origen,  # Saldo antes de la transacción
-#             saldo_posterior=saldo_posterior_origen  # Saldo después de la transacción
-            
-#         )
-#         db.session.add(transaccion_origen)
-
-#         # Crear transacción de depósito en la cuenta destino (monto positivo)
-#         transaccion_destino = Transaccion(
-#             cuenta_id=cuenta_destino_id,
-#             tipo="depósito",
-#             monto=monto,  # Monto positivo
-#             descripcion=f"Transferencia desde cuenta {cuenta_origen.numero_cuenta}",
-#             fecha=datetime.now(timezone.utc),
-#             saldo_anterior=saldo_anterior_destino,  # Saldo antes de la transacción
-#             saldo_posterior=saldo_posterior_destino  # Saldo después de la transacción
-#         )
-#         db.session.add(transaccion_destino)
-
-#         # Guardar los cambios en la base de datos
-#         db.session.commit()
-
-#         return jsonify({
-#             "mensaje": "Transferencia realizada exitosamente",
-#             "saldo_origen": cuenta_origen.saldo,
-#             "saldo_destino": cuenta_destino.saldo,
-#             "transaccion_origen": transaccion_origen.serialize(),
-#             "transaccion_destino": transaccion_destino.serialize()
-#         }), 201
-
-#     except Exception as e:
-#         db.session.rollback()
-#         return jsonify({"error": str(e)}), 500
 
 #                                                   ENVIO DE CODIGO Y VERIFICACIONES POR EMAIL
 
@@ -784,10 +937,10 @@ def send_code():
     if not user:
         return jsonify({'error': 'Usuario no encontrado'}), 404
 
-    # Generar código de seguridad
+    # Generar código de segurida
     code = f"{random.randint(100000, 999999)}"
-    user.reset_code = code
-    # user.code_expires = datetime.now(timezone.utc) + timedelta(minutes=10)  # Código válido por 10 minutos
+    user.reset_code = code  # Asignar el código al usuario
+    user.code_expires = datetime.now(timezone.utc) + timedelta(minutes=10)  # Código válido por 10 minutos
 
     # Guardar cambios en la base de datos
     db.session.commit()
@@ -810,6 +963,24 @@ def send_code():
 
     get_mail().send(msg)
     return jsonify({'message': 'Código enviado exitosamente', 'code': code}), 200
+
+@api.route('/verify-code', methods=['POST'])
+def verify_code():
+    data = request.json
+    email = data.get('email')
+    code = data.get('code')
+
+    if not email or not code:
+        return jsonify({'error': 'Email y código son requeridos'}), 400
+
+    user = User.query.filter_by(email=email).first()
+    if not user:
+        return jsonify({'error': 'Usuario no encontrado'}), 404
+
+    if user.reset_code != code:
+        return jsonify({'error': 'Código incorrecto'}), 400
+    return jsonify({'message': 'Código verificado correctamente', 'user_id': user.id}), 200
+
 
     #                                                             CODIGO PARA TARJETAS DE COORDENADAS
 
@@ -943,22 +1114,6 @@ def send_coordinates_card(user_id):
     except Exception as e:
         return jsonify({"error": "Ha ocurrido un error", "details": str(e)}), 500
     
-@api.route('/verify-code', methods=['POST'])
-def verify_code():
-    data = request.json
-    email = data.get('email')
-    code = data.get('code')
-
-    if not email or not code:
-        return jsonify({'error': 'Email y código son requeridos'}), 400
-
-    user = User.query.filter_by(email=email).first()
-    if not user:
-        return jsonify({'error': 'Usuario no encontrado'}), 404
-
-    if user.reset_code != code:
-        return jsonify({'error': 'Código incorrecto'}), 400
-    return jsonify({'message': 'Código verificado correctamente'}), 200
 
 @api.route('/data', methods=['GET'])
 def get_data():
@@ -1042,6 +1197,8 @@ def get_market_data():
     except Exception as e:
         return jsonify({"error": "Ocurrió un error", "details": str(e)}), 500
     
+    #                                                              IMPORTAR PRODUCTOS DE SCRAPER AMAZON
+    
 @api.route('/products/load', methods=['GET'])
 def load_products_from_file():
     """
@@ -1093,4 +1250,121 @@ def get_all_products():
         data = [producto.serialize() for producto in productos]
         return jsonify({"productos": data}), 200
     except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    
+    #                               RECORDATORIO DE INSTALAR  "pipenv install faker"
+
+@api.route('/create_dummy_users', methods=['POST'])
+def create_dummy_users():
+    """Crea 20 usuarios con datos ficticios y todos los registros relacionados en las demás tablas."""
+    fake = Faker('es_ES')  # Faker en español (puedes usar el locale que prefieras)
+    
+    for _ in range(20):
+        # Crear usuario
+        user = User(
+            name=fake.first_name(),
+            email=fake.unique.email(),
+            password="password",  # Puedes encriptarla si lo deseas
+            is_active=True
+        )
+        db.session.add(user)
+        db.session.flush()  # Para obtener el id del usuario
+        
+        # Crear cliente asociado
+        cliente = Cliente(
+            nombre=user.name,
+            apellidos=fake.last_name(),
+            telefono=fake.phone_number(),
+            direccion=fake.address(),
+            tipo_documento=fake.random_element(elements=('DNI', 'NIE', 'Pasaporte')),
+            numero_documento=fake.unique.ssn()
+        )
+        db.session.add(cliente)
+        db.session.flush()  # Para obtener el id del cliente
+        
+        # Asociar el cliente al usuario
+        user.cliente_id = cliente.id
+        db.session.add(user)
+        
+        # Crear cuenta asociada al cliente
+        cuenta = Cuenta(
+            numero_cuenta=f"GEEK-ES24{random.randint(10000000, 99990000)}",
+            numero_tarjeta=str(random.randint(1000000000000000, 9999999999999999)),
+            cvv=str(random.randint(100, 999)),
+            caducidad="12/30",
+            tipo_cuenta="Debito",
+            saldo=round(random.uniform(1000, 10000), 2),
+            saldo_retenido=0,
+            cliente_id=cliente.id,
+            estado=1,
+        )
+        db.session.add(cuenta)
+        db.session.flush()  # Para obtener el id de la cuenta
+        
+        # Generar la tarjeta de coordenadas para la cuenta
+        posiciones = [f"{fila}{columna}" for fila in "ABCD" for columna in range(1, 5)]  # De A1 a D4
+        for pos in posiciones:
+            codigo = f"{random.randint(0, 9999):04d}"
+            coordenada = TarjetaCoordenadas(
+                cuenta_id=cuenta.id,
+                posicion=pos,
+                valor=codigo,
+            )
+            db.session.add(coordenada)
+        
+        # Crear algunas notificaciones predeterminadas para el cliente
+        mensajes_notif = [
+            "Bienvenido a Geek-Bank!",
+            "Configura tu perfil para una mejor experiencia.",
+            "Revisa nuestras nuevas funcionalidades.",
+            "No te olvides de solicitar tu tarjeta de coordenadas."
+        ]
+        for mensaje in mensajes_notif:
+            notificacion = Notificacion(
+                mensaje=mensaje,
+                cliente_id=cliente.id
+            )
+            db.session.add(notificacion)
+        
+        # Crear algunas transacciones (por ejemplo, un depósito y un retiro)
+        transacciones_data = [
+            {"tipo": "depósito", "monto": 1000.00, "descripcion": "Depósito inicial"},
+            {"tipo": "retiro", "monto": -200.00, "descripcion": "Retiro en cajero"}
+        ]
+        for tdata in transacciones_data:
+            saldo_anterior = cuenta.saldo
+            # Actualizar el saldo según el tipo de transacción
+            if tdata["tipo"] == "depósito":
+                cuenta.saldo += tdata["monto"]
+            else:
+                # En el caso de retiro se resta
+                cuenta.saldo += tdata["monto"]
+            saldo_posterior = cuenta.saldo
+            
+            transaccion = Transaccion(
+                cuenta_id=cuenta.id,
+                tipo=tdata["tipo"],
+                monto=tdata["monto"],
+                descripcion=tdata["descripcion"],
+                fecha=datetime.now(timezone.utc),
+                saldo_anterior=saldo_anterior,
+                saldo_posterior=saldo_posterior
+            )
+            db.session.add(transaccion)
+        
+        # Crear configuración de usuario
+        config = ConfiguracionUsuario(
+            id_usuario=user.id,
+            modo_oscuro=fake.boolean(chance_of_getting_true=70),
+            ocultar_saldo=fake.boolean(chance_of_getting_true=30),
+            idioma="es",
+            componentesSave=""
+        )
+        db.session.add(config)
+    
+    try:
+        db.session.commit()
+        return jsonify({"message": "20 usuarios creados exitosamente con todos sus registros relacionados"}), 201
+    except Exception as e:
+        db.session.rollback()
         return jsonify({"error": str(e)}), 500

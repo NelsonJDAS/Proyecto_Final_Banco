@@ -87,7 +87,7 @@
 //     )
 // }
 
-// export default TarjetasCoordenadas
+// export default TarjetasCoordenadassendCoordinatesCard
 
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../../../../store/appContext";
@@ -115,12 +115,8 @@ const TarjetasCoordenadas = () => {
             if (data && data.tarjeta_coordenadas) {
                 setDatos(data.tarjeta_coordenadas); // 🔹 Usamos directamente la respuesta
                 setSendCode(false);
+                actions.sendCoordinatesCard(store.user.id)
                 notyf.success("Codigo correcto")
-
-                const emailResponse = await actions.sendCoordinatesCard(store.user.id);
-                if (!emailResponse) {
-                    notyf.error("Error al enviar la tarjeta de coordenadas por correo")
-                }
             } else {
                 notyf.error("Código inválido o expirado")
                 setDatos([]);

@@ -89,7 +89,9 @@ export const Login = () => {
     // codidicion para que la password este igual en ambos inputs
     const HandleNewPassword = (e) => {
         if (NewPassword.current.value != "" && NewPasswordCondition.current.value != "" && NewPasswordCondition.current.value == NewPassword.current.value) {
-            btnNewPassword.current.classList.remove("boton-cancelado")
+            btnNewPassword.current.classList.remove("boton-cancelado",
+            SetPassword(NewPassword.current.value)
+            )
         } else {
             btnNewPassword.current.classList.add("boton-cancelado")
         }
@@ -152,10 +154,17 @@ export const Login = () => {
         }
     };
 
+    const HandleChangePassword = async () => {
+        const userId = store.user
+        actions.updateUserPassword(userId, password)
+        console.log(userId, password);
+        
+    }
+
     return (
         <div className="login">
             <div className={`d-flex flex-column align-content-center text-center formulario-login ${store.fondo}`}>
-                <h1 className="titulo-login">{t(userForgotPassword === false ? 'Login.login' : newPassword ? "Confirmar Contraseña" : 'Login.recovery')}</h1>
+                <h1 className="titulo-login">{t(userForgotPassword === false ? 'Login.login' : newPassword ? 'Login.confirm' : 'Login.recovery')}</h1>
                 {/* hace la transicion mas suave  */}
                 <div className={userForgotPassword ? "transicion-recuperar-password " : "transicion-Iniciar-Sesion "}>
                     {/*muestra dependiendo del estado userForgotPassword el contenedor de iniciar sesion o password olvidada*/}
@@ -202,9 +211,11 @@ export const Login = () => {
                                     {/* Usamos el mismo boton para el contenedor confirmar password */}
                                     <div className={`col-12 col-xl-6 col-md-6 my-md-3 my-1 text-start ${newPassword ? "col-xl-12" : ""}`}>
                                         <button type="button" className={`rounded-pill btn btn-primary w-100 fw-bold ${newPassword ? "" : "d-none"} boton-cancelado`} ref={btnNewPassword} onClick={() => {
+                                            HandleChangePassword()
                                             // tu funcion aqui
-                                            actions.updateUserPassword("userId", newPassword)
-                                        }}>Listo!</button>
+                                            // actions.updateUserPassword(userId, newPassword)
+                                            // console.log("desde cambio contraseña",userId, newPassword);
+                                            }}>Listo!</button>
                                         {/* Ocultamos el boton con el estado de newpassword */}
                                         <button type="button" className={`rounded-pill btn btn-primary w-100 fw-bold boton-cancelado ${newPassword ? "d-none" : ""}`} ref={buttomCode} onClick={() => {
                                             SetCode(true)
