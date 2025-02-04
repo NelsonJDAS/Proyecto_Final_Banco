@@ -23,6 +23,7 @@
 
 .contenedor-principal-store {
     min-height: 500px;
+    padding-bottom: 70px;
 }
 
 .precio::after {
