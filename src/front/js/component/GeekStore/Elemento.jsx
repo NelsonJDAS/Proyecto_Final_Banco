@@ -61,7 +61,7 @@ const Elemento = ({ id, Nombre, Precio, Imagen, categoria, onViewMore, calificac
     return (
         <div className={`col-6 text-center contenedor-elemento-store ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`} ref={sectionRef}>
             <div className="bg-white elemento-store h-100 text-dark">
-                <div className="row pt-3 contenedor-titulo">
+                <div className="row pt-3 contenedor-titulo-store">
                     <div className="col-12 text-center">
                         <span className="nombre-producto bg-white">{Nombre.includes(",") ? Nombre.split(",")[0] : Nombre.includes(".") ? Nombre.split(".")[0] : Nombre}</span>
                     </div>

@@ -47,9 +47,7 @@ const ContenedorPrincipalTransferencias = () => {
     useEffect(() => {
         const storedId = localStorage.getItem("userId")
         actions.fetchUserDetails(storedId)
-        console.log("Tarjeta de coordenadas", store.tarjetaCoord)
         SetUserLoad(true);
-        console.log(store.cliente)
 
     }, []);
 
@@ -114,7 +112,6 @@ const ContenedorPrincipalTransferencias = () => {
                     montoNumerico,
                     concepto
                 );
-                console.log(resultado);
 
                 // Limpiar formulario
                 setCuentaDestino('');
@@ -144,7 +141,7 @@ const ContenedorPrincipalTransferencias = () => {
             } catch (error) {
                 Swal.fire({
                     title: '¡Error!',
-                    text: 'Error al hacer la transferencia, Confirma los datos solicitados',
+                    text: `${error}`,
                     icon: 'error',
                     confirmButtonText: 'Aceptar',
                     allowOutsideClick: false,

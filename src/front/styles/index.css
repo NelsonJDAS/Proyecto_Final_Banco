@@ -244,3 +244,8 @@ footer {
   pointer-events: none;
   opacity: 0.5;
 }
+
+.boton-cancelado {
+  pointer-events: none;
+  opacity: 0.5;
+}

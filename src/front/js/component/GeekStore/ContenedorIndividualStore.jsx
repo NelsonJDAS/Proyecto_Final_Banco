@@ -170,7 +170,6 @@ const ContenedorIndividualStore = () => {
                                 <button
                                     className="btn btn-primary fw-bold rounded-pill text-white fs-2 mx-3 btn-individual"
                                     onClick={() => {
-                                        console.log(productData)
                                         actions.addToCart(productData)
                                     }}
                                 >

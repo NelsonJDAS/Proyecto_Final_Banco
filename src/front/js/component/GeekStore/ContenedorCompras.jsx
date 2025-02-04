@@ -116,7 +116,6 @@ const ContenedorCompras = () => {
                 notyf.error("Saldo insuficiente para realizar la transferencia")
             }
         } else {
-            console.log(store.tarjetaCoord)
             notyf.error("Codigos erroneos")
         }
     };
