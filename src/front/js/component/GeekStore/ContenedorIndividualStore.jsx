@@ -97,7 +97,7 @@ const ContenedorIndividualStore = () => {
     return (
         <>
 
-            <div className={`container contenedor-individual-store bg-white text-dark ${userLoad ? "animacion-individual-store visible" : "animacion-individual-store"}`} ref={sectionRef}>
+            <div className={`container contenedor-individual-store bg-white text-dark ${store.borde} ${userLoad ? "animacion-individual-store visible" : "animacion-individual-store"}`} ref={sectionRef}>
                 <div className="row mb-3 py-3">
                     <div className="col-12 text-end align-content-center">
                         <span

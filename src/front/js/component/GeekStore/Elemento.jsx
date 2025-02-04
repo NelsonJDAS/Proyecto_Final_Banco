@@ -1,11 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { RiStarSFill } from "react-icons/ri";
 import { RiStarSLine } from "react-icons/ri";
+import { Context } from "../../store/appContext";
 
 const Elemento = ({ id, Nombre, Precio, Imagen, categoria, onViewMore, calificacion }) => {
     const [userLoad, setUserLoad] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
+    const { store, actions } = useContext(Context);
     const sectionRef = useRef(null);
     const [porcentaje, SetPorcentaje] = useState(0);
 
@@ -59,11 +61,11 @@ const Elemento = ({ id, Nombre, Precio, Imagen, categoria, onViewMore, calificac
     }, [isVisible]);
 
     return (
-        <div className={`col-6 text-center contenedor-elemento-store ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`} ref={sectionRef}>
-            <div className="bg-white elemento-store h-100 text-dark">
+        <div className={`col-6 text-center contenedor-elemento-store ${userLoad ? "animacion-abajo visible" : "animacion-abajo"} `} ref={sectionRef}>
+            <div className={` elemento-store h-100 bg-white text-dark ${store.borde}`}>
                 <div className="row pt-3 contenedor-titulo-store">
                     <div className="col-12 text-center">
-                        <span className="nombre-producto bg-white">{Nombre.includes(",") ? Nombre.split(",")[0] : Nombre.includes(".") ? Nombre.split(".")[0] : Nombre}</span>
+                        <span className={`nombre-producto bg-white`}>{Nombre.includes(",") ? Nombre.split(",")[0] : Nombre.includes(".") ? Nombre.split(".")[0] : Nombre}</span>
                     </div>
                 </div>
                 <div className="row my-3 imagen-contenedor">

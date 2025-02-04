@@ -20,6 +20,7 @@ const ContenedorCompras = () => {
     const [codigo2, setCodigo2] = useState()
 
 
+
     const codigo1Ref = useRef(null)
     const codigo2Ref = useRef(null)
     const modalRef = useRef(null)
@@ -223,7 +224,7 @@ const ContenedorCompras = () => {
                 <div className="container contenedor-elementos">
                     {store.cart && store.cart.length > 0 ? (
                         store.cart.map((item) => (
-                            <div className="row my-3 mx-3 bg-white text-dark animacion-compras" key={item.id}>
+                            <div className={`row my-3 mx-3 bg-white text-dark animacion-compras ${store.borde}`} key={item.id}>
                                 <div className="align-content-center contenedor-compras col-4">
                                     <img
                                         src={item.image_url}

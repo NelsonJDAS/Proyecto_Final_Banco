@@ -580,7 +580,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           localStorage.setItem("cart", JSON.stringify(updatedCart));
           notyf.success("Producto agregado al carrito");
         } else {
-          notyf.open({ type: "warning", message: "Producto ya se encuentra en el carrito" });
+          notyf.open({ type: 'custom', message: "No puedes comprar mas de 1 producto de un producto especifico", className: 'notyf-custom' })
         }
       },
 
