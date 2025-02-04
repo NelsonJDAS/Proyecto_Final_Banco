@@ -3,6 +3,7 @@ import { Context } from "../../store/appContext";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import GraficaHome from "../graficas/GraficaHome.jsx";
+import { RiAdminLine } from "react-icons/ri";
 
 const SaldoUsuario = () => {
     const { store, actions } = useContext(Context);
@@ -22,7 +23,7 @@ const SaldoUsuario = () => {
                         <div className="d-flex flex-column">
                             <p className="fs-1 fw-light">Hola, <span className="fw-bold">{store.cliente.nombre == undefined ? ". . . . . . " : store.cliente.nombre}</span></p>
                         </div>
-                        <span className="admin-class mx-2">admin</span>
+                        <span className="admin-class text-warning mx-2">admin <RiAdminLine /></span>
                     </div>
                     <div className="col-4 col-xl-4 text-end"><span className="hover fs-3" onClick={() => {
                         actions.CambiarIncognito(!store.hidden)
