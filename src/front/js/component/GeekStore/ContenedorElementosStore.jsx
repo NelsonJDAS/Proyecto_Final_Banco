@@ -17,6 +17,7 @@ const ContenedorElementosStore = () => {
     // Estado que guarda la categoría seleccionada; por defecto "móviles"
     const [selectedCategory, setSelectedCategory] = useState("móviles");
 
+
     useEffect(() => {
         actions.Scroll();
         setUserLoad(true);
@@ -112,6 +113,7 @@ const ContenedorElementosStore = () => {
                 {
                     [...(listaFiltrada.length === 0 ? filteredProducts : listaFiltrada)].slice(pagination[0], pagination[1]).map(product => (
                         <Elemento
+                            calificacion={Math.round(parseInt(product.rating))}
                             key={product.id}
                             id={product.id}
                             Nombre={product.title}

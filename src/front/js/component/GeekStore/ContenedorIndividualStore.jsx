@@ -4,6 +4,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { RiArrowGoBackFill } from "react-icons/ri";
+import { RiStarSFill } from "react-icons/ri";
+import { RiStarSLine } from "react-icons/ri";
 
 const ContenedorIndividualStore = () => {
     const [userLoad, setUserLoad] = useState(false);
@@ -17,6 +19,27 @@ const ContenedorIndividualStore = () => {
     // logica para mostrar el conteindo si el usuario esta en la seccion del componente
     const [isVisible, setIsVisible] = useState(false);
     const sectionRef = useRef(null);
+
+
+    const generarEstrellas = (num) => {
+        const estrella1 = "★"
+        const estrella2 = "☆"
+
+        let estrellas = [];
+
+        let numestrellas = num;
+
+        for (let i = 0; i < num; i++) {
+            estrellas.push(estrella1);
+        }
+        while (numestrellas < 5) {
+            estrellas.push(estrella2);
+            numestrellas++
+        }
+
+        return estrellas
+    }
+
 
     // controla la variable para cambiarla si el usuario se encuentra encima del componente
     useEffect(() => {
@@ -143,7 +166,7 @@ const ContenedorIndividualStore = () => {
                             </div>
                         </div>
                         <div className="row h-25">
-                            <div className="col-12 text-end align-content-center">
+                            <div className="col-12 text-end align-content-center mt-3">
                                 <button
                                     className="btn btn-primary fw-bold rounded-pill text-white fs-2 mx-3 btn-individual"
                                     onClick={() => {
@@ -153,6 +176,15 @@ const ContenedorIndividualStore = () => {
                                 >
                                     Agregar al carrito <i><AiOutlineShoppingCart /></i>
                                 </button>
+                            </div>
+                            <div className="col-12 text-end mt-3 fs-4">
+                                <p>
+                                    {
+                                        Object.assign(generarEstrellas(productData == null ? 5 : Math.round(parseInt(productData.rating)))).map((elem, index) => {
+                                            return elem === "★" ? <i key={index} className="text-warning"><RiStarSFill /></i> : <i key={index}><RiStarSLine /></i>
+                                        })
+                                    }
+                                </p>
                             </div>
                         </div>
                     </div>

@@ -7,7 +7,6 @@ import Swal from 'sweetalert2';
 
 import PurchaseModal from "./PurchaseModal.jsx";
 import { Context } from "../../store/appContext.js";
-import TituloStore from "./TituloStore.jsx";
 import { IoClose } from "react-icons/io5";
 
 
