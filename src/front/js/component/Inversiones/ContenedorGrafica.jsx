@@ -24,6 +24,7 @@ const ContenedorGraficas = () => {
             const data = await response.json();
 
 
+
             let valores = [];
             Object.entries(data.values).map((item) => {
                 let datos = { "time": item[1].datetime, "value": parseInt(item[1].close) }
@@ -36,6 +37,7 @@ const ContenedorGraficas = () => {
 
 
         } catch (error) {
+            actions.ActualizarGrafica("")
             console.error('Error al obtener datos del backend:', error);
         }
 
