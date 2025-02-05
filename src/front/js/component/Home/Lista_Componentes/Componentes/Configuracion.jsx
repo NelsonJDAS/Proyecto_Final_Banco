@@ -11,14 +11,15 @@ const Configuracion = () => {
             <p className="align-content-start objeto-animado">Configuración</p>
             <div className="container w-50">
                 <div className="form-check form-switch">
-                    {store.fondo === "fondo-modo-claro" ? <>
+                    {store.modoClaro ? <>
                         <input className="form-check-input hover my-1 fs-4" type="checkbox" role="switch" checked onClick={() => {
-                            actions.CambiarModo(false)
+                            actions.CambiarModo(!store.modoClaro)
+                            console.log("desde el BOTOOOOOOOOOOOOON",store.modoClaro)
                         }} />
                     </> :
                         <>
                             <input className="form-check-input hover my-1 fs-4" type="checkbox" role="switch" onClick={() => {
-                                actions.CambiarModo(true)
+                                actions.CambiarModo(!store.modoClaro)
                             }} />
                         </>}
                     <p className="texto-componente-configuracion">Modo Claro</p>

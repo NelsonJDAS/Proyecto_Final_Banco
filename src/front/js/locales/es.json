@@ -47,7 +47,8 @@
     "name": "Nombre",
     "email": "Dirección de correo electrónico",
     "password": "Contraseña",
-    "forgot": "¿Ha olvidado su contraseña?"
+    "forgot": "¿Ha olvidado su contraseña?",
+    "confirm": "Confirmar Contraseña"
   },
 
   "Forgot": {

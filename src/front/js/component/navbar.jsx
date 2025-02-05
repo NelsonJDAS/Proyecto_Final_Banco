@@ -22,9 +22,14 @@ export const Navbar = () => {
 	const location = useLocation();
 	// Logica para botones onclick modal/traduccion
 	const { t, i18n } = useTranslation();
-	const handleLanguageChange = (language) => {
+	const handleLanguageChange = async (language) => {
 		i18n.changeLanguage(language);
-	};
+	  
+		if (localStorage.getItem("token")) {
+		  const userId = localStorage.getItem("userId");
+		  await actions.updateUserLanguage(userId, language);
+		}
+	  };
 
 	const navigate = useNavigate(null);
 
