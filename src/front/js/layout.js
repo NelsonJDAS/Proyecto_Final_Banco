@@ -52,7 +52,6 @@ const Layout = () => {
             <Routes>
               <Route element={<Landingpage />} path="/" />
               <Route element={<Login />} path="/login" />
-              <Route element={<Home />} path="/home" />
               <Route element={<Politicas />} path="/politicas" />
               <Route element={<Terminos />} path="/terminos" />
               <Route element={<Aviso />} path="/aviso" />
@@ -60,19 +59,24 @@ const Layout = () => {
               <Route element={<Educacion />} path="/educacion" />
               <Route element={<Consejos />} path="/consejos" />
               <Route element={<Metodos />} path="/metodos" />
-              <Route element={<Perfil />} path="/perfil" />
-              <Route element={<Transferencias />} path="/transferencias" />
-              <Route element={<Movimientos />} path="/movimientos" />
               <Route element={<Not_found />} path="*" />
-              <Route element={<Inversiones />} path="/inversiones" />
               <Route element={<Contacto />} path="/contacto" />
               <Route element={<Chat />} path="/chat" />
               <Route element={<Titulos />} path="/titulos" />
               <Route element={<Certificaciones />} path="/certificaciones" />
-              <Route element={<GraficaIndividual />} path="/grafica/:nombre/:simbolo" />
-              <Route element={<Store />} path="/tienda" />
-              <Route element={<Individualstore />} path="/tienda/:categoria/:productId" />
-              <Route element={<StorePedido />} path="/tienda/checkout" />
+              {localStorage.getItem("token") == null ? "" :
+                <>
+                  <Route element={<Individualstore />} path="/tienda/:categoria/:productId" />
+                  <Route element={<Store />} path="/tienda" />
+                  <Route element={<GraficaIndividual />} path="/grafica/:nombre/:simbolo" />
+                  <Route element={<Home />} path="/home" />
+                  <Route element={<Perfil />} path="/perfil" />
+                  <Route element={<Transferencias />} path="/transferencias" />
+                  <Route element={<Movimientos />} path="/movimientos" />
+                  <Route element={<Inversiones />} path="/inversiones" />
+                  {store.cart.length === 0 ? "" : <Route element={<StorePedido />} path="/tienda/checkout" />}
+                </>
+              }
             </Routes>
           </div>
           <Footer />

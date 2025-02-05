@@ -129,6 +129,7 @@ const ContenedorCompras = () => {
         codigo1 == codigo2 ? generarCodigos() : ""
     }, [codigo1, codigo2])
 
+
     useEffect(() => {
         actions.Scroll();
         SetUserLoad(true)
@@ -241,7 +242,10 @@ const ContenedorCompras = () => {
                                 <div className="align-content-center contenedor-compras col-1 px-0 mx-0">
                                     <button
                                         className="btn btn-outline-danger w-100 h-100"
-                                        onClick={() => actions.removeFromCart(item.id)}
+                                        onClick={() => {
+                                            actions.removeFromCart(item.id)
+                                            store.cart.length == 0 ? navigate("/tienda") : ""
+                                        }}
                                     >
                                         <FaRegTrashCan />
                                     </button>

@@ -69,11 +69,11 @@ export const Footer = () => {
 				</div>
 				<div className="col-4 col-md-3 col-lg-2 px-0 px-md-3 flex-column animation">
 					<h6 className="subtitulo d-flex ">{t('Footer.Products and services')}</h6>
-					<span className={`d-flex link-footer ${store.borde_hover}`} onClick={() => {
+					<span className={`d-flex link-footer ${store.borde_hover} ${localStorage.getItem("token") == null ? "boton-cancelado" : ""}`} onClick={() => {
 						actions.Scroll()
 						navigate("/inversiones")
 					}}>Inversiones</span>
-					<span className={`d-flex link-footer ${store.borde_hover}`} onClick={() => {
+					<span className={`d-flex link-footer ${store.borde_hover} ${localStorage.getItem("token") == null ? "boton-cancelado" : ""}`} onClick={() => {
 						actions.Scroll()
 						navigate("/tienda")
 					}}>Tienda</span>

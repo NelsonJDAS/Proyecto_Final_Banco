@@ -191,7 +191,7 @@ export const Navbar = () => {
 						</>)}
 
 					<div className="col-1 text-end align-content-center d-flex justify-content-between">
-						{location.pathname === "/tienda" ? <div className="align-content-center fs-4 mt-3">
+						{location.pathname === "/tienda" || location.pathname.includes("/tienda/") ? <div className="align-content-center fs-4 mt-3">
 							<div className={`d-flex hover ${store.cart.length == 0 ? "boton-cancelado" : ""}`} onClick={() => { navigate("/tienda/checkout") }}>
 								<IoCartOutline />
 								<p className="num-compras">{store.cart.length == 0 ? "0" : store.cart.length}</p>
