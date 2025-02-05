@@ -1,0 +1,9 @@
+/* background de las tarjetas de tarifas */
+
+.bg-elite {
+    background: linear-gradient(135deg, #004e92, #ffd700);
+}
+
+.bg-premium {
+    background: linear-gradient(135deg, #1a2a6c, #3b8d99, #00d4ff);
+}

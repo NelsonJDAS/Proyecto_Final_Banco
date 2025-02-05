@@ -1,0 +1,275 @@
+/* Animacion para suavizar la transicion */
+.elemento-login {
+    width: 90% !important;
+    opacity: 0.1;
+    transform: translatex(100px);
+    transition: opacity 1s ease, transform 2s ease;
+}
+
+.elemento-login.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* alinea todo el contenido al centro */
+.content {
+    align-content: center;
+}
+
+/* elige la altura del contenedor principal para crear o loguearse */
+.contenedor-main {
+    height: 600px;
+}
+
+/* preparamos el contenedor para aplicar animaciones */
+.contenedor {
+    position: relative;
+    width: 768px;
+    max-width: 100%;
+    min-height: 480px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.btn-login {
+    background: linear-gradient(135deg, #2563EB, #93C5FD);
+    color: white;
+    font-weight: 700;
+    transform: scale(1);
+    transition: transform 0.2s ease, background-color 0.5s ease, color 0.3s ease;
+}
+
+.btn-login:hover {
+    background: linear-gradient(135deg, #93C5FD, #2563EB);
+    color: white;
+    transform: scale(1.01);
+}
+
+@media (max-width: 660px) {
+    .contenedor-main {
+        height: 600px !important;
+        width: 100% !important;
+    }
+
+    .elemento-login {
+        border: transparent !important;
+        width: 100% !important;
+    }
+
+    .contenedor {
+        border-radius: 0px;
+        margin: 0px !important;
+    }
+
+    .texto-login {
+        font-size: 10px !important;
+    }
+
+    .input {
+        width: 90%;
+    }
+
+    .label-login {
+        text-align: center !important;
+        font-size: 13px !important;
+        margin: 15px 0px !important;
+    }
+
+    .titulo-login {
+        font-size: 25px !important;
+    }
+
+    .btn-login {
+        width: 90% !important;
+    }
+
+    .link-login {
+        font-size: 18px !important;
+    }
+}
+
+@media (min-width: 660px) and (max-width: 992px) {
+
+    .elemento-login {
+        width: 90% !important;
+    }
+
+    .texto-login {
+        font-size: 15px !important;
+    }
+
+    .input {
+        width: 90%;
+    }
+
+    .label-login {
+        text-align: center !important;
+        font-size: 15px !important;
+        margin: 10px 0px !important;
+    }
+
+    .titulo-login {
+        font-size: 30px !important;
+    }
+
+    .btn-login {
+        width: 90% !important;
+    }
+
+    .link-login {
+        font-size: 30px !important;
+    }
+}
+
+/* estado base de los contenedores antes de la animacion */
+.register,
+.login {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+}
+
+/* contenedor registro */
+.register {
+    width: 50%;
+    opacity: 0;
+    z-index: 1;
+}
+
+/* contenedor login */
+.login {
+    width: 50%;
+    z-index: 2;
+}
+
+
+/* aplicamos la altura maxima para el contenedor login y register */
+.formulario-login {
+    justify-content: center;
+    height: 100%;
+}
+
+/* link encargado del estado para la animacion */
+.btn-desplazar {
+    background-color: transparent;
+    border: 2px solid white;
+}
+
+/* animaciones para mover el contenedor animado encima del contenido */
+.contenedor.panel-derecho-activo .login {
+    transform: translateX(100%);
+}
+
+.contenedor.panel-derecho-activo .register {
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+}
+
+/* contenedor principal del componente animado */
+.contenedor-principal {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: transform 0.6s ease-in-out;
+    z-index: 100;
+}
+
+/* animaciones para mover el contenedor animado */
+.contenedor.panel-derecho-activo .contenedor-principal {
+    transform: translateX(-100%);
+}
+
+.contenedor.panel-derecho-activo .contenedor-interactivo {
+    transform: translateX(50%);
+}
+
+/*componente animado */
+.contenedor-interactivo {
+    position: relative;
+    left: -100%;
+    height: 100%;
+    width: 200%;
+    background: linear-gradient(135deg, #1E3A8A, #2563EB, #93C5FD);
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+}
+
+/* clases generales para el contenedor izquierdo y derecho */
+.contenedor-derecho,
+.contenedor-izquierdo {
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+}
+
+/* clases para la animacion de cada lado*/
+.contenedor-izquierdo {
+    transform: translateX(-20%);
+}
+
+.contenedor-derecho {
+    right: 0;
+    transform: translateX(0);
+}
+
+.contenedor.panel-derecho-activo .contenedor-izquierdo {
+    transform: translateX(0);
+}
+
+.contenedor.panel-derecho-activo .contenedor-derecho {
+    transform: translateX(20%);
+}
+
+
+
+/* aumentar la altura del link encargado de cambiar el estado del contenedor animado */
+.link-login {
+    font-size: 25px !important;
+}
+
+.link-login:hover {
+    opacity: 0.7;
+    transform: scale(0.99);
+}
+
+/* color para todos los inputs */
+.input {
+    background-color: rgb(235, 251, 251);
+}
+
+/* modificamos la transicion y la altura del componente para hacer mas suave el cambio de recuperar password a inciar sesion y de forma contraria */
+.transicion-recuperar-password {
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+}
+
+
+.transicion-Iniciar-Sesion {
+    transform: translateY(-10px);
+    transition: transform 0.3s ease;
+}
+
+
+/* Esto hace que el cursor sea invisible */
+.input-code {
+    caret-color: transparent;
+}
+
+.prueba {
+    background: linear-gradient(135deg, #b71c1c, #e53935, #ff8a80);
+}
+
+.mensaje-condicion {
+    height: 5px;
+}

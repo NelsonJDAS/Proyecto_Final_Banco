@@ -1,3 +1,265 @@
-/* 
-    General Styles used on every website (Don't Repeat Yourself)
-*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+b,
+p,
+span,
+label,
+i,
+a,
+form,
+button,
+div {
+  font-family: Arial, sans-serif;
+}
+
+h1,
+h2,
+h3,
+i,
+b,
+p,
+span,
+label {
+  transition: all 0.6s ease-in-out;
+}
+
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden !important;
+}
+
+
+.w-90 {
+  width: 85%;
+}
+
+.contorno-input:focus {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* solucion de bug para el modal en el /perfil */
+.modal-backdrop {
+  z-index: 0 !important;
+}
+
+.z-1 {
+  z-index: 1;
+}
+
+/* animaciones generales para animacion de izq a derecha , derecha a izquierda, arriba a abajo, abajo a arriba*/
+
+.animacion-izq {
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 2s ease, transform 2s ease, color 0.6s ease;
+  transform: translateX(-100px);
+}
+
+.animacion-izq.visible {
+  pointer-events: all;
+  opacity: 1;
+  transition: opacity 2s ease, transform 2s ease, color 0.6s ease;
+  transform: translateX(0);
+}
+
+.animacion-der {
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 2s ease, transform 2s ease, color 0.6s ease;
+  transform: translateX(100px);
+}
+
+.animacion-der.visible {
+  pointer-events: all;
+  opacity: 1;
+  transition: opacity 2s ease, transform 2s ease, color 0.6s ease;
+  transform: translateX(0);
+}
+
+.animacion-arriba {
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 2s ease, transform 2s ease, color 0.6s ease;
+  transform: translateY(-100px);
+}
+
+.animacion-arriba.visible {
+  pointer-events: all;
+  opacity: 1;
+  transition: opacity 2s ease, transform 2s ease, color 0.6s ease;
+  transform: translateX(0);
+}
+
+.animacion-abajo {
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 2s ease, transform 2s ease, color 0.6s ease;
+  transform: translateY(100px);
+}
+
+.animacion-abajo.visible {
+  pointer-events: all;
+  opacity: 1;
+  transition: opacity 2s ease, transform 2s ease, color 0.6s ease;
+  transform: translateY(0);
+}
+
+
+/*scroll principal*/
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 0;
+  background: none;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(85, 85, 85, 0.756);
+  cursor: grab;
+}
+
+::-webkit-scrollbar-thumb:active {
+  cursor: grabbing;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+
+/* ajusta el footer para que siempre se localize abajo (las clases se ubican en el loyout.js) */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1;
+}
+
+
+/* modo claro y oscuro */
+.fondo-modo-claro {
+  background-color: #ffffff;
+}
+
+.fondo-modo-oscuro {
+  background-color: rgb(52 58 63) !important;
+}
+
+.w-85 {
+  width: 85%;
+}
+
+
+footer {
+  background: #333;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+}
+
+.color-principal {
+  background-color: #1E3A8A;
+}
+
+.color-gradiante {
+  background: linear-gradient(90deg, #1E3A8A, #2563EB);
+}
+
+
+.enlace-claro:hover {
+  /* iluminacion letra para el modo oscuro */
+  cursor: pointer;
+  text-shadow: 0 0 13px rgb(163, 163, 163);
+}
+
+.enlace-oscuro:hover {
+  /* iluminacion letra para el modo claro */
+  cursor: pointer;
+  text-shadow: 0 0 13px rgba(64, 64, 64, 0.542);
+}
+
+.borde-brillante {
+  /* borde con iluminacion */
+  box-shadow: 0 0 10px rgb(110, 110, 110);
+}
+
+
+.letra-brillante {
+  /* iluminacion para letras */
+  text-shadow: 0 0 13px rgb(255, 255, 255);
+}
+
+.hover:hover {
+  /* accion para que el cursor actue como link */
+  cursor: pointer;
+}
+
+/*Desenfocar contenido*/
+
+.desenfoque {
+  filter: blur(4px);
+  user-select: none;
+}
+
+/*biblioteca alerta */
+/* Cambiar el color de notificaciones de éxito */
+.notyf__toast--success {
+  border-radius: 10px !important;
+}
+
+/* Cambiar el color de notificaciones de error */
+.notyf__toast--error {
+  border-radius: 10px !important;
+}
+
+.notyf-custom {
+  font-weight: bold !important;
+  border-radius: 20px !important;
+  background-color: #1E3A8A !important;
+  width: 400px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.flecha-cancelada {
+  color: gray;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.boton-cancelado {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.alerta-transferencia {
+  border-radius: 50px !important;
+  box-shadow: 0 20px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+.btn-alerta {
+  border-radius: 20px !important;
+}
+
+.bg-alerta-transferencia {
+  background-color: black !important;
+  color: white !important;
+}

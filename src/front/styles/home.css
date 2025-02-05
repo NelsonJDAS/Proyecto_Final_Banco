@@ -1,7 +1,296 @@
-/*
-    home.css: This website contains selectors only used in home.css
+/* Animacion para suavizar la transicion del saldo del usuario y contenedor de notificaciones*/
+.elemento {
+    opacity: 0.1;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
 
-    All pages share the styles on index.css but you should create 
-    one more css for each page that will contain the selected used 
-    on that page only (the ones not reused in other pages).
-*/
+.elemento.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* contenedor de saldo */
+.contenedor-saldo {
+    transform: translateY(0px);
+    transition: transform 0.3s ease, box-shadow 0.5s ease;
+}
+
+.contenedor-saldo:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Animacion para suavizar la transicion de la tabla de movimientos*/
+.elemento-tabla {
+    opacity: 0.1;
+    transform: translateX(25px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.elemento-tabla.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.elemento-segundario {
+    opacity: 0.1;
+    transform: translateY(20px);
+    transition: opacity 2s ease, transform 2s ease, box-shadow 0.5s ease;
+}
+
+.elemento-segundario.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* Animacion para suavizar la transicion de los componentes interactivos*/
+
+/* primera columna */
+.componente-izquierdo {
+    opacity: 0;
+    transform: translateX(-100px);
+    transition: opacity 2s ease, transform 2s ease;
+}
+
+.componente-izquierdo.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* segunda columna */
+.componente-izquierdov2 {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.componente-izquierdov2.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* tercera columna */
+.componente-derechov2 {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.componente-derechov2.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* cuarta columna */
+.componente-derecho {
+    opacity: 0;
+    transform: translateX(100px);
+    transition: opacity 2s ease, transform 2s ease;
+}
+
+.componente-derecho.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+.contenedor-componente-interactivo {
+    height: 210px;
+    overflow: hidden;
+}
+
+
+/*animacion contenedor notificaciones*/
+.elemento-noti {
+    opacity: 0.1;
+    transform: translateX(50px);
+    transition: opacity 2s ease, transform 2s ease;
+}
+
+.elemento-noti.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.desvanecer-noti {
+    opacity: 0.1;
+    transition: opacity 2s ease;
+}
+
+.desvanecer-noti.visible {
+    opacity: 1;
+}
+
+
+/*contenedor de notificaciones*/
+
+.contenedor-notificaciones {
+    max-height: 600px;
+    min-height: 550px;
+    border-radius: 10px;
+}
+
+/*animacion para cada contenedor*/
+.animacion-contenedor {
+    transition: transform 0.3s ease, box-shadow 0.5s ease;
+    border-radius: 10px;
+}
+
+.animacion-contenedor:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.3);
+}
+
+
+.animacion-contenedor:hover .objeto-animado {
+    transform: translateY(10px);
+    transform: scale(1.2);
+}
+
+/*Fondos para la lista de componentes*/
+
+.bg-cuentas {
+    background: linear-gradient(to bottom right, black, grey, rgb(146, 146, 146));
+}
+
+.bg-transferencias {
+    background: linear-gradient(90deg, #AEEEEE, #B3E0E5, #80C9C5);
+}
+
+.bg-tarjetas {
+    background: linear-gradient(90deg, #1E3A8A, #2563EB);
+}
+
+.bg-alertas {
+    background: linear-gradient(45deg, #FF4C4C, #FFA500);
+}
+
+.bg-tienda {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.bg-tienda:hover .animacion-store {
+    transform: scale(1.05);
+}
+
+.bg-productos {
+    background: linear-gradient(135deg, #1E3A8A, #2563EB);
+}
+
+.bg-configuracion {
+    background: #F0F4F8;
+}
+
+.bg-atencion {
+    background: linear-gradient(135deg, #00B0FF, #4CAF50);
+}
+
+.bg-redes {
+    background: linear-gradient(135deg, #3b5998, #1da1f2, #e1306c, #ff0000);
+}
+
+.icono-redes-home {
+    transition: transform 0.3s ease, box-shadow 0.5s ease;
+    margin: 0 3px;
+    font-size: 30px;
+}
+
+.bg-divisas {
+    background: linear-gradient(145deg, #023e8a, #03045e);
+}
+
+.scroll-divisas {
+    overflow: auto;
+    height: 190px;
+}
+
+.scroll-divisas::-webkit-scrollbar {
+    width: 10px;
+}
+
+.scroll-divisas::-webkit-scrollbar-thumb {
+    background: #ffffff;
+}
+
+.scroll-divisas::-webkit-scrollbar-thumb:hover {
+    background: rgba(208, 208, 208, 0.756);
+    cursor: grab;
+}
+
+.scroll-divisas::-webkit-scrollbar-thumb:active {
+    cursor: grabbing;
+}
+
+.bg-coordenadas {
+    background: linear-gradient(135deg, #f9f9f9, #e6e6e6);
+}
+
+/*responsive*/
+
+@media (max-width: 768px) {
+    .saldo-disponible {
+        font-size: 10px;
+    }
+
+    .num-saldo {
+        font-size: 20px !important;
+    }
+
+    .cabecera-movimientos {
+        font-size: 12px !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+    .saldo-disponible {
+        font-size: 20px;
+    }
+
+    .num-saldo {
+        font-size: 30px !important;
+    }
+
+    .cabecera-movimientos {
+        font-size: 17px !important;
+    }
+}
+
+.bg-tarjeta {
+    background-color: rgb(197, 197, 197);
+    color: black;
+}
+
+
+.contenedor-valores-tarjeta {
+    border-radius: 20px;
+}
+
+.titulo-tarjeta {
+    font-size: 10px;
+}
+
+.enlace-tarjeta:hover {
+    cursor: default;
+    color: rgb(204, 204, 204);
+}
+
+.input-divisa {
+    border: none !important;
+}
+
+.contenedor-noti-movimientos {
+    min-height: 700px;
+}
+
+.contenedor-grafica-home {
+    margin-top: -35px;
+}
+
+.admin-class {
+    font-size: 11px;
+}

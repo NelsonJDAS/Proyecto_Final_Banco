@@ -1,0 +1,223 @@
+{
+  "Landing1": {
+    "welcome": "¡Bienvenido a GeekBank!",
+    "welcome1": "En Geek Bank reinventamos la forma en que interactúas con tu dinero. Somos más que un banco",
+    "welcome2": "tradicional; somos una plataforma diseñada para brindarte comodidad, transparencia y control total",
+    "welcome3": "sobre tus finanzas, todo respaldado por la última tecnología financiera."
+  },
+
+  "Landing2": {
+    "p1_1": "Beneficios de GeekBank",
+    "p1_2": "Soporte 24/7",
+    "p1_3": "para que nunca estés solo",
+    "p2": "Crece con Geek Bank",
+    "p3": "Sin comisiones ocultas",
+    "p4": "Créditos y préstamos con intereses competitivos",
+    "p5": "Seguridad",
+    "p6": "Banca Movil",
+    "p7": "Banca Global",
+    "p8": "Ahorro automatizado con solo un click"
+  },
+
+  "Landing3": {
+    "p1": "¡Empieza Ahora!",
+    "p2": "Regístrate ahora para disfrutar de todos nuestros beneficios.",
+    "btn": "Entrar"
+  },
+
+  "Landing4": {
+    "h2": "¿Por qué elegir GeekBank?",
+    "p1_1": "Servicio de tus finanzas",
+    "p1_2": "Nuestra plataforma es intuitiva y está diseñada para simplificar tu vida.",
+    "p2_1": "Transparencia",
+    "p2_2": "Sin comisiones ocultas ni sorpresas desagradables.",
+    "p3_1": "Valoramos tu tiempo",
+    "p3_2": "Realiza transacciones y gestiona tus cuentas en cuestión de segundos, estés donde estés."
+  },
+
+  "Landing5": {
+    "t1": "Desde que me cambié a este banco, todo ha sido mucho más sencillo. La interfaz de la app es súper fácil de usar y las transferencias son rápidas.",
+    "t2": "Claro, transparente y con excelente soporte. No hay comisiones escondidas. ¡Muy recomendable!",
+    "t3": "El soporte es rápido, útil y siempre está disponible. Me resolvieron todas mis dudas al instante."
+  },
+
+  "Login": {
+    "login": "Iniciar sesión",
+    "recovery": "Recuperar contraseña",
+    "name": "Nombre",
+    "email": "Dirección de correo electrónico",
+    "password": "Contraseña",
+    "forgot": "¿Ha olvidado su contraseña?",
+    "confirm": "Confirmar Contraseña"
+  },
+
+  "Forgot": {
+    "recovery2": "No te preocupes, te ayudaremos a recuperar el acceso a tu cuenta. Introduzca la dirección de correo electrónico asociada a su cuenta. Te enviaremos un código de verificación que podrás utilizar para restablecer tu contraseña.",
+    "sendCode": "Enviar código",
+    "code": "Código",
+    "check": "Comprobar",
+    "return": "Volver Atrás"
+  },
+
+  "Register": {
+    "welcome!": "",
+    "register": "Regístrese aquí",
+    "cuenta?": "¿Ya tienes una cuenta?",
+    "loginfunc": "Inicia sesión para acceder a todas tus funcionalidades de la web",
+    "hello!": "¡Hola!",
+    "sinCuenta": "¿Aún no tiene cuenta?",
+    "sinCuenta2": "Crear una es rapido y sencillo",
+    "sinCuenta3": "Haz clic en el botón de abajo para comenzar.",
+    "create": "Crear una cuenta",
+    "ready": "¡Listo!"
+  },
+  "perfil": {
+    "modify": "Modifica tus datos aqui!",
+    "name": "Nombre Completo",
+    "subname": "Apellidos",
+    "address": "Direccion",
+    "phone": "Telefono",
+    "doctype": "Tipo de documento",
+    "type1": "DNI",
+    "type2": "NIE",
+    "type3": "Pasaporte",
+    "docnumb": "Num Documento",
+    "btn": "Confirmar Cambios"
+  },
+  "Footer": {
+    "Contact information": "Información de contacto",
+    "Contact": "Contacto",
+    "Chat": "Chat",
+    "Legal links": "Enlaces legales",
+    "Privacy Policy": "Politica de privacidad",
+    "Term of conditions": "Termino de condiciones",
+    "Legal notice": "Aviso legal",
+    "Links to resources": "Enlaces a recursos",
+    "Rates and commissions": "Tarifas y comisiones",
+    "Education": "Educacion",
+    "Security": "Seguridad",
+    "Tips": "Consejos",
+    "Security methods": "Metodos de Seguridad",
+    "Coordinate card": "Tarjeta de coordenadas",
+    "Products and services": "Productos y servicios",
+    "Shop": "Tienda",
+    "Insurance": "Seguros",
+    "Loans": "Prestamos",
+    "Certifications": "Certificaciones",
+    "Certified titles": "Titulos certificados",
+    "Security titles": "Titulos de seguridad"
+  },
+  "Navbar": {
+    "Languages": "Idiomas",
+    "Movements": "Movimientos",
+    "Transfers": "Transferencias",
+    "perfil": "Perfil",
+    "Exch/Currency": "Cambio/Divisas",
+    "Investments": "Inversiones"
+  },
+  "Politicas": {
+    "p1": "Politicas de Privacidad",
+    "p2": "En GeekBank, valoramos profundamente y protegemos con el máximo compromiso la privacidad de todos y cada uno de nuestros clientes. Somos conscientes de que la confianza que depositan en nosotros es fundamental para construir relaciones sólidas y duraderas. Por ello, implementamos políticas estrictas para garantizar que su información personal esté siempre protegida. Esta política de privacidad tiene como objetivo detallar cómo recopilamos, usamos, almacenamos y salvaguardamos su información personal, asegurando que se trate con total cuidado, respeto y confidencialidad.",
+    "p3": "Información que Recopilamos",
+    "p4": "Recopilamos información personal que usted nos proporciona al abrir una cuenta, como su nombre, dirección, correo electrónico, número de teléfono y datos financieros.",
+    "p5": "Beneficios del Uso de la Información",
+    "c1": "Proveer y gestionar los servicios bancarios",
+    "c2": "Procesar transacciones y pagos",
+    "c3": "Mejorar nuestros productos y servicios",
+    "c4": "Cumplir con obligaciones legales y regulatorias",
+    "p6": "Proteccion Privacidad",
+    "p7": "En GeekBank, la seguridad de su información personal y financiera es nuestra máxima prioridad. Implementamos tecnología de encriptación avanzada y autenticación multifactor para proteger sus datos y prevenir accesos no autorizados. Utilizamos sistemas de monitoreo continuo para detectar y bloquear cualquier intento de fraude, asegurando que sus transacciones se realicen de manera segura. El acceso a su información está restringido a empleados autorizados, quienes reciben capacitación constante en prácticas de seguridad. Nuestra plataforma de banca digital está diseñada para brindarle una experiencia segura, con auditorías regulares para garantizar su protección. Nunca compartimos su información personal sin su consentimiento, y estamos comprometidos con la mejora continua de nuestras medidas de seguridad para mantener sus datos protegidos frente a cualquier amenaza. En GeekBank, su confianza y seguridad son nuestra prioridad. Si tiene alguna pregunta, no dude en contactarnos.",
+    "p8": "Política de Compartición de Datos en GeekBank",
+    "p9": "En GeekBank, valoramos su privacidad y nos comprometemos a proteger su información personal. Solo compartimos sus datos con terceros en los siguientes casos:",
+    "c5": "Servicios",
+    "c6": "Legales",
+    "c7": "Consentimiento",
+    "p10": "En todo momento, nos aseguramos de que cualquier compartición de datos se realice de manera responsable y transparente, priorizando siempre su seguridad y privacidad. Si tiene alguna pregunta sobre cómo compartimos sus datos, puede contactarnos en cualquier momento."
+  },
+  "terminos": {
+    "p1": "Términos y Condiciones - GeekBank",
+    "p2": "Bienvenido a GeekBank. Al acceder y utilizar nuestros servicios, usted acepta cumplir con los siguientes términos y condiciones. Estos términos son un acuerdo legal entre usted y GeekBank, y su aceptación es necesaria para hacer uso de nuestros productos y servicios. Le recomendamos leer detenidamente toda la información contenida en este documento, ya que al utilizar nuestros servicios, está aceptando los términos aquí establecidos.",
+    "p3": "Uso de Nuestros Servicios",
+    "p4": "En GeekBank, ofrecemos soluciones bancarias seguras y eficientes para satisfacer sus necesidades financieras. Al utilizar nuestros servicios, usted se compromete a hacerlo de manera responsable y conforme a las leyes y regulaciones aplicables. Es su responsabilidad proporcionar información precisa y actualizada al registrarse y realizar transacciones. No debe utilizar nuestros servicios para actividades ilegales, fraudulentas o malintencionadas. GeekBank se reserva el derecho de suspender o cancelar su acceso si detectamos un uso inapropiado. Además, le recomendamos proteger sus dispositivos y datos personales con medidas de seguridad adecuadas. Al acceder a nuestros servicios, se compromete a seguir estos términos para garantizar una experiencia segura y eficiente.",
+    "p5": "Responsabilidades Del Cliente",
+    "p6": "En GeekBank, ofrecemos soluciones bancarias seguras y eficientes para satisfacer sus necesidades financieras. Al utilizar nuestros servicios, usted se compromete a hacerlo de manera responsable y conforme a las leyes y regulaciones aplicables. Es su responsabilidad proporcionar información precisa y actualizada al registrarse y realizar transacciones. No debe utilizar nuestros servicios para actividades ilegales, fraudulentas o malintencionadas. GeekBank se reserva el derecho de suspender o cancelar su acceso si detectamos un uso inapropiado. Además, le recomendamos proteger sus dispositivos y datos personales con medidas de seguridad adecuadas. Al acceder a nuestros servicios, se compromete a seguir estos términos para garantizar una experiencia segura y eficiente.",
+    "ti1": "Informacion",
+    "text1": "Proveer información veraz y actualizada",
+    "ti2": "Confidencialidad",
+    "text2": "Proteger la confidencialidad de sus credenciales",
+    "ti3": "Responsabilidad",
+    "text3": "Notificar inmediatamente cualquier uso no autorizado de su cuenta",
+    "p7": "Limitaciones de Responsabilidad",
+    "p8": "GeekBank no será responsable por pérdidas o daños derivados de:",
+    "c1": "El uso indebido de los servicios por parte del cliente",
+    "c2": "Interrupciones en el servicio por causas fuera de nuestro control",
+    "c3": "Errores en la información proporcionada por el cliente"
+  },
+  "aviso": {
+    "p1": "Aviso Legal - GeekBank",
+    "p2": "Este aviso legal tiene como propósito regular el acceso, el uso y la navegación dentro del sitio web, así como los servicios que son proporcionados por GeekBank. Al ingresar y utilizar este sitio web, usted acepta de manera expresa y sin reservas las condiciones y términos establecidos en el presente aviso. Es importante que el usuario lea detenidamente este documento, ya que en él se detallan las normas que rigen tanto la interacción con los contenidos y servicios ofrecidos por GeekBank, como las responsabilidades y derechos aplicables tanto al usuario como a los administradores del sitio. Al continuar utilizando el sitio web, se entiende que el usuario ha comprendido y aceptado plenamente todas las disposiciones aquí expuestas. Si no está de acuerdo con alguna de las condiciones especificadas, le recomendamos que se abstenga de hacer uso del sitio web o de cualquiera de los servicios relacionados. GeekBank se reserva el derecho de modificar, actualizar o eliminar en cualquier momento las condiciones de este aviso legal, por lo que es responsabilidad del usuario revisarlo periódicamente para asegurarse de estar al tanto de cualquier cambio. Estas modificaciones entrarán en vigor desde el momento de su publicación en el sitio web. El acceso al sitio web y su uso están condicionados al cumplimiento de las normativas aplicables, incluyendo pero no limitándose a las leyes de propiedad intelectual, protección de datos y comercio electrónico..",
+    "p3": "Información Legal y de Contacto de GeekBank",
+    "p4": "GeekBank es una entidad financiera que opera de manera completamente legítima, cumpliendo con todas las normativas legales y regulaciones establecidas por las autoridades competentes. Como institución responsable, nos comprometemos a garantizar la seguridad, la transparencia y la confianza de nuestros clientes en cada uno de los servicios que ofrecemos. Para más información o consultas, puede ponerse en contacto con nosotros a través de los siguientes medios:",
+    "c1": "Dirección  --   Calle del perdido, Ciudad Geek.",
+    "c2": "Correo electrónico  --  geeksacademybank@gmail.com",
+    "c3": "Teléfono  --  +34 600 18 16 22",
+    "p5": "Propiedad Intelectual",
+    "p6": "Todos los contenidos, marcas, logos, imágenes, textos y diseños presentes en este sitio web son propiedad exclusiva de GeekBank o de sus licenciantes, y están protegidos por las leyes de propiedad intelectual aplicables.",
+    "p7": "Uso Permitido",
+    "c4": "Reproducir, distribuir o modificar los contenidos del sitio sin autorización previa.",
+    "c5": "Utilizar el sitio para actividades fraudulentas o ilícitas.",
+    "c6": "Intentar acceder sin autorización a sistemas o datos de GeekBank."
+  },
+  "tarifas": {
+    "p1": "Tarifas - GeekBank",
+    "p2": "En GeekBank, trabajamos incansablemente para garantizar que nuestros clientes tengan acceso a información clara, precisa y completamente transparente sobre nuestras tarifas y comisiones. Nos enorgullece ofrecer una experiencia bancaria excepcional que prioriza la confianza y la claridad en cada interacción. Sabemos que entender los costos asociados con los servicios bancarios es fundamental para tomar decisiones informadas, por lo que nos aseguramos de que toda la información relacionada con nuestras tarifas y comisiones sea presentada de manera detallada, comprensible y sin sorpresas.",
+    "p3": "Cuentas Bancarias",
+    "p4": "En GeekBank, trabajamos incansablemente para garantizar que nuestros clientes tengan acceso a información clara, precisa y completamente transparente sobre nuestras tarifas y comisiones. Nos enorgullece ofrecer una experiencia bancaria excepcional que prioriza la confianza y la claridad en cada interacción. Sabemos que entender los costos asociados con los servicios bancarios es fundamental para tomar decisiones informadas, por lo que nos aseguramos de que toda la información relacionada con nuestras tarifas y comisiones sea presentada de manera detallada, comprensible y sin sorpresas.",
+    "t1": "Mantenimiento de cuenta",
+    "text1": "5 € mensuales, exento con saldo promedio mayor a 1,000 €.",
+    "t2": "Transferencias internas",
+    "text2": "Sin costo. Puedes enviar dinero entre cuentas del mismo banco de forma gratuita",
+    "t3": "Transferencias internacionales",
+    "text3": "15 € por transacción. Este costo se aplica cuando realizas transferencias a bancos en otros países",
+    "p5": "Tarjetas",
+    "p6": "En GeekBank, trabajamos incansablemente para garantizar que nuestros clientes tengan acceso a información clara, precisa y completamente transparente sobre nuestras tarifas y comisiones. Nos enorgullece ofrecer una experiencia bancaria excepcional que prioriza la confianza y la claridad en cada interacción. Sabemos que entender los costos asociados con los servicios bancarios es fundamental para tomar decisiones informadas, por lo que nos aseguramos de que toda la información relacionada con nuestras tarifas y comisiones sea presentada de manera detallada, comprensible y sin sorpresas.",
+    "p7": "Prestamos y Créditos",
+    "p8": "Ofrecemos condiciones claras y flexibles para nuestros préstamos.",
+    "t4": "Comisión por apertura",
+    "text4": "1.5% del monto solicitado",
+    "t5": "Pago anticipado",
+    "text5": "No genera ningún costo adicional",
+    "t6": "Intereses moratorios",
+    "text6": "3% mensual sobre saldos vencidos",
+    "p9": "Otros Servicios",
+    "p10": "Conoce los costos asociados a servicios adicionales.",
+    "c1": "Emisión de cheques de gerencia: 10 € por cada cheque emitido.",
+    "c2": "Reposición de tarjeta: 15 € por reemplazo en caso de pérdida o daño.",
+    "c3": "Consulta de saldo en cajeros externos: 1 € por cada consulta realizada fuera de nuestra red."
+  },
+  "educacion": {
+    "p1": "Educación Financiera - GeekBank",
+    "p2": "En GeekBank, creemos que la educación financiera es clave para ayudar a nuestros clientes a tomar decisiones informadas y gestionar su dinero de manera eficiente. Nos comprometemos a ser más que una institución financiera, ofreciendo recursos educativos diseñados para todos los niveles de conocimiento. Desde guías sobre presupuestos, ahorro e inversiones, hasta herramientas interactivas y consejos sobre planificación financiera, estamos aquí para brindarle el apoyo necesario en cada paso. Nuestro objetivo es asegurarnos de que pueda tomar decisiones con confianza, con acceso a la información más relevante y actualizada para mejorar su salud financiera y alcanzar sus metas.",
+    "p3": "¿Por qué es importante la educación financiera?",
+    "p4": "Comprender los conceptos financieros básicos le permite:",
+    "text1": "Planificar y administrar su presupuesto personal de manera efectiva",
+    "text2": "Evitar deudas innecesarias y manejar las existentes",
+    "text3": "Ahorrar para metas futuras como la compra de una casa o la jubilación",
+    "p5": "Recursos",
+    "p6": "En GeekBank, ofrecemos los siguientes recursos para apoyar su educación financiera:",
+    "t1": "Guías y artículos",
+    "t1t": "Contenido sobre préstamos, inversiones y ahorro",
+    "t2": "Simuladores financieros",
+    "t2t": "Participe en nuestras sesiones gratuitas sobre finanzas personales",
+    "t3": "Seminarios web",
+    "t3t": "Herramientas para calcular presupuestos y préstamos",
+    "p7": "Consejos Prácticos",
+    "c1": "Guías y artículos: Contenido sobre préstamos, inversiones y ahorro",
+    "c2": "Seminarios web: Sesiones gratuitas sobre finanzas personales",
+    "c3": "imuladores financieros: Herramientas para calcular presupuestos y préstamos"
+  },
+  "consejos": {
+    "p1": "Consejos de Seguridad - GeekBank",
+    "p2": "En GeekBank, la seguridad de nuestros clientes es nuestra máxima prioridad. A continuación, le proporcionamos una serie de consejos útiles para proteger su información y mantener sus transacciones seguras."
+  }
+}

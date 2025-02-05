@@ -1,0 +1,93 @@
+@media (max-width: 480px) {
+    .link-footer {
+        font-size: 8px;
+    }
+
+    .subtitulo {
+        font-size: 10px !important;
+    }
+
+    .animation {
+        margin: 10px 0px;
+    }
+
+    .icono_redes {
+        font-size: 15px !important;
+    }
+}
+
+@media (min-width: 480px) and (max-width: 992px) {
+    .link-footer {
+        font-size: 12px;
+        margin-top: 5px;
+    }
+
+    .subtitulo {
+        margin-top: 10px;
+        font-size: 15px !important;
+    }
+
+    .icono_redes {
+        font-size: 17px !important;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+    .link-footer {
+        font-size: 11px;
+    }
+
+    .subtitulo {
+        font-size: 12px !important;
+    }
+
+    .icono_redes {
+        font-size: 22px !important;
+    }
+}
+
+/*--------------- animacion linea blanca h6 ----------*/
+.animation {
+    transition: justify-content 0.5s ease;
+    transition: transform 0.5s ease;
+}
+
+.animation h6 {
+    position: relative;
+    display: inline-block;
+    transition: transform 0.5s ease;
+}
+
+.animation h6::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 0;
+    height: 2.5px;
+    background-color: rgb(110, 110, 110);
+    transition: width 0.5s ease;
+}
+
+.animation:hover h6 {
+    justify-content: center;
+}
+
+.animation:hover span {
+    transform: translateX(5%);
+}
+
+.animation:hover h6::after {
+    width: 100%;
+}
+
+.icono_redes {
+    margin: 0 3px;
+    font-size: 25px;
+}
+
+.icono_redes:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+}

@@ -1,0 +1,129 @@
+.img {
+  /* longitud del simbolo principal */
+  width: 165px;
+  height: 150px;
+  margin-top: -10px;
+  z-index: 0;
+}
+
+@media (max-width: 480px) {
+  .img {
+    width: 60px;
+    height: 60px;
+    margin-top: 0px;
+  }
+
+  .titulo-nav {
+    font-size: 20px !important;
+  }
+
+  body {
+    padding-right: 0px !important;
+  }
+
+  .contenedor-modal {
+    padding-top: 60px;
+  }
+}
+
+@media (min-width: 480px) and (max-width: 550px) {
+  .img {
+    margin: 5px 20px 0px 0px;
+    width: 85px;
+    height: 85px;
+  }
+
+  .titulo-nav {
+    font-size: 22px !important;
+  }
+
+  body {
+    padding-right: 0px !important;
+  }
+}
+
+@media (min-width: 550px) and (max-width: 768px) {
+  .img {
+    margin: 10px 20px 0px 0px;
+    width: 92px;
+    height: 92px;
+  }
+
+  .titulo-nav {
+    font-size: 24px !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .img {
+    width: 100px;
+    height: 100px;
+    margin-top: 0px;
+  }
+
+  .titulo-nav {
+    font-size: 30px !important;
+  }
+
+  body {
+    padding-right: 0px !important;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1300px) {
+  .link {
+    font-size: 10px !important;
+  }
+}
+
+@media (min-width: 1300px) and (max-width: 1800px) {
+  .link {
+    font-size: 12px !important;
+  }
+}
+
+
+.dark-mode {
+  /* contenedor del modo oscuro/claro */
+  transition: background-image 0.5s ease-in-out, color 0.5s ease-in-out;
+  width: 65px;
+}
+
+.fondo-oscuro {
+  /* fondo para modo oscuro */
+  background-image: url(https://www.shutterstock.com/image-vector/stars-moon-on-black-background-260nw-2009148419.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.fondo-claro {
+  /* fondo para modo claro */
+  background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5ej-1HuylRdc-8eRZhJEJyGBerba9yhX4dg&s);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.circle {
+  /* permite la transicion para el circulo */
+  transition: transform 0.6s ease;
+}
+
+.active {
+  /* ejecuta la transicion para la movilidad del circulo */
+  transform: translateX(100%) !important;
+}
+
+.icono {
+  /* centrado del simbolo */
+  margin-bottom: 2px;
+}
+
+.simbolo-idioma {
+  font-size: 22px;
+}
+
+.num-compras {
+  font-size: 12px !important;
+}
