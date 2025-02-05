@@ -236,7 +236,6 @@ export const Login = () => {
                                         <div className="col-12 text-center">
                                             <button type="button" className={`btn btn-primary text-white fw-bold mt-3 mt-xl-3 mt-md-0 mt-lg-0 w-100 rounded-pill boton-cancelado`} ref={btnComprobarRef} onClick={() => {
                                                 SetNewPassword(true);
-                                                console.log(timeCode)
                                                 actions.verifyCode(forgotMail, CodeSend)
                                                 console.log(forgotMail, CodeSend);
                                                 ;

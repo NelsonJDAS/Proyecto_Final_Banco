@@ -340,7 +340,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             setStore({ ...store, transacciones: data.cuentas.transacciones });
             setStore({ ...store, configuracion: data.configuracion });
 
-            // console.log("TRANSACCCCCCCCCCCCCCCCCCCCIONES", data.cuentas.transacciones)
 
 
             let valores = [];
@@ -349,7 +348,6 @@ const getState = ({ getStore, getActions, setStore }) => {
               let datos = { "time": Math.floor(new Date(item[1].fecha).getTime() / 1000) - item[0], "value": parseInt(item[1].monto) }
               valores.push(datos)
             })
-            console.log(valores)
 
             valores.sort((a, b) => a.time - b.time);
             getActions().ActualizarGraficaHome(valores);
@@ -413,7 +411,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             setStore({
               ...store, coordinatesCardSent: true,
             });
-            console.log("Tarjeta de coordenadas enviada exitosamente:", data);
           })
           .catch((error) => {
             // Si hay un error, actualiza el store con el mensaje de error
@@ -444,7 +441,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
 
           const data = await response.json();
-          console.log(data)
+
           if (!response.ok) {
             throw new Error(data.error || "Error al realizar la transferencia");
           }
@@ -505,7 +502,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           const actions = getActions();
           setStore({ email });
 
-          fetch(process.env.BACKEND_URL + "/api/send-code", {
+          fetch(process.env.BACKEND_URL + "api/send-code", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -587,7 +584,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
       sendCoordinatesCode: (email) => {
-        console.log(email)
         const store = getStore();
 
         fetch(`${process.env.BACKEND_URL}/api/send-coordinates-code`, {
@@ -769,7 +765,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           localStorage.setItem("cart", JSON.stringify(updatedCart));
           notyf.success("Producto agregado al carrito");
         } else {
-          notyf.open({ type: "warning", message: "Producto ya se encuentra en el carrito" });
+          notyf.open({ type: 'custom', message: "No puedes comprar mas de 1 producto de un producto especifico", className: 'notyf-custom' })
         }
       },
 
@@ -781,7 +777,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         localStorage.setItem("cart", JSON.stringify(updatedCart));
         notyf.success("Producto eliminado del carrito");
       },
-
+      
       // Acción para vaciar completamente el carrito y actualizar localStorage
       clearCart: () => {
         const store = getStore();
@@ -789,6 +785,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         localStorage.setItem("cart", JSON.stringify([]));
         notyf.success("Carrito vaciado");
       },
+
 
     },
   };

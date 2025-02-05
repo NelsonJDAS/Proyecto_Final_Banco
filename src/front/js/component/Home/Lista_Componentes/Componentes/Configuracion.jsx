@@ -22,7 +22,7 @@ const Configuracion = () => {
                                 actions.CambiarModo(!store.modoClaro)
                             }} />
                         </>}
-                    <p>Modo Claro</p>
+                    <p className="texto-componente-configuracion">Modo Claro</p>
                 </div>
                 <div className="form-check form-switch">
                     {store.hidden ? <>
@@ -34,7 +34,7 @@ const Configuracion = () => {
                             actions.CambiarIncognito(!store.hidden)
                         }} />
                     </>}
-                    <p>Ocultar Saldo</p>
+                    <p className="texto-componente-configuracion">Ocultar Saldo</p>
                 </div>
             </div>
         </div >

@@ -119,10 +119,10 @@ const ContenedorPrincipalChat = () => {
     return (
         <div className={`container w-50 espaciado-chat ${store.fondo === "fondo-modo-claro" ? "text-info" : "text-dark "} ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>
             <div className="row bg-secondary cabecera-chat">
-                <div className="col-6 align-content-center text-center">
+                <div className="col-lg-6 col-10 align-content-center text-center">
                     <span className="nombre-chat">Chat Virtual</span>
                 </div>
-                <div className="col-6 align-content-center text-end">
+                <div className="col-lg-6 col-2 align-content-center text-end">
                     <i className="fs-2 mx-2"><FaUserCircle /></i>
                 </div>
             </div>

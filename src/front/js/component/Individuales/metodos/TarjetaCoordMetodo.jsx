@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import ColLateral from "../ColLateral.jsx";
 
-const ContenedorPrecaucionConsejos = () => {
+const TarjetaCoordMetodo = () => {
     const { t } = useTranslation()
     const [userLoad, SetUserLoad] = useState(false);
     // logica para mostrar el conteindo si el usuario esta en la seccion del componente
@@ -43,21 +42,21 @@ const ContenedorPrecaucionConsejos = () => {
         }
     }, [isVisible])
     return (
-        <div className="container espaciado-fondo">
-            <h1 className={`text-center titulo-principal-politica ${userLoad ? "animacion-der visible" : "animacion-der"}`}>
-                Consejos de Seguridad en Línea
+        <div className="container espaciado-fondo" ref={sectionRef}>
+            <h1 className={`text-center titulo-principal-politica ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>
+                Tarjeta de Coordenadas
             </h1>
-            <p className={`fs-3 text-center ${userLoad ? "animacion-der visible" : "animacion-der"}`}>
-                Mantén tu información protegida siguiendo estas recomendaciones:
+            <p className={`fs-3 text-center ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>
+                La tarjeta de coordenadas es un método de autenticación utilizado
+                para validar operaciones en línea. Consiste en una tarjeta física
+                con una matriz de números organizados en filas y columnas. Al realizar
+                ciertas transacciones, se te pedirá ingresar un valor específico de la tarjeta para verificar tu identidad.
             </p>
-            <div ref={sectionRef} className="row">
-                <ColLateral width="w-75" text={"Asegúrate de que estás ingresando a nuestro sitio oficial"} position="left" userLoad={userLoad} />
-                <ColLateral width="w-75" text={"No hagas clic en enlaces sospechosos ni respondas correos electrónicos"} position="" userLoad={userLoad} />
-                <ColLateral width="w-75" text={"Verifica siempre la autenticidad de mensaje que recibas en nombre de GeekBank"} position="left" userLoad={userLoad} />
-                <ColLateral width="w-75" text={"Evita acceder a tu cuenta desde redes WiFi públicas o dispositivos desconocidos"} position="" userLoad={userLoad} />
-            </div >
         </div>
     )
 }
 
-export default ContenedorPrecaucionConsejos
+export default TarjetaCoordMetodo
+
+
+

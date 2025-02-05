@@ -25,7 +25,6 @@ const ContenedorNotificaciones = () => {
 
 
     useEffect(() => {
-        console.log(pagination)
         if (pagination[0] == 0) {
             if (pagination[1] > notificaciones.length) {
                 flechaDer.current.classList.add("flecha-cancelada");

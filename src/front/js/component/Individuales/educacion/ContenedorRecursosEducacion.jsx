@@ -50,9 +50,9 @@ const ContenedorRecursosEducacion = () => {
             <h1 className={`text-center titulo-politica ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>{t('educacion.p5')}</h1>
             <p className={`fs-3 text-center ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>{t('educacion.p6')}</p>
             <div className="row">
-                <div className="col-12 col-lg-4"><ContenedorCuadrado position="left" text={t('educacion.t1t')} title={t('educacion.t1')} logo={<FaBookOpen />} /></div>
-                <div className="col-12 col-md-6 col-lg-4"><ContenedorCuadrado position="bottom" text={t('educacion.t2t')} title={t('educacion.t2')} logo={<FaBitcoin />} /></div>
-                <div className="col-12 col-md-6 col-lg-4"><ContenedorCuadrado position="right" text={t('educacion.t3t')} title={t('educacion.t3')} logo={<IoCameraSharp />} /></div>
+                <div className="col-12 col-lg-4 my-3 my-lg-0"><ContenedorCuadrado position="left" text={t('educacion.t1t')} title={t('educacion.t1')} logo={<FaBookOpen />} /></div>
+                <div className="col-12 col-md-6 col-lg-4 my-3 my-lg-0"><ContenedorCuadrado position="bottom" text={t('educacion.t2t')} title={t('educacion.t2')} logo={<FaBitcoin />} /></div>
+                <div className="col-12 col-md-6 col-lg-4 my-3 my-lg-0"><ContenedorCuadrado position="right" text={t('educacion.t3t')} title={t('educacion.t3')} logo={<IoCameraSharp />} /></div>
             </div>
         </div>
     )

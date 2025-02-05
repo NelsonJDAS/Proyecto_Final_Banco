@@ -27,7 +27,6 @@ const ContenedorPrincipalTransferencias = () => {
     const codigo2Ref = useRef(null)
     const modalRef = useRef(null)
 
-    const [tarjeta, setTarjeta] = useState('');
 
     const generarCodigos = () => {
         codigo1Ref.current.value = ""
@@ -37,8 +36,8 @@ const ContenedorPrincipalTransferencias = () => {
     }
 
     useEffect(() => {
-        setTarjeta(store.tarjetaCoord);
-    }, [store.tarjetaCoord])
+        codigo1 == codigo2 ? generarCodigos() : ""
+    }, [codigo1, codigo2])
 
     useEffect(() => {
         generarCodigos();
@@ -48,9 +47,7 @@ const ContenedorPrincipalTransferencias = () => {
     useEffect(() => {
         const storedId = localStorage.getItem("userId")
         actions.fetchUserDetails(storedId)
-        console.log("Tarjeta de coordenadas", store.tarjetaCoord)
         SetUserLoad(true);
-        console.log(store.cliente)
 
     }, []);
 
@@ -96,7 +93,6 @@ const ContenedorPrincipalTransferencias = () => {
     }
 
     const handleTransferencia = async () => {
-        console.log(tarjeta)
         // Dividir nombre completo en nombre y apellidos
         const [nombre, ...apellidos] = estadoDestinatario.split(' ');
         const cuentaOrigenId = store.cuentas?.id;
@@ -116,7 +112,6 @@ const ContenedorPrincipalTransferencias = () => {
                     montoNumerico,
                     concepto
                 );
-                console.log(resultado);
 
                 // Limpiar formulario
                 setCuentaDestino('');
@@ -146,7 +141,7 @@ const ContenedorPrincipalTransferencias = () => {
             } catch (error) {
                 Swal.fire({
                     title: '¡Error!',
-                    text: 'Error al hacer la transferencia, Confirma los datos solicitados',
+                    text: `${error}`,
                     icon: 'error',
                     confirmButtonText: 'Aceptar',
                     allowOutsideClick: false,
@@ -171,7 +166,7 @@ const ContenedorPrincipalTransferencias = () => {
 
     return (
         <>
-            <div className="modal fade" id="tarjetacord" tabIndex="-1" aria-labelledby="label" aria-hidden="true" ref={modalRef}>
+            <div className="modal fade" id="tarjetacord" tabIndex="-1" aria-labelledby="label" ref={modalRef}>
                 {/* Modal selector de idiomas */}
                 <div className="modal-dialog modal-dialog-centered">
                     <div className={`modal-content contenedor-modal-transferencias rounded-3 ${store.fondo} borde-brillante `}>
@@ -190,12 +185,12 @@ const ContenedorPrincipalTransferencias = () => {
                                 </p>
                             </div>
                             <div className="row my-3">
-                                <div className="col-3 mx-2 px-0 text-end"><p className="mt-2 fs-bold">{codigo1 == undefined ? "" : codigo1.posicion}</p></div>
-                                <div className="col-8 mx-2 px-0"><input type="text" placeholder="* * * *" className="mx-3 text-center w-50 py-2 rounded-pill" maxLength="4" ref={codigo1Ref} /></div>
+                                <div className="col-3 mx-md-2 mx-1 px-0 text-end"><p className="mt-2 fs-bold">{codigo1 == undefined ? "" : codigo1.posicion}</p></div>
+                                <div className="col-8 mx-md-2 mx-1 px-0"><input type="text" placeholder="* * * *" className="mx-3 text-center w-50 py-2 rounded-pill" maxLength="4" ref={codigo1Ref} /></div>
                             </div>
                             <div className="row my-3">
-                                <div className="col-3 mx-2 px-0 text-end"><p className="mt-2 fs-bold">{codigo2 == undefined ? "" : codigo2.posicion}</p></div>
-                                <div className="col-8 mx-2 px-0"><input type="text" placeholder="* * * *" className="mx-3 text-center w-50 py-2 rounded-pill" maxLength="4" ref={codigo2Ref} /></div>
+                                <div className="col-3  mx-md-2 mx-1 px-0 text-end"><p className="mt-2 fs-bold">{codigo2 == undefined ? "" : codigo2.posicion}</p></div>
+                                <div className="col-8 mx-md-2 mx-1 px-0"><input type="text" placeholder="* * * *" className="mx-3 text-center w-50 py-2 rounded-pill" maxLength="4" ref={codigo2Ref} /></div>
                             </div>
                             <div className="row my-3">
                                 <div className="col-12  text-center">
@@ -210,7 +205,7 @@ const ContenedorPrincipalTransferencias = () => {
                 </div>
             </div>
             <h1 className={`text-center titulo-transferencia ${userLoad ? "animacion-arriba visible" : "animacion-arriba"}`}>Transferencias</h1>
-            <div className={`container w-90 contenedor-principal-transferencias ${userLoad ? "animacion-abajo visible" : "animacion-abajo"} ${store.fondo === "fondo-modo-claro" ? "bg-white" : "bg-dark text-white"}`}>
+            <div className={`container w-90 contenedor-principal-transferencias ${userLoad ? "animacion-abajo visible" : "animacion-abajo"} ${store.fondo === "fondo-modo-claro" ? "bg-white" : "bg-transferencia-modo-negro text-white"}`}>
 
                 <div className="row">
                     <div className={`my-2 col-lg-6 d-flex flex-column text-center ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>
@@ -274,7 +269,7 @@ const ContenedorPrincipalTransferencias = () => {
                         />
                     </div>
 
-                    <div className={`col-12 mt-3 d-flex flex-column text-center ${userLoad ? "animacion-abajo visible" : "animacion-abajo"} `}>
+                    <div className={`col-12 mt-0 mt-lg-3 d-flex flex-column text-center ${userLoad ? "animacion-abajo visible" : "animacion-abajo"} `}>
                         <div className="container">
                             <button
                                 className={`btn btn-transferencias w-25 ${store.fondo === "fondo-modo-claro" ? "text-dark" : "text-white"}`}

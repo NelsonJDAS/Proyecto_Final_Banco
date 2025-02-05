@@ -38,35 +38,49 @@
 
 
 @media (max-width: 580px) {
+    .titulo-transferencia {
+        font-size: 30px;
+        font-weight: 700;
+    }
+
     .contenedor-principal-transferencias {
         height: 750px;
+        width: 100% !important;
         border-radius: 0px;
-        margin-bottom: 0px;
+        margin-bottom: 15px;
         background-color: #E0E0E0;
         border: 4px solid #A0A0A0;
+    }
+
+    .btn-transferencias {
+        font-size: 20px;
+        width: 80% !important;
     }
 }
 
 @media (min-width: 580px) and (max-width: 992px) {
+    .titulo-transferencia {
+        font-size: 30px;
+        font-weight: 700;
+    }
+
     .contenedor-principal-transferencias {
         height: 750px;
-        border-radius: 40px;
-        margin-bottom: 40px;
+        width: 90% !important;
+        border-radius: 0px;
+        margin-bottom: 30px;
         background-color: #E0E0E0;
-        border: 4px double #A0A0A0;
+        border: 4px solid #A0A0A0;
+    }
+
+    .btn-transferencias {
+        font-size: 20px;
+        width: 80% !important;
     }
 }
 
-.alerta-transferencia {
-    border-radius: 50px !important;
-    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.3) !important;
-}
 
-.btn-alerta {
-    border-radius: 20px !important;
-}
 
-.bg-alerta-transferencia {
-    background-color: black !important;
-    color: white !important;
+.bg-transferencia-modo-negro {
+    background-color: rgba(0, 0, 0, 0.163);
 }

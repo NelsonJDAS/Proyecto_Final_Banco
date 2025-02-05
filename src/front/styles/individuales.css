@@ -94,6 +94,10 @@
         padding: 60px 0px 45px 0px;
     }
 
+    .texto-componente-configuracion {
+        font-size: 13px;
+    }
+
     .titulo-politica {
         font-size: 30px !important;
         padding: 60px 0px 45px 0px;
@@ -109,6 +113,10 @@
 
     .espaciado-fondo {
         margin-bottom: 40px !important;
+    }
+
+    .espaciado-chat {
+        width: 90% !important;
     }
 }
 
@@ -129,6 +137,14 @@
 
     .espaciado-fondo {
         margin-bottom: 70px !important;
+    }
+
+    .espaciado-chat {
+        width: 80% !important;
+    }
+
+    .texto-componente-configuracion {
+        font-size: 13px;
     }
 }
 
