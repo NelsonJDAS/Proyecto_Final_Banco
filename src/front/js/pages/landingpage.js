@@ -13,6 +13,7 @@ export const Landingpage = () => {
   useEffect(() => {
     // localStorage.clear();
     actions.fetchProducts()
+    actions.loadProducts()
   }, []);
   
   return (

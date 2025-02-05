@@ -232,6 +232,14 @@ def addUser():
             
             db.session.add(notif_transaccion)
 
+        nueva_config = ConfiguracionUsuario(
+            id_usuario=new_user.id,
+            modo_oscuro=False,         # Por defecto, ejemplo: True (modo claro si tu lógica lo interpreta así)
+            ocultar_saldo=False,      # Por defecto, no ocultar saldo
+            idioma="es"               # Idioma por defecto
+        )
+        db.session.add(nueva_config)
+
         # Confirmamos los cambios (más adelante en el código)
         db.session.commit()
         print("Cambios confirmados")
@@ -496,12 +504,15 @@ def get_user_details(id):
             for coord in cuenta.tarjetas_coordenadas
         ]
 
+        configuracion = user.configuracion
+
         # Construir la respuesta
         response = {
             "user": {
                 "id": user.id,
                 "name": user.name,
-                "email": user.email
+                "email": user.email,
+                "rol": user.rol
             },
             "cliente": {
                 "id": cliente.id,
@@ -524,8 +535,10 @@ def get_user_details(id):
                 "transacciones": transacciones_data,
             },
             "notificaciones": [notificacion.serialize() for notificacion in cliente.notificaciones],
-            "tarjeta_coordenadas": tarjeta_coordenadas_data
+            "tarjeta_coordenadas": tarjeta_coordenadas_data,
+            "configuracion": configuracion.serialize() if configuracion else None
         }
+        print("conf desde 532", configuracion.serialize())
         return jsonify(response), 200
     except Exception as e:
         return jsonify({"error": "Ha ocurrido un error", "details": str(e)}), 500
@@ -626,7 +639,6 @@ def update_config():
             modo_oscuro=modo_oscuro if modo_oscuro is not None else True,
             ocultar_saldo=ocultar_saldo if ocultar_saldo is not None else False,
             idioma=idioma if idioma else "es",
-            componentesSave=""
         )
         db.session.add(config)
     else:
@@ -645,13 +657,15 @@ def update_config():
         return jsonify({"error": str(e)}), 500
 
     
-@api.route('/api/get_config', methods=['GET'])
-def get_config():
-    user_id = request.args.get('user_id')  # ID del User
-    config = ConfiguracionUsuario.query.filter_by(id_usuario=user_id).first()
+@api.route('/get_config/<int:id>', methods=['GET'])
+def get_config(id):
+    print("Obteniendo configuración para id:", id)
+    config = ConfiguracionUsuario.query.filter_by(id_usuario=id).first()
     if config:
+        print("Configuración encontrada:", config.serialize())
         return jsonify(config.serialize()), 200
     else:
+        print("No se encontró configuración para el id:", id)
         return jsonify({"error": "Configuración no encontrada"}), 404
 
 #                                                                   NOTIFICACIONES
@@ -1202,10 +1216,16 @@ def get_market_data():
 @api.route('/products/load', methods=['GET'])
 def load_products_from_file():
     """
-    Lee el archivo productos.json y lo inserta en la tabla producto.
+    Lee el archivo productos.json y lo inserta en la tabla Producto,
+    pero solo si no hay productos cargados previamente.
     """
     import json
     import os
+
+    # Verificamos si ya hay algún producto en la base de datos
+    existing_product = Producto.query.first()
+    if existing_product:
+        return jsonify({"msg": "Productos ya están cargados en la base de datos"}), 200
 
     json_path = os.path.join("src", "amazon_scraper", "productos.json")
 
@@ -1242,6 +1262,7 @@ def load_products_from_file():
     except Exception as e:
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
+
 
 @api.route('/products', methods=['GET'])
 def get_all_products():

@@ -15,6 +15,7 @@ export const Home = () => {
     // const storedName = localStorage.getItem("name");
     const storedId = localStorage.getItem("userId")
     actions.fetchUserDetails(storedId)
+    actions.getUserConfig(storedId)
     console.log("Tarjeta de coordenadas", store.tarjetaCoord)
   }, []);
 

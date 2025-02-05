@@ -9,12 +9,14 @@ class User(db.Model):
     name = db.Column(db.String(100))
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), nullable=False)
+    rol = db.Column(Enum('usuario', 'administrador', name='rol_enum'), default='usuario', nullable=False)
     is_active = db.Column(db.Boolean(), nullable=False)
     reset_code = db.Column(db.String(6), nullable=True)
     coordinates_code = db.Column(db.String(6), nullable=True)
     code_expires = db.Column(db.DateTime, nullable=True)
     cliente_id = db.Column(db.Integer, db.ForeignKey('cliente.id'))
     cliente = db.relationship("Cliente", back_populates="usuarios")
+    configuracion = db.relationship("ConfiguracionUsuario", uselist=False, back_populates="usuario")
 
     def __repr__(self):
         return f'<User {self.email}>'
@@ -24,6 +26,7 @@ class User(db.Model):
             "id": self.id,
             "name": self.name,
             "email": self.email,
+            "rol": self.rol
         }
 
 class Cliente(db.Model):
@@ -69,13 +72,12 @@ class ConfiguracionUsuario(db.Model):
     modo_oscuro = db.Column(db.Boolean, default=False)
     ocultar_saldo = db.Column(db.Boolean, default=False)  # Nuevo campo
     idioma = db.Column(db.String(5))
-    componentesSave = db.Column(db.String(50))
 
     # Relación con User
-    usuario = db.relationship("User", backref="configuracion")
+    usuario = db.relationship("User", back_populates="configuracion")
 
     def __repr__(self):
-        return f'<ConfiguracionUsuario User ID: {self.id_usuario}>'
+        return f'<ConfiguracionUsuario {self.id_usuario}>'
 
     def serialize(self):
         return {
@@ -84,7 +86,6 @@ class ConfiguracionUsuario(db.Model):
             "modo_oscuro": self.modo_oscuro,
             "ocultar_saldo": self.ocultar_saldo,
             "idioma": self.idioma,
-            "componentesSave": self.componentesSave,
         }
 
 

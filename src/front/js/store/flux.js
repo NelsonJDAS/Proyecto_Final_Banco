@@ -5,6 +5,7 @@ const getState = ({ getStore, getActions, setStore }) => {
   const notyf = new Notyf();
   return {
     store: {
+      modoClaro: "",
       texto: "text-white",
       fondo: "fondo-modo-oscuro",
       borde: "border border-white",
@@ -21,6 +22,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       tarjetaCoordComp: {},
       transacciones: [],
       listaNotificaciones: [],
+      configuracion: [],
       graficaHome: [
         { time: "2023-01-01", value: 0 },
         { time: "2023-01-02", value: 0 },
@@ -70,19 +72,41 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({ ...getStore(), graficaHome: datos });
       },
 
-      CambiarIncognito: (estado) => {
-        estado == true
-          ? notyf.open({ type: 'custom', message: "Modo incógnito activado", className: 'notyf-custom' })
-          : notyf.open({ type: 'custom', message: "Modo incógnito desactivado", className: 'notyf-custom' });
+      CambiarIncognito: async (estado) => {
+        // Actualizar la UI localmente
+        if (estado === true) {
+          notyf.open({ type: 'custom', message: "Modo incógnito activado", className: 'notyf-custom' });
+        } else {
+          notyf.open({ type: 'custom', message: "Modo incógnito desactivado", className: 'notyf-custom' });
+        }
         setStore({ ...getStore(), hidden: estado });
+
+        // Obtener el user_id desde el store
+        const user_id = localStorage.getItem('userId');
+
+        // Enviar la actualización al backend
+        try {
+          const response = await fetch(process.env.BACKEND_URL + "/api/update_config", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ user_id, ocultar_saldo: estado })
+          });
+          if (!response.ok) throw new Error("Error al actualizar el modo incógnito");
+          const data = await response.json();
+          notyf.success(data.message);
+        } catch (error) {
+          notyf.error("Error al actualizar el modo incógnito");
+          console.error(error);
+        }
       },
+
       CambiarNotificaciones: () => {
         !getStore().notificacionesHidden == true
           ? notyf.open({ type: 'custom', message: "Notificaciones desactivadas", className: 'notyf-custom' })
           : notyf.open({ type: 'custom', message: "Notificaciones Activadas", className: 'notyf-custom' });
         setStore({ ...getStore(), notificacionesHidden: !getStore().notificacionesHidden });
       },
-      
+
       Scroll: () => {
         const navbar = document.getElementById("navbar"); // Seleccionamos el elemento por ID
         if (navbar) {
@@ -92,10 +116,13 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
         }
       },
-      CambiarModo: (estado) => {
+      CambiarModo: async (estado) => {
+        console.log("desde el flux el estado ASDASDAWDDAWD", estado)
+        // Actualizar la UI localmente
         if (estado === true) {
-          notyf.open({ type: 'custom', message: "Modo claro activado", className: 'notyf-custom' })
+          notyf.open({ type: 'custom', message: "Modo claro activado", className: 'notyf-custom' });
           setStore({
+            modoClaro: estado,
             texto: "text-dark",
             fondo: "fondo-modo-claro",
             borde: "border border-secondary",
@@ -106,6 +133,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         } else {
           notyf.open({ type: 'custom', message: "Modo oscuro activado", className: 'notyf-custom' });
           setStore({
+            modoClaro: estado,
             texto: "text-white",
             fondo: "fondo-modo-oscuro",
             borde: "border border-white",
@@ -114,7 +142,27 @@ const getState = ({ getStore, getActions, setStore }) => {
           document.body.classList.remove("fondo-modo-claro");
           document.body.classList.add("fondo-modo-oscuro");
         }
+
+        // Obtener el user_id
+        const user_id = localStorage.getItem('userId');
+
+        // Enviar la actualización al backend
+        try {
+          const response = await fetch(process.env.BACKEND_URL + "/api/update_config", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ user_id, modo_oscuro: estado })
+          });
+          if (!response.ok) throw new Error("Error al actualizar el modo");
+          const data = await response.json();
+          // Puedes mostrar un mensaje de éxito adicional si lo deseas
+          notyf.success(data.message);
+        } catch (error) {
+          notyf.error("Error al actualizar el modo");
+          console.error(error);
+        }
       },
+
 
       updateUserLanguage: async (user_id, idioma) => {
         try {
@@ -123,8 +171,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ user_id, idioma })
           });
-          console.log( user_id, idioma);
-          
+          console.log(user_id, idioma);
+
           if (!response.ok) throw new Error("Error al actualizar el idioma");
           const data = await response.json();
           notyf.success(data.message);
@@ -133,6 +181,64 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.error(error);
         }
       },
+
+      getUserConfig: async (id) => {
+        try {
+            // Realizamos la petición GET al endpoint, enviando el user_id como query string
+            const response = await fetch(`${process.env.BACKEND_URL}/api/get_config/${id}`, {
+                method: "GET",
+                headers: { "Content-Type": "application/json" }
+            });
+    
+            if (!response.ok) {
+                throw new Error(`Error al obtener la configuración: ${response.status} ${response.statusText}`);
+            }
+    
+            // Convertimos la respuesta a JSON
+            const configData = await response.json();
+    
+            // Guardamos la configuración en el localStorage (opcional)
+            localStorage.setItem('userConfig', JSON.stringify(configData));
+    
+            // Actualizamos el store y la UI en base al valor de modo (suponiendo que configData.modo_oscuro
+            // es un booleano que coincide con la lógica de CambiarModo)
+            if (configData.modo_oscuro === true) {
+                // Modo Claro activado
+                setStore({
+                    ...getStore(),
+                    configuracion: configData,
+                    hidden: configData.ocultar_saldo,
+                    modoClaro: configData.modo_oscuro,
+                    texto: "text-dark",
+                    fondo: "fondo-modo-claro",
+                    borde: "border border-secondary",
+                    borde_hover: "enlace-oscuro"
+                });
+                // Actualizamos la clase del body para reflejar el modo
+                document.body.classList.remove("fondo-modo-oscuro");
+                document.body.classList.add("fondo-modo-claro");
+            } else {
+                // Modo Oscuro activado
+                setStore({
+                    ...getStore(),
+                    configuracion: configData,
+                    hidden: configData.ocultar_saldo,
+                    modoClaro: configData.modo_oscuro,
+                    texto: "text-white",
+                    fondo: "fondo-modo-oscuro",
+                    borde: "border border-white",
+                    borde_hover: "enlace-claro"
+                });
+                document.body.classList.remove("fondo-modo-claro");
+                document.body.classList.add("fondo-modo-oscuro");
+            }
+  
+        } catch (error) {
+            console.error("Error al obtener la configuración del usuario:", error);
+            notyf.error("Error al obtener la configuración");
+        }
+    },
+    
 
       loginUser: async (name, email, password) => {
         const store = getStore();
@@ -232,8 +338,9 @@ const getState = ({ getStore, getActions, setStore }) => {
             setStore({ ...store, listaNotificaciones: data.notificaciones });
             setStore({ ...store, tarjetaCoord: data.tarjeta_coordenadas });
             setStore({ ...store, transacciones: data.cuentas.transacciones });
+            setStore({ ...store, configuracion: data.configuracion });
 
-            console.log("TRANSACCCCCCCCCCCCCCCCCCCCIONES", data.cuentas.transacciones)
+            // console.log("TRANSACCCCCCCCCCCCCCCCCCCCIONES", data.cuentas.transacciones)
 
 
             let valores = [];
@@ -251,7 +358,9 @@ const getState = ({ getStore, getActions, setStore }) => {
             data.values == undefined ? "" : actions.ActualizarGrafica(valores)
 
 
-            console.log("user", store.user, "cliente", store.cliente, "cuentas", store.cuentas, "Notificaciones", store.listaNotificaciones, "transacciones", store.transacciones);
+            console.log("user", store.user, "cliente", store.cliente, "cuentas", store.cuentas, "Notificaciones", store.listaNotificaciones, "transacciones", store.transacciones,
+              "configuracion", store.configuracion
+            );
           })
           .catch((error) => {
             // Manejamos cualquier error que ocurra durante el fetch
@@ -421,19 +530,19 @@ const getState = ({ getStore, getActions, setStore }) => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email: store.email, code: store.code }),
         })
-        .then((response) => {
-          if (!response.ok) { notyf.error("Código Incorrecto");}
-          return response.json();
-        })
-        .then((data) => {
-          notyf.success("Codigo Verificado");
-          // Guardamos el user_id en el store
-          setStore({ user: data.user_id });
-          console.log(store.user)
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
+          .then((response) => {
+            if (!response.ok) { notyf.error("Código Incorrecto"); }
+            return response.json();
+          })
+          .then((data) => {
+            notyf.success("Codigo Verificado");
+            // Guardamos el user_id en el store
+            setStore({ user: data.user_id });
+            console.log(store.user)
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
       },
 
       updateUserPassword: (id, newPassword) => {
@@ -475,7 +584,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       //     throw error;
       //   }
       // },
-      
+
 
       sendCoordinatesCode: (email) => {
         console.log(email)
@@ -590,6 +699,34 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
+      loadProducts: async () => {
+        try {
+          // Realizamos la petición GET al endpoint de carga de productos
+          const response = await fetch(process.env.BACKEND_URL + '/api/products/load', {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' }
+          });
+      
+          // Si la respuesta no es exitosa, lanzamos un error
+          if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || "Error al cargar productos");
+          }
+      
+          const data = await response.json();
+      
+          // Por ejemplo, puedes mostrar una notificación de éxito
+          notyf.success(data.msg);
+      
+          // Opcional: si el endpoint devolviera productos, podrías actualizar el store
+          // setStore({ ...getStore(), products: data.products });
+      
+        } catch (error) {
+          notyf.error("Error al cargar productos");
+          console.error("Error en loadProducts:", error);
+        }
+      },      
+
       fetchProducts: () => {
         const store = getStore();
         fetch(process.env.BACKEND_URL + '/api/products', {
@@ -598,7 +735,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             "Content-Type": "application/json"
           },
         })
-          .then((response) => {           
+          .then((response) => {
             if (!response.ok) {
               throw new Error(`Error: ${response.status} - ${response.statusText}`);
             }
@@ -635,7 +772,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           notyf.open({ type: "warning", message: "Producto ya se encuentra en el carrito" });
         }
       },
-      
+
       // Acción para eliminar un producto específico del carrito y actualizar localStorage
       removeFromCart: (productId) => {
         const store = getStore();
@@ -644,7 +781,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         localStorage.setItem("cart", JSON.stringify(updatedCart));
         notyf.success("Producto eliminado del carrito");
       },
-      
+
       // Acción para vaciar completamente el carrito y actualizar localStorage
       clearCart: () => {
         const store = getStore();
@@ -652,7 +789,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         localStorage.setItem("cart", JSON.stringify([]));
         notyf.success("Carrito vaciado");
       },
-      
+
     },
   };
 };
