@@ -3,7 +3,7 @@ import { Context } from "../../../store/appContext";
 import ColLateral from "../ColLateral.jsx";
 import { useTranslation } from "react-i18next";
 
-const ContenedorDispositivosConsejos = () => {
+const Autenticacion = () => {
     const { t } = useTranslation()
     const { store, actions } = useContext(Context);
 
@@ -49,19 +49,18 @@ const ContenedorDispositivosConsejos = () => {
 
     return (
         <div className="container espaciado-fondo">
-            <h2 className={`text-center titulo-principal-politica ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>Protege tus Dispositivos</h2>
+            <h2 className={`text-center titulo-principal-politica ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>Autenticación Segura</h2>
+            <p className={`fs-3 text-center ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>
+                Usa contraseñas seguras y únicas para tu banca en línea.
+                Activa la tarjeta de coordenadas para mas seguridad y
+                nunca olvides los siguientes dos consejos.
+            </p>
             <div ref={sectionRef} className="row">
-                <ColLateral width="w-75" text={"Mantén tu software actualizado"} position="left" userLoad={userLoad} />
-                <ColLateral width="w-75" text={"Instala un antivirus confiable"} position="" userLoad={userLoad} />
-                <ColLateral width="w-75" text={"Evita redes Wi-Fi públicas"} position="left" userLoad={userLoad} />
-                <ColLateral width="w-75" text={"Habilita el bloqueo de pantalla"} position="" userLoad={userLoad} />
-                <ColLateral width="w-75" text={"Descarga apps solo de tiendas oficiales"} position="left" userLoad={userLoad} />
-                <ColLateral width="w-75" text={"No guardes contraseñas sin cifrar"} position="" userLoad={userLoad} />
-                <ColLateral width="w-75" text={"Activa rastreo y borrado remoto"} position="left" userLoad={userLoad} />
+                <ColLateral width="w-75" text={"Usa contraseñas unicas y fuertes"} position="left" userLoad={userLoad} />
+                <ColLateral width="w-75" text={"Nunca compartas tus credenciales"} position="" userLoad={userLoad} />
             </div >
         </div >
     )
 }
 
-export default ContenedorDispositivosConsejos
-
+export default Autenticacion

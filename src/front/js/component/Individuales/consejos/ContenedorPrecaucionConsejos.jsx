@@ -1,16 +1,61 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import ColLateral from "../ColLateral.jsx";
 
 const ContenedorPrecaucionConsejos = () => {
+    const { t } = useTranslation()
+    const [userLoad, SetUserLoad] = useState(false);
+    // logica para mostrar el conteindo si el usuario esta en la seccion del componente
+    const [isVisible, setIsVisible] = useState(false);
+    const sectionRef = useRef(null);
+
+    // controla la variable para cambiarla si el usuario se encuentra encima del componente
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                // entry.isIntersecting indica si el elemento es visible
+                setIsVisible(entry.isIntersecting);
+            },
+            {
+                root: null, // Usar la ventana como viewport
+                rootMargin: '0px', // Sin márgenes
+                threshold: 0.1, // Al menos el 10% del componente debe estar visible
+            }
+        );
+
+        if (sectionRef.current) {
+            observer.observe(sectionRef.current); // Observar el componente
+        }
+
+        return () => {
+            // Limpiar el observer al desmontar el componente
+            if (sectionRef.current) {
+                observer.unobserve(sectionRef.current);
+            }
+        };
+    }, []);
+
+    useEffect(() => {
+        if (isVisible) {
+            SetUserLoad(true)
+        } else {
+            SetUserLoad(false)
+        }
+    }, [isVisible])
     return (
-        <div className="container">
-            <h1 className="text-center">Sea Precavido en Línea</h1>
-            <p>
-                <ul>
-                    <li>Asegúrese de que está ingresando a nuestro sitio oficial (<a href="https://www.geekbank.com">www.geekbank.com</a>).</li>
-                    <li>No haga clic en enlaces sospechosos o correos electrónicos no solicitados.</li>
-                    <li>Verifique siempre la autenticidad de las comunicaciones que reciba de GeekBank.</li>
-                </ul>
+        <div className="container espaciado-fondo">
+            <h1 className={`text-center titulo-principal-politica ${userLoad ? "animacion-arriba visible" : "animacion-arriba"}`}>
+                Consejos de Seguridad en Línea
+            </h1>
+            <p className={`fs-3 text-center ${userLoad ? "animacion-arriba visible" : "animacion-arriba"}`}>
+                Mantén tu información protegida siguiendo estas recomendaciones:
             </p>
+            <div ref={sectionRef} className="row">
+                <ColLateral width="w-75" text={"Asegúrate de que estás ingresando a nuestro sitio oficial"} position="left" userLoad={userLoad} />
+                <ColLateral width="w-75" text={"No hagas clic en enlaces sospechosos ni respondas correos electrónicos"} position="" userLoad={userLoad} />
+                <ColLateral width="w-75" text={"Verifica siempre la autenticidad de mensaje que recibas en nombre de GeekBank"} position="left" userLoad={userLoad} />
+                <ColLateral width="w-75" text={"Evita acceder a tu cuenta desde redes WiFi públicas o dispositivos desconocidos"} position="" userLoad={userLoad} />
+            </div >
         </div>
     )
 }
