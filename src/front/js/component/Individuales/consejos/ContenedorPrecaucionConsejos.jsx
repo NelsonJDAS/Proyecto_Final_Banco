@@ -44,10 +44,10 @@ const ContenedorPrecaucionConsejos = () => {
     }, [isVisible])
     return (
         <div className="container espaciado-fondo">
-            <h1 className={`text-center titulo-principal-politica ${userLoad ? "animacion-arriba visible" : "animacion-arriba"}`}>
+            <h1 className={`text-center titulo-principal-politica ${userLoad ? "animacion-der visible" : "animacion-der"}`}>
                 Consejos de Seguridad en Línea
             </h1>
-            <p className={`fs-3 text-center ${userLoad ? "animacion-arriba visible" : "animacion-arriba"}`}>
+            <p className={`fs-3 text-center ${userLoad ? "animacion-der visible" : "animacion-der"}`}>
                 Mantén tu información protegida siguiendo estas recomendaciones:
             </p>
             <div ref={sectionRef} className="row">

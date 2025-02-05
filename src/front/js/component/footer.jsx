@@ -62,9 +62,9 @@ export const Footer = () => {
 						actions.Scroll()
 						navigate("/consejos")
 					}}>{t('Footer.Tips')}</span>
-					<span className={`d-flex opacity-50`} onClick={() => {
-						// actions.Scroll()
-						// navigate("/metodos")
+					<span className={`d-flex link-footer ${store.borde_hover}`} onClick={() => {
+						actions.Scroll()
+						navigate("/metodos")
 					}}>{t('Footer.Security methods')}</span>
 				</div>
 				<div className="col-4 col-md-3 col-lg-2 px-0 px-md-3 flex-column animation">
