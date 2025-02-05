@@ -267,558 +267,558 @@ const getState = ({ getStore, getActions, setStore }) => {
         } catch (error) {
           console.error("Error fetching private data:", error);
         }
-      }
-    },
+      },
 
 
-    loginUser: async (name, email, password) => {
-      const store = getStore();
-      const actions = getActions();
+
+      loginUser: async (name, email, password) => {
+        const store = getStore();
+        const actions = getActions();
 
 
-      try {
-        const response = await fetch(process.env.BACKEND_URL + "/api/User/Login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name, email, password }),
-        });
+        try {
+          const response = await fetch(process.env.BACKEND_URL + "/api/User/Login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name, email, password }),
+          });
 
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.mensaje || "Error en el inicio de sesión");
-        }
-
-        const data = await response.json();
-        // Guardamos el token en el localStorage
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("name", data.user.name);
-        localStorage.setItem("userId", data.user.id);
-        // actions.fetchUserDetails(data.user.id)
-
-        // Actualizamos el store con el token y los datos del usuario
-        setStore({
-          ...store,
-          token: data.token,
-          user: data.user, // Ajustar según lo que devuelva tu backend
-
-        });
-        console.log("Login exitoso. Token guardado en localStorage.", store.user, store.usuario);
-      } catch (error) {
-        console.error("Error en loginUser:", error.message);
-        throw error; // Lanzamos el error para que HandleLogin lo maneje
-      }
-    },
-
-    registerUser: (name, email, password) => {
-      const actions = getActions();
-      console.log("desde flux", name, email, password);
-
-      return fetch(process.env.BACKEND_URL + "/api/User/Register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          password: password,
-          email: email,
-          name: name,
-          is_active: true,
-        }),
-      })
-        .then((response) => {
           if (!response.ok) {
-            throw new Error("Error en el registro");
+            const errorData = await response.json();
+            throw new Error(errorData.mensaje || "Error en el inicio de sesión");
           }
-          return response.json(); // Parseamos la respuesta JSON
-        })
-        .then((data) => {
+
+          const data = await response.json();
+          // Guardamos el token en el localStorage
           localStorage.setItem("token", data.token);
           localStorage.setItem("name", data.user.name);
           localStorage.setItem("userId", data.user.id);
           // actions.fetchUserDetails(data.user.id)
-          return "success";
-        })
-        .catch((error) => {
-          console.error("Error al registrar usuario:", error);
-        });
-    },
 
-    fetchUserDetails: (id) => {
-      const store = getStore();
-      fetch(`${process.env.BACKEND_URL}/api/User/${id}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((response) => {
-
-          if (!response.ok) {
-            notyf.error("Error al actualizar datos del usuario:");
-            throw new Error(`Error: ${response.status} - ${response.statusText}`);
-          }
-          return response.json(); // Convertimos la respuesta a JSON
-        })
-
-        .then((data) => {
-
-          // Guardamos los datos del usuario en el store bajo la propiedad "usuario"
-          setStore({ ...store, cliente: data.cliente });
-          setStore({ ...store, cuentas: data.cuentas });
-          setStore({ ...store, user: data.user });
-          setStore({ ...store, listaNotificaciones: data.notificaciones });
-          setStore({ ...store, tarjetaCoord: data.tarjeta_coordenadas });
-          setStore({ ...store, transacciones: data.cuentas.transacciones });
-          setStore({ ...store, configuracion: data.configuracion });
-
-
-
-          let valores = [];
-          Object.entries(data.cuentas.transacciones).map((item) => {
-            // console.log(item[0])
-            let datos = { "time": Math.floor(new Date(item[1].fecha).getTime() / 1000) - item[0], "value": parseInt(item[1].monto) }
-            valores.push(datos)
-          })
-
-          valores.sort((a, b) => a.time - b.time);
-          getActions().ActualizarGraficaHome(valores);
-
-
-          data.values == undefined ? "" : actions.ActualizarGrafica(valores)
-
-
-          console.log("user", store.user, "cliente", store.cliente, "cuentas", store.cuentas, "Notificaciones", store.listaNotificaciones, "transacciones", store.transacciones,
-            "configuracion", store.configuracion
-          );
-        })
-        .catch((error) => {
-          // Manejamos cualquier error que ocurra durante el fetch
-          console.error("Hubo un problema al obtener los detalles del usuario:", error);
-        });
-    },
-
-    updateClienteProfile: (id, perfil) => {
-      const store = getStore();
-
-      fetch(`${process.env.BACKEND_URL}/api/User/${id}/Perfil`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(perfil)
-      })
-        .then(async (response) => {
-          if (response.ok) {
-            notyf.success("Perfil Actualizado")
-            const data = await response.json(); // Procesar la respuesta como JSON
-            setStore({ ...store, cliente: data.cliente });
-          } else {
-            notyf.error("Error al actualizar el usuario")
-            const errorData = await response.json(); // Procesar el error como JSON
-          }
-        })
-        .catch((error) => {
-          console.error("Error de red o del servidor:", error);
-        });
-    },
-
-    sendCoordinatesCard: (userId) => {
-      const store = getStore();
-
-      fetch(`${process.env.BACKEND_URL}/api/send-coordinates-card/${userId}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Error al enviar la tarjeta de coordenadas");
-          }
-          return response.json();
-        })
-        .then((data) => {
-          // Si la solicitud es exitosa, actualiza el store
+          // Actualizamos el store con el token y los datos del usuario
           setStore({
-            ...store, coordinatesCardSent: true,
-          });
-        })
-        .catch((error) => {
-          // Si hay un error, actualiza el store con el mensaje de error
-          setStore({
-            ...store, coordinatesCardSent: false,
-          });
-          console.error("Error al enviar la tarjeta de coordenadas:", error);
-        });
-    },
+            ...store,
+            token: data.token,
+            user: data.user, // Ajustar según lo que devuelva tu backend
 
-    realizarTransferencia: async (cuenta_origen_id, numero_cuenta_destino, nombre_destino, apellidos_destino, monto, descripcion) => {
+          });
+          console.log("Login exitoso. Token guardado en localStorage.", store.user, store.usuario);
+        } catch (error) {
+          console.error("Error en loginUser:", error.message);
+          throw error; // Lanzamos el error para que HandleLogin lo maneje
+        }
+      },
 
-      try {
-        const response = await fetch(`${process.env.BACKEND_URL}/api/transaccion/transferencia`, {
+      registerUser: (name, email, password) => {
+        const actions = getActions();
+        console.log("desde flux", name, email, password);
+
+        return fetch(process.env.BACKEND_URL + "/api/User/Register", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            // Authorization: `Bearer ${localStorage.getItem("token")}`, // Si usas autenticación
           },
           body: JSON.stringify({
-            cuenta_origen_id,
-            numero_cuenta_destino, // Número de cuenta destino
-            nombre_destino,       // Nombre del cliente destino
-            apellidos_destino,    // Apellidos del cliente destino
-            monto,
-            descripcion,
+            password: password,
+            email: email,
+            name: name,
+            is_active: true,
           }),
-        });
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Error en el registro");
+            }
+            return response.json(); // Parseamos la respuesta JSON
+          })
+          .then((data) => {
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("name", data.user.name);
+            localStorage.setItem("userId", data.user.id);
+            // actions.fetchUserDetails(data.user.id)
+            return "success";
+          })
+          .catch((error) => {
+            console.error("Error al registrar usuario:", error);
+          });
+      },
 
-        const data = await response.json();
+      fetchUserDetails: (id) => {
+        const store = getStore();
+        fetch(`${process.env.BACKEND_URL}/api/User/${id}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => {
 
-        if (!response.ok) {
-          throw new Error(data.error || "Error al realizar la transferencia");
-        }
+            if (!response.ok) {
+              notyf.error("Error al actualizar datos del usuario:");
+              throw new Error(`Error: ${response.status} - ${response.statusText}`);
+            }
+            return response.json(); // Convertimos la respuesta a JSON
+          })
 
-        // Actualizar el store con los nuevos saldos
-        // const store = getStore();
-        // const updatedCuentas = store.cuentas.map((cuenta) => {
-        //     if (cuenta.id === cuenta_origen_id) {
-        //         return { ...cuenta, saldo: data.saldo_origen };
-        //     }
-        //     if (cuenta.numero_cuenta === numero_cuenta_destino) {
-        //         return { ...cuenta, saldo: data.saldo_destino };
-        //     }
-        //     return cuenta;
-        // });
+          .then((data) => {
 
-        // setStore({
-        //     ...store,
-        //     cuentas: updatedCuentas,
-        // });
+            // Guardamos los datos del usuario en el store bajo la propiedad "usuario"
+            setStore({ ...store, cliente: data.cliente });
+            setStore({ ...store, cuentas: data.cuentas });
+            setStore({ ...store, user: data.user });
+            setStore({ ...store, listaNotificaciones: data.notificaciones });
+            setStore({ ...store, tarjetaCoord: data.tarjeta_coordenadas });
+            setStore({ ...store, transacciones: data.cuentas.transacciones });
+            setStore({ ...store, configuracion: data.configuracion });
 
-        return data; // Devuelve los datos de la transferencia
-      } catch (error) {
-        console.error("Error al realizar la transferencia:", error);
-        throw error; // Lanza el error para manejarlo en el componente
-      }
-    },
 
-    marcarNotificacionComoLeida: async (notificacionId) => {
-      try {
-        const response = await fetch(`${process.env.BACKEND_URL}/api/notificaciones/${notificacionId}/marcar-leida`, {
+
+            let valores = [];
+            Object.entries(data.cuentas.transacciones).map((item) => {
+              // console.log(item[0])
+              let datos = { "time": Math.floor(new Date(item[1].fecha).getTime() / 1000) - item[0], "value": parseInt(item[1].monto) }
+              valores.push(datos)
+            })
+
+            valores.sort((a, b) => a.time - b.time);
+            getActions().ActualizarGraficaHome(valores);
+
+
+            data.values == undefined ? "" : actions.ActualizarGrafica(valores)
+
+
+            console.log("user", store.user, "cliente", store.cliente, "cuentas", store.cuentas, "Notificaciones", store.listaNotificaciones, "transacciones", store.transacciones,
+              "configuracion", store.configuracion
+            );
+          })
+          .catch((error) => {
+            // Manejamos cualquier error que ocurra durante el fetch
+            console.error("Hubo un problema al obtener los detalles del usuario:", error);
+          });
+      },
+
+      updateClienteProfile: (id, perfil) => {
+        const store = getStore();
+
+        fetch(`${process.env.BACKEND_URL}/api/User/${id}/Perfil`, {
           method: "PUT",
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "application/json"
           },
-        });
+          body: JSON.stringify(perfil)
+        })
+          .then(async (response) => {
+            if (response.ok) {
+              notyf.success("Perfil Actualizado")
+              const data = await response.json(); // Procesar la respuesta como JSON
+              setStore({ ...store, cliente: data.cliente });
+            } else {
+              notyf.error("Error al actualizar el usuario")
+              const errorData = await response.json(); // Procesar el error como JSON
+            }
+          })
+          .catch((error) => {
+            console.error("Error de red o del servidor:", error);
+          });
+      },
 
-        if (!response.ok) {
-          throw new Error("Error al marcar la notificación como leída");
-        }
-
-        const data = await response.json();
-        return data; // Devuelve la notificación actualizada
-
-      } catch (error) {
-        console.error("Error:", error);
-        throw error;
-      }
-    },
-    setNotificaciones: (listaNotificaciones) => {
-      const store = getStore();
-      setStore({ ...store, listaNotificaciones });
-    },
-
-    sendCode: (email) => {
-      try {
+      sendCoordinatesCard: (userId) => {
         const store = getStore();
-        const actions = getActions();
-        setStore({ email });
 
-        fetch(process.env.BACKEND_URL + "api/send-code", {
+        fetch(`${process.env.BACKEND_URL}/api/send-coordinates-card/${userId}`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Accept": "application/json",
           },
-          body: JSON.stringify({ email: store.email }),
         })
-          .then((response) => response.json())
-          .then((data) => console.log(data))
-      } catch (error) {
-        return notyf.error("Error al enviar el codigo")
-      }
-    },
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Error al enviar la tarjeta de coordenadas");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            // Si la solicitud es exitosa, actualiza el store
+            setStore({
+              ...store, coordinatesCardSent: true,
+            });
+          })
+          .catch((error) => {
+            // Si hay un error, actualiza el store con el mensaje de error
+            setStore({
+              ...store, coordinatesCardSent: false,
+            });
+            console.error("Error al enviar la tarjeta de coordenadas:", error);
+          });
+      },
 
-    verifyCode: (email, code) => {
-      const store = getStore();
-      setStore({ email });
-      setStore({ code });
+      realizarTransferencia: async (cuenta_origen_id, numero_cuenta_destino, nombre_destino, apellidos_destino, monto, descripcion) => {
 
-      fetch(process.env.BACKEND_URL + "/api/verify-code", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: store.email, code: store.code }),
-      })
-        .then((response) => {
-          if (!response.ok) { notyf.error("Código Incorrecto"); }
-          return response.json();
-        })
-        .then((data) => {
-          notyf.success("Codigo Verificado");
-          // Guardamos el user_id en el store
-          setStore({ user: data.user_id });
-          console.log(store.user)
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
-    },
+        try {
+          const response = await fetch(`${process.env.BACKEND_URL}/api/transaccion/transferencia`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              // Authorization: `Bearer ${localStorage.getItem("token")}`, // Si usas autenticación
+            },
+            body: JSON.stringify({
+              cuenta_origen_id,
+              numero_cuenta_destino, // Número de cuenta destino
+              nombre_destino,       // Nombre del cliente destino
+              apellidos_destino,    // Apellidos del cliente destino
+              monto,
+              descripcion,
+            }),
+          });
 
-    updateUserPassword: (id, newPassword) => {
-      fetch(`${process.env.BACKEND_URL}/api/User/${id}/Password`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ new_password: newPassword })
-      })
-        .then(async (response) => {
-          if (response.ok) {
-            const data = await response.json();
-            notyf.success("Contraseña actualizada correctamente");
-          } else {
-            const errorData = await response.json();
-            // Mostrar mensaje de error del servidor o un mensaje genérico
-            notyf.error(errorData.error || "Error al actualizar la contraseña");
-          }
-        })
-        .catch((error) => {
-          notyf.error("Error de red o del servidor");
-          console.error("Error en updateUserPassword:", error);
-        });
-    },
+          const data = await response.json();
 
-    // updateUserPassword: async (userId, newPassword) => {
-    //   try {
-    //     const response = await fetch(process.env.BACKEND_URL + `/api/User/${userId}/Password`, {
-    //       method: "PUT",
-    //       headers: {
-    //         "Content-Type": "application/json"
-    //       },
-    //       body: JSON.stringify({ newPassword })
-    //     });
-    //     return response; // Luego, en el componente, puedes revisar response.ok para mostrar mensajes
-    //   } catch (error) {
-    //     console.error("Error al actualizar la contraseña:", error);
-    //     throw error;
-    //   }
-    // },
-
-
-    sendCoordinatesCode: (email) => {
-      const store = getStore();
-
-      fetch(`${process.env.BACKEND_URL}/api/send-coordinates-code`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email: email }),
-      })
-        .then((response) => {
           if (!response.ok) {
-            throw new Error("Error al enviar el código");
+            throw new Error(data.error || "Error al realizar la transferencia");
           }
-          return response.json();
-        })
-        .then((data) => {
-          // setStore({
-          //   ...store, coordinatesCodeSent: true,
+
+          // Actualizar el store con los nuevos saldos
+          // const store = getStore();
+          // const updatedCuentas = store.cuentas.map((cuenta) => {
+          //     if (cuenta.id === cuenta_origen_id) {
+          //         return { ...cuenta, saldo: data.saldo_origen };
+          //     }
+          //     if (cuenta.numero_cuenta === numero_cuenta_destino) {
+          //         return { ...cuenta, saldo: data.saldo_destino };
+          //     }
+          //     return cuenta;
           // });
-          console.log("Código enviado:", data);
-        })
-        .catch((error) => {
+
           // setStore({
-          //   ...store, coordinatesCodeSent: false,
+          //     ...store,
+          //     cuentas: updatedCuentas,
           // });
-          console.error("Error:", error);
-        });
-    },
 
-    // Acción para verificar el código de la tarjeta de coordenadas
+          return data; // Devuelve los datos de la transferencia
+        } catch (error) {
+          console.error("Error al realizar la transferencia:", error);
+          throw error; // Lanza el error para manejarlo en el componente
+        }
+      },
 
-    verifyCoordinatesCode: (email, code) => {
-      const store = getStore();
+      marcarNotificacionComoLeida: async (notificacionId) => {
+        try {
+          const response = await fetch(`${process.env.BACKEND_URL}/api/notificaciones/${notificacionId}/marcar-leida`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
 
-      return fetch(`${process.env.BACKEND_URL}/api/verify-coordinates-code`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email: email, code: code }),
-      })
-        .then((response) => {
           if (!response.ok) {
-            throw new Error("Código inválido o expirado");
+            throw new Error("Error al marcar la notificación como leída");
           }
-          return response.json();
-        })
-        .then((data) => {
-          setStore({ ...store, tarjetaCoord: data.tarjeta_coordenadas });
-          return data; // 🔹 Devolvemos los datos
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-          return null; // 🔹 Devolvemos null en caso de error
-        });
-    },
 
-    sendCoordinatesCard: async (user_id) => {
-      try {
-        const response = await fetch(`${process.env.BACKEND_URL}/api/send-coordinates-card/${user_id}`, {
+          const data = await response.json();
+          return data; // Devuelve la notificación actualizada
+
+        } catch (error) {
+          console.error("Error:", error);
+          throw error;
+        }
+      },
+      setNotificaciones: (listaNotificaciones) => {
+        const store = getStore();
+        setStore({ ...store, listaNotificaciones });
+      },
+
+      sendCode: (email) => {
+        try {
+          const store = getStore();
+          const actions = getActions();
+          setStore({ email });
+
+          fetch(process.env.BACKEND_URL + "api/send-code", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json",
+            },
+            body: JSON.stringify({ email: store.email }),
+          })
+            .then((response) => response.json())
+            .then((data) => console.log(data))
+        } catch (error) {
+          return notyf.error("Error al enviar el codigo")
+        }
+      },
+
+      verifyCode: (email, code) => {
+        const store = getStore();
+        setStore({ email });
+        setStore({ code });
+
+        fetch(process.env.BACKEND_URL + "/api/verify-code", {
           method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: store.email, code: store.code }),
+        })
+          .then((response) => {
+            if (!response.ok) { notyf.error("Código Incorrecto"); }
+            return response.json();
+          })
+          .then((data) => {
+            notyf.success("Codigo Verificado");
+            // Guardamos el user_id en el store
+            setStore({ user: data.user_id });
+            console.log(store.user)
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      },
+
+      updateUserPassword: (id, newPassword) => {
+        fetch(`${process.env.BACKEND_URL}/api/User/${id}/Password`, {
+          method: "PUT",
           headers: {
             "Content-Type": "application/json"
-          }
-        });
-
-        const data = await response.json();
-        if (!response.ok) {
-          throw new Error(data.error || "Error al enviar la tarjeta de coordenadas");
-        }
-
-        return data;
-      } catch (error) {
-        console.error("Error enviando la tarjeta de coordenadas:", error);
-        return null;
-      }
-    },
-
-    fetchGraficasData: async () => {
-      try {
-        const response = await fetch(process.env.BACKEND_URL + "/api/data");
-        if (!response.ok) throw new Error('Error fetching data');
-
-        const data = await response.json();
-
-        // Formatear los datos
-        const formattedData = data.map((item) => ({
-          time: item.date,
-          value: item.price,
-        }));
-
-        // Guardar los datos en el store
-        setStore({ chartData: formattedData });
-      } catch (error) {
-        console.error('Error al obtener datos del backend:', error);
-      }
-    },
-
-    fetchStockData: async (symbol) => {
-      try {
-        const response = await fetch(`${process.env.s}/api/stock/${symbol}`);
-        if (!response) throw new Error('Error fetching stock data');
-        const data = await response.json();
-
-        // Guardar datos en el store
-        setStore({ stockData: data });
-      } catch (error) {
-        console.error('Error al obtener datos de las acciones:', error);
-      }
-    },
-
-    loadProducts: async () => {
-      try {
-        // Realizamos la petición GET al endpoint de carga de productos
-        const response = await fetch(process.env.BACKEND_URL + '/api/products/load', {
-          method: 'GET',
-          headers: { 'Content-Type': 'application/json' }
-        });
-
-        // Si la respuesta no es exitosa, lanzamos un error
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.error || "Error al cargar productos");
-        }
-
-        const data = await response.json();
-
-        // Por ejemplo, puedes mostrar una notificación de éxito
-        notyf.success(data.msg);
-
-        // Opcional: si el endpoint devolviera productos, podrías actualizar el store
-        // setStore({ ...getStore(), products: data.products });
-
-      } catch (error) {
-        notyf.error("Error al cargar productos");
-        console.error("Error en loadProducts:", error);
-      }
-    },
-
-    fetchProducts: () => {
-      const store = getStore();
-      fetch(process.env.BACKEND_URL + '/api/products', {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json"
-        },
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`Error: ${response.status} - ${response.statusText}`);
-          }
-          return response.json(); // Convertimos la respuesta a JSON
+          },
+          body: JSON.stringify({ new_password: newPassword })
         })
-        .then((data) => {
-          const productos = data.productos;
-          const productosPorCategoria = productos.reduce((acc, producto) => {
-            const categoria = producto.categoria || 'Sin Categoria';
-            if (!acc[categoria]) {
-              acc[categoria] = [];
+          .then(async (response) => {
+            if (response.ok) {
+              const data = await response.json();
+              notyf.success("Contraseña actualizada correctamente");
+            } else {
+              const errorData = await response.json();
+              // Mostrar mensaje de error del servidor o un mensaje genérico
+              notyf.error(errorData.error || "Error al actualizar la contraseña");
             }
-            acc[categoria].push(producto);
-            return acc;
-          }, {});
-          // Actualizamos el store con los productos agrupados
-          setStore({ ...store, productos: productosPorCategoria });
-          console.log("Productos agrupados:", productosPorCategoria);
-        })
-        .catch((error) => {
-          console.error("Error al obtener productos:", error);
-        });
-    },
+          })
+          .catch((error) => {
+            notyf.error("Error de red o del servidor");
+            console.error("Error en updateUserPassword:", error);
+          });
+      },
 
-    addToCart: (product) => {
-      const store = getStore();
-      const existe = store.cart.find((item) => item.id === product.id);
-      if (!existe) {
-        const updatedCart = [...store.cart, product];
+      // updateUserPassword: async (userId, newPassword) => {
+      //   try {
+      //     const response = await fetch(process.env.BACKEND_URL + `/api/User/${userId}/Password`, {
+      //       method: "PUT",
+      //       headers: {
+      //         "Content-Type": "application/json"
+      //       },
+      //       body: JSON.stringify({ newPassword })
+      //     });
+      //     return response; // Luego, en el componente, puedes revisar response.ok para mostrar mensajes
+      //   } catch (error) {
+      //     console.error("Error al actualizar la contraseña:", error);
+      //     throw error;
+      //   }
+      // },
+
+
+      sendCoordinatesCode: (email) => {
+        const store = getStore();
+
+        fetch(`${process.env.BACKEND_URL}/api/send-coordinates-code`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email: email }),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Error al enviar el código");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            // setStore({
+            //   ...store, coordinatesCodeSent: true,
+            // });
+            console.log("Código enviado:", data);
+          })
+          .catch((error) => {
+            // setStore({
+            //   ...store, coordinatesCodeSent: false,
+            // });
+            console.error("Error:", error);
+          });
+      },
+
+      // Acción para verificar el código de la tarjeta de coordenadas
+
+      verifyCoordinatesCode: (email, code) => {
+        const store = getStore();
+
+        return fetch(`${process.env.BACKEND_URL}/api/verify-coordinates-code`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email: email, code: code }),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Código inválido o expirado");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            setStore({ ...store, tarjetaCoord: data.tarjeta_coordenadas });
+            return data; // 🔹 Devolvemos los datos
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+            return null; // 🔹 Devolvemos null en caso de error
+          });
+      },
+
+      sendCoordinatesCard: async (user_id) => {
+        try {
+          const response = await fetch(`${process.env.BACKEND_URL}/api/send-coordinates-card/${user_id}`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            }
+          });
+
+          const data = await response.json();
+          if (!response.ok) {
+            throw new Error(data.error || "Error al enviar la tarjeta de coordenadas");
+          }
+
+          return data;
+        } catch (error) {
+          console.error("Error enviando la tarjeta de coordenadas:", error);
+          return null;
+        }
+      },
+
+      fetchGraficasData: async () => {
+        try {
+          const response = await fetch(process.env.BACKEND_URL + "/api/data");
+          if (!response.ok) throw new Error('Error fetching data');
+
+          const data = await response.json();
+
+          // Formatear los datos
+          const formattedData = data.map((item) => ({
+            time: item.date,
+            value: item.price,
+          }));
+
+          // Guardar los datos en el store
+          setStore({ chartData: formattedData });
+        } catch (error) {
+          console.error('Error al obtener datos del backend:', error);
+        }
+      },
+
+      fetchStockData: async (symbol) => {
+        try {
+          const response = await fetch(`${process.env.s}/api/stock/${symbol}`);
+          if (!response) throw new Error('Error fetching stock data');
+          const data = await response.json();
+
+          // Guardar datos en el store
+          setStore({ stockData: data });
+        } catch (error) {
+          console.error('Error al obtener datos de las acciones:', error);
+        }
+      },
+
+      loadProducts: async () => {
+        try {
+          // Realizamos la petición GET al endpoint de carga de productos
+          const response = await fetch(process.env.BACKEND_URL + '/api/products/load', {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' }
+          });
+
+          // Si la respuesta no es exitosa, lanzamos un error
+          if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || "Error al cargar productos");
+          }
+
+          const data = await response.json();
+
+          // Por ejemplo, puedes mostrar una notificación de éxito
+          notyf.success(data.msg);
+
+          // Opcional: si el endpoint devolviera productos, podrías actualizar el store
+          // setStore({ ...getStore(), products: data.products });
+
+        } catch (error) {
+          notyf.error("Error al cargar productos");
+          console.error("Error en loadProducts:", error);
+        }
+      },
+
+      fetchProducts: () => {
+        const store = getStore();
+        fetch(process.env.BACKEND_URL + '/api/products', {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json"
+          },
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`Error: ${response.status} - ${response.statusText}`);
+            }
+            return response.json(); // Convertimos la respuesta a JSON
+          })
+          .then((data) => {
+            const productos = data.productos;
+            const productosPorCategoria = productos.reduce((acc, producto) => {
+              const categoria = producto.categoria || 'Sin Categoria';
+              if (!acc[categoria]) {
+                acc[categoria] = [];
+              }
+              acc[categoria].push(producto);
+              return acc;
+            }, {});
+            // Actualizamos el store con los productos agrupados
+            setStore({ ...store, productos: productosPorCategoria });
+            console.log("Productos agrupados:", productosPorCategoria);
+          })
+          .catch((error) => {
+            console.error("Error al obtener productos:", error);
+          });
+      },
+
+      addToCart: (product) => {
+        const store = getStore();
+        const existe = store.cart.find((item) => item.id === product.id);
+        if (!existe) {
+          const updatedCart = [...store.cart, product];
+          setStore({ ...store, cart: updatedCart });
+          localStorage.setItem("cart", JSON.stringify(updatedCart));
+          notyf.success("Producto agregado al carrito");
+        } else {
+          notyf.open({ type: 'custom', message: "No puedes comprar mas de 1 producto de un producto especifico", className: 'notyf-custom' })
+        }
+      },
+
+      // Acción para eliminar un producto específico del carrito y actualizar localStorage
+      removeFromCart: (productId) => {
+        const store = getStore();
+        const updatedCart = store.cart.filter((item) => item.id !== productId);
         setStore({ ...store, cart: updatedCart });
         localStorage.setItem("cart", JSON.stringify(updatedCart));
-        notyf.success("Producto agregado al carrito");
-      } else {
-        notyf.open({ type: 'custom', message: "No puedes comprar mas de 1 producto de un producto especifico", className: 'notyf-custom' })
-      }
+        notyf.success("Producto eliminado del carrito");
+      },
+
+      // Acción para vaciar completamente el carrito y actualizar localStorage
+      clearCart: () => {
+        const store = getStore();
+        setStore({ ...store, cart: [] });
+        localStorage.setItem("cart", JSON.stringify([]));
+        notyf.success("Carrito vaciado");
+      },
+
+
     },
-
-    // Acción para eliminar un producto específico del carrito y actualizar localStorage
-    removeFromCart: (productId) => {
-      const store = getStore();
-      const updatedCart = store.cart.filter((item) => item.id !== productId);
-      setStore({ ...store, cart: updatedCart });
-      localStorage.setItem("cart", JSON.stringify(updatedCart));
-      notyf.success("Producto eliminado del carrito");
-    },
-
-    // Acción para vaciar completamente el carrito y actualizar localStorage
-    clearCart: () => {
-      const store = getStore();
-      setStore({ ...store, cart: [] });
-      localStorage.setItem("cart", JSON.stringify([]));
-      notyf.success("Carrito vaciado");
-    },
-
-
-  },
   };
 };
 
