@@ -50,9 +50,9 @@ const ContenedorPrestamosTarifas = () => {
             <h1 className={`text-center titulo-politica ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>{t('tarifas.p7')}</h1>
             <p className={`fs-3 text-center ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>{t('tarifas.p8')}</p>
             <div className="row">
-                <div className="col-12 col-lg-4"><ContenedorCuadrado position="left" text={t('tarifas.text4')} title={t('tarifas.t4')} logo={<GrMoney />} /></div>
-                <div className="col-12 col-md-6 col-lg-4"><ContenedorCuadrado position="left" text={t('tarifas.text5')} title={t('tarifas.t5')} logo={<IoRocketOutline />} /></div>
-                <div className="col-12 col-md-6 col-lg-4"><ContenedorCuadrado position="left" text={t('tarifas.text6')} title={t('tarifas.t6')} logo={<FaRegHourglassHalf />} /></div>
+                <div className="col-12 col-lg-4 my-3 my-lg-0"><ContenedorCuadrado position="left" text={t('tarifas.text4')} title={t('tarifas.t4')} logo={<GrMoney />} /></div>
+                <div className="col-12 col-md-6 col-lg-4 my-3 my-lg-0"><ContenedorCuadrado position="left" text={t('tarifas.text5')} title={t('tarifas.t5')} logo={<IoRocketOutline />} /></div>
+                <div className="col-12 col-md-6 col-lg-4 my-3 my-lg-0"><ContenedorCuadrado position="left" text={t('tarifas.text6')} title={t('tarifas.t6')} logo={<FaRegHourglassHalf />} /></div>
             </div>
         </div>
     )

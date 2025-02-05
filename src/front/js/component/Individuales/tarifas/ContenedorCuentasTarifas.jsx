@@ -50,9 +50,9 @@ const ContenedorCuentasTarifas = () => {
             <h1 className={`text-center titulo-politica ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>{t('tarifas.p3')}</h1>
             <p className={`fs-3 text-center ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>{t('tarifas.p4')}</p>
             <div className="row">
-                <div className="col-12 col-lg-4"><ContenedorCuadrado position="left" text={t('tarifas.text1')} title={t('tarifas.t1')} logo={<BsCreditCard2Back />} /></div>
-                <div className="col-12 col-md-6 col-lg-4"><ContenedorCuadrado position="left" text={t('tarifas.text2')} title={t('tarifas.t2')} logo={<FaMoneyBillTransfer />} /></div>
-                <div className="col-12 col-md-6 col-lg-4"><ContenedorCuadrado position="left" text={t('tarifas.text3')} title={t('tarifas.t3')} logo={<TbWorld />} /></div>
+                <div className="col-12 col-lg-4 my-3 my-lg-0"><ContenedorCuadrado position="left" text={t('tarifas.text1')} title={t('tarifas.t1')} logo={<BsCreditCard2Back />} /></div>
+                <div className="col-12 col-md-6 col-lg-4 my-3 my-lg-0"><ContenedorCuadrado position="left" text={t('tarifas.text2')} title={t('tarifas.t2')} logo={<FaMoneyBillTransfer />} /></div>
+                <div className="col-12 col-md-6 col-lg-4 my-3 my-lg-0"><ContenedorCuadrado position="left" text={t('tarifas.text3')} title={t('tarifas.t3')} logo={<TbWorld />} /></div>
             </div>
         </div>
     )

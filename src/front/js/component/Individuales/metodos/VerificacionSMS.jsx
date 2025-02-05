@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import ColLateral from "../ColLateral.jsx";
 
-const ContenedorPrecaucionConsejos = () => {
+const VerificacionSMS = () => {
     const { t } = useTranslation()
     const [userLoad, SetUserLoad] = useState(false);
     // logica para mostrar el conteindo si el usuario esta en la seccion del componente
@@ -43,21 +43,23 @@ const ContenedorPrecaucionConsejos = () => {
         }
     }, [isVisible])
     return (
-        <div className="container espaciado-fondo">
-            <h1 className={`text-center titulo-principal-politica ${userLoad ? "animacion-der visible" : "animacion-der"}`}>
-                Consejos de Seguridad en Línea
+        <div className="container espaciado-fondo" ref={sectionRef}>
+            <h1 className={`text-center titulo-principal-politica ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>
+                Código de Verificación por SMS
             </h1>
-            <p className={`fs-3 text-center ${userLoad ? "animacion-der visible" : "animacion-der"}`}>
-                Mantén tu información protegida siguiendo estas recomendaciones:
+            <p className={`fs-3 text-center ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>
+                Estamos implementando un nuevo sistema de seguridad basado en códigos de verificación únicos (OTP - One-Time Password), enviados a tu número de celular registrado. Podras disfrutar de los siguientes beneficios:
             </p>
             <div ref={sectionRef} className="row">
-                <ColLateral width="w-75" text={"Asegúrate de que estás ingresando a nuestro sitio oficial"} position="left" userLoad={userLoad} />
-                <ColLateral width="w-75" text={"No hagas clic en enlaces sospechosos ni respondas correos electrónicos"} position="" userLoad={userLoad} />
-                <ColLateral width="w-75" text={"Verifica siempre la autenticidad de mensaje que recibas en nombre de GeekBank"} position="left" userLoad={userLoad} />
-                <ColLateral width="w-75" text={"Evita acceder a tu cuenta desde redes WiFi públicas o dispositivos desconocidos"} position="" userLoad={userLoad} />
+                <ColLateral width="w-75" text={"Mayor seguridad en cada transacción"} position="left" userLoad={userLoad} />
+                <ColLateral width="w-75" text={"Protección adicional contra accesos no autorizados"} position="" userLoad={userLoad} />
+                <ColLateral width="w-75" text={"No requiere almacenamiento físico"} position="left" userLoad={userLoad} />
             </div >
         </div>
     )
 }
 
-export default ContenedorPrecaucionConsejos
+export default VerificacionSMS
+
+
+

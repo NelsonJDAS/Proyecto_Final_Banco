@@ -99,6 +99,7 @@
 
 .contenedor-componente-interactivo {
     height: 210px;
+    overflow: hidden;
 }
 
 

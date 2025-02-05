@@ -25,7 +25,7 @@ const ContenedorContacto = () => {
 
 
     return (
-        <div className="container">
+        <div className="container espaciado-fondo">
             <div className="espaciado-contacto">
                 <h1 className={`text-center titulo-principal-politica ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>Contacto GeekBank</h1>
                 <p className={`fs-3 text-center ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`} >

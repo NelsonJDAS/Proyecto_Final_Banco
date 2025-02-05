@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import ColLateral from "../ColLateral.jsx";
 
-const ContenedorPrecaucionConsejos = () => {
+const TarjetaCoordUso = () => {
     const { t } = useTranslation()
     const [userLoad, SetUserLoad] = useState(false);
     // logica para mostrar el conteindo si el usuario esta en la seccion del componente
@@ -45,19 +45,19 @@ const ContenedorPrecaucionConsejos = () => {
     return (
         <div className="container espaciado-fondo">
             <h1 className={`text-center titulo-principal-politica ${userLoad ? "animacion-der visible" : "animacion-der"}`}>
-                Consejos de Seguridad en Línea
+                ¿Cómo Usarla de Forma Segura?
             </h1>
             <p className={`fs-3 text-center ${userLoad ? "animacion-der visible" : "animacion-der"}`}>
-                Mantén tu información protegida siguiendo estas recomendaciones:
+                Para garantizar la seguridad de tus transacciones, sigue estas recomendaciones:
             </p>
             <div ref={sectionRef} className="row">
-                <ColLateral width="w-75" text={"Asegúrate de que estás ingresando a nuestro sitio oficial"} position="left" userLoad={userLoad} />
-                <ColLateral width="w-75" text={"No hagas clic en enlaces sospechosos ni respondas correos electrónicos"} position="" userLoad={userLoad} />
-                <ColLateral width="w-75" text={"Verifica siempre la autenticidad de mensaje que recibas en nombre de GeekBank"} position="left" userLoad={userLoad} />
-                <ColLateral width="w-75" text={"Evita acceder a tu cuenta desde redes WiFi públicas o dispositivos desconocidos"} position="" userLoad={userLoad} />
+                <ColLateral width="w-75" text={"Nunca compartas tu tarjeta de coordenadas con nadie"} position="left" userLoad={userLoad} />
+                <ColLateral width="w-75" text={"Evita tomar fotos o almacenarla en dispositivos electrónicos"} position="" userLoad={userLoad} />
+                <ColLateral width="w-75" text={"Anotala en un papel nunca en un dispositivo"} position="left" userLoad={userLoad} />
+                <ColLateral width="w-75" text={"Solo ingresa coordenadas en sitios oficiales del banco"} position="" userLoad={userLoad} />
             </div >
         </div>
     )
 }
 
-export default ContenedorPrecaucionConsejos
+export default TarjetaCoordUso

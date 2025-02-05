@@ -1,8 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import ColLateral from "../ColLateral.jsx";
+import ContenedorCuadrado from "../ContenedorCuadrado.jsx";
+import { MdOutlineSms } from "react-icons/md";
+import { TbPassword } from "react-icons/tb";
+import { PiIdentificationCard } from "react-icons/pi";
 
-const ContenedorPrecaucionConsejos = () => {
+const VerificacionSMSUso = () => {
     const { t } = useTranslation()
     const [userLoad, SetUserLoad] = useState(false);
     // logica para mostrar el conteindo si el usuario esta en la seccion del componente
@@ -43,21 +46,20 @@ const ContenedorPrecaucionConsejos = () => {
         }
     }, [isVisible])
     return (
-        <div className="container espaciado-fondo">
-            <h1 className={`text-center titulo-principal-politica ${userLoad ? "animacion-der visible" : "animacion-der"}`}>
-                Consejos de Seguridad en Línea
+        <div className="container espaciado-fondo" ref={sectionRef}>
+            <h1 className={`text-center titulo-principal-politica ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>
+                ¿Cómo Funcionará?
             </h1>
-            <p className={`fs-3 text-center ${userLoad ? "animacion-der visible" : "animacion-der"}`}>
-                Mantén tu información protegida siguiendo estas recomendaciones:
-            </p>
-            <div ref={sectionRef} className="row">
-                <ColLateral width="w-75" text={"Asegúrate de que estás ingresando a nuestro sitio oficial"} position="left" userLoad={userLoad} />
-                <ColLateral width="w-75" text={"No hagas clic en enlaces sospechosos ni respondas correos electrónicos"} position="" userLoad={userLoad} />
-                <ColLateral width="w-75" text={"Verifica siempre la autenticidad de mensaje que recibas en nombre de GeekBank"} position="left" userLoad={userLoad} />
-                <ColLateral width="w-75" text={"Evita acceder a tu cuenta desde redes WiFi públicas o dispositivos desconocidos"} position="" userLoad={userLoad} />
-            </div >
+            <div className="row">
+                <div className="col-12 col-lg-4 my-3 mb-lg-3"><ContenedorCuadrado position="left" text={"Al realizar una transacción o iniciar sesión desde un dispositivo nuevo, recibirás un  SMS."} title={"Recibe tu código por SMS"} logo={<MdOutlineSms />} /></div>
+                <div className="col-12 col-md-6 col-lg-4 my-3 mb-lg-3"><ContenedorCuadrado position="bottom" text={"Deberás ingresar este código en la plataforma para validar tu identidad."} title={"Ingresa el código de verificación"} logo={<TbPassword />} /></div>
+                <div className="col-12 col-md-6 col-lg-4 my-3 mb-lg-3"><ContenedorCuadrado position="right" text={"Cada código es único y tiene un tiempo de expiración limitado"} title={"Código único y limitado"} logo={<PiIdentificationCard />} /></div>
+            </div>
         </div>
     )
 }
 
-export default ContenedorPrecaucionConsejos
+export default VerificacionSMSUso
+
+
+
