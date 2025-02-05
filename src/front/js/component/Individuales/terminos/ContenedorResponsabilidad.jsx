@@ -50,9 +50,9 @@ const ContenedorResponsabilidad = () => {
             <h1 className={`text-center titulo-politica ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`}>{t('terminos.p5')}</h1>
             <p className={`fs-3 text-center ${userLoad ? "animacion-abajo visible" : "animacion-abajo"}`} ref={sectionRef}>{t('terminos.p6')}</p>
             <div className="row">
-                <div className="col-12 col-lg-4"><ContenedorCuadrado position="left" text={t('terminos.text1')} title={t('terminos.ti1')} logo={<IoDocumentOutline />} /></div>
-                <div className="col-12 col-md-6 col-lg-4"><ContenedorCuadrado position="bottom" text={t('terminos.text2')} title={t('terminos.ti2')} logo={<CiLock />} /></div>
-                <div className="col-12 col-md-6 col-lg-4"><ContenedorCuadrado position="right" text={t('terminos.text3')} title={t('terminos.ti3')} logo={<IoIosInformationCircleOutline />} /></div>
+                <div className="col-12 col-lg-4 my-3 m-lg-0"><ContenedorCuadrado position="left" text={t('terminos.text1')} title={t('terminos.ti1')} logo={<IoDocumentOutline />} /></div>
+                <div className="col-12 col-md-6 col-lg-4 my-3 m-lg-0"><ContenedorCuadrado position="bottom" text={t('terminos.text2')} title={t('terminos.ti2')} logo={<CiLock />} /></div>
+                <div className="col-12 col-md-6 col-lg-4 my-3 m-lg-0"><ContenedorCuadrado position="right" text={t('terminos.text3')} title={t('terminos.ti3')} logo={<IoIosInformationCircleOutline />} /></div>
             </div>
         </div>
     )

@@ -135,7 +135,7 @@ const ContenedorCompras = () => {
     }, [])
     return (
         <>
-            <div className="modal fade" id="tarjetacord" tabIndex="-1" aria-labelledby="label" aria-hidden="true" ref={modalRef}>
+            <div className="modal fade" id="tarjetacord" tabIndex="-1" aria-labelledby="label" ref={modalRef}>
                 {/* Modal selector de idiomas */}
                 <div className="modal-dialog modal-dialog-centered">
                     <div className={`modal-content contenedor-modal-transferencias rounded-3 ${store.fondo} borde-brillante `}>

@@ -51,9 +51,9 @@ const VerificacionSMSUso = () => {
                 ¿Cómo Funcionará?
             </h1>
             <div className="row">
-                <div className="col-12 col-lg-4 my-2 mb-lg-3"><ContenedorCuadrado position="left" text={"Al realizar una transacción o iniciar sesión desde un dispositivo nuevo, recibirás un  SMS."} title={"Recibe tu código por SMS"} logo={<MdOutlineSms />} /></div>
-                <div className="col-12 col-md-6 col-lg-4 my-2 mb-lg-3"><ContenedorCuadrado position="bottom" text={"Deberás ingresar este código en la plataforma para validar tu identidad."} title={"Ingresa el código de verificación"} logo={<TbPassword />} /></div>
-                <div className="col-12 col-md-6 col-lg-4 my-2 mb-lg-3"><ContenedorCuadrado position="right" text={"Cada código es único y tiene un tiempo de expiración limitado"} title={"Código único y limitado"} logo={<PiIdentificationCard />} /></div>
+                <div className="col-12 col-lg-4 my-3 mb-lg-3"><ContenedorCuadrado position="left" text={"Al realizar una transacción o iniciar sesión desde un dispositivo nuevo, recibirás un  SMS."} title={"Recibe tu código por SMS"} logo={<MdOutlineSms />} /></div>
+                <div className="col-12 col-md-6 col-lg-4 my-3 mb-lg-3"><ContenedorCuadrado position="bottom" text={"Deberás ingresar este código en la plataforma para validar tu identidad."} title={"Ingresa el código de verificación"} logo={<TbPassword />} /></div>
+                <div className="col-12 col-md-6 col-lg-4 my-3 mb-lg-3"><ContenedorCuadrado position="right" text={"Cada código es único y tiene un tiempo de expiración limitado"} title={"Código único y limitado"} logo={<PiIdentificationCard />} /></div>
             </div>
         </div>
     )

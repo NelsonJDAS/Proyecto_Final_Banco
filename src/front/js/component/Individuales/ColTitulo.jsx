@@ -52,7 +52,7 @@ const ColTitulo = ({ title, position, descripcion, logo }) => {
             <i className="icono-titulo">{logo}</i>
             <span className="fs-2 fw-bold">{title}</span>
             <div className={`container d-flex flex-column ${texto ? "texto-titulo visible" : "texto-titulo"}`}>
-                <p className="fs-4 fw-bold">{descripcion}</p>
+                <p className="fs-4 fw-bold texto-titulo-contenedor">{descripcion}</p>
                 <p>Ver Documento</p>
             </div>
         </div>

@@ -46,8 +46,8 @@ const Mensaje = ({ textoBot, textoUser }) => {
     return (
         <div ref={sectionRef}>
             <div className="row my-2">
-                <div className="col-4"></div>
-                <div className="col-8">
+                <div className="col-lg-4 col-1"></div>
+                <div className="col-lg-8 col-11">
                     <div className={`mensaje-chat ${userLoad ? "mensaje-chat-animacion visible" : ""}`}>
                         <div className="row">
                             <div className="col-12 text-end"><p className="mx-2"> (Tu) </p></div>
@@ -61,7 +61,7 @@ const Mensaje = ({ textoBot, textoUser }) => {
                 </div>
             </div>
             <div className="row my-2">
-                <div className="col-8">
+                <div className="col-lg-8 col-11">
                     <div className={`mensaje-chat ${userLoad ? "mensaje-chat-animacion visible" : ""}`}>
                         <div className="row">
                             <div className="col-12"><p className="mx-2"> IA-lejandro <i><FaUserCircle /></i> </p></div>
@@ -73,7 +73,7 @@ const Mensaje = ({ textoBot, textoUser }) => {
                         </div>
                     </div>
                 </div>
-                <div className="col-4"></div>
+                <div className="col-lg-4 col-1"></div>
             </div>
         </div>
     )
