@@ -421,7 +421,6 @@ def addUser():
 #         return jsonify({"error": str(e)}), 400
        
 @api.route('/User/Login', methods=['POST'])
-# @jwt_required()
 def user_autentication():
     # Obtener datos del cliente
     data = request.get_json()
@@ -438,29 +437,24 @@ def user_autentication():
     if not name:
         return jsonify({"Mensaje": "The name is missing"}), 400
 
-    try:
-        # Buscar usuario en la base de datos
-        user = User.query.filter_by(name=name, email=email, password=password).first()
+    # Buscar usuario en la base de datos
+    user = User.query.filter_by(name=name, email=email, password=password).first()
+    if user is None:
+        return jsonify({"mensaje": "Invalid password or email"}), 400
+    
+    # Crear token de acceso
+    access_token = create_access_token(identity=user.name)
+    # Responder con el usuario y el token
+    return jsonify({
+        "user": {
+            "id": user.id,
+            "name": user.name,
+            "email": user.email
+            },
+        "token": access_token
+    }), 200
 
-        if user is None:
-            return jsonify({"mensaje": "Invalid password or email"}), 400
-        
-        # Crear token de acceso
-        access_token = create_access_token(identity=user.name)
 
-        # Responder con el usuario y el token
-        return jsonify({
-            "user": {
-                "id": user.id,
-                "name": user.name,
-                "email": user.email
-    },
-    "token": access_token
-        }), 200  # 200 para indicar éxito en login
-
-    except Exception as e:
-        print("Error en el backend:", str(e))  # Log para debugging
-        return jsonify({"error": "An error occurred during login"}), 500
 
 @api.route('/User/<int:id>')
 # @jwt_required()

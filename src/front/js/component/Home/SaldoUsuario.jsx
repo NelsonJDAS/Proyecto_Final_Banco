@@ -23,7 +23,7 @@ const SaldoUsuario = () => {
                         <div className="d-flex flex-column">
                             <p className="fs-1 fw-light">Hola, <span className="fw-bold">{store.cliente.nombre == undefined ? ". . . . . . " : store.cliente.nombre}</span></p>
                         </div>
-                        <span className="admin-class text-warning mx-2">admin <RiAdminLine /></span>
+                        <span className="admin-class text-warning mx-2">admin <RiAdminLine /></span>    
                     </div>
                     <div className="col-4 col-xl-4 text-end"><span className="hover fs-3" onClick={() => {
                         actions.CambiarIncognito(!store.hidden)

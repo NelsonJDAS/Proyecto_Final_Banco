@@ -12,11 +12,19 @@ export const Home = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // const storedName = localStorage.getItem("name");
-    const storedId = localStorage.getItem("userId")
-    actions.fetchUserDetails(storedId)
-    actions.getUserConfig(storedId)
-    console.log("Tarjeta de coordenadas", store.tarjetaCoord)
+    const checkAuth = async () => {
+      const authStatus = await actions.verifyToken();
+      
+      if (!authStatus.authenticated) {
+        navigate("/login");
+      } else {
+        const storedId = localStorage.getItem("userId");
+        actions.fetchUserDetails(storedId);
+        actions.getUserConfig(storedId);
+      }
+    };
+  
+    checkAuth();
   }, []);
 
   return (

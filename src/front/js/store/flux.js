@@ -240,41 +240,43 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
-      fetchPrivateData: async () => {
+      verifyToken: async () => {
+        const token = localStorage.getItem("token");
+    
+        if (!token) {
+          notyf.error("No hay sesión activa. Inicia sesión.");
+          return { authenticated: false };
+        }
+    
         try {
-          const token = localStorage.getItem("token");
-          if (!token) {
-            console.error("No token found");
-            return;
-          }
-
-          const response = await fetch("/private", {
+          const response = await fetch(process.env.BACKEND_URL + "/api/private", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              "Authorization": `Bearer ${token}`
-            }
+              Authorization: `Bearer ${token}`,
+            },
           });
-
+    
           if (!response.ok) {
-            throw new Error("Failed to fetch private data");
+            localStorage.removeItem("token"); // Eliminar token inválido
+            notyf.error("Sesión expirada. Inicia sesión nuevamente.");
+            return { authenticated: false };
+          } else {
+            const data = await response.json();
+            console.log("Usuario autenticado:", data.current_user);
+    
+            return { authenticated: true, user: data.current_user };
           }
-
-          const data = await response.json();
-          console.log("Private data fetched:", data);
-
-          setStore({ privateData: data });
         } catch (error) {
-          console.error("Error fetching private data:", error);
+          console.error("Error al verificar el token:", error);
+          notyf.error("Error al autenticar. Intenta nuevamente.");
+          return { authenticated: false };
         }
       },
-
-
 
       loginUser: async (name, email, password) => {
         const store = getStore();
         const actions = getActions();
-
 
         try {
           const response = await fetch(process.env.BACKEND_URL + "/api/User/Login", {
