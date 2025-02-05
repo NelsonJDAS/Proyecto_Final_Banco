@@ -13,19 +13,14 @@ from api.mail_config import get_mail
 from datetime import datetime, timezone, timedelta
 from faker import Faker
 
-
-
-
 # Para Flask-Mail, codigo de seguridad
 from flask_mail import Message
 import random
-
 
 api = Blueprint('api', __name__)
 
 # Allow CORS requests to this API
 CORS(api)
-
 
 @api.route('/test')
 def test():
@@ -245,7 +240,7 @@ def addUser():
         print("Cambios confirmados")
 
         # Generar un token para el usuario
-        access_token = create_access_token(identity=new_user.id)
+        access_token = create_access_token(identity=new_user.name)
         return jsonify({
             "mensaje": "Usuario, cliente, cuenta y transacciones creados exitosamente",
             "user": {
