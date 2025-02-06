@@ -1201,7 +1201,54 @@ def get_market_data():
         return jsonify({"error": "Ocurrió un error", "details": str(e)}), 500
     
     #                                                              IMPORTAR PRODUCTOS DE SCRAPER AMAZON
-    
+
+@api.route('/products/loadpost', methods=['POST'])
+def load_products_from_request():
+    """
+    Recibe un JSON con productos desde Postman y los inserta en la tabla Producto,
+    pero solo si no hay productos cargados previamente.
+    """
+    import json
+    from flask import request
+
+    # Verificamos si ya hay algún producto en la base de datos
+    existing_product = Producto.query.first()
+    if existing_product:
+        return jsonify({"msg": "Productos ya están cargados en la base de datos"}), 200
+
+    try:
+        data = request.get_json()
+        if not data:
+            return jsonify({"error": "No se proporcionó un JSON válido"}), 400
+
+        for item in data:
+            cat_nombre = item.get('category')
+            category = None
+            if cat_nombre:
+                category = Categoria.query.filter_by(nombre=cat_nombre).first()
+                if not category:
+                    category = Categoria(nombre=cat_nombre)
+                    db.session.add(category)
+                    db.session.flush()  # Asigna un ID a la categoría
+
+            product = Producto(
+                title=item.get('title', ''),
+                price=item.get('price', 'Agotado'),
+                image_url=item.get('image_url', ''),
+                rating=item.get('rating', ''),
+                review_count=item.get('review_count', ''),
+                categoria=category  # Asocia la categoría al producto
+            )
+            db.session.add(product)
+
+        db.session.commit()
+        return jsonify({"msg": "Productos cargados exitosamente"}), 200
+
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 500
+
+
 @api.route('/products/load', methods=['GET'])
 def load_products_from_file():
     """
