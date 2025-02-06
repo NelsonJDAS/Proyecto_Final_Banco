@@ -4,8 +4,10 @@ import { Context } from "../../store/appContext.js";
 import { useNavigate, useParams } from "react-router-dom";
 import { RiArrowGoBackFill } from "react-icons/ri";
 import { BiSolidBusiness } from "react-icons/bi";
+import { useTranslation } from "react-i18next";
 
 const ContenedorGraficas = () => {
+    const { t } = useTranslation()
     const { store, actions } = useContext(Context);
 
     const [userLoad, SetUserLoad] = useState(false)
@@ -54,14 +56,14 @@ const ContenedorGraficas = () => {
         <div className={`espaciado-fondo ${userLoad ? "animacion-inversiones visible" : "animacion-inversiones"}`}>
             {store.grafica.length == 0 ?
                 <div className="row">
-                    <div className="col-12 fw-bold fs-2 text-center my-3"><span className="titulo-individual-inversiones">Sin datos sobre la empresa</span></div>
+                    <div className="col-12 fw-bold fs-2 text-center my-3"><span className="titulo-individual-inversiones">{t('graficaindividual.p1')}</span></div>
                     <div className="col-12 text-center"><i className="color-inversion simbolo-empresa"><BiSolidBusiness /></i></div>
-                    <div className="col-12 text-center"><span className="hover fs-1 color-inversion" onClick={() => navigate("/inversiones")}>Volver Atras</span></div>
+                    <div className="col-12 text-center"><span className="hover fs-1 color-inversion" onClick={() => navigate("/inversiones")}>{t('graficaindividual.atras')}</span></div>
                 </div>
                 :
                 <>
                     <div className="row">
-                        <div className="col-11 text-end"> <span className={`color-inversion hover fw-bold`} onClick={() => navigate("/inversiones")}>Volver atras <i><RiArrowGoBackFill /></i></span></div>
+                        <div className="col-11 text-end"> <span className={`color-inversion hover fw-bold`} onClick={() => navigate("/inversiones")}>{t('graficaindividual.atras')}<i><RiArrowGoBackFill /></i></span></div>
                         <div className="col-12 fw-bold fs-2 text-center my-3"><span className={`titulo-individual-inversiones`}>{nombre}</span></div>
                     </div>
                     <div className={`container-fluid contenedor-grafica animacion-contenedor-inversiones  ${store.fondo === "fondo-modo-claro" ? "bg-modo-claro" : "bg-modo-oscuro"}`}>

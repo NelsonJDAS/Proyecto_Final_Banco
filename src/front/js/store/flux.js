@@ -539,7 +539,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           const actions = getActions();
           setStore({ email });
 
-          fetch(process.env.BACKEND_URL + "api/send-code", {
+          fetch(process.env.BACKEND_URL + "/api/send-code", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

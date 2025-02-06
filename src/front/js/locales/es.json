@@ -60,7 +60,7 @@
   },
 
   "Register": {
-    "welcome!": "",
+    "welcome!": "Bienvenido!",
     "register": "Regístrese aquí",
     "cuenta?": "¿Ya tienes una cuenta?",
     "loginfunc": "Inicia sesión para acceder a todas tus funcionalidades de la web",
@@ -275,5 +275,80 @@
     "text2": "geeksacademybank@gmail.com",
     "ti3": "Teléfono",
     "text3": "+34 600 18 16 22"
+  },
+  "titulos": {
+    "p1": "Titulos Seguridad GeekBank",
+    "p2": "A continuación, podrás ver diversos títulos relacionados con la seguridad, diseñados para reconocer y validar el cumplimiento de estándares y mejores prácticas en áreas críticas. Estos certificados son un reflejo del compromiso, la formación y las habilidades adquiridas en programas enfocados en la protección de sistemas, datos y entornos laborales, garantizando la seguridad tanto de las personas como de la información.",
+    "colti1": "Certificado de Reconocimiento en Seguridad Cibernética",
+    "coldes1": "Este certificado reconoce el cumplimiento de prácticas de seguridad cibernética, demostrando una adecuada protección de datos e infraestructura frente a amenazas digitales.",
+    "colti2": "Certificado de Participación en Programas de Seguridad",
+    "coldes2": "Otorgado a los profesionales que han participado activamente en programas de formación y capacitación sobre seguridad, seminarios y talleres relacionados con la protección de sistemas.",
+    "colti3": "Certificado de Logro en Gestión de Riesgos",
+    "coldes3": "Este certificado se concede a aquellos individuos que han completado con éxito un programa de gestión de riesgos y análisis de vulnerabilidades en entornos tecnológicos.",
+    "colti4": "Certificado de Finalización de Curso en Seguridad de la Información",
+    "coldes4": "Este diploma se otorga a quienes han completado un curso de formación en seguridad de la información, gestionado por expertos en protección de datos y normativas de privacidad.",
+    "colti5": "Certificado de Apreciación por Cumplimiento en Seguridad",
+    "coldes5": "Este certificado expresa nuestro agradecimiento a los profesionales que han demostrado un compromiso ejemplar con las políticas de seguridad, manteniendo entornos laborales seguros y conformes a las normativas.",
+    "colti6": "Certificado de Cumplimiento de Normativas de Seguridad",
+    "coldes6": "Certifica que el individuo ha cumplido con todas las normativas y políticas de seguridad establecidas, asegurando un entorno protegido y conforme a las leyes de seguridad y privacidad.",
+    "colti7": "Certificado de Auditoría de Seguridad Aprobada",
+    "coldes7": "Este certificado se otorga a aquellos que han aprobado una auditoría de seguridad, garantizando la revisión exitosa de sistemas y procesos relacionados con la protección de datos y recursos.",
+    "colti8": "Diploma de Excelencia en Gestión de Seguridad",
+    "coldes8": "Reconoce a los profesionales que han demostrado un desempeño sobresaliente en la implementación y gestión de políticas de seguridad en su organización o empresa.",
+    "colti9": "Certificado de Capacitación en Protección de Datos",
+    "coldes9": "Este certificado acredita que el titular ha completado un curso sobre la protección de datos personales, cumpliendo con las leyes y regulaciones de privacidad establecidas.",
+    "colti10": "Certificado de Actualización en Protocolos de Seguridad",
+    "coldes10": "Este certificado se emite a los profesionales que han actualizado su conocimiento y habilidades en relación con los nuevos protocolos de seguridad implementados por la organización o industria.",
+    "coldescarga": "Ver documento"
+  },
+  "certificaciones": {
+    "p1": "Certificaciones GeekBank",
+    "p2": "A continuación podras ver diversos títulos de certificados, los cuales están diseñados para reconocer y validar el cumplimiento de objetivos y logros en áreas específicas. Estos certificados son un reflejo de la formación, el rendimiento y el compromiso demostrado en los respectivos programas",
+    "colti1": "Certificado de Reconocimiento Bancario",
+    "coldes1": "Este certificado reconoce el uso responsable y exitoso de los productos financieros ofrecidos por el banco, demostrando una buena gestión de cuentas y pagos.",
+    "colti2": "Certificado de Participación en Programas Financieros",
+    "coldes2": "Otorgado a los clientes que han participado activamente en programas de educación financiera, seminarios y talleres organizados por la entidad bancaria.",
+    "colti3": "Certificado de Logro en Asesoría Financiera",
+    "coldes3": "Este certificado se concede a aquellos clientes que han completado con éxito un programa de asesoría financiera personalizada con el banco.",
+    "colti4": "Certificado de Finalización de Curso en Finanzas Personales",
+    "coldes4": "Este diploma se otorga a los clientes que completaron un curso de formación en finanzas personales, gestionado por el banco, para mejorar su capacidad de manejar sus recursos financieros.",
+    "colti5": "Certificado de Apreciación por Lealtad Bancaria",
+    "coldes5": "Este certificado expresa nuestro agradecimiento a los clientes por su lealtad y relaciones duraderas con el banco, demostrando un compromiso constante.",
+    "colti6": "Certificado de Cumplimiento de Normativas Bancarias",
+    "coldes6": "Certifica que el cliente ha cumplido con todas las normativas y políticas del banco, manteniendo un historial financiero limpio y confiable.",
+    "colti7": "Certificado de Crédito Aprobado",
+    "coldes7": "Este certificado se otorga a clientes que han sido aprobados para un crédito, tras demostrar un buen historial financiero y capacidad de pago.",
+    "colti8": "Diploma de Excelencia en Gestión Financiera",
+    "coldes8": "Reconoce a los clientes que han demostrado un desempeño excepcional en la gestión de sus productos bancarios, como cuentas de ahorro, tarjetas de crédito, o inversiones.",
+    "colti9": "Certificado de Capacitación en Inversiones",
+    "coldes9": "Este certificado acredita que el cliente ha completado con éxito un curso sobre estrategias de inversión y productos de inversión disponibles en el banco.",
+    "colti10": "Certificado de Actualización de Producto Bancario",
+    "coldes10": "Este certificado se emite a los clientes que han actualizado su información o sus productos financieros, como cuentas, tarjetas o préstamos, en el banco."
+  },
+  "individualstore": {
+    "atras": "Volver atrás",
+    "p1": "¡Disfruta ofertas exclusivas por ser cliente del banco! 🎉",
+    "p2": "Paga con tu tarjeta y accede a descuentos, meses sin intereses y recompensas especiales.",
+    "p3": "Puedes agregar o modificar tu pedido en cualquier momento desde el carrito.",
+    "agregar": "Agregar al carrito"
+  },
+  "store": {
+    "cat": "Categoria",
+    "cat1": "Smartphones",
+    "cat2": "TV",
+    "cat3": "Pequeño electrodomestico",
+    "buscar": "Buscar"
+  },
+  "graficaindividual": {
+    "p1": "Sin datos sobre la empresa",
+    "atras": "Volver Atras",
+    "p2": "En GeekBank, las gráficas te permiten ver el rendimiento de mas de 20.000 empresas del mercado de manera sencilla y en tiempo real. Con datos actualizados al instante, es fácil seguir las fluctuaciones de las acciones y tomar decisiones informadas. Una herramienta pensada para quienes quieren estar al tanto del mundo de la bolsa de valores de forma clara y accesible.",
+    "p3": "Ver acciones"
+  },
+  "transferencias": {
+    "p1": "Tarjeta de coordenadas",
+    "p2": "Por favor, ingrese los dos valores de su tarjeta de coordenadas para completar la transacción de forma segura. Estos códigos son necesarios para verificar su identidad y garantizar la protección de su cuenta. Asegúrese de introducirlos correctamente antes de continuar.",
+    "p3": "Comprobar Codigos",
+    "p4": "Transferencias"
   }
 }

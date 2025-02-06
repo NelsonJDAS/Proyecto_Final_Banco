@@ -6,8 +6,10 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import { RiArrowGoBackFill } from "react-icons/ri";
 import { RiStarSFill } from "react-icons/ri";
 import { RiStarSLine } from "react-icons/ri";
+import { useTranslation } from "react-i18next";
 
 const ContenedorIndividualStore = () => {
+    const { t } = useTranslation()
     const [userLoad, setUserLoad] = useState(false);
     const { store, actions } = useContext(Context);
     const navigate = useNavigate();
@@ -103,8 +105,7 @@ const ContenedorIndividualStore = () => {
                         <span
                             className="text-danger hover fw-bold volver-atras-btn"
                             onClick={() => navigate("/tienda")}
-                        >
-                            Volver atrás <i><RiArrowGoBackFill /></i>
+                        >{t('individualstore.atras')}<i><RiArrowGoBackFill /></i>
                         </span>
                     </div>
                 </div>
@@ -136,10 +137,8 @@ const ContenedorIndividualStore = () => {
                         <div className="row mb-3">
                             <div className="col-12">
                                 <div className="text-center bg-dark rounded-3 bg-opacity-25 border border-secondary p-3">
-                                    <p className="fw-bold fs-4">¡Disfruta ofertas exclusivas por ser cliente del banco! 🎉</p>
-                                    <p className="fs-5">
-                                        Paga con tu tarjeta y accede a descuentos, meses sin intereses y recompensas especiales.
-                                    </p>
+                                    <p className="fw-bold fs-4">{t('individualstore.p1')}</p>
+                                    <p className="fs-5">{t('individualstore.p2')}</p>
                                 </div>
                             </div>
                         </div>
@@ -158,9 +157,7 @@ const ContenedorIndividualStore = () => {
                             <div className="col-12">
                                 <div className="container">
                                     <div className="text-center bg-warning rounded-3 bg-opacity-50 p-3 border border-warning">
-                                        <p className="fw-bold">
-                                            Puedes agregar o modificar tu pedido en cualquier momento desde el carrito.
-                                        </p>
+                                        <p className="fw-bold">{t('individualstore.p3')}</p>
                                     </div>
                                 </div>
                             </div>
@@ -172,8 +169,7 @@ const ContenedorIndividualStore = () => {
                                     onClick={() => {
                                         actions.addToCart(productData)
                                     }}
-                                >
-                                    Agregar al carrito <i><AiOutlineShoppingCart /></i>
+                                >{t('individualstore.agregar')}<i><AiOutlineShoppingCart /></i>
                                 </button>
                             </div>
                             <div className="col-12 text-end mt-3 fs-4">

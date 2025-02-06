@@ -1,8 +1,10 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Context } from "../../store/appContext";
+import { useTranslation } from "react-i18next";
 
 
 const ColTitulo = ({ title, position, descripcion, logo }) => {
+    const { t } = useTranslation()
     const [positionCol, SetPositionCol] = useState(position === "left" ? "animacion-izq-titulo" : "animacion-der-titulo");
     const { store, actions } = useContext(Context);
     const [texto, SetTexto] = useState(false)
@@ -53,7 +55,7 @@ const ColTitulo = ({ title, position, descripcion, logo }) => {
             <span className="fs-2 fw-bold">{title}</span>
             <div className={`container d-flex flex-column ${texto ? "texto-titulo visible" : "texto-titulo"}`}>
                 <p className="fs-4 fw-bold texto-titulo-contenedor">{descripcion}</p>
-                <p>Ver Documento</p>
+                <p>{t('titulos.coldescarga')}</p>
             </div>
         </div>
 

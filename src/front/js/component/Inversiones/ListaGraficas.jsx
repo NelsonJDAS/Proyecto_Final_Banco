@@ -4,8 +4,10 @@ import ContenedorGraficas from "./ContenedorGrafica.jsx";
 import ElementoSeleccionable from "./ElementoSeleccionable.jsx";
 import { FaArrowLeft } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 const ListaGraficas = () => {
+    const { t } = useTranslation()
     const { store, actions } = useContext(Context);
     const [pagination, SetPagination] = useState([0, 9])
     const flechaDer = useRef("");
