@@ -340,6 +340,15 @@
     "buscar": "Buscar"
   },
   "graficaindividual": {
-    "": ""
+    "p1": "Sin datos sobre la empresa",
+    "atras": "Volver Atras",
+    "p2": "En GeekBank, las gráficas te permiten ver el rendimiento de mas de 20.000 empresas del mercado de manera sencilla y en tiempo real. Con datos actualizados al instante, es fácil seguir las fluctuaciones de las acciones y tomar decisiones informadas. Una herramienta pensada para quienes quieren estar al tanto del mundo de la bolsa de valores de forma clara y accesible.",
+    "p3": "Ver acciones"
+  },
+  "transferencias": {
+    "p1": "Tarjeta de coordenadas",
+    "p2": "Por favor, ingrese los dos valores de su tarjeta de coordenadas para completar la transacción de forma segura. Estos códigos son necesarios para verificar su identidad y garantizar la protección de su cuenta. Asegúrese de introducirlos correctamente antes de continuar.",
+    "p3": "Comprobar Codigos",
+    "p4": "Transferencias"
   }
 }
