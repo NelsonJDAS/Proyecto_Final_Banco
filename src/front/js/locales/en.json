@@ -59,7 +59,7 @@
   },
 
   "Register": {
-    "welcome!": "",
+    "welcome!": "Welcome!",
     "register": "Register here",
     "cuenta?": "Already have an account?",
     "loginfunc": "Log in to access all the features of the site",
@@ -223,6 +223,111 @@
   },
   "consejos": {
     "p1": "Security Tips - GeekBank",
-    "p2": "At GeekBank, your security is our priority. We want you to enjoy a safe and secure banking experience, which is why we offer you these essential recommendations to avoid fraud and protect your personal and financial information. By following these good practices, you can reduce risks and operate with complete peace of mind."
+    "p2": "At GeekBank, your security is our priority. We want you to enjoy a safe and secure banking experience, so we offer these essential recommendations to prevent fraud and protect your personal and financial information. By following these best practices, you can reduce risks and operate with complete peace of mind.",
+    "p3": "Secure Authentication",
+    "p4": "Use strong and unique passwords for your online banking. Activate the coordinate card for added security and never forget the following two tips.",
+    "col1": "Use unique and strong passwords",
+    "col2": "Never share your credentials",
+    "p5": "Online Security Tips",
+    "p6": "Keep your information protected by following these recommendations:",
+    "col3": "Ensure you are logging into our official site",
+    "col4": "Do not click on suspicious links or respond to emails",
+    "col5": "Always verify the authenticity of messages received on behalf of GeekBank",
+    "col6": "Avoid accessing your account from public WiFi networks or unknown devices",
+    "p7": "Protect Your Devices",
+    "col7": "Keep your software updated",
+    "col8": "Install a reliable antivirus",
+    "col9": "Avoid public Wi-Fi networks",
+    "col10": "Enable screen lock",
+    "col11": "Download apps only from official stores",
+    "col12": "Do not store passwords without encryption",
+    "col13": "Enable remote tracking and data wipe"
+  },
+  "metodos": {
+    "p1": "Security Methods at Geek Bank",
+    "p2": "At GeekBank, we protect your transactions with advanced security systems. Learn how our coordinate card works and the new SMS verification code method, which will be available soon.",
+    "p3": "Coordinate Card",
+    "p4": "The coordinate card is an authentication method used to validate online transactions. It consists of a physical card with a matrix of numbers organized into rows and columns. When making certain transactions, you will be asked to enter a specific value from the card to verify your identity.",
+    "p5": "How to Use It Safely?",
+    "p6": "To ensure the security of your transactions, follow these recommendations:",
+    "col1": "Never share your coordinate card with anyone",
+    "col2": "Avoid taking photos or storing it on electronic devices",
+    "col3": "Write it down on paper, never on a device",
+    "col4": "Only enter coordinates on the bank’s official sites",
+    "p7": "SMS Verification Code",
+    "p8": "We are implementing a new security system based on unique verification codes (OTP - One-Time Password) sent to your registered phone number. You will enjoy the following benefits:",
+    "col5": "Increased security for every transaction",
+    "col6": "Additional protection against unauthorized access",
+    "col7": "No physical storage required",
+    "p9": "How Will It Work?",
+    "ti1": "Receive your code via SMS",
+    "text1": "When making a transaction or logging in from a new device, you will receive an SMS.",
+    "ti2": "Enter the verification code",
+    "text2": "You must enter this code on the platform to verify your identity.",
+    "ti3": "Unique and limited-time code",
+    "text3": "Each code is unique and has a limited expiration time."
+  },
+  "notfound": {
+    "p1": "404 - Page Not Found",
+    "p2": "The page you are looking for is not available. The URL may be incorrect, or the page may have been removed.",
+    "p3": "Go Back"
+  },
+  "contacto": {
+    "p1": "GeekBank Contact",
+    "p2": "At GeekBank, we care about providing you with the best service and ensuring you have a unique experience. If you need assistance or have any questions, you can contact us easily and quickly through the following options:",
+    "ti1": "24/7 Online Support",
+    "ti2": "Email",
+    "text2": "geeksacademybank@gmail.com",
+    "ti3": "Phone",
+    "text3": "+34 600 18 16 22"
+  },
+  "titulos": {
+    "p1": "GeekBank Security Titles",
+    "p2": "Below, you will find various security-related titles designed to recognize and validate compliance with standards and best practices in critical areas. These certificates reflect the commitment, training, and skills acquired in programs focused on protecting systems, data, and work environments, ensuring the security of both people and information.",
+    "colti1": "Cybersecurity Recognition Certificate",
+    "coldes1": "This certificate acknowledges compliance with cybersecurity practices, demonstrating adequate data and infrastructure protection against digital threats.",
+    "colti2": "Security Program Participation Certificate",
+    "coldes2": "Awarded to professionals who have actively participated in training programs and workshops related to system protection.",
+    "colti3": "Risk Management Achievement Certificate",
+    "coldes3": "This certificate is granted to individuals who have successfully completed a risk management and vulnerability analysis program in technological environments.",
+    "colti4": "Information Security Course Completion Certificate",
+    "coldes4": "This diploma is awarded to those who have completed an information security training course managed by data protection and privacy regulation experts.",
+    "coldescarga": "View document"
+  },
+  "certificaciones": {
+    "p1": "GeekBank Certifications",
+    "p2": "Below, you will find various certification titles designed to recognize and validate the achievement of objectives and milestones in specific areas. These certificates reflect the training, performance, and commitment demonstrated in the respective programs.",
+    "colti1": "Banking Recognition Certificate",
+    "coldes1": "This certificate recognizes the responsible and successful use of financial products offered by the bank, demonstrating good account and payment management.",
+    "colti2": "Financial Program Participation Certificate",
+    "coldes2": "Awarded to clients who have actively participated in financial education programs, seminars, and workshops organized by the bank.",
+    "colti3": "Financial Advisory Achievement Certificate",
+    "coldes3": "This certificate is awarded to clients who have successfully completed a personalized financial advisory program with the bank."
+  },
+  "individualstore": {
+    "atras": "Go Back",
+    "p1": "Enjoy exclusive offers for being a bank customer! 🎉",
+    "p2": "Pay with your card and access discounts, interest-free months, and special rewards.",
+    "p3": "You can add or modify your order at any time from the cart.",
+    "agregar": "Add to Cart"
+  },
+  "store": {
+    "cat": "Category",
+    "cat1": "Smartphones",
+    "cat2": "TV",
+    "cat3": "Small Appliances",
+    "buscar": "Search"
+  },
+  "graficaindividual": {
+    "p1": "No data available for the company",
+    "atras": "Go Back",
+    "p2": "At GeekBank, charts allow you to see the performance of over 20,000 companies in the market in a simple and real-time manner. With up-to-date data, it's easy to track stock fluctuations and make informed decisions. A tool designed for those who want to stay informed about the stock market in a clear and accessible way.",
+    "p3": "View Stocks"
+  },
+  "transferencias": {
+    "p1": "Coordinate Card",
+    "p2": "Please enter the two values from your coordinate card to complete the transaction securely. These codes are necessary to verify your identity and ensure your account's protection. Make sure to enter them correctly before proceeding.",
+    "p3": "Verify Codes",
+    "p4": "Transfers"
   }
 }

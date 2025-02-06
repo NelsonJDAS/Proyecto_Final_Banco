@@ -3,8 +3,10 @@ import { Context } from "../../store/appContext.js";
 import { SlGraph } from "react-icons/sl";
 import { useNavigate } from "react-router-dom";
 import { GrMoney } from "react-icons/gr";
+import { useTranslation } from "react-i18next";
 
 const ElementoSeleccionable = ({ nombre, simbolo, moneda }) => {
+    const { t } = useTranslation()
     const { store, actions } = useContext(Context);
     const [userLoad, SetUserLoad] = useState(false)
 
@@ -60,7 +62,7 @@ const ElementoSeleccionable = ({ nombre, simbolo, moneda }) => {
                     <div className="col-12 text-center"><i className="simbolo-grafica color-inversion "><SlGraph /></i></div>
                     <div className="col-12 text-center"><i className="color-inversion enlace-grafica"><GrMoney /></i></div>
                     <div className="col-12 text-center"><div><p className="fs-5 enlace-grafica color-inversion ">{moneda}</p></div></div>
-                    <div className="col-12 text-center"><div><p className="fs-5 enlace-grafica color-inversion ">Ver Acciones</p></div></div>
+                    <div className="col-12 text-center"><div><p className="fs-5 enlace-grafica color-inversion ">{t('graficaindividual.p3')}</p></div></div>
                 </div>
             </div>
         </div >

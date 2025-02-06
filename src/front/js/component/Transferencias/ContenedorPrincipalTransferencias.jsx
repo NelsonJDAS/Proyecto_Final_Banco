@@ -5,9 +5,11 @@ import { Notyf } from 'notyf';
 import 'notyf/notyf.min.css';
 import Swal from 'sweetalert2';
 import { IoClose } from "react-icons/io5";
+import { useTranslation } from "react-i18next";
 
 
 const ContenedorPrincipalTransferencias = () => {
+    const { t } = useTranslation()
     const notyf = new Notyf();
 
     const { store, actions } = useContext(Context);
@@ -171,18 +173,13 @@ const ContenedorPrincipalTransferencias = () => {
                 <div className="modal-dialog modal-dialog-centered">
                     <div className={`modal-content contenedor-modal-transferencias rounded-3 ${store.fondo} borde-brillante `}>
                         <div className="modal-header row border-0">
-                            <h1 className="modal-title fs-3 text-center col-10" id="label">Tarjeta de coordenadas</h1>
+                            <h1 className="modal-title fs-3 text-center col-10" id="label">{t('transferencias.p1')}</h1>
                             <div className="hover fs-3 col-2 text-center" data-bs-dismiss="modal"><IoClose /></div>
                         </div>
                         <div className="modal-body">
                             {/* Selector de lenguaje */}
                             <div className="container mb-3">
-                                <p className="text-center">
-                                    Por favor, ingrese los dos valores de su tarjeta de coordenadas
-                                    para completar la transacción de forma segura. Estos códigos son necesarios
-                                    para verificar su identidad y garantizar la protección de su cuenta. Asegúrese de
-                                    introducirlos correctamente antes de continuar.
-                                </p>
+                                <p className="text-center">{t('transferencias.p2')}</p>
                             </div>
                             <div className="row my-3">
                                 <div className="col-3 mx-md-2 mx-1 px-0 text-end"><p className="mt-2 fs-bold">{codigo1 == undefined ? "" : codigo1.posicion}</p></div>
@@ -194,9 +191,7 @@ const ContenedorPrincipalTransferencias = () => {
                             </div>
                             <div className="row my-3">
                                 <div className="col-12  text-center">
-                                    <button className="btn btn-outline-success rounded-pill w-50" onClick={handleTransferencia}>
-                                        Comprobar Codigos
-                                    </button>
+                                    <button className="btn btn-outline-success rounded-pill w-50" onClick={handleTransferencia}>{t('transferencias.p3')}</button>
                                 </div>
                             </div>
                         </div>
@@ -204,7 +199,7 @@ const ContenedorPrincipalTransferencias = () => {
                     </div>
                 </div>
             </div>
-            <h1 className={`text-center titulo-transferencia ${userLoad ? "animacion-arriba visible" : "animacion-arriba"}`}>Transferencias</h1>
+            <h1 className={`text-center titulo-transferencia ${userLoad ? "animacion-arriba visible" : "animacion-arriba"}`}>Transferencias{t('transferencias.p4')}</h1>
             <div className={`container w-90 contenedor-principal-transferencias ${userLoad ? "animacion-abajo visible" : "animacion-abajo"} ${store.fondo === "fondo-modo-claro" ? "bg-white" : "bg-transferencia-modo-negro text-white"}`}>
 
                 <div className="row">
