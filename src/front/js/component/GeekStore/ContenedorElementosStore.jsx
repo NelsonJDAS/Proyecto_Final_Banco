@@ -4,8 +4,10 @@ import Elemento from "./Elemento.jsx";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const ContenedorElementosStore = () => {
+    const { t } = useTranslation()
     const [userLoad, setUserLoad] = useState(false);
     const { store, actions } = useContext(Context);
     const [listaFiltrada, setListaFiltrada] = useState([])
@@ -95,14 +97,14 @@ const ContenedorElementosStore = () => {
                             className="py-3 text-center fw-bold text-dark hover w-75 rounded-pill fs-4"
                             aria-label="Small select example"
                         >
-                            <option value="" disabled>Categoria</option>
-                            <option value="1" className="fw-bold text-dark">Smartphones</option>
-                            <option value="2" className="fw-bold text-dark">TV</option>
-                            <option value="3" className="fw-bold text-dark">Pequeño electrodomestico</option>
+                            <option value="" disabled>{t('store.cat')}</option>
+                            <option value="1" className="fw-bold text-dark">{t('store.cat1')}</option>
+                            <option value="2" className="fw-bold text-dark">{t('store.cat2')}</option>
+                            <option value="3" className="fw-bold text-dark">{t('store.cat3')}</option>
                         </select>
                     </div>
                     <div className="align-content-center col-6 text-end">
-                        <input type="text" placeholder="Buscar" className="mx-3 text-center w-75 py-3 rounded-pill fs-4" onChange={HandleInput} />
+                        <input type="text" placeholder={t('store.buscar')} className="mx-3 text-center w-75 py-3 rounded-pill fs-4" onChange={HandleInput} />
                     </div>
                 </div>
             </div>

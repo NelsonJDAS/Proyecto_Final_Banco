@@ -4,8 +4,10 @@ import { Context } from "../../store/appContext.js";
 import { useNavigate, useParams } from "react-router-dom";
 import { RiArrowGoBackFill } from "react-icons/ri";
 import { BiSolidBusiness } from "react-icons/bi";
+import { useTranslation } from "react-i18next";
 
 const ContenedorGraficas = () => {
+    const { t } = useTranslation()
     const { store, actions } = useContext(Context);
 
     const [userLoad, SetUserLoad] = useState(false)
