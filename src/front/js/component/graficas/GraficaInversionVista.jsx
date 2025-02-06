@@ -63,7 +63,7 @@ const GraficaInversionVista = () => {
         }
     }, [store.grafica]); // Escuchar cambios en los datos del gráfico
 
-    return <div className='contenedor-componente-interactivo' ref={chartContainerRef} />;
+    return <div className='h-100' ref={chartContainerRef} />;
 };
 
 export default GraficaInversionVista;

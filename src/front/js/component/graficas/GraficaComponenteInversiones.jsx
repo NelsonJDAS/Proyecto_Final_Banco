@@ -58,7 +58,7 @@ const GraficaComponenteInversiones = () => {
         }
     }, [store.chartData]); // Escuchar cambios en los datos del gráfico
 
-    return <div className='contenedor-componente-interactivo' ref={chartContainerRef} />;
+    return <div ref={chartContainerRef} />;
 };
 
 export default GraficaComponenteInversiones;

@@ -86,18 +86,20 @@ const getState = ({ getStore, getActions, setStore }) => {
         const user_id = localStorage.getItem('userId');
 
         // Enviar la actualización al backend
-        try {
-          const response = await fetch(process.env.BACKEND_URL + "/api/update_config", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ user_id, ocultar_saldo: estado })
-          });
-          if (!response.ok) throw new Error("Error al actualizar el modo incógnito");
-          const data = await response.json();
-          notyf.success(data.message);
-        } catch (error) {
-          notyf.error("Error al actualizar el modo incógnito");
-          console.error(error);
+        if (localStorage.getItem("token") != null) {
+          try {
+            const response = await fetch(process.env.BACKEND_URL + "/api/update_config", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ user_id, ocultar_saldo: estado })
+            });
+            if (!response.ok) throw new Error("Error al actualizar el modo incógnito");
+            const data = await response.json();
+            notyf.success(data.message);
+          } catch (error) {
+            notyf.error("Error al actualizar el modo incógnito");
+            console.error(error);
+          }
         }
       },
 
@@ -148,19 +150,21 @@ const getState = ({ getStore, getActions, setStore }) => {
         const user_id = localStorage.getItem('userId');
 
         // Enviar la actualización al backend
-        try {
-          const response = await fetch(process.env.BACKEND_URL + "/api/update_config", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ user_id, modo_oscuro: estado })
-          });
-          if (!response.ok) throw new Error("Error al actualizar el modo");
-          const data = await response.json();
-          // Puedes mostrar un mensaje de éxito adicional si lo deseas
-          notyf.success(data.message);
-        } catch (error) {
-          notyf.error("Error al actualizar el modo");
-          console.error(error);
+        if (localStorage.getItem("token") != null) {
+          try {
+            const response = await fetch(process.env.BACKEND_URL + "/api/update_config", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ user_id, modo_oscuro: estado })
+            });
+            if (!response.ok) throw new Error("Error al actualizar el modo");
+            const data = await response.json();
+            // Puedes mostrar un mensaje de éxito adicional si lo deseas
+            notyf.success(data.message);
+          } catch (error) {
+            notyf.error("Error al actualizar el modo");
+            console.error(error);
+          }
         }
       },
 
@@ -242,12 +246,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       verifyToken: async () => {
         const token = localStorage.getItem("token");
-    
+
         if (!token) {
           notyf.error("No hay sesión activa. Inicia sesión.");
           return { authenticated: false };
         }
-    
+
         try {
           const response = await fetch(process.env.BACKEND_URL + "/api/private", {
             method: "POST",
@@ -256,7 +260,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               Authorization: `Bearer ${token}`,
             },
           });
-    
+
           if (!response.ok) {
             localStorage.removeItem("token"); // Eliminar token inválido
             notyf.error("Sesión expirada. Inicia sesión nuevamente.");
@@ -264,7 +268,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           } else {
             const data = await response.json();
             console.log("Usuario autenticado:", data.current_user);
-    
+
             return { authenticated: true, user: data.current_user };
           }
         } catch (error) {
