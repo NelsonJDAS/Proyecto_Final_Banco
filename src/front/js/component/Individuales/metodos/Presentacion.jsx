@@ -43,14 +43,8 @@ const Presentacion = () => {
     }, [isVisible])
     return (
         <div className="container espaciado-fondo" ref={sectionRef}>
-            <h1 className={`text-center titulo-principal-politica ${userLoad ? "animacion-arriba visible" : "animacion-arriba"}`}>
-                Métodos de Seguridad en Geek Bank
-            </h1>
-            <p className={`fs-3 text-center ${userLoad ? "animacion-arriba visible" : "animacion-arriba"}`}>
-                En GeekBank, protegemos tus transacciones con sistemas de seguridad avanzados.
-                Conoce cómo funciona nuestra tarjeta de coordenadas y el nuevo método de código de verificación por
-                SMS, que estará disponible próximamente.
-            </p>
+            <h1 className={`text-center titulo-principal-politica ${userLoad ? "animacion-arriba visible" : "animacion-arriba"}`}>{t('metodos.p1')}</h1>
+            <p className={`fs-3 text-center ${userLoad ? "animacion-arriba visible" : "animacion-arriba"}`}>{t('metodos.p2')}</p>
         </div>
     )
 }

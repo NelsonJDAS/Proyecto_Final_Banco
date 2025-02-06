@@ -73,6 +73,7 @@ const Layout = () => {
               <Route element={<Movimientos />} path="/movimientos" />
               <Route element={<Inversiones />} path="/inversiones" />
               {store.cart.length === 0 ? "" : <Route element={<StorePedido />} path="/tienda/checkout" />}
+              {/*     const { t } = useTranslation()     {t('')}                */}
             </Routes>
           </div>
           <Footer />

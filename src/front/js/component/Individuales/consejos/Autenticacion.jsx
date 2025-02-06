@@ -49,15 +49,11 @@ const Autenticacion = () => {
 
     return (
         <div className="container espaciado-fondo">
-            <h2 className={`text-center titulo-principal-politica ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>Autenticación Segura</h2>
-            <p className={`fs-3 text-center ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>
-                Usa contraseñas seguras y únicas para tu banca en línea.
-                Activa la tarjeta de coordenadas para mas seguridad y
-                nunca olvides los siguientes dos consejos.
-            </p>
+            <h2 className={`text-center titulo-principal-politica ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>{t('consejos.p3')}</h2>
+            <p className={`fs-3 text-center ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>{t('consejos.p4')}</p>
             <div ref={sectionRef} className="row">
-                <ColLateral width="w-75" text={"Usa contraseñas unicas y fuertes"} position="left" userLoad={userLoad} />
-                <ColLateral width="w-75" text={"Nunca compartas tus credenciales"} position="" userLoad={userLoad} />
+                <ColLateral width="w-75" text={t('consejos.col1')} position="left" userLoad={userLoad} />
+                <ColLateral width="w-75" text={t('consejos.col2')} position="" userLoad={userLoad} />
             </div >
         </div >
     )

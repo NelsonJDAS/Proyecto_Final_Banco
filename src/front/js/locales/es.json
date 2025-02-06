@@ -218,6 +218,62 @@
   },
   "consejos": {
     "p1": "Consejos de Seguridad - GeekBank",
-    "p2": "En GeekBank, la seguridad de nuestros clientes es nuestra máxima prioridad. A continuación, le proporcionamos una serie de consejos útiles para proteger su información y mantener sus transacciones seguras."
+    "p2": "En GeekBank, tu seguridad es nuestra prioridad. Queremos que disfrutes de una experiencia bancaria segura y protegida, por eso te ofrecemos estas recomendaciones esenciales para evitar fraudes y proteger tu información personal y financiera. Siguiendo estas buenas prácticas, puedes reducir riesgos y operar con total tranquilidad.",
+    "p3": "Autenticación Segura",
+    "p4": "Usa contraseñas seguras y únicas para tu banca en línea. Activa la tarjeta de coordenadas para mas seguridad y nunca olvides los siguientes dos consejos.",
+    "col1": "Usa contraseñas unicas y fuertes",
+    "col2": "Nunca compartas tus credenciales",
+    "p5": "Consejos de Seguridad en Línea",
+    "p6": "Mantén tu información protegida siguiendo estas recomendaciones:",
+    "col3": "Asegúrate de que estás ingresando a nuestro sitio oficial",
+    "col4": "No hagas clic en enlaces sospechosos ni respondas correos electrónicos",
+    "col5": "Verifica siempre la autenticidad de mensaje que recibas en nombre de GeekBank",
+    "col6": "Evita acceder a tu cuenta desde redes WiFi públicas o dispositivos desconocidos",
+    "p7": "Protege tus Dispositivos",
+    "col7": "Mantén tu software actualizado",
+    "col8": "Instala un antivirus confiable",
+    "col9": "Evita redes Wi-Fi públicas",
+    "col10": "Habilita el bloqueo de pantalla",
+    "col11": "Descarga apps solo de tiendas oficiales",
+    "col12": "No guardes contraseñas sin cifrar",
+    "col13": "Activa rastreo y borrado remoto"
+  },
+  "metodos": {
+    "p1": "Métodos de Seguridad en Geek Bank",
+    "p2": "En GeekBank, protegemos tus transacciones con sistemas de seguridad avanzados. Conoce cómo funciona nuestra tarjeta de coordenadas y el nuevo método de código de verificación por SMS, que estará disponible próximamente.",
+    "p3": "Tarjeta de Coordenadas",
+    "p4": "La tarjeta de coordenadas es un método de autenticación utilizado para validar operaciones en línea. Consiste en una tarjeta física con una matriz de números organizados en filas y columnas. Al realizar ciertas transacciones, se te pedirá ingresar un valor específico de la tarjeta para verificar tu identidad.",
+    "p5": "¿Cómo Usarla de Forma Segura?",
+    "p6": "Para garantizar la seguridad de tus transacciones, sigue estas recomendaciones:",
+    "col1": "Nunca compartas tu tarjeta de coordenadas con nadie",
+    "col2": "Evita tomar fotos o almacenarla en dispositivos electrónicos",
+    "col3": "Anotala en un papel nunca en un dispositivo",
+    "col4": "Solo ingresa coordenadas en sitios oficiales del banco",
+    "p7": "Código de Verificación por SMS",
+    "p8": "Estamos implementando un nuevo sistema de seguridad basado en códigos de verificación únicos (OTP - One-Time Password), enviados a tu número de celular registrado. Podras disfrutar de los siguientes beneficios:",
+    "col5": "Mayor seguridad en cada transacción",
+    "col6": "Protección adicional contra accesos no autorizados",
+    "col7": "No requiere almacenamiento físico",
+    "p9": "¿Cómo Funcionará?",
+    "ti1": "Recibe tu código por SMS",
+    "text1": "Al realizar una transacción o iniciar sesión desde un dispositivo nuevo, recibirás un  SMS.",
+    "ti2": "Ingresa el código de verificación",
+    "text2": "Deberás ingresar este código en la plataforma para validar tu identidad.",
+    "ti3": "Código único y limitado",
+    "text3": "Cada código es único y tiene un tiempo de expiración limitado"
+  },
+  "notfound": {
+    "p1": "404 - Página no encontrada",
+    "p2": "La página que estás buscando no se encuentra disponible. Es posible que la URL esté incorrecta o que la página haya sido eliminada.",
+    "p3": "Volver atras"
+  },
+  "contacto": {
+    "p1": "Contacto GeekBank",
+    "p2": "En Geek Bank, nos importa ofrecerte el mejor servicio y asegurarnos de que tengas una experiencia única. Si necesitas asistencia o tienes alguna pregunta, puedes ponerte en contacto con nosotros de manera fácil y rápida a través de las siguientes opciones:",
+    "ti1": "Soporte en línea 24/7",
+    "ti2": "Correo electrónico",
+    "text2": "geeksacademybank@gmail.com",
+    "ti3": "Teléfono",
+    "text3": "+34 600 18 16 22"
   }
 }
