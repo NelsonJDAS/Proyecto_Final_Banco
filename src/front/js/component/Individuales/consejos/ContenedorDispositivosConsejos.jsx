@@ -49,15 +49,15 @@ const ContenedorDispositivosConsejos = () => {
 
     return (
         <div className="container espaciado-fondo">
-            <h2 className={`text-center titulo-principal-politica ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>Protege tus Dispositivos</h2>
+            <h2 className={`text-center titulo-principal-politica ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>{t('consejos.p7')}</h2>
             <div ref={sectionRef} className="row">
-                <ColLateral width="w-75" text={"Mantén tu software actualizado"} position="left" userLoad={userLoad} />
-                <ColLateral width="w-75" text={"Instala un antivirus confiable"} position="" userLoad={userLoad} />
-                <ColLateral width="w-75" text={"Evita redes Wi-Fi públicas"} position="left" userLoad={userLoad} />
-                <ColLateral width="w-75" text={"Habilita el bloqueo de pantalla"} position="" userLoad={userLoad} />
-                <ColLateral width="w-75" text={"Descarga apps solo de tiendas oficiales"} position="left" userLoad={userLoad} />
-                <ColLateral width="w-75" text={"No guardes contraseñas sin cifrar"} position="" userLoad={userLoad} />
-                <ColLateral width="w-75" text={"Activa rastreo y borrado remoto"} position="left" userLoad={userLoad} />
+                <ColLateral width="w-75" text={t('consejos.col7')} position="left" userLoad={userLoad} />
+                <ColLateral width="w-75" text={t('consejos.col8')} position="" userLoad={userLoad} />
+                <ColLateral width="w-75" text={t('consejos.col9')} position="left" userLoad={userLoad} />
+                <ColLateral width="w-75" text={t('consejos.col10')} position="" userLoad={userLoad} />
+                <ColLateral width="w-75" text={t('consejos.col11')} position="left" userLoad={userLoad} />
+                <ColLateral width="w-75" text={t('consejos.col12')} position="" userLoad={userLoad} />
+                <ColLateral width="w-75" text={t('consejos.col13')} position="left" userLoad={userLoad} />
             </div >
         </div >
     )

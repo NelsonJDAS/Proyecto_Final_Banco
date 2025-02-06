@@ -43,15 +43,8 @@ const TarjetaCoordMetodo = () => {
     }, [isVisible])
     return (
         <div className="container espaciado-fondo" ref={sectionRef}>
-            <h1 className={`text-center titulo-principal-politica ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>
-                Tarjeta de Coordenadas
-            </h1>
-            <p className={`fs-3 text-center ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>
-                La tarjeta de coordenadas es un método de autenticación utilizado
-                para validar operaciones en línea. Consiste en una tarjeta física
-                con una matriz de números organizados en filas y columnas. Al realizar
-                ciertas transacciones, se te pedirá ingresar un valor específico de la tarjeta para verificar tu identidad.
-            </p>
+            <h1 className={`text-center titulo-principal-politica ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>{t('metodos.p3')}</h1>
+            <p className={`fs-3 text-center ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>{t('metodos.p4')}</p>
         </div>
     )
 }

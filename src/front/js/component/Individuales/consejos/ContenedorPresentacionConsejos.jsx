@@ -44,15 +44,8 @@ const ContenedorPresentacionConsejos = () => {
     return (
         <div className="container espaciado-fondo" ref={sectionRef}>
             <h1 className={`text-center titulo-principal-politica ${userLoad ? "animacion-arriba visible" : "animacion-arriba"}`}>
-                Consejos de Seguridad Bancaria
-            </h1>
-            <p className={`fs-3 text-center ${userLoad ? "animacion-arriba visible" : "animacion-arriba"}`}>
-                En GeekBank, tu seguridad es nuestra prioridad.
-                Queremos que disfrutes de una experiencia bancaria segura y protegida,
-                por eso te ofrecemos estas recomendaciones esenciales para evitar fraudes y proteger
-                tu información personal y financiera. Siguiendo estas buenas prácticas, puedes reducir
-                riesgos y operar con total tranquilidad.
-            </p>
+            {t('consejos.p1')}</h1>
+            <p className={`fs-3 text-center ${userLoad ? "animacion-arriba visible" : "animacion-arriba"}`}>{t('consejos.p2')}</p>
         </div>
     )
 }

@@ -64,19 +64,16 @@ const Layout = () => {
               <Route element={<Chat />} path="/chat" />
               <Route element={<Titulos />} path="/titulos" />
               <Route element={<Certificaciones />} path="/certificaciones" />
-              {localStorage.getItem("token") == null ? "" :
-                <>
-                  <Route element={<Individualstore />} path="/tienda/:categoria/:productId" />
-                  <Route element={<Store />} path="/tienda" />
-                  <Route element={<GraficaIndividual />} path="/grafica/:nombre/:simbolo" />
-                  <Route element={<Home />} path="/home" />
-                  <Route element={<Perfil />} path="/perfil" />
-                  <Route element={<Transferencias />} path="/transferencias" />
-                  <Route element={<Movimientos />} path="/movimientos" />
-                  <Route element={<Inversiones />} path="/inversiones" />
-                  {store.cart.length === 0 ? "" : <Route element={<StorePedido />} path="/tienda/checkout" />}
-                </>
-              }
+              <Route element={<Individualstore />} path="/tienda/:categoria/:productId" />
+              <Route element={<Store />} path="/tienda" />
+              <Route element={<GraficaIndividual />} path="/grafica/:nombre/:simbolo" />
+              <Route element={<Home />} path="/home" />
+              <Route element={<Perfil />} path="/perfil" />
+              <Route element={<Transferencias />} path="/transferencias" />
+              <Route element={<Movimientos />} path="/movimientos" />
+              <Route element={<Inversiones />} path="/inversiones" />
+              {store.cart.length === 0 ? "" : <Route element={<StorePedido />} path="/tienda/checkout" />}
+              {/*     const { t } = useTranslation()     {t('')}                */}
             </Routes>
           </div>
           <Footer />
