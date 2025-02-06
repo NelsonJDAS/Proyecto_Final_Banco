@@ -44,17 +44,13 @@ const TarjetaCoordUso = () => {
     }, [isVisible])
     return (
         <div className="container espaciado-fondo">
-            <h1 className={`text-center titulo-principal-politica ${userLoad ? "animacion-der visible" : "animacion-der"}`}>
-                ¿Cómo Usarla de Forma Segura?
-            </h1>
-            <p className={`fs-3 text-center ${userLoad ? "animacion-der visible" : "animacion-der"}`}>
-                Para garantizar la seguridad de tus transacciones, sigue estas recomendaciones:
-            </p>
+            <h1 className={`text-center titulo-principal-politica ${userLoad ? "animacion-der visible" : "animacion-der"}`}>{t('metodos.p5')}</h1>
+            <p className={`fs-3 text-center ${userLoad ? "animacion-der visible" : "animacion-der"}`}>{t('metodos.p6')}</p>
             <div ref={sectionRef} className="row">
-                <ColLateral width="w-75" text={"Nunca compartas tu tarjeta de coordenadas con nadie"} position="left" userLoad={userLoad} />
-                <ColLateral width="w-75" text={"Evita tomar fotos o almacenarla en dispositivos electrónicos"} position="" userLoad={userLoad} />
-                <ColLateral width="w-75" text={"Anotala en un papel nunca en un dispositivo"} position="left" userLoad={userLoad} />
-                <ColLateral width="w-75" text={"Solo ingresa coordenadas en sitios oficiales del banco"} position="" userLoad={userLoad} />
+                <ColLateral width="w-75" text={t('metodos.col1')} position="left" userLoad={userLoad} />
+                <ColLateral width="w-75" text={t('metodos.col2')} position="" userLoad={userLoad} />
+                <ColLateral width="w-75" text={t('metodos.col3')} position="left" userLoad={userLoad} />
+                <ColLateral width="w-75" text={t('metodos.col4')} position="" userLoad={userLoad} />
             </div >
         </div>
     )

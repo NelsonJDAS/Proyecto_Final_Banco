@@ -47,13 +47,11 @@ const VerificacionSMSUso = () => {
     }, [isVisible])
     return (
         <div className="container espaciado-fondo" ref={sectionRef}>
-            <h1 className={`text-center titulo-principal-politica ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>
-                ¿Cómo Funcionará?
-            </h1>
+            <h1 className={`text-center titulo-principal-politica ${userLoad ? "animacion-izq visible" : "animacion-izq"}`}>{t('metodos.p9')}</h1>
             <div className="row">
-                <div className="col-12 col-lg-4 my-3 mb-lg-3"><ContenedorCuadrado position="left" text={"Al realizar una transacción o iniciar sesión desde un dispositivo nuevo, recibirás un  SMS."} title={"Recibe tu código por SMS"} logo={<MdOutlineSms />} /></div>
-                <div className="col-12 col-md-6 col-lg-4 my-3 mb-lg-3"><ContenedorCuadrado position="bottom" text={"Deberás ingresar este código en la plataforma para validar tu identidad."} title={"Ingresa el código de verificación"} logo={<TbPassword />} /></div>
-                <div className="col-12 col-md-6 col-lg-4 my-3 mb-lg-3"><ContenedorCuadrado position="right" text={"Cada código es único y tiene un tiempo de expiración limitado"} title={"Código único y limitado"} logo={<PiIdentificationCard />} /></div>
+                <div className="col-12 col-lg-4 my-3 mb-lg-3"><ContenedorCuadrado position="left" text={t('metodos.text1')} title={t('metodos.ti1')} logo={<MdOutlineSms />} /></div>
+                <div className="col-12 col-md-6 col-lg-4 my-3 mb-lg-3"><ContenedorCuadrado position="bottom" text={t('metodos.text2')} title={t('metodos.ti2')} logo={<TbPassword />} /></div>
+                <div className="col-12 col-md-6 col-lg-4 my-3 mb-lg-3"><ContenedorCuadrado position="right" text={t('metodos.text3')} title={t('metodos.ti3')} logo={<PiIdentificationCard />} /></div>
             </div>
         </div>
     )

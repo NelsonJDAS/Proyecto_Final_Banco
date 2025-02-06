@@ -42,20 +42,17 @@ const ContenedorPrecaucionConsejos = () => {
             SetUserLoad(false)
         }
     }, [isVisible])
+
     return (
         <div className="container espaciado-fondo">
-            <h1 className={`text-center titulo-principal-politica ${userLoad ? "animacion-der visible" : "animacion-der"}`}>
-                Consejos de Seguridad en Línea
-            </h1>
-            <p className={`fs-3 text-center ${userLoad ? "animacion-der visible" : "animacion-der"}`}>
-                Mantén tu información protegida siguiendo estas recomendaciones:
-            </p>
+            <h1 className={`text-center titulo-principal-politica ${userLoad ? "animacion-der visible" : "animacion-der"}`}>{t('consejos.p5')}</h1>
+            <p className={`fs-3 text-center ${userLoad ? "animacion-der visible" : "animacion-der"}`}>{t('consejos.p6')}</p>
             <div ref={sectionRef} className="row">
-                <ColLateral width="w-75" text={"Asegúrate de que estás ingresando a nuestro sitio oficial"} position="left" userLoad={userLoad} />
-                <ColLateral width="w-75" text={"No hagas clic en enlaces sospechosos ni respondas correos electrónicos"} position="" userLoad={userLoad} />
-                <ColLateral width="w-75" text={"Verifica siempre la autenticidad de mensaje que recibas en nombre de GeekBank"} position="left" userLoad={userLoad} />
-                <ColLateral width="w-75" text={"Evita acceder a tu cuenta desde redes WiFi públicas o dispositivos desconocidos"} position="" userLoad={userLoad} />
-            </div >
+                <ColLateral width="w-75" text={t('consejos.col3')} position="left" userLoad={userLoad} />
+                <ColLateral width="w-75" text={t('consejos.col4')} position="" userLoad={userLoad} />
+                <ColLateral width="w-75" text={t('consejos.col5')} position="left" userLoad={userLoad} />
+                <ColLateral width="w-75" text={t('consejos.col6')} position="" userLoad={userLoad} />
+            </div> 
         </div>
     )
 }
