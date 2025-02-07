@@ -24,12 +24,12 @@ export const Navbar = () => {
 	const { t, i18n } = useTranslation();
 	const handleLanguageChange = async (language) => {
 		i18n.changeLanguage(language);
-	  
+
 		if (localStorage.getItem("token")) {
-		  const userId = localStorage.getItem("userId");
-		  await actions.updateUserLanguage(userId, language);
+			const userId = localStorage.getItem("userId");
+			await actions.updateUserLanguage(userId, language);
 		}
-	  };
+	};
 
 	const navigate = useNavigate(null);
 
@@ -142,7 +142,7 @@ export const Navbar = () => {
 											<div className={`dropdown-item text-center hover ${store.fondo === "fondo-modo-claro" ? "text-white" : "text-dark"}`}>
 												<span className={store.borde_hover} onClick={() => {
 													location.pathname === "/tienda" ? navigate("/home") : navigate("/tienda")
-												}}>{location.pathname === "/tienda" ? "Home" : "Tienda"}</span>
+												}}>{location.pathname === "/tienda" ? "Home" : t('Footer.Shop')}</span>
 											</div>
 										</li>
 										<li>
@@ -182,7 +182,7 @@ export const Navbar = () => {
 							<div className="col-1 align-content-center link  fw-bold text-center d-none d-lg-block">
 								<span className={store.borde_hover} onClick={() => {
 									location.pathname === "/tienda" ? navigate("/home") : navigate("/tienda")
-								}}>{location.pathname === "/tienda" ? "Home" : "Tienda"}</span>
+								}}>{location.pathname === "/tienda" ? "Home" : t('Footer.Shop')}</span>
 							</div>
 							<div className="col-1 align-content-center link  fw-bold text-center d-none d-lg-block">
 								<span className={store.borde_hover} onClick={() => {
